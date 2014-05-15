@@ -1,0 +1,55 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{title}} - Nutrition</title>
+        {% else %}
+        <title>Welcome to Nutrition</title>
+        {% endif %}
+        <link rel="stylesheet" type="text/css" href="static/css/base.css">
+        <link rel="stylesheet" type="text/css" href="static/css/style3.css">
+        <script type="text/javascript" src=static/js/jqeryy.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1 class="title">NUTRITION</h1>
+            <nav id="main-nav">
+                <ul class="clearfix">
+                    <li class="active"><a href="/index">HOME</a></li>
+                    <li><a href="/login">LOGIN</a></li>
+                    <li><a href="/foodlog">FOOD LOG</a></li>
+                    <li><a href="/profile">PROFILE</a></li>
+                    <li><a href="/register">REGISTER</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div>Nutrition: <a href="/index">Home</a></div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in mesages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    {% block content %}{% endblock %}        
+    </body>
+</html>
+
+
+
+        <div>Nutrition: <a href="/index">Home</a></div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in mesages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    {% block content %}{% endblock %}        
+    </body>
+</html>

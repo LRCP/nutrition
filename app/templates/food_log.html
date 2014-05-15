@@ -4,10 +4,12 @@
 {% from "_formhelpers.html" import render_field %}
 <form method=post action="/food_log">
 
-<h3>Here is the food_log page!</h3>
+<h2>Here is Your Personal Food Log Page!</h2>
+
 <p>
-    Please enter Food and Amount of Food in grams:
+    <strong>Please enter the Food and Amount of Food in grams:</strong>
 </p>
+
 <table>
     <thead>
         <tr>
@@ -16,58 +18,1121 @@
             
         </tr>
         <tr>
-            <td><input type ="text" name ="food"></td>
-            <td><input type="integer" name="quantity"></td>
+            <td><input class="typeahead" type ="text" name ="food" required placeholder="Food"></td>
+            <td><input type="integer" name="quantity" required placeholder="Quantity"></td>
             
 
         </tr>
-        <p>Here are food nutrients:</p>
+       
     </thead>
 </table>
+<div>
+    <br>
+</div>
 <input type="submit">
-<p>Here are your food nutrients:</p>
-<table>
-    <thead>
-        <tr>
-            <th>Calories</th>
-            <th>Protein</th>
-            <th>Carbohydrates</th>
-            <th>Fats</th>
-        </tr>
-        <tr>
-            <td><output name="calories">{{ calories }}</output></td>
-            <td><output name="protein">{{ protein }}</output></td>
-            <td><output name="carbohydrates">{{ carbohydrates }}</output></td>
-            <td><output name="fats">{{ fats }}</output></td>
+</form>
+<!--Make a description of the food groups. loop over list of objects and list in template--><div>
+
+<p>
+    <strong>Please select the food groups you wish to search.</strong>
+</p>
+
+{# select is the type of tag/element, as opposed to div, p, input.
+class is a way to identify the element for purposes of css. class is a multiple identifier, not a unique identifier.
+multiple gives the property of the tag of we can pick more than one item. #}
+<select class="multiselect" multiple="multiple" id="food_group_select">
+    {% for food_group in food_groups_list %} 
+        {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
+        {# food_group is a class. FodGrp_Desc is an attribute of food_group #}
+        <option value ="{{food_group.FdGrp_Cd}}">{{ food_group.FdGrp_Desc }}</option>
+
+    {% endfor %}
+  
+
+  {# <option value="Dairy and Egg Products">Dairy and Egg Products</option>
+  <option value="Spices and Herbs">Spices and Herbs</option>
+  <option value="Baby Foods">Baby Foods</option>
+  <option value="Fats and Oils">Fats and Oils</option>
+  <option value="Poultry Products">Poultry Products</option>
+  <option value="Soups, Sauces, and Gravies">Soups, Sauces, and Gravies</option>
+  <option value="Sausages and Luncheon Meats">Sausages and Luncheon Meats</option>
+  <option value="Breakfast Cereals">Breakfast Cereals</option>
+  <option value="Fruit and Fruit Juices">Fruit and Fruit Juices</option>
+  <option value="Pork Products">Pork Products</option>
+  <option value="Vegetables and Vegetable Products">Vegetables and Vegetable Products</option>
+  <option value="Nut and Seed Products">Nut and Seed Products</option>
+  <option value="Beef Products">Beef Products</option>
+  <option value="Beverages">Beverages</option>
+  <option value="Finfish and Shellfish Products">Finfish and Shellfish Products</option>
+  <option value="Legumes and Legume Products">Legumes and Legume Products</option>
+  <option value="Lamb, Veal, and Game Products">Lamb, Veal, and Game Products</option>
+  <option value="Baked Products">Baked Products</option>
+  <option value="Sweets">Sweets</option>
+  <option value="Cereal Grains and Pasta">Cereal Grains and Pasta</option>
+  <option value="Fast Foods">Fast Foods</option>
+  <option value="Meals, Entrees, and Side Dishes">Meals, Entrees, and Side Dishes</option>
+  <option value="Snacks">Snacks</option>
+  <option value="American Indian/Alaska Native Foods">American Indian/Alaska Native Foods</option>
+  <option value="Restaurant Foods">Restaurant Foods</option> #}
+</select>
+{# <select class="typeahead" multiple="multiple">
+    {% for food in FoodDesc %} 
+        <option value ="{{food}}">{{ food.FoodDesc }}</option>
+
+    {% endfor %}
+</select> #}
 
 
-        </tr>
-    </thead>
-</table>
+
+</div>
+
+{# <div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2">Dairy and Egg Products</div>
+        <div class="col-xs-2">Spices and Herbs</div>
+        <div class="col-xs-2">Baby Foods</div>
+        <div class="col-xs-2">Fats and Oils</div>
+        <div class="col-xs-2">Poultry Products</div>
+        <div class="col-xs-2">Soups, Sauces, and Gravies</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">Sausages and Luncheon Meats</div>
+        <div class="col-xs-2">Breakfast Cereals</div>
+        <div class="col-xs-2">Fruit and Fruit Juices</div>
+        <div class="col-xs-2">Pork Products</div>
+        <div class="col-xs-2">Vegetables and Vegetable Products</div>
+        <div class="col-xs-2">Nut and Seed Products</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">Beef Products</div>
+        <div class="col-xs-2">Beverages</div>
+        <div class="col-xs-2">Finfish and Shellfish Products</div>
+        <div class="col-xs-2">Legumes and Legume Products</div>
+        <div class="col-xs-2">Lamb, Veal, and Game Products</div>
+        <div class="col-xs-2">Baked Products</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">Sweets</div>
+        <div class="col-xs-2">Cereal Grains and Pasta</div>
+        <div class="col-xs-2">Fast Foods</div>
+        <div class="col-xs-2">Meals, Entrees, and Side Dishes</div>
+        <div class="col-xs-2">Snacks</div>
+        <div class="col-xs-2">American Indian/Alaska Native Foods</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2">Restaurant Foods</div>
+    </div>
+    </div>
+
+ #}
 
 
- 
-    <!--Food: <input type ="text" name ="food">
-    Quantity: <input type="text" name="quantity">
-    <br>-->
-    <!--
-    Food: <input type ="text" name ="food">
-    Quantity: <input type="text" name="quantity">
+
+    {# {% for food_group in food_groups_list %}
+    <div class="row">
+        <div class="col-xs-2">
+            {{food_group["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food_group["food_group"]["Dairy and Egg Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Spices and Herbs"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Baby Foods"]}}
+            
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Fats and Oils"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Poultry Products"]}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2">
+            {{food_groups["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food_groups["food_group"]["Soups, Sauces, and Gravies"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Sausages and Luncheon Meats"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Breakfast Cereals"]}}
+            
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Fruit and Fruit Juices"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Pork Products"]}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2">
+            {{food_group["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food_group["food_group"]["Vegetables and Vegetable Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Nut and Seed Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Beef Products"]}}
+            
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Beverages"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Finfish and Shellfish Products"]}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2">
+            {{food_group["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food_group["food_group"]["Legumes and Legume Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Lamb, Veal, and Game Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Baked Products"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Sweets"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Cereal Grains and Pasta"]}}
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-xs-2">
+            {{food_group["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food_group["food_group"]["Fast Foods"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Meals, Entrees, and Side Dishes"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Snacks"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["American Indian/Alaska Native Foods"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["food_group"]["Restaurant Foods"]}}
+        </div>
+    </div> #}
+
+
+
+
+
+
+
+
+<p><h4>HERE ARE THE FOOD NUTRIENTS:</h4></p>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2"><strong>FOOD</strong></div>
+        <div class="col-xs-2"><strong>CALS</strong></div>
+        <div class="col-xs-2"><strong>PROT</strong></div>
+        <div class="col-xs-2"><strong>CARBS</strong></div>
+        <div class="col-xs-2"><strong>FATS</strong></div>
+        <div class="col-xs-2"></div>
+    </div>
+
+    {% for food in food_nutrient_list %}
+    <div class="row">
+        <div class="col-xs-2">
+            {{food["name"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["nutrients"]["Protein & Amino Acids"][ "Protein"]}}
+        </div>
+        <div class="col-xs-2">
+            {{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]}}
+            
+        </div>
+        <div class="col-xs-2">
+            {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}}
+        </div>
+    {# {% endfor %} #}
+        
+
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+        </div>
+
+    </div>
+
+
+    {% endfor %}
+</div>
+
+<!--From here on down is my template-->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-2">
+            <strong>FOOD</strong>
+        </div>
+        <div class="col-xs-2">
+            <strong>CALS</strong>
+        </div>
+        <div class="col-xs-2">
+            <strong>PROT</strong>
+        </div>
+        <div class="col-xs-2">
+            <strong>CARBS</strong>
+        </div>
+        <div class="col-xs-2">
+            <strong>FATS</strong>
+        </div>
+        <div class="col-xs-2">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2">
+            BANANA
+        </div>
+        <div class="col-xs-2">
+            35
+        </div>
+        <div class="col-xs-2">
+            1.1
+        </div>
+        <div class="col-xs-2">
+            2.8
+        </div>
+        <div class="col-xs-2">
+            0.1
+        </div>
+        <div class="col-xs-2">
+            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+        </div>
+    </div>
     <br>
-    Food: <input type ="text" name ="food">
-    Quantity: <input type="text" name="quantity">
     <br>
-    -->
+</div>
+
+<div class="container-fluid collapse" id="Food-Details"> 
+    <p><h4>NUTRIENT BREAKDOWN FOR THE FOOD:</h4></p>  
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Calories</h3>
+            <div>
+                Protein
+            </div>
+            <div>
+                Carbs
+            </div>
+            <div>
+                Fats
+            </div>
+        </div>
+
+        <div class="col-md-4">            
+            <h3>Protein</h3>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Protein-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Protein-Details" class="collapse">
+                <div>
+                    Tryptophan
+                </div>
+                <div>
+                    Threonine
+                </div>
+                <div>
+                    Isoleucine
+                </div>
+                <div>
+                    Leucine
+                </div>
+                <div>
+                    Lysine
+                </div>
+                <div>
+                    Methionine
+                </div>
+                <div>
+                    Cystine
+                </div>
+                <div>
+                    Phenylalanine
+                </div>
+                <div>
+                    Tyrosine
+                </div>
+                <div>
+                    Valine
+                </div>
+                <div>
+                    Arginine
+                </div>
+                <div>
+                    Histidine
+                </div>
+                <div>
+                    Alanine
+                </div>
+                <div>
+                    Aspartic acid
+                </div>
+                <div>
+                    Glutamic acid
+                </div>
+                <div>
+                    Glycine
+                </div>
+                <div>
+                    Proline
+                </div>
+                <div>
+                    Serine
+                </div>
+                <div>
+                    Hydroxyproline
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="col-md-4">
+            <h3>Carbohydrates</h3>
+            <div>
+                Fiber
+            </div>
+            <div>
+                Starch:
+            </div>
+
+            <div>
+                Sugars:23
+            </div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sugars-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Sugars-Details" class="collapse">
+
+                <div>
+                    Sucrose
+                </div>
+                <div>
+                    Glucose
+                </div>
+                <div>
+                    Fructose
+                </div>
+                <div>
+                    Lactose
+                </div>
+                <div>
+                    Maltose
+                </div>
+                <div>
+                    Galactose
+                </div>
+            </div>           
+        </div> 
+    </div>       
     
 
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Fats</h3>
+            <div>
+                <h6>Saturated</h6>
+                <div>Total Lipid Fat</div>
+                <div>Total Saturated</div>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Saturated-Fats-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <div id="Saturated-Fats-Details" class="collapse">
+                    <div>
+                        4:0
+                    </div>
+                    <div>
+                        6:0
+                    </div>
+                    <div>
+                        8:0
+                    </div>
+                    <div>1
+                        10:0
+                    </div>
+                    <div>
+                        12:0
+                    </div>
+                    <div>
+                        13:0
+                    </div>
+                    <div>
+                        14:0
+                    </div>
+                    <div>
+                        15:0
+                    </div>
+                    <div>
+                        16:0
+                    </div>
+                    <div>
+                        17:0
+                    </div>
+                    <div>
+                        18:0
+                    </div>
+                    <div>
+                        20:0
+                    </div>
+                    <div>
+                        22:0
+                    </div>
+                    <div>
+                        24:0
+                    </div>
+                </div>
+                
 
-</form>
-<hr>
-<ul>
-{% for food in food_nutrient_list %}
-    <li>{{food.name }}, {{ food.calorie }}, {{ food.protein }}, {{ food.carbohydrate }},  {{ food.fat }}</li>
-{% endfor %}
-</ul>
+                
+                <h6>Monounsaturated</h6>
+                <div>Total Monounsaturated</div>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Monounsaturated-Fats-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                <div id="Monounsaturated-Fats-Details" class="collapse">
+                    <div>
+                        14:1
+                    </div>
+                    <div>
+                        15:1
+                    </div>
+                    <div>16:1 
+                        undifferentiated
+                    </div>
+                    <div>
+                        16:1 c
+                    </div>
+                    <div>
+                        16:1 t
+                    </div>
+                    <div>
+                        17:1
+                    </div>
+                    <div>
+                        18:1 undifferentiated
+                    </div>
+                    <div>
+                        18:1 c
+                    </div>
+                    <div>
+                        18:1 t
+                    </div>
+                    <div>
+                        18:1-11t (18:1tn-7)
+                    </div>
+                    <div>
+                        20:1
+                    </div>
+                    <div>
+                        22:1 undifferentiated
+                    </div>
+                    <div>
+                        22:1 c
+                    </div>
+                    <div>
+                        22:1 t
+                    </div>
+                    <div>
+                        24:1 c
+                    </div>
+                </div>
+            
+                <h6>Polyunsaturated</h6>
+                <div>Total Polyunsaturated</div>
+
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Polyunsaturated-Fats-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+           
+                <div id="Polyunsaturated-Fats-Details" class="collapse">
+                    <div>
+                        18:2 undifferentiated
+                    </div>
+                    <div>
+                        18:2 n-6 c,c
+                    </div>
+                    <div>
+                        18:2 CLAs
+                    </div>
+                    <div>1
+                        8:2 t,t
+                    </div>
+                    <div>
+                        18:2 i
+                    </div>
+                    <div>
+                        18:2 t not further defined
+                    </div>
+                    <div>
+                        18:3 undifferentiated
+                    </div>
+                    <div>
+                        18:3 n-3 c,c,c (ALA)
+                    </div>
+                    <div>
+                        18:3 n-6 c,c,c
+                    </div>
+                    <div>
+                        18:3i
+                    </div>
+                    <div>
+                        18:4
+                    </div>
+                    <div>
+                        20:2 n-6 c,c
+                    </div>
+                    <div>
+                        20:3 undifferentiated
+                    </div>
+                    <div>
+                        20:3 n-3
+                    </div>
+                    <div>
+                        20:3 n-6
+                    </div>
+                    <div>
+                        20:4 undifferentiated
+                    </div>
+                    <div>
+                        20:4 n-6
+                    </div>
+                    <div>
+                        20:5 n-3 (EPA)
+                    </div>
+                    <div>
+                        21:5
+                    </div>
+                    <div>
+                        22:4
+                    </div>
+                    <div>
+                        22:5 n-3 (DPA)
+                    </div>
+                    <div>
+                        22:6 n-3 (DHA)
+                    </div>
+                </div>
+
+                <h6>Trans-Fats</h6>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Trans-Fats-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+           
+                <div id="Trans-Fats-Details" class="collapse">
+                    <div>Fatty Acids, total trans</div>
+                    <div>Fatty acids, total trans-monoenoic</div>
+                    <div>Fatty acids, total trans-polyenoic</div>
+                </div>
+            </div>   
+        </div>
+        <div class="col-md-4">
+            <h3>Vitamins</h3>
+            <div>Vitamin a, IU</div>
+            <div>Vitamin A, RAE</div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Vitamin-A-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Vitamin-A-Details" class="collapse">
+                <div>
+                    Retinol
+                </div>
+                <div>
+                    Carotene, beta
+                </div>
+                <div>
+                    Carotene, alpha
+                </div>
+                <div>
+                    Cryptoxanthin, beta
+                </div>
+                <div>
+                    Vitamin A, IU
+                </div>
+                <div>
+                    Lycopene
+                </div>
+                <div>
+                    Lutein + Zeaxanthin
+                </div>
+            </div>
+            <div>
+                Vitamin C, total ascorbic acid
+            </div>
+            <div>
+                Vitamin D(D2 + D3)
+            </div>
+            <div>
+                Vitamin D2 (ergocalciforol)
+            </div>
+            <div>
+                Vitamin D3(cholecalciferol)
+            </div>
+            <div>
+                Vitamin D
+            </div>
+            <div>
+                Vitamin E(alpha-tocopherol)
+            </div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Vitamin-E-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Vitamin-E-Details" class="collapse">
+                <div>
+                    Vitamin E, added
+                </div>
+                <div>
+                    Tocopherol, beta
+                </div>
+                <div>
+                    Tocopherol, gamma
+                </div>
+                <div>
+                    Tocopherol, delta
+                </div>
+                <div>
+                    Tocotrienol, alpha
+                </div>
+                <div>
+                    Tocotrienol, beta
+                </div>
+                <div>
+                    Tocotrienol, gamma
+                </div>
+                <div>
+                    Tocotrienol, delta
+                </div>
+            </div>
+            <div>
+                Vitamin K (phylloquinone)
+            </div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Vitamin-K-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Vitamin-K-Details" class="collapse">
+                <div>
+                    Dihydrophylloquinone
+                </div>
+                <div>
+                    Menaquinone-4
+                </div>
+            </div>
+            <div>
+                Vitamin B1(Thiamin)
+            </div>
+            <div>
+                Vitamin B2(Riboflavin)
+            </div>
+            <div>
+                Vitamin B3(Niacin)
+            </div>
+            <div>
+                Vitamin B5(Pantothenic Acid)
+            </div>
+            <div>
+                Vitamin B-6(Pyridoxine)
+            </div>
+            <div>
+                Folate, total
+            </div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Folate-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Folate-Details" class="collapse">
+                <div>
+                    Folic acid
+                </div>
+                <div>
+                    Folate, food
+                </div>
+                <div>
+                    Folate, DFE
+                </div>
+            </div>
+            <div>
+                Vitamin B-12(Cobalamin)
+            </div>
+            <div>
+                Vitamin B-12(Cobalamin), added
+            </div>
+            <div>
+                Choline, total
+            </div>
+            <div>
+                Betaine
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Minerals</h3>
+            <div>
+                Calcium, Ca
+            </div>
+            <div>
+                Iron, Fe
+            </div>
+            <div>
+                Magnesium, Mg
+            </div>
+            <div>
+                Phosphorus, P
+            </div>
+            <div>
+                Potassium, K
+            </div>
+            <div>
+                Sodium, Na
+            </div>
+            <div>
+                Zinc, Zn
+            </div>
+            <div>
+                Copper, Cu
+            </div>
+            <div>
+                Manganese, Mn
+            </div>
+            <div>
+                Selenium, Se
+            </div>
+            <div>
+                Selenium
+            </div>
+            <div>
+                Flouride, F
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Sterols</h3>
+            <div>Cholesterol</div>
+            <div>Phytosterols</div>
+            <div>Stigmasterol</div>
+            <div>Campesterol</div>
+            <div>Beta-sitosterol</div>
+        </div>
+        <div class="col-md-4">
+            <h3>Other</h3>
+            <div>Water</div>
+            <div>Alcohol, ethyl</div>
+            <div>Caffeine</div>
+            <div>Theobromine</div>
+            <div>Ash</div>
+        </div>     
+    </div>
+</div>
+
+<div class="container-fluid">
+    <p><h4>TOTAL NUTRIENTS</h4></p>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Calories</h3>
+            <div>Protein</div>
+            <div>Carbs</div>
+            <div>Fats</div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Protein</h3>
+
+
+            <div>
+                Tryptophan
+            </div>
+            <div>
+                Threonine
+            </div>
+            <div>
+                Isoleucine
+            </div>
+            <div>
+                Leucine
+            </div>
+            <div>
+                Lysine
+            </div>
+            <div>
+                Methionine
+            </div>
+            <div>
+                Cystine
+            </div>
+            <div>
+                Phenylalanine
+            </div>
+            <div>
+                Tyrosine
+            </div>
+            <div>
+                Valine
+            </div>
+            <div>
+                Arginine
+            </div>
+            <div>
+                Histidine
+            </div>
+            <div>
+                Alanine
+            </div>
+            <div>
+                Aspartic acid
+            </div>
+            <div>
+                Glutamic acid
+            </div>
+            <div>
+                Glycine
+            </div>
+            <div>
+                Proline
+            </div>
+            <div>
+                Serine
+            </div>
+            <div>
+                Hydroxyproline
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Carbohydrates</h3>
+            <div>
+                Fiber
+            </div>
+            <div>
+                Sugar:23
+                <div>
+                    Sucrose
+                </div>
+                <div>
+                    Glucose
+                </div>
+                <div>
+                    Fructose
+                </div>
+                <div>
+                    Lactose
+                </div>
+                <div>
+                    Maltose
+                </div>
+                <div>
+                    Galactose
+                </div>
+            </div>           
+        </div>        
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Fats</h3>
+            <div>
+                <h6>Saturated</h6>
+                <div>Total Saturated</div>
+                <div>4:0</div>
+                <div>6:0</div>
+                <div>8:0</div>
+                <div>10:0</div>
+                <div>12:0</div>
+                <div>13:0</div>
+                <div>14:0</div>
+                <div>15:0</div>
+                <div>16:0</div>
+                <div>17:0</div>
+                <div>18:0</div>
+                <div>20:0</div>
+                <div>22:0</div>
+                <div>24:0</div>
+                
+
+
+                <h6>Monounsaturated</h6>
+                <div>Total Monounsaturated</div>
+                <div>14:1</div>
+                <div>15:1</div>
+                <div>16:1 undifferentiated</div>
+                <div>16:1 c</div>
+                <div>16:1 t</div>
+                <div>17:1</div>
+                <div>18:1 undifferentiated</div>
+                <div>18:1 c</div>
+                <div>18:1 t</div>
+                <div>18:1-11t undifferentiated</div>
+                <div>20:1</div>
+                <div>22:1 undifferentiated</div>
+                <div>22:1 c</div>
+                <div>22:1 t</div>
+                <div>24:1 c</div>
+
+                <h6>Polyunsaturated</h6>
+                <div>Total Polyunsaturated</div>
+                <div>18:2 undifferentiated</div>
+                <div>18:2 n-6 c,c</div>
+                <div>18:2 CLAs</div>
+                <div>18:2 t,t</div>
+                <div>18:2 i</div>
+                <div>18:2 t not further defined</div>
+                <div>18:3 undifferentiated</div>
+                <div>18:3 n-3 c,c,c (ALA)</div>
+                <div>18:3 n-6 c,c,c</div>
+                <div>18:3i</div>
+                <div>18:4</div>
+                <div>20:2 n-6 c,c</div>
+                <div>20:3 undifferentiated</div>
+                <div>20:3 n-3</div>
+                <div>20:3 n-6</div>
+                <div>20:4 undifferentiated</div>
+                <div>20:4 n-6</div>
+                <div>20:5 n-3 (EPA)</div>
+                <div>21:5</div>
+                <div>22:4</div>
+                <div>22:5 n-3 (DPA)</div>
+                <div>22:6 n-3 (DHA)</div>
+
+                <h6>Fatty Acids, total trans</h6>
+                <h6>Fatty acids, total trans-monoenoic</h6>
+                <h6>Fatty acids, total trans-polyenoic</h6>
+                
+                
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Vitamins</h3>
+            
+            <div>Vitamin A, RAE</div>
+            <div>Retinol</div>
+            <div>Carotene, beta</div>
+            <div>Carotene, alpha</div>
+            <div>Cryptoxanthin, beta</div>
+            <div>Vitamin A, IU</div>
+            <div>Lycopene</div>
+            <div>Lutein + Zeaxanthin</div>
+            <div>Vitamin C, total ascorbic acid</div>
+            <div>Vitamin D3(D2 + D3</div>
+            <div>Vitamin D2 (ergocalciforol)</div>
+            <div>Vitamin D3(cholecalciferol)</div>
+            <div>Vitamin D</div>
+            <div>Vitamin E(alpha-tocopherol)</div>
+            <div>Vitamin E, added</div>
+            <div>Tocopherol, beta</div>
+            <div>Tocopherol, gamma</div>
+            <div>Tocopherol, delta</div>
+            <div>Tocotrienol, alpha</div>
+            <div>Tocotrienol, beta</div>
+            <div>Tocotrienol, gamma</div>
+            <div>Tocotrienol, delta</div>
+            <div>Vitamin K (phylloquinone)</div>
+            <div>Dihydrophylloquinone</div>
+            <div>Menaquinone-4</div>
+            <div>Vitamin B1(Thiamin)</div>
+            <div>Vitamin B2(Riboflavin)</div>
+            <div>Vitamin B3(Niacin)</div>
+            <div>Vitamin B5(Pantothenic Acid)</div>
+            <div>Vitamin B-6(Pyridoxine)</div>
+            <div>Folate, total</div>
+            <div>Folic acid</div>
+            <div>Vitamin B-12(Cobalamin)</div>
+            <div>Vitamin B-12(Cobalamin), added</div>
+            <div>Choline, total</div>
+            <div>Betaine</div>
+        </div>
+        <div class="col-md-4">
+            <h3>Minerals</h3>
+            <div>Calcium, Ca</div>
+            <div>Iron, Fe</div>
+            <div>Magnesium, Mg</div>
+            <div>Phosphorus, P</div>
+            <div>Potassium, K</div>
+            <div>Sodium, Na</div>
+            <div>Zinc, Zn</div>
+            <div>Copper, Cu</div>
+            <div>Magnanese, Mn</div>
+            <div>Selenium, Se</div>
+            <div>Selenium</div>
+            <div>Flouride, F</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Sterols</h3>
+            <div>Cholesterol</div>
+            <div>Physterols</div>
+            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sterols-Details">
+                More Details
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+            <div id="Sterols-Details" class="collapse">
+                
+                
+                <div>Stigmasterol</div>
+                <div>Campesterol</div>
+                <div>Beta-sitosterol</div>
+                
+            </div>
+        </div>
+    
+  
+               
+        <div class="col-md-4">
+            <h3>Other</h3>
+            <div>Water</div>
+            <div>Alcohol</div>
+            <div>Caffeine</div>
+            <div>Theobromine</div>
+            <div>Ash</div>
+        </div>     
+    </div>
+
+</div>
+
+
 {% endblock %}
 
 
