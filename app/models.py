@@ -11,22 +11,13 @@ from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 
 
 
-#consider renaming association_table to something more description and as plurals
+
 class Association(BaseNutrition):
     __tablename__ = 'association'
     id = Column(Integer, Sequence('association_id_seq'), primary_key=True)
     food_logs_id = Column(Integer, ForeignKey('food_logs.id'))
-    #food_des_NDB_No = Column(Text, ForeignKey('food_des.NDB_No'), primary_key=True)
     quantity = Column(Float)
-    #extra_data = Column(String(50))
     
-    #foodlogs = relationship('FoodLog', backref='foodlog_assocs')
-
-# This code is replaced by the class definition above.
-#association_table = Table('association', BaseNutrition.metadata,
-    #Column('foods_id', Integer, ForeignKey('foods.id')),
-    #Column('food_logs_id', Integer, ForeignKey('food_logs.id')),
-    #)
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -42,7 +33,70 @@ class User(BaseNutrition):
     protein_goal = Column(Integer)
     carbohydrate_goal = Column(Integer)
     fat_goal = Column(Integer)
-    weight = Column(Integer)
+    weight_in_pounds = Column(Integer)
+    weight_in_kilograms = Column(Integer)
+    weight_in_stones = Column(Integer)
+    height_in_feet = Column(Integer)
+    height_in_inches = Column(Integer)
+    height_in_centimeters = Column(Integer)
+    gender = Column(String)
+    activity_level = Column(Float)
+    basal_metabolic_rate = Column(Integer)
+    activity_calories = Column(Integer)
+    dietary_thermogenesis_calories = Column(Integer)
+    caloric_needs = Column(Integer)
+    weight_change_goal = Column(Float)
+    age = Column(Integer)
+    caloric_change_daily = Column(Integer)
+    
+    basal_metabolic_rate_male = Column(Integer)
+    basal_metabolic_rate_female = Column(Integer)
+
+    activity_calories_male = Column(Integer)
+    activity_calories_female = Column(Integer)
+  
+    dietary_thermogenesis_calories_male = Column(Integer)
+    dietary_thermogenesis_calories_female = Column(Integer)
+    calorie_needs_absolute_male = Column(Integer)
+    calorie_needs_absolute_female = Column(Integer)
+    calorie_needs_male = Column(Integer)
+    calorie_needs_female = Column(Integer)
+    calorie_goal_male = Column(Integer)
+    calorie_goal_female = Column(Integer)
+    protein_ratio_goal = Column(Integer)
+    carbohydrate_ratio_goal = Column(Integer)
+    fat_ratio_goal = Column(Integer)
+    help = Column(Text)
+    
+
+
+
+    # Consider asking for the following information:
+    # User_gender: Male or Female
+    # User_weight: Output in both kg and pounds
+    # User_height:: Output in cm and feet/inches
+    # Caloric Needs is based on: 
+    #     Basal Metabolic Rate + Activity Calories + Thermogenesis Calories +- 10%
+    #     Basal Metabolic Rate: 
+    #         Men: User_weight in pounds x 11
+    #         Women: User_weight in pounds x 10.1            
+    #     Activity Calories: 
+    #         Inactive: Less than 2 hours of moving: Basal Metabolic Rate x 30%
+    #         Average: Sitting most of the day, walking or standing 2-4
+    #            hours, no strenous activity: Basal Metabolic Rate X 50%
+    #         Active(physically active 4 or more hours each day, little   
+    #             sitting or standing, some strenuous activity):
+    #             Basal Metabolic Rate x 75%
+    #     Dietary Thermogenesis Calories: 10%(Basal Metabolic Rate + physical activity calories)
+    # Weight Goal:
+    #     Maintain Weight: Caloric Needs
+    #     Lose Weight: Caloric Needs - [(Pounds_per_week_to_lose) x 3500 calories] = Number of calories per week
+    #     Gain Weight: Caloric Needs + [(Pounds_per_week_to_gain) x 3500 calories] = Number of calories per week.
+    #     Calories per week may be allocated equally or unequally throughout the week. Calories to lose or gain can be devided between caloric intake and activity.
+    # Macronutrient Ratio Targets:
+    #     Enter desired ratio of calories from Protein, Carbs and Fats:
+    #         Protein:   Carbs:   Fats:
+
     
     #one to many
     food_logs = relationship('FoodLog', backref='user', lazy = 'dynamic')
@@ -67,42 +121,9 @@ class User(BaseNutrition):
     def __repr__(self):
         return "<User('%s','%s', '%s')>" % (self.name, self.password, self.email)
 
-#class FoodDescription(BaseUSDA):
-    #__table__ = Table(
-        #'food_des', metadata, Column('NDB_No', Text, primary_key=True),
-        #autoload=True)
-    #foodlogs = relationship("FoodLog", backref="food_des_assocs")
-
-#should class Food be deleted?
-#class Food(BaseNutrition):#lists the nutrients.
-    #__tablename__ = 'foods'
-    #id = Column(Integer, Sequence('foods_id_seq'), primary_key=True)
-    #name = Column(String(50))
-   # calorie = Column(Integer)
-    #protein = Column(Integer)
-    #carbohydrate = Column(Integer)
-    #fat = Column(Integer)
-    #food_log_id = Column(Integer, ForeignKey('food_log.id'))
-    #backref is a name to refer back to the original connection.
-
-    
-    
-    #def __init__(self, name, calorie, protein, carbohydrate, fat):
-        #self.name = name
-        #self.calorie = calorie
-       # self.protein = protein
-        #self.carbohydrate = carbohydrate
-        #self.fat = fat
-
-    #def __repr__(self):
-        #return "<Food('%s','%d', '%d', '%d', '%d')>" % (self.name, 
-            #self.calorie, self.protein, self.carbohydrate, self.fat)
-
-class FoodLog(BaseNutrition):#continue using users as a model
+class FoodLog(BaseNutrition):
 # FoodLog is a list of foods eaten and the quantity eaten.
-# be sure to read building a realtionship in the tutorial. Need to consider ForeignKey
 # many to one is for the relationship between FoodLog and User
-# a user can have multiple food_logs but food_log can have one user
 # many to many is for relationship between FoodLog and Food
     __tablename__ = 'food_logs'
     id = Column(Integer, Sequence('food_logs_id_seq'), primary_key=True)
@@ -110,26 +131,8 @@ class FoodLog(BaseNutrition):#continue using users as a model
     #timestamp = Column(DateTime)
 
     #foods is being modified to be defined via the Association Object.
-    #foods = relationship('Food', secondary=association_table, backref='food_logs')#many to many relationship
-    #food_log may have many foods
     foods = relationship('Association')
-        
-    #instantiation not needed when used with SQLAlchemy.
-    #AQLAlchemy automatically gives the __init__ constructor.
-    #def __init__(self, name, quantity):
-        #self.food_name = name
-        #self.quantity = quantity
-        
-    #def __repr__(self):
-        #return "<FoodLog('%s','%d')>" % (self.food_name, self.quantity)
-
-# only create meta data in databases we are creating, 
-# not in preexisting databases.
-
-#FoodLog.food_description_NDB_No = Column(Text, ForeignKey(FoodDescription.__table__.c.NDB_No))
-
-
-
+ 
 
 class DataDerivationCodeDescription(BaseUSDA):
     __table__ = Table(
@@ -201,6 +204,7 @@ class Weight(BaseUSDA):
 
 Association.food = relationship(FoodDescription, backref='foodlog_assocs')
 Association.food_description_NDB_No = Column(Text, ForeignKey(FoodDescription.__table__.c.NDB_No))
+#This is where we create the database.
 BaseNutrition.metadata.create_all(engineNutrition)
 
 

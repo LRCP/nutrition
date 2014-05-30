@@ -20,19 +20,24 @@ $(document).ready(function() {
             replace: function(url, query) {
                 // we got the food_group_select from the food_log.html
                 var select1 = document.getElementById("food_group_select");
-                var selected1 = [];
+                    var groups_string = ".json?";
                     for (var i = 1; i < select1.length; i++) {
-                        if (select1.options[i].selected) {selected1.push(select1.options[i].value)};                            
-                    }
-                console.log(selected1);
-                    /*here create a for loop to loop over each element in selected1[]and add it to the string
-                    .json?*/
-                /* var selected1Length = selected1.length;
-                 for (var i = 0; i < selected1Length, i++) }
-                    return url + query + ".json?group=" + selected1[i] + ".group=selected1[selected1.length]"*/
+                        if (select1.options[i].selected ) {
 
-                return url + query + ".json?group=1100&group=400"
-                /*$("select.multiselect")[0].options [list of indices ranging from 1 thru 26*/
+
+                            groups_string = groups_string + "group=" + select1.options[i].value;
+                            if (i != select1.length-1) {
+                                groups_string = groups_string + "&";
+                            }
+                        }; 
+
+                    }
+               
+                console.log(groups_string)  
+                return url + query + groups_string
+
+
+                
                 }
 
 

@@ -59,18 +59,6 @@ if user is None:
     session.add(user)
     session.commit()
 
-#food = session.query(models.Food).filter_by(name='kale').first()
-#if food is None:
-    #food = models.Food('kale', 1, 2, 3, 4)
-    #session.add(food)
-    #session.commit()
-
-#food = session.query(models.Food).filter_by(name='grapes').first()
-#if food is None:
-    #food = models.Food('grapes', 1, 2, 3, 4)
-    #session.add(food)
-   # session.commit()
-
 session.close()
 
 from app import views

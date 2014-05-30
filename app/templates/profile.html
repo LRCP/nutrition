@@ -4,15 +4,73 @@
 <form method="post" action="/profile">
 
 <h3>Here is the profile page!</h3>
+
     
         {{ render_field(form.calorie_goal) }}
         {{ render_field(form.protein_goal) }}
         {{ render_field(form.carbohydrate_goal) }}
+        
+        {{ render_field(form.weight) }}
+        {{ render_field(form.height) }}
+        {{ render_field(form.basal_metabolic_rate) }}
+        {{ render_field(form.activity_calories) }}
+        {{ render_field(form.caloric_needs) }}
+        {{ render_field(form.weight_change_goal) }}
+        {{ render_field(form.age) }}
+        {{ render_field(form.protein_ratio_goal) }}
+        {{ render_field(form.carbohydrate_ratio_goal) }}
+        {{ render_field(form.fat_ratio_goal) }}
+        {{ render_field(form.help) }}
+
+
+        
+        {#{{ render_field(form.gender) }}#}
+        {#{{ render_field(form.weight_in_pounds) }}
+         {{ render_field(form.weight_in_kilograms) }}
+        {{ render_field(form.weight_in_stones) }}
+        {{ render_field(form.height_in_feet) }}
+        {{ render_field(form.height_in_inches) }}
+        {{ render_field(form.height_in_centimeters) }}
+        
+        {{ render_field(form.activity_level) }}
+        {{ render_field(form.weight_change_goal) }}
         {{ render_field(form.fat_goal) }}
-    
+        {{ render_field(form.birthyear) }}
+        {{ render_field(form.caloric_needs) }} #}
+        
     <p><input type="submit" value="Profile"></p>
 </form>
 {% endblock %}
 
 
+{# Consider asking for the following information:
+    User_gender: Male or Female
+    User_gender: Female: Standard Special:Pregnant Lactating
+    User_weight: Output in both kg and pounds
+    User_height:: Output in cm and feet/inches
+    Caloric Needs is based on: 
+        Basal Metabolic Rate + Activity Calories + Thermogenesis Calores +- 10%
+        Basal Metabolic Rate: 
+            Men: User_weight in pounds x 11
+            Women: User_weight in pounds x 10.1            
+        Activity Calories: 
+            Inactive: Less than 2 hours of moving: Basal Metabolic Rate x 30%
+            Average: Sitting most of the day, walking or standing 2-4
+               hours, no strenous activity: Basal Metabolic Rate X 50%
+            Active(physically active 4 or more hours each day, little   
+                sitting or standing, some strenuous activity):
+                Basal Metabolism x 75%
+        Dietary Thermogenesis Calories: 10%(Basal Metabolic Rate + physical activity calories)
+    Weight Goal:
+        Maintain Weight: Caloric Needs
+        Lose Weight: Caloric Needs - [(Pounds_per_week_to_lose) x 3500 calories] = Number of calories per week
+        Gain Weight: Caloric Needs + [(Pounds_per_week_to_gain) x 3500 calories] = Number of calories per week.
+        Calories per week may be allocated equally or unequally throughout the week. Calories to lose or gain can be devided between caloric intake and activity.
+    Macronutrient Ratio Targets:
+        Enter desired ratio of calories from Protein, Carbs and Fats:
+            Protein:   Carbs:   Fats:
 
+
+
+
+ #}
