@@ -29,44 +29,82 @@ class User(BaseNutrition):
     password = Column(String(12))
     email = Column(String(102), index = True, unique = True)
     role = Column(SmallInteger, default = ROLE_USER)
+
+
     calorie_goal = Column(Integer)
     protein_goal = Column(Integer)
     carbohydrate_goal = Column(Integer)
     fat_goal = Column(Integer)
-    weight_in_pounds = Column(Integer)
+    weight_unit = Column(String)
+
+    #if weight_unit_selected = 'weight_in-kilograms':
+        # weight_in _kilograms = weight
+    #if weight_unit_selected = 'weight_in_pounds':
+        #weight_in_kilograms = int('weight_in_pounds') * .45
+    #if weight_unit_selected = 'weight_in_stones'):
+    #   weight_in_kilograms = int('weight_in_stones') * 6.35
+
     weight_in_kilograms = Column(Integer)
-    weight_in_stones = Column(Integer)
-    height_in_feet = Column(Integer)
-    height_in_inches = Column(Integer)
-    height_in_centimeters = Column(Integer)
+    weight_goal = Column(Integer)
+    weight_goal_unit = Column(String)
+    height_unit = Column(String)
+
+    #if height_unit = 'Height in Feet':
+    #   height_in-meters = int('Height In Feet') *.30 + int('Height in Inches) * .03    
+    height_in_meters = Column(Float)
     gender = Column(String)
-    activity_level = Column(Float)
+    activity_level = Column(String)
+
+    #basal_metabolic_rate (BMR)= 
+    #male_body_weight in pounds * 11 or
+    #male_weight_in_kilograms * 2.2 * 11
+
+    #female_body_weight x 10.1
+    #if gender = 'Male':
+        #basal_metabolic_rate = weight_in_kilograms * 2.2 * 11
+    #if gender = 'Female':
+        #basal_metabolic_rate = weigt_in_kilograms * 2.2 * 10.1
     basal_metabolic_rate = Column(Integer)
+    
+    #activity_calories = basal_metabolic_rate * activity_level_percentage
+    #inactive = .30
+    #average = .50
+    #active = .75    
     activity_calories = Column(Integer)
+    
+    #dietary_thermogenesis_calories = 10%(BMR + activity_calories)
     dietary_thermogenesis_calories = Column(Integer)
+    
+    #caloric_needs = (BMR + activity_calories + thermogenesis_calories)
+    #+- 10%
     caloric_needs = Column(Integer)
+    
     weight_change_goal = Column(Float)
     age = Column(Integer)
+    birthdate = Column(Integer)
+
+    #caloric_change_daily = caloric_need + 
     caloric_change_daily = Column(Integer)
     
-    basal_metabolic_rate_male = Column(Integer)
-    basal_metabolic_rate_female = Column(Integer)
-
-    activity_calories_male = Column(Integer)
-    activity_calories_female = Column(Integer)
-  
-    dietary_thermogenesis_calories_male = Column(Integer)
-    dietary_thermogenesis_calories_female = Column(Integer)
-    calorie_needs_absolute_male = Column(Integer)
-    calorie_needs_absolute_female = Column(Integer)
-    calorie_needs_male = Column(Integer)
-    calorie_needs_female = Column(Integer)
-    calorie_goal_male = Column(Integer)
-    calorie_goal_female = Column(Integer)
+    
+    
+    
+    
+    
+    calorie_needs_absolute = Column(Integer)
+    calorie_needs_ = Column(Integer)
+    
+    
     protein_ratio_goal = Column(Integer)
     carbohydrate_ratio_goal = Column(Integer)
     fat_ratio_goal = Column(Integer)
     help = Column(Text)
+
+    #create functions def set_activity_level(level): example:
+#def set_activity_level(self, level):
+#if level == "inacitive":
+#self.activity_level = 0.3
+#user.set_activity_level(form.activity_level)
     
 
 
@@ -97,7 +135,7 @@ class User(BaseNutrition):
     #     Enter desired ratio of calories from Protein, Carbs and Fats:
     #         Protein:   Carbs:   Fats:
 
-    
+   
     #one to many
     food_logs = relationship('FoodLog', backref='user', lazy = 'dynamic')
 

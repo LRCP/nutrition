@@ -25,6 +25,7 @@ def profile():
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
         #Here we need to save the information enterred by the User.
+        #need access to the user object.
         return redirect(url_for('profile'))
     return render_template('profile.html', 
         #title is the name of the page for Profile: Nutrition
