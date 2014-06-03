@@ -55,8 +55,8 @@ class ProfileForm(Form):
             errorMessage='Make a Selection')]
         )
     birthdate = DateField(
-        'Your Birthday Year, Month and Day', 
-        format='%Y/%m/%d', 
+        ('Your Birthday Year, Month and Day', 
+        format='%Y/%m/%d'), 
         [validators.NumberRange(
         min=DateTime.Today.AddYears(-120), 
         max=DateTime.Today,
@@ -157,16 +157,18 @@ class ProfileForm(Form):
     #     (('gain 2.0 lbs or .91 kg or .14 stones per week', 'Gain 2.0lbs/.91kg/.14 Stones per Week')], (7000),
     #     [validators.Required()]
     #     )
+
+#finish the changes.
     weight_change_weekly = SelectField('Weight Change Weekly', choices=[
-        ('lose -2.0 lbs or -.91 kg or -.14 stones per week', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
-        ('lose -1.5 lbs or -.68 kg or -.11 stones per week', 'Lose -1.5lbs/-.68kg/-.11 Stones per Week'),
-        ('lose -1.0 lbs or -.45 kg or -.07 stones per week', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
-        ('lose -.5 lbs or -.23 kg or -.03 stones per week', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week')
+        ('minus-two_pounds', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
+        ('minus_one_and_one_half_pounds', 'Lose -1.5lbs/-.68kg/-.11 Stones per Week'),
+        ('minus_one_pound ', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
+        ('minus_one_half_pound', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week')
         ('maintain', 'Maintain'),
-        ('gain .5 lbs or .23 kg or .03 stones per week', 'Gain .5 lbs/.23kg/.03 Stones per Week'),
-        ('gain 1.0 lbs or .45 kg or .07 stones per week', 'Gain 1.0lbs/.45kg/.07 Stones per Week'), 
-        ('gain 1.5 lbs or .68 kg or .11 stones per week', 'Gain 1.5lbs/.68kg/.11 Stones per Week'),
-        ('gain 2.0 lbs or .91 kg or .14 stones per week', 'Gain 2.0lbs/.91kg/.14 Stones per Week'),
+        ('plus_one_half_pound', 'Gain .5 lbs/.23kg/.03 Stones per Week'),
+        ('plus_one_pound', 'Gain 1.0lbs/.45kg/.07 Stones per Week'), 
+        ('plus one_and_one_half_pound', 'Gain 1.5lbs/.68kg/.11 Stones per Week'),
+        ('plus_two_pounds', 'Gain 2.0lbs/.91kg/.14 Stones per Week'),
         [validators.Required(
             errorMessage='Make a Selection')]
     )

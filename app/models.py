@@ -28,77 +28,134 @@ class User(BaseNutrition):
     name = Column(String(64), index = True, unique = True)
     password = Column(String(12))
     email = Column(String(102), index = True, unique = True)
-    role = Column(SmallInteger, default = ROLE_USER)
-
-
-    calorie_goal = Column(Integer)
+    role = Column(SmallInteger, default = ROLE_USER)  
     protein_goal = Column(Integer)
     carbohydrate_goal = Column(Integer)
     fat_goal = Column(Integer)
-    weight_unit = Column(String)
-
-    #if weight_unit_selected = 'weight_in-kilograms':
-        # weight_in _kilograms = weight
-    #if weight_unit_selected = 'weight_in_pounds':
-        #weight_in_kilograms = int('weight_in_pounds') * .45
-    #if weight_unit_selected = 'weight_in_stones'):
-    #   weight_in_kilograms = int('weight_in_stones') * 6.35
-
     weight_in_kilograms = Column(Integer)
     weight_goal = Column(Integer)
-    weight_goal_unit = Column(String)
-    height_unit = Column(String)
-
-    #if height_unit = 'Height in Feet':
-    #   height_in-meters = int('Height In Feet') *.30 + int('Height in Inches) * .03    
     height_in_meters = Column(Float)
     gender = Column(String)
     activity_level = Column(String)
-
-    #basal_metabolic_rate (BMR)= 
-    #male_body_weight in pounds * 11 or
-    #male_weight_in_kilograms * 2.2 * 11
-
-    #female_body_weight x 10.1
-    #if gender = 'Male':
-        #basal_metabolic_rate = weight_in_kilograms * 2.2 * 11
-    #if gender = 'Female':
-        #basal_metabolic_rate = weigt_in_kilograms * 2.2 * 10.1
-    basal_metabolic_rate = Column(Integer)
-    
-    #activity_calories = basal_metabolic_rate * activity_level_percentage
-    #inactive = .30
-    #average = .50
-    #active = .75    
-    activity_calories = Column(Integer)
-    
-    #dietary_thermogenesis_calories = 10%(BMR + activity_calories)
-    dietary_thermogenesis_calories = Column(Integer)
-    
-    #caloric_needs = (BMR + activity_calories + thermogenesis_calories)
-    #+- 10%
-    caloric_needs = Column(Integer)
-    
-    weight_change_goal = Column(Float)
     age = Column(Integer)
-    birthdate = Column(Integer)
+    weekly_weight_change = Column(Integer)
 
+    def set_weekly_weight_change(self, change_level):      
+        if change_level = 'minus_two_pounds'
+            self.weekly_weight_change = -2 * .45
+        if change_level = 'minus_one_and_one_half_pound':
+            self.weekly_weight_change = -1.5 * .45
+        if change_level = 'minus_one_pound':
+            self.weekly_weight_change = -1 * .45
+        if change_level = 'minus_one_half_pound':
+            self.weekly_weight_change = -.5 * .45
+        if change_level = 'maintain':
+            self.weekly_weight_change = 0 * .45
+        if change_level = 'plus_one_half_pound':
+            self.weekly_weight_change = .5 * .45
+        if change_level = 'plus_one_pound':
+            self.weekly_weight_change = 1 * .45
+        if change_level = 'plus one_and_one_half_pound':
+            self.weekly_weight_change = 1.5 * .45
+        if change_level = 'plus_two_pounds':
+            self.weekly_weight_change = 2 * .45
+        return self
+
+    def get_caloric_change_weekly(self):
+        get_caloric_change_weekly = self.set_weekly_weight_change * 3500
+        return caloric_change_weekly
+
+    def get_caloric_change_daily(self):
+        get_caloric_change_daily = self.get_caloric_change_weekly / 700
+        return caloric_change_daily
+ 
+    def set_weight_goal(self, number, unit):
+        if unit == 'weight_in_kilograms':
+            self.weight_goal = number
+        if unit == 'weight_in_pounds':
+            self.weight_goal = number * .45
+        if unit == 'weight_in_stones':
+            self.weight_goal = number * 6.35
+        return self
+
+
+    def set_weight(self, number, unit):
+        if unit == 'weight_in_kilograms'
+           self.weight_in_kilograms = number
+        if unit == 'weight_in_pounds':
+            self.weight_in_kilograms = number * .45
+        if unit == 'weight_in_stones'):
+           self.weight_in_kilograms = number * 6.35
+        return self
+
+
+    def set_height(self, number_a, number_b=0, unit='height_in_meters'):
+        if unit == 'height_in_meters':
+            self.height_in_meters = number_a
+        if unit == 'height_in_feet':
+            self.height_in_meters = number_a * .30 + number_b *.03
+        return self
+
+    #need setter functions for height,activity
+    #for simple values, don't need addtional arguments.
+    def get_basal_metabolic_rate(self):
+        if self.gender == 'Male':
+            basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 11
+        if self.gender == 'Female':
+            basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 10.1
+        return basal_metabolic_rate
+
+    #write more getters 
+    def get_activity_calories(self): 
+        if self.activity_level == 'inactive':
+            activity_calories = self.basal_metabolic_rate * .30
+        if self.activity_level == 'average':
+            activity_calories = self.basal_metabolic_rate * .50
+        if self.activity_level == 'active':
+            activity_calories = self.basal_metabolic_rate * .75
+        return activity_calories
+
+
+    def get_dietary_thermogenesis_calories(self):
+        dietary_thermogenesis_calories = .10 * (self.get_basal_metabolic_rate() + self.get_activity_calories())
+        return dietary_thermogenesis_calories
+
+    def get_caloric_needs_daily(self):
+        caloric_needs_absolute = (
+            self.get_basal_metabolic_rate() + 
+            self.get_activity_calories() + 
+            self.get_dietary_thermogenesis_calories()
+            )
+        caloric_needs_daily_min = .90 * (caloric_needs_absolute)
+        caloric_needs_daily_max = 1.10 * (caloric_needs_absolute)
+        return caloric_needs_daily_min, caloric_needs_daily_max
+    
+    
+    def get_adjusted_daily_caloric_needs(self):
+        self.get_adjusted_daily_caloric_needs = self.get_caloric_daily_needs + self.weekly_weight_change / 700
+        return adjusted_daily_caloric_needs
+        
+    #     Maintain Weight: Caloric Needs
+    #     Lose Weight: Caloric Needs - [(Pounds_per_week_to_lose) x 3500 calories] = Number of calories per week
+    #     Gain Weight: Caloric Needs + [(Pounds_per_week_to_gain) x 3500 calories] = Number of calories per week.
+    #     Calories per week may be allocated equally or unequally throughout the week. Calories to lose or gain can be devided between caloric intake and activity.
+
+    
+    
     #caloric_change_daily = caloric_need + 
-    caloric_change_daily = Column(Integer)
+    #caloric_change_daily = Column(Integer)
     
     
     
     
     
     
-    calorie_needs_absolute = Column(Integer)
-    calorie_needs_ = Column(Integer)
+    
+    #calorie_needs_ = Column(Integer)
     
     
-    protein_ratio_goal = Column(Integer)
-    carbohydrate_ratio_goal = Column(Integer)
-    fat_ratio_goal = Column(Integer)
-    help = Column(Text)
+    
+
 
     #create functions def set_activity_level(level): example:
 #def set_activity_level(self, level):
