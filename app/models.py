@@ -40,33 +40,33 @@ class User(BaseNutrition):
     age = Column(Integer)
     weekly_weight_change = Column(Integer)
 
-    def set_weekly_weight_change(self, change_level):      
-        if change_level = 'minus_two_pounds'
+    def set_weekly_weight_change(self, weekly_change_level):      
+        if weekly_change_level = 'minus_two_pounds'
             self.weekly_weight_change = -2 * .45
-        if change_level = 'minus_one_and_one_half_pound':
+        if weekly_change_level = 'minus_one_and_one_half_pound':
             self.weekly_weight_change = -1.5 * .45
-        if change_level = 'minus_one_pound':
+        if weekly_change_level = 'minus_one_pound':
             self.weekly_weight_change = -1 * .45
-        if change_level = 'minus_one_half_pound':
+        if weekly_change_level = 'minus_one_half_pound':
             self.weekly_weight_change = -.5 * .45
-        if change_level = 'maintain':
+        if weekly_change_level = 'maintain':
             self.weekly_weight_change = 0 * .45
-        if change_level = 'plus_one_half_pound':
+        if weekly_change_level = 'plus_one_half_pound':
             self.weekly_weight_change = .5 * .45
-        if change_level = 'plus_one_pound':
+        if weekly_change_level = 'plus_one_pound':
             self.weekly_weight_change = 1 * .45
-        if change_level = 'plus one_and_one_half_pound':
+        if weekly_change_level = 'plus one_and_one_half_pound':
             self.weekly_weight_change = 1.5 * .45
-        if change_level = 'plus_two_pounds':
+        if weekly_change_level = 'plus_two_pounds':
             self.weekly_weight_change = 2 * .45
         return self
 
     def get_caloric_change_weekly(self):
-        get_caloric_change_weekly = self.set_weekly_weight_change * 3500
+        caloric_change_weekly = self.set_weekly_weight_change * 3500
         return caloric_change_weekly
 
     def get_caloric_change_daily(self):
-        get_caloric_change_daily = self.get_caloric_change_weekly / 700
+        caloric_change_daily = self.get_caloric_change_weekly() / 700
         return caloric_change_daily
  
     def set_weight_goal(self, number, unit):
@@ -108,11 +108,11 @@ class User(BaseNutrition):
     #write more getters 
     def get_activity_calories(self): 
         if self.activity_level == 'inactive':
-            activity_calories = self.basal_metabolic_rate * .30
+            activity_calories = self.get_basal_metabolic_rate() * .30
         if self.activity_level == 'average':
-            activity_calories = self.basal_metabolic_rate * .50
+            activity_calories = self.get_basal_metabolic_rate() * .50
         if self.activity_level == 'active':
-            activity_calories = self.basal_metabolic_rate * .75
+            activity_calories = self.get_basal_metabolic_rate() * .75
         return activity_calories
 
 
@@ -132,7 +132,7 @@ class User(BaseNutrition):
     
     
     def get_adjusted_daily_caloric_needs(self):
-        self.get_adjusted_daily_caloric_needs = self.get_caloric_daily_needs + self.weekly_weight_change / 700
+        adjusted_daily_caloric_needs = self.get_caloric_daily_needs() + self.weekly_weight_change / 700
         return adjusted_daily_caloric_needs
         
     #     Maintain Weight: Caloric Needs
