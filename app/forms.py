@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import BooleanField, PasswordField, DateTimeField, validators
-from wtforms import DecimalField, TextField, IntegerField, DateField, SelectField
+from wtforms import DecimalField, TextField, IntegerField, DateField, SelectField, FloatField
 from wtforms.validators import Required, Length, NumberRange
 
 
@@ -25,42 +25,44 @@ class ProfileForm(Form):
         [validators.NumberRange(
             min=500, 
             max=5000,
-            errorMessage="Enter an integer between 500 and 5000")]
+            message="Enter an integer between 500 and 5000")]
         )
     protein_goal = IntegerField(
         'Protein Goal', 
         [validators.NumberRange(
             min=10, 
             max=200,
-            errorMessage="Enter an integer between 10 and 200")]
+            message="Enter an integer between 10 and 200")]
         )
     carbohydrate_goal = IntegerField(
         'Carbohydrate Goal',
         [validators.NumberRange(
             min=95, 
             max=1000,
-            errorMessage="Enter an integer between 95 and 1000")]
+            message="Enter an integer between 95 and 1000")]
         )
     fat_goal = IntegerField(
         'Fat Goal',
         [validators.NumberRange(
             min=7, 
             max=167,
-            errorMessage="Enter an integer between 7 and 167")]
+            message="Enter an integer between 7 and 167")]
         )
     nutrient_goal = SelectField('Nutrient Goal', choices=[
-        ('total, Total'),
+        ('total', 'Total'),
         ('ratio', 'Ratio')],
-        [validators.Required(
-            errorMessage='Make a Selection')]
+        #need key word arguments to follow other key word arguments
+        validators=[validators.Required(
+            message='Make a Selection')]
         )
+
+    #research how to validate a datefield
     birthdate = DateField(
-        ('Your Birthday Year, Month and Day', 
-        format='%Y/%m/%d'), 
-        [validators.NumberRange(
-        min=DateTime.Today.AddYears(-120), 
-        max=DateTime.Today,
-        errorMessage="Invalid Birthdate")]
+        'Your Birthday Year, Month and Day',
+          validators=[validators.NumberRange(
+         #    min=DateField.date.today(-120), 
+         #    max=DateField.date.today,
+         #    message="Invalid Birthdate")]
         )
 
     
@@ -69,18 +71,18 @@ class ProfileForm(Form):
             # [validators.NumberRange(
             # min=2, 
             # max=1000,
-            # errorMessage="Enter an integer between 2 and 1000")]),
+            # message="Enter an integer between 2 and 1000")]),
         ('weight_in_kilograms', 'Weight in Kilograms'),
             # [validators.NumberRange(
             #     min=1, 
             #     max=454,
-            #     errorMessage="Enter a number between 1 and 454")])
+            #     message="Enter a number between 1 and 454")])
         ('weight_in_stones', 'Weight in Stones')], 
             # [validators.NumberRange(
             #     min=2, 
             #     max=71)]), 
-        [validators.Required(
-                errorMessage='Make a Selection')]     
+        validators=[validators.Required(
+                message='Make a Selection')]     
         )
 
     weight = IntegerField(
@@ -88,7 +90,7 @@ class ProfileForm(Form):
         [validators.NumberRange(
             min=1, 
             max=1000,
-            errorMessage="Enter a number between and including 1 and 1000")]
+            message="Enter a number between and including 1 and 1000")]
         )
 
     weight_goal = IntegerField(
@@ -96,7 +98,7 @@ class ProfileForm(Form):
         [validators.NumberRange(
             min=1,
             max=1000,
-            errorMessage="Enter a number between and including 1 and 1000")]
+            message="Enter a number between and including 1 and 1000")]
         )
     height_unit = SelectField('Height', choices=[
         ('height_in_feet','Height in Feet'), 
@@ -108,15 +110,15 @@ class ProfileForm(Form):
             # [validators.NumberRange(
             #     min=1, 
             #     max=300)])
-        [validators.Required(
-            errorMessage='Make a Selection')]
+        validators=[validators.Required(
+            message='Make a Selection')]
         )
     height = FloatField(
         'Height', 
         [validators.NumberRange(
             min=0, 
             max=300,
-            errorMessage="Enter a number between and including 0 and 300")]
+            message="Enter a number between and including 0 and 300")]
         )
     
     gender = SelectField('Gender', choices=[
@@ -124,8 +126,8 @@ class ProfileForm(Form):
         ('female', 'Female'), 
         ('female pregnant', 'Female Pregnant'), 
         ('female lactating', 'Female Lactating')], 
-        [validators.Required(
-            errorMessage='Make a Selection')]
+        validators=[validators.Required(
+            message='Make a Selection')]
         )
 
 
@@ -133,8 +135,8 @@ class ProfileForm(Form):
         ('inactive', 'Inactive: Less than 2 hours of moving'),
         ('average', 'Average: Walking or Standing 2-4 or more hours per day'),
         ('active', 'Active: Physically Active 4 or more hours per day')],
-        [validators.Required(
-            errorMessage='Make a Selection')]
+        validators=[validators.Required(
+            message='Make a Selection')]
         )
 
     #     (('inactive', 'Inactive: Less than 2 hours of moving')), (.30),
@@ -163,14 +165,14 @@ class ProfileForm(Form):
         ('minus-two_pounds', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
         ('minus_one_and_one_half_pounds', 'Lose -1.5lbs/-.68kg/-.11 Stones per Week'),
         ('minus_one_pound ', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
-        ('minus_one_half_pound', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week')
+        ('minus_one_half_pound', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week'),
         ('maintain', 'Maintain'),
         ('plus_one_half_pound', 'Gain .5 lbs/.23kg/.03 Stones per Week'),
         ('plus_one_pound', 'Gain 1.0lbs/.45kg/.07 Stones per Week'), 
         ('plus one_and_one_half_pound', 'Gain 1.5lbs/.68kg/.11 Stones per Week'),
-        ('plus_two_pounds', 'Gain 2.0lbs/.91kg/.14 Stones per Week'),
-        [validators.Required(
-            errorMessage='Make a Selection')]
+        ('plus_two_pounds', 'Gain 2.0lbs/.91kg/.14 Stones per Week')],
+        validators=[validators.Required(
+            message='Make a Selection')]
     )
 
 

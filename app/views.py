@@ -24,6 +24,23 @@ def profile():
     #request.form contains all the filled-in information.
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
+        #user = session.query(User).filter_by(email="happy").first()
+        #profile = session.query(ProfileForm).filter_by(user=user).first()
+        user = User(
+            form.calorie_goal.data, 
+            form.protein_goal.data, 
+            form.carbohydrate_goal.data,
+            form.fat_goal.data,
+            form.nutrient_goal.data,
+            form.birthdate.data,
+            form.weight_unit.data,
+            form.weight.data,
+            form.weight_goal.data,
+            form.height_unit.data,
+            form.height.data,
+            form.gender.data,
+            form.activity_level.data)
+        db_session.add(user)
         #Here we need to save the information enterred by the User.
         #need access to the user object.
         return redirect(url_for('profile'))
@@ -42,8 +59,12 @@ def get_food_log():
     if food_log is None:
         food_log = FoodLog()
         food_log.user = user
+        
         session.add(food_log)
         session.commit(food_log)
+
+        #session.add()
+        #session.commit()
     return food_log
 
 @app.route('/food_log', methods=['GET'])
@@ -124,6 +145,10 @@ def login():
     
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
+        #user = session.query(User).filter_by(email="happy").first()
+        #login = session.query(LoginForm).filter_by(user=user).first()
+        user = User(form.openid.data, form.remember_me.data)
+        db_session.add(user)
     
         return redirect(url_for('index'))
     return render_template('login.html', 
@@ -136,6 +161,11 @@ def login():
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
+        #user = session.query(User).filter_by(email="happy").first()
+        #register = session.query(RegistrationForm).filter_by(user=user).first()
+        user = User(form.username.data, form.email.data, 
+                form.password.data)
+        db_session.add(User)
         return redirect(url_for('login'))
     return render_template('register.html', 
         title = "Register",

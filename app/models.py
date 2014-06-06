@@ -39,30 +39,45 @@ class User(BaseNutrition):
     activity_level = Column(String)
     age = Column(Integer)
     weekly_weight_change = Column(Integer)
+    openid = Column(String(64), Sequence('user_openid_seq'), index = True, unique = True)
+    remember_me = Column(String, default=False)
+    username = Column(String(25))
+    confirm = Column(Text)
+    calorie_goal = Column(Integer)
+    
+    nutrient_goal = Column(Float)
+    birthdate = Column(Integer)
+    weight_unit = Column(Text)
+    weight = Column(Integer)
+    height_unit = Column(String)
+    height = Column(Float)
+    activity_level = Column(String)
+    weekly_change_level = Column(String)
+
 
     def set_weekly_weight_change(self, weekly_change_level):      
-        if weekly_change_level = 'minus_two_pounds'
+        if weekly_change_level == 'minus_two_pounds':
             self.weekly_weight_change = -2 * .45
-        if weekly_change_level = 'minus_one_and_one_half_pound':
+        elif weekly_change_level == 'minus_one_and_one_half_pound':
             self.weekly_weight_change = -1.5 * .45
-        if weekly_change_level = 'minus_one_pound':
+        elif weekly_change_level == 'minus_one_pound':
             self.weekly_weight_change = -1 * .45
-        if weekly_change_level = 'minus_one_half_pound':
+        elif weekly_change_level == 'minus_one_half_pound':
             self.weekly_weight_change = -.5 * .45
-        if weekly_change_level = 'maintain':
+        elif weekly_change_level == 'maintain':
             self.weekly_weight_change = 0 * .45
-        if weekly_change_level = 'plus_one_half_pound':
+        elif weekly_change_level == 'plus_one_half_pound':
             self.weekly_weight_change = .5 * .45
-        if weekly_change_level = 'plus_one_pound':
+        elif weekly_change_level == 'plus_one_pound':
             self.weekly_weight_change = 1 * .45
-        if weekly_change_level = 'plus one_and_one_half_pound':
+        elif weekly_change_level == 'plus one_and_one_half_pound':
             self.weekly_weight_change = 1.5 * .45
-        if weekly_change_level = 'plus_two_pounds':
+        elif weekly_change_level == 'plus_two_pounds':
             self.weekly_weight_change = 2 * .45
         return self
 
     def get_caloric_change_weekly(self):
-        caloric_change_weekly = self.set_weekly_weight_change * 3500
+        caloric_change_weekly = self.weekly_weight_change * 3500
         return caloric_change_weekly
 
     def get_caloric_change_daily(self):
@@ -72,19 +87,19 @@ class User(BaseNutrition):
     def set_weight_goal(self, number, unit):
         if unit == 'weight_in_kilograms':
             self.weight_goal = number
-        if unit == 'weight_in_pounds':
+        elif unit == 'weight_in_pounds':
             self.weight_goal = number * .45
-        if unit == 'weight_in_stones':
+        elif unit == 'weight_in_stones':
             self.weight_goal = number * 6.35
         return self
 
 
     def set_weight(self, number, unit):
-        if unit == 'weight_in_kilograms'
+        if unit == 'weight_in_kilograms':
            self.weight_in_kilograms = number
-        if unit == 'weight_in_pounds':
+        elif unit == 'weight_in_pounds':
             self.weight_in_kilograms = number * .45
-        if unit == 'weight_in_stones'):
+        elif unit == 'weight_in_stones':
            self.weight_in_kilograms = number * 6.35
         return self
 
@@ -92,7 +107,7 @@ class User(BaseNutrition):
     def set_height(self, number_a, number_b=0, unit='height_in_meters'):
         if unit == 'height_in_meters':
             self.height_in_meters = number_a
-        if unit == 'height_in_feet':
+        elif unit == 'height_in_feet':
             self.height_in_meters = number_a * .30 + number_b *.03
         return self
 
@@ -101,7 +116,7 @@ class User(BaseNutrition):
     def get_basal_metabolic_rate(self):
         if self.gender == 'Male':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 11
-        if self.gender == 'Female':
+        elif self.gender == 'Female':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 10.1
         return basal_metabolic_rate
 
@@ -109,9 +124,9 @@ class User(BaseNutrition):
     def get_activity_calories(self): 
         if self.activity_level == 'inactive':
             activity_calories = self.get_basal_metabolic_rate() * .30
-        if self.activity_level == 'average':
+        elif self.activity_level == 'average':
             activity_calories = self.get_basal_metabolic_rate() * .50
-        if self.activity_level == 'active':
+        elif self.activity_level == 'active':
             activity_calories = self.get_basal_metabolic_rate() * .75
         return activity_calories
 
