@@ -24,22 +24,28 @@ def profile():
     #request.form contains all the filled-in information.
     form = ProfileForm(request.form)
     if request.method == 'POST' and form.validate():
-        #user = session.query(User).filter_by(email="happy").first()
+        user = session.query(User).filter_by(email="happy").first()
         #profile = session.query(ProfileForm).filter_by(user=user).first()
-        user = User(
-            form.calorie_goal.data, 
-            form.protein_goal.data, 
-            form.carbohydrate_goal.data,
-            form.fat_goal.data,
-            form.nutrient_goal.data,
-            form.birthdate.data,
-            form.weight_unit.data,
-            form.weight.data,
-            form.weight_goal.data,
-            form.height_unit.data,
-            form.height.data,
-            form.gender.data,
-            form.activity_level.data)
+        
+        user.calorie_goal = form.calorie_goal.data, 
+        user.protein_goal = form.protein_goal.data, 
+        user.carbohydrate_goal = form.carbohydrate_goal.data,
+        user.fat_goal = form.fat_goal.data,
+        user.nutrient_goal = form.nutrient_goal.data,
+        user.birthday = form.birthday.data,
+        user.age = datetime.date.today() - user.birthday.data,
+        #user.weight_unit = form.weight_unit.data,
+        user.weight = user.set_weight(form.weight.data, form.weight_unit.data),
+        user.weight_goal = user.set_weight_goal(form.weight_goal.data, form.weight_goal_unit.data),
+        #user.height_unit = form.height_unit.data,
+        user.height = user.set_height(form.height.data, form.height_unit.data),
+        user.gender = form.gender.data,
+        user.caloric_needs_daily = form.caloric_needs_daily.data,
+        user.adjusted_daily_caloric_needs = form.adjusted_daily_caloric_needs.data,
+        user.activity_level = form.activity_level.data
+        user.weekly_weight_change = user.set_weekly_weight_change(
+            form.weekly_weight_change.data, form.weekly_weight_change_unit.data),
+
         db_session.add(user)
         #Here we need to save the information enterred by the User.
         #need access to the user object.
@@ -61,10 +67,10 @@ def get_food_log():
         food_log.user = user
         
         session.add(food_log)
-        session.commit(food_log)
+        #session.commit(food_log)
 
         #session.add()
-        #session.commit()
+        session.commit()
     return food_log
 
 @app.route('/food_log', methods=['GET'])

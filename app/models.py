@@ -1,5 +1,5 @@
 from itertools import chain
-from sqlalchemy import create_engine, Column, Text
+from sqlalchemy import create_engine, Column, Text, Date
 from sqlalchemy import Integer, String, Float, Table, SmallInteger
 from sqlalchemy import Sequence, MetaData, ForeignKey, ForeignKeyConstraint
 from sqlalchemy.ext.associationproxy  import association_proxy
@@ -37,16 +37,15 @@ class User(BaseNutrition):
     height_in_meters = Column(Float)
     gender = Column(String)
     activity_level = Column(String)
-    age = Column(Integer)
+    
     weekly_weight_change = Column(Integer)
     openid = Column(String(64), Sequence('user_openid_seq'), index = True, unique = True)
     remember_me = Column(String, default=False)
     username = Column(String(25))
     confirm = Column(Text)
     calorie_goal = Column(Integer)
-    
+    birthday = Column(Date)
     nutrient_goal = Column(Float)
-    birthdate = Column(Integer)
     weight_unit = Column(Text)
     weight = Column(Integer)
     height_unit = Column(String)
@@ -54,7 +53,10 @@ class User(BaseNutrition):
     activity_level = Column(String)
     weekly_change_level = Column(String)
 
-
+    def get_age(self):
+        age = datetime.date.today() - self.birthday
+        return age.days / 365
+  
     def set_weekly_weight_change(self, weekly_change_level):      
         if weekly_change_level == 'minus_two_pounds':
             self.weekly_weight_change = -2 * .45
@@ -83,7 +85,8 @@ class User(BaseNutrition):
     def get_caloric_change_daily(self):
         caloric_change_daily = self.get_caloric_change_weekly() / 700
         return caloric_change_daily
- 
+    
+    #do I need to say unit='weight_in_kilograms'?
     def set_weight_goal(self, number, unit):
         if unit == 'weight_in_kilograms':
             self.weight_goal = number
@@ -94,6 +97,7 @@ class User(BaseNutrition):
         return self
 
 
+    #do I need to say unit = 'weight_in_kilograms'? 
     def set_weight(self, number, unit):
         if unit == 'weight_in_kilograms':
            self.weight_in_kilograms = number
@@ -149,6 +153,7 @@ class User(BaseNutrition):
     def get_adjusted_daily_caloric_needs(self):
         adjusted_daily_caloric_needs = self.get_caloric_daily_needs() + self.weekly_weight_change / 700
         return adjusted_daily_caloric_needs
+    
         
     #     Maintain Weight: Caloric Needs
     #     Lose Weight: Caloric Needs - [(Pounds_per_week_to_lose) x 3500 calories] = Number of calories per week
@@ -158,30 +163,16 @@ class User(BaseNutrition):
     
     
     #caloric_change_daily = caloric_need + 
-    #caloric_change_daily = Column(Integer)
-    
-    
-    
-    
-    
-    
-    
+    #caloric_change_daily = Column(Integer) 
     #calorie_needs_ = Column(Integer)
-    
-    
-    
 
-
-    #create functions def set_activity_level(level): example:
+#create functions def set_activity_level(level): example:
 #def set_activity_level(self, level):
 #if level == "inacitive":
 #self.activity_level = 0.3
 #user.set_activity_level(form.activity_level)
-    
-
-
-
-    # Consider asking for the following information:
+ 
+# Consider asking for the following information:
     # User_gender: Male or Female
     # User_weight: Output in both kg and pounds
     # User_height:: Output in cm and feet/inches

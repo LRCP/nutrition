@@ -2,6 +2,8 @@ from flask.ext.wtf import Form
 from wtforms import BooleanField, PasswordField, DateTimeField, validators
 from wtforms import DecimalField, TextField, IntegerField, DateField, SelectField, FloatField
 from wtforms.validators import Required, Length, NumberRange
+import datetime
+from datetime import date, timedelta
 
 
 class LoginForm(Form):
@@ -30,39 +32,32 @@ class ProfileForm(Form):
     protein_goal = IntegerField(
         'Protein Goal', 
         [validators.NumberRange(
-            min=10, 
-            max=200,
-            message="Enter an integer between 10 and 200")]
+            min=1, 
+            max=100,
+            message="Enter an integer between 1 and 100")]
         )
     carbohydrate_goal = IntegerField(
         'Carbohydrate Goal',
         [validators.NumberRange(
-            min=95, 
-            max=1000,
-            message="Enter an integer between 95 and 1000")]
+            min=1, 
+            max=100,
+            message="Enter an integer between 1 and 100")]
         )
     fat_goal = IntegerField(
         'Fat Goal',
         [validators.NumberRange(
-            min=7, 
-            max=167,
-            message="Enter an integer between 7 and 167")]
+            min=1, 
+            max=100,
+            message="Enter an integer between 1 and 100")]
         )
-    nutrient_goal = SelectField('Nutrient Goal', choices=[
-        ('total', 'Total'),
-        ('ratio', 'Ratio')],
-        #need key word arguments to follow other key word arguments
-        validators=[validators.Required(
-            message='Make a Selection')]
-        )
+    
 
     #research how to validate a datefield
-    birthdate = DateField(
-        'Your Birthday Year, Month and Day',
-          validators=[validators.NumberRange(
-         #    min=DateField.date.today(-120), 
-         #    max=DateField.date.today,
-         #    message="Invalid Birthdate")]
+    birthday = DateField(
+        'Enter your Birthday in this format: Year - Month - Day',
+        [validators.NumberRange(
+            min=datetime.date.today() - datetime.timedelta(days=45657),
+            max=datetime.date.today())]
         )
 
     
