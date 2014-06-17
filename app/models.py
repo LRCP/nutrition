@@ -7,6 +7,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship, backref
 from app import BaseNutrition, BaseUSDA, engineNutrition, metadata, engineUSDA
 from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
+from datetime import datetime
+from datetime import date, timedelta
+
 
 
 
@@ -45,16 +48,12 @@ class User(BaseNutrition):
     confirm = Column(Text)
     calorie_goal = Column(Integer)
     birthday = Column(Date)
-    nutrient_goal = Column(Float)
-    weight_unit = Column(Text)
-    weight = Column(Integer)
-    height_unit = Column(String)
-    height = Column(Float)
+    #nutrient_goal = Column(Float)
     activity_level = Column(String)
-    weekly_change_level = Column(String)
+    
 
     def get_age(self):
-        age = datetime.date.today() - self.birthday
+        age = date.today() - self.birthday
         return age.days / 365
   
     def set_weekly_weight_change(self, weekly_change_level):      
@@ -105,6 +104,7 @@ class User(BaseNutrition):
             self.weight_in_kilograms = number * .45
         elif unit == 'weight_in_stones':
            self.weight_in_kilograms = number * 6.35
+           #self refers to the user's object, the instance of the class,  whoever is logged in.
         return self
 
 

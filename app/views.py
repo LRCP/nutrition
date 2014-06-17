@@ -11,11 +11,11 @@ from constants import food_nutrient_dictionary, food_groups_dictionary
 
 @app.route('/')
 @app.route('/index')
-def index():
-    user = { 'nickname': 'Linda' } # fake user
-    return render_template("index.html",
-        title = 'Home',
-        user = user)
+# def index():
+#      user = { 'nickname': 'Linda' } # fake user
+#      return render_template("index.html",
+#          title = 'Home',
+#          user = user)
 
 
 @app.route('/profile', methods=['GET', 'POST'])
@@ -23,30 +23,32 @@ def profile():
     #request contains all the completed information that the user's browser sends to the host's server.
     #request.form contains all the filled-in information.
     form = ProfileForm(request.form)
+    #print request.form
+    
+    print form.validate()
+    print form.errors
     if request.method == 'POST' and form.validate():
-        user = session.query(User).filter_by(email="happy").first()
-        #profile = session.query(ProfileForm).filter_by(user=user).first()
-        
-        user.calorie_goal = form.calorie_goal.data, 
-        user.protein_goal = form.protein_goal.data, 
-        user.carbohydrate_goal = form.carbohydrate_goal.data,
-        user.fat_goal = form.fat_goal.data,
-        user.nutrient_goal = form.nutrient_goal.data,
-        user.birthday = form.birthday.data,
-        user.age = datetime.date.today() - user.birthday.data,
-        #user.weight_unit = form.weight_unit.data,
-        user.weight = user.set_weight(form.weight.data, form.weight_unit.data),
-        user.weight_goal = user.set_weight_goal(form.weight_goal.data, form.weight_goal_unit.data),
-        #user.height_unit = form.height_unit.data,
-        user.height = user.set_height(form.height.data, form.height_unit.data),
-        user.gender = form.gender.data,
-        user.caloric_needs_daily = form.caloric_needs_daily.data,
-        user.adjusted_daily_caloric_needs = form.adjusted_daily_caloric_needs.data,
-        user.activity_level = form.activity_level.data
-        user.weekly_weight_change = user.set_weekly_weight_change(
-            form.weekly_weight_change.data, form.weekly_weight_change_unit.data),
 
-        db_session.add(user)
+        #get the user from the database session
+        user = session.query(User).filter_by(email="happy").first()
+        # do not store the results of calculations using variable defined in
+        # models.py That is what models.py is for.
+        user.calorie_goal = form.calorie_goal.data
+        print form.calorie_goal.data
+        user.protein_goal = form.protein_goal.data
+
+        user.carbohydrate_goal = form.carbohydrate_goal.data
+        user.fat_goal = form.fat_goal.data
+        #user.nutrient_goal = form.nutrient_goal.data
+        user.birthday = form.birthday.data
+        print form.birthday.data
+        user.set_weight(form.weight.data, form.weight_unit.data)
+        user.weight_goal = user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
+        user.set_height(form.height.data, form.height_unit.data)
+        user.gender = form.gender.data       
+        user.activity_level = form.activity_level.data
+        user.set_weekly_weight_change(form.weekly_change_level.data)
+        session.commit()
         #Here we need to save the information enterred by the User.
         #need access to the user object.
         return redirect(url_for('profile'))
@@ -58,8 +60,9 @@ def profile():
         form=form)
 
 
-def get_food_log():
-    user = session.query(User).filter_by(email="happy").first()
+def get_food_log(user):
+    #pass the user as a parameter
+    
     food_log = session.query(FoodLog).filter_by(user=user).first()
     
     if food_log is None:
@@ -75,11 +78,13 @@ def get_food_log():
 
 @app.route('/food_log', methods=['GET'])
 def food_log_get():
-    
+   
+    user = session.query(User).filter_by(email="happy").first()
     #gets the food groups list from the database
-    # session.query(FoodGroupDescription) is a function that returns a variable.
+    #session.query(FoodGroupDescription) is a function that returns a variable.
+
     food_groups_list = session.query(FoodGroupDescription).order_by(FoodGroupDescription.FdGrp_Desc).all()
-    food_log = get_food_log()
+    food_log = get_food_log(user)
     
     # The food_log contains a list of associations between foods and quantities.
     #creating a list of dictionaries
@@ -108,12 +113,14 @@ def food_log_get():
             "name": association.food.Long_Desc, 
             "nutrients": values_nutrient_dictionary,
             })
-     
+    
     return render_template(
         'food_log.html', title="FoodLog",
         food_nutrient_list=food_nutrient_list, 
         food_groups_list=food_groups_list,
-        #food_groups_list=(FoodGroupDescription.FdGrp_Cd).sort
+        # pass the user into the template. 
+        # need a user object to display something in python on views.
+        user=user
         )
     
 

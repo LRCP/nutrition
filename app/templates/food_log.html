@@ -3,6 +3,26 @@
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 <form method=post action="/food_log">
+{# <div>
+    {{ render_field(form.calorie_goal) }}
+    {{ render_field(form.protein_goal) }}
+    {{ render_field(form.carbohydrate_goal) }}
+    {{ render_field(form.fat_goal) }}
+    {{ render_field(form.weekly_change_level) }}
+</div> #}
+<div>
+    Name: {{user}}
+    Fat Goal: {{ user.fat_goal }}
+    Protein Goal: {{ user.protein_goal }}
+    Carbohydrate Goal: {{  user.carbohydrate_goal }}
+    Fat Goal: {{ user.fat_goal }}
+    Age: {{ user.get_age() }}
+    Weekly Weight Change Goal: {{ user.set_weekly_weight_change(self) }}
+    Caloric Change Weekly: {{ user.get_caloric_change_weekly() }}
+    Caloric Change Daily: {{ user.get_caloric_change_weekly() }}
+    Caloric Needs Daily: {{ user.get_adjusted_daily_caloric_needs() }}
+
+</div>
 
 <h2>Here is Your Personal Food Log Page!</h2>
 <p>
