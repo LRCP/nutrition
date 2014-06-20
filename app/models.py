@@ -39,7 +39,7 @@ class User(BaseNutrition):
     weight_goal = Column(Integer)
     height_in_meters = Column(Float)
     gender = Column(String)
-    activity_level = Column(String)
+   
     
     weekly_weight_change = Column(Integer)
     openid = Column(String(64), Sequence('user_openid_seq'), index = True, unique = True)
@@ -50,6 +50,8 @@ class User(BaseNutrition):
     birthday = Column(Date)
     #nutrient_goal = Column(Float)
     activity_level = Column(String)
+    caloric_change_weekly = Column(Integer)
+    caloric_change_daily = Column(Integer)
     
 
     def get_age(self):
@@ -80,9 +82,8 @@ class User(BaseNutrition):
     def get_caloric_change_weekly(self):
         caloric_change_weekly = self.weekly_weight_change * 3500
         return caloric_change_weekly
-
     def get_caloric_change_daily(self):
-        caloric_change_daily = self.get_caloric_change_weekly() / 700
+        caloric_change_daily = self.get_caloric_change_weekly() / 7
         return caloric_change_daily
     
     #do I need to say unit='weight_in_kilograms'?
@@ -118,9 +119,9 @@ class User(BaseNutrition):
     #need setter functions for height,activity
     #for simple values, don't need addtional arguments.
     def get_basal_metabolic_rate(self):
-        if self.gender == 'Male':
+        if self.gender == 'male':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 11
-        elif self.gender == 'Female':
+        elif self.gender == 'female':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 10.1
         return basal_metabolic_rate
 
@@ -140,18 +141,16 @@ class User(BaseNutrition):
         return dietary_thermogenesis_calories
 
     def get_caloric_needs_daily(self):
-        caloric_needs_absolute = (
+        caloric_needs_daily= (
             self.get_basal_metabolic_rate() + 
             self.get_activity_calories() + 
             self.get_dietary_thermogenesis_calories()
             )
-        caloric_needs_daily_min = .90 * (caloric_needs_absolute)
-        caloric_needs_daily_max = 1.10 * (caloric_needs_absolute)
-        return caloric_needs_daily_min, caloric_needs_daily_max
+        return caloric_needs_daily
     
     
     def get_adjusted_daily_caloric_needs(self):
-        adjusted_daily_caloric_needs = self.get_caloric_daily_needs() + self.weekly_weight_change / 700
+        adjusted_daily_caloric_needs = self.get_caloric_needs_daily() + self.weekly_weight_change / 700
         return adjusted_daily_caloric_needs
     
         
@@ -229,9 +228,36 @@ class FoodLog(BaseNutrition):
     __tablename__ = 'food_logs'
     id = Column(Integer, Sequence('food_logs_id_seq'), primary_key=True)
     user_id = Column(Integer, ForeignKey('users.id'))#many food_logs to one user
-    #timestamp = Column(DateTime)
+    # protein_consumed = Column(Integer)
+    # carbohydrate_consumed = Column(Integer)
+    # fat_consumed = Column(Integer)
+    # vitamins_consumed = Column(Float)
+    # minerals_consumed = Column(Float)
+    # other_consumed = Column(Float)
+    # total_calories_consumed = Column(Integer)
 
-    #foods is being modified to be defined via the Association Object.
+
+    #def get_total_calories:
+    #   Energy_KCAL = 0
+    #   for food in self.foods:
+    #       Energy_KCAL += food.Energy_KCAL
+    #   return calories
+
+    #def get_protein: 
+    #   protein = 0
+    #   for food in self.foods:
+    #       protein +=food.protein
+    #   return protein
+    #def get_carbohydrates:
+    #def get_fat:
+    #def get_other:
+    #def get_vitamins:
+    #def get_minerals:
+
+
+    
+
+    #foods, an attribute, is being modified to be defined via the Association Object.
     foods = relationship('Association')
  
 

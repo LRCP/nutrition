@@ -43,7 +43,7 @@ def profile():
         user.birthday = form.birthday.data
         print form.birthday.data
         user.set_weight(form.weight.data, form.weight_unit.data)
-        user.weight_goal = user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
+        user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
         user.set_height(form.height.data, form.height_unit.data)
         user.gender = form.gender.data       
         user.activity_level = form.activity_level.data

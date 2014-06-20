@@ -11,16 +11,16 @@
     {{ render_field(form.weekly_change_level) }}
 </div> #}
 <div>
-    Name: {{user}}
-    Fat Goal: {{ user.fat_goal }}
-    Protein Goal: {{ user.protein_goal }}
-    Carbohydrate Goal: {{  user.carbohydrate_goal }}
-    Fat Goal: {{ user.fat_goal }}
-    Age: {{ user.get_age() }}
-    Weekly Weight Change Goal: {{ user.set_weekly_weight_change(self) }}
-    Caloric Change Weekly: {{ user.get_caloric_change_weekly() }}
-    Caloric Change Daily: {{ user.get_caloric_change_weekly() }}
-    Caloric Needs Daily: {{ user.get_adjusted_daily_caloric_needs() }}
+    Welcome: {{ user.name }}
+    Protein Goal: {{ user.protein_goal }}%
+    Carbohydrate Goal: {{  user.carbohydrate_goal }}%
+    Fat Goal: {{ user.fat_goal }}%
+    
+    Weekly Weight Change Goal: {{ user.weekly_weight_change }}
+    {#getter functions are attributes to be referred to as user.get_....#}
+    Caloric Change Weekly: {{ user.get_caloric_change_weekly()|round|int }}
+    Caloric Change Daily: {{ user.get_caloric_change_daily()|round|int }}
+    Caloric Needs Daily: {{ user.get_adjusted_daily_caloric_needs()|round|int }}
 
 </div>
 
