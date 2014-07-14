@@ -30,3 +30,18 @@ th {
 tr {
   padding: 5px;
 }
+.welcome {
+  text-align: center;
+  color: black;
+  font-size: 20;
+  font-weight: bold;
+}
+#user_name {
+  /*color: #C2A36D;*/
+  color: black;
+  font-size: 30;
+}
+
+h4 {
+  font_size: 20;
+}

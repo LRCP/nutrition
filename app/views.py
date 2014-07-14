@@ -18,15 +18,23 @@ from constants import food_nutrient_dictionary, food_groups_dictionary
 #          user = user)
 
 
-@app.route('/profile', methods=['GET', 'POST'])
-def profile():
-    #request contains all the completed information that the user's browser sends to the host's server.
-    #request.form contains all the filled-in information.
+#next assignment: use food_log as an example.
+@app.route('/profile', methods=['GET'])
+def profile_get():
+    form = ProfileForm(request.form)
+    return render_template('profile.html', 
+        #title is the name of the page for Profile: Nutrition
+        title = 'Profile',
+        #make a variable in the template called form. The value of the form should be
+        #equal to the variable form in the local function.
+        form=form)
+
+
+@app.route('/profile', methods=['POST'])
+def profile_post():
     form = ProfileForm(request.form)
     #print request.form
-    
-    print form.validate()
-    print form.errors
+
     if request.method == 'POST' and form.validate():
 
         #get the user from the database session
@@ -34,14 +42,12 @@ def profile():
         # do not store the results of calculations using variable defined in
         # models.py That is what models.py is for.
         user.calorie_goal = form.calorie_goal.data
-        print form.calorie_goal.data
         user.protein_goal = form.protein_goal.data
 
         user.carbohydrate_goal = form.carbohydrate_goal.data
         user.fat_goal = form.fat_goal.data
         #user.nutrient_goal = form.nutrient_goal.data
         user.birthday = form.birthday.data
-        print form.birthday.data
         user.set_weight(form.weight.data, form.weight_unit.data)
         user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
         user.set_height(form.height.data, form.height_unit.data)
@@ -51,13 +57,47 @@ def profile():
         session.commit()
         #Here we need to save the information enterred by the User.
         #need access to the user object.
-        return redirect(url_for('profile'))
-    return render_template('profile.html', 
-        #title is the name of the page for Profile: Nutrition
-        title = 'Profile',
-        #make a variable in the template called form. The value of the form should be
-        #equal to the variable form in the local function.
-        form=form)
+        #return redirect(url_for('profile_get'))
+        return render_template('profile.html',
+            title = 'Profile',
+            form=form)
+
+# @app.route('/profile', methods=['GET', 'POST'])
+# def profile():
+#     #request contains all the completed information that the user's browser sends to the host's server.
+#     #request.form contains all the filled-in information.
+#     form = ProfileForm(request.form)
+#     #print request.form
+    
+#     if request.method == 'POST' and form.validate():
+
+#         #get the user from the database session
+#         user = session.query(User).filter_by(email="happy").first()
+#         # do not store the results of calculations using variable defined in
+#         # models.py That is what models.py is for.
+#         user.calorie_goal = form.calorie_goal.data
+#         user.protein_goal = form.protein_goal.data
+
+#         user.carbohydrate_goal = form.carbohydrate_goal.data
+#         user.fat_goal = form.fat_goal.data
+#         #user.nutrient_goal = form.nutrient_goal.data
+#         user.birthday = form.birthday.data
+#         user.set_weight(form.weight.data, form.weight_unit.data)
+#         user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
+#         user.set_height(form.height.data, form.height_unit.data)
+#         user.gender = form.gender.data       
+#         user.activity_level = form.activity_level.data
+#         user.set_weekly_weight_change(form.weekly_change_level.data)
+#         session.commit()
+#         #Here we need to save the information enterred by the User.
+#         #need access to the user object.
+#         #return redirect(url_for('profile'))
+#     return render_template('profile.html', 
+#         #title is the name of the page for Profile: Nutrition
+#         title = 'Profile',
+#         #make a variable in the template called form. The value of the form should be
+#         #equal to the variable form in the local function.
+#         form=form)
 
 
 def get_food_log(user):
@@ -82,6 +122,8 @@ def food_log_get():
     user = session.query(User).filter_by(email="happy").first()
     #gets the food groups list from the database
     #session.query(FoodGroupDescription) is a function that returns a variable.
+    if user.protein_goal == None:
+        return redirect(url_for('profile'))
 
     food_groups_list = session.query(FoodGroupDescription).order_by(FoodGroupDescription.FdGrp_Desc).all()
     food_log = get_food_log(user)
@@ -126,9 +168,10 @@ def food_log_get():
 
 @app.route('/food_log', methods=['POST'])
 def food_log_post():
+    user = session.query(User).filter_by(email="happy").first()
     foods = request.form.getlist('food')
     quantities = request.form.getlist('quantity')
-    food_log = get_food_log()
+    food_log = get_food_log(user)
     
     for food_name, food_quantity in zip(foods, quantities):
         food = session.query(FoodDescription).filter(

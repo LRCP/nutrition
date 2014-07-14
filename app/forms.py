@@ -34,21 +34,21 @@ class ProfileForm(Form):
         [validators.NumberRange(
             min=1, 
             max=100,
-            message="Enter an integer between 1 and 100")]
+            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
         )
     carbohydrate_goal = IntegerField(
         'Carbohydrate Goal',
         [validators.NumberRange(
             min=1, 
             max=100,
-            message="Enter an integer between 1 and 100")]
+            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
         )
     fat_goal = IntegerField(
         'Fat Goal',
         [validators.NumberRange(
             min=1, 
             max=100,
-            message="Enter an integer between 1 and 100")]
+            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
         )
     
 
@@ -96,8 +96,8 @@ class ProfileForm(Form):
             message="Enter a number between and including 1 and 1000")]
         )
     height_unit = SelectField('Height', choices=[
-        ('height_in_feet','Height in Feet'), 
-        ('Height in Inches','Height in Inches'), 
+        # ('height_in_feet','Height in Feet'), 
+        ('height_in_inches','Height in Inches'), 
             # [validators.NumberRange(
             #     min=1, 
             #     max=12)])
@@ -159,7 +159,7 @@ class ProfileForm(Form):
     weekly_change_level = SelectField('Weekly Change Level', choices=[
         ('minus-two_pounds', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
         ('minus_one_and_one_half_pounds', 'Lose -1.5lbs/-.68kg/-.11 Stones per Week'),
-        ('minus_one_pound ', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
+        ('minus_one_pound', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
         ('minus_one_half_pound', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week'),
         ('maintain', 'Maintain'),
         ('plus_one_half_pound', 'Gain .5 lbs/.23kg/.03 Stones per Week'),

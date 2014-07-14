@@ -52,7 +52,12 @@ class User(BaseNutrition):
     activity_level = Column(String)
     caloric_change_weekly = Column(Integer)
     caloric_change_daily = Column(Integer)
+    adjusted_daily_caloric_needs = Column(Integer)
+    body_mass_index = Column(Float)
     
+    def get_body_mass_index(self):
+        bmi = self.weight_in_kilograms / (self.height_in_meters **2)
+        return bmi
 
     def get_age(self):
         age = date.today() - self.birthday
@@ -79,9 +84,11 @@ class User(BaseNutrition):
             self.weekly_weight_change = 2 * .45
         return self
 
+
     def get_caloric_change_weekly(self):
         caloric_change_weekly = self.weekly_weight_change * 3500
         return caloric_change_weekly
+
     def get_caloric_change_daily(self):
         caloric_change_daily = self.get_caloric_change_weekly() / 7
         return caloric_change_daily
@@ -109,11 +116,14 @@ class User(BaseNutrition):
         return self
 
 
-    def set_height(self, number_a, number_b=0, unit='height_in_meters'):
+    #def set_height(self, number_a, number_b=0, unit='height_in_meters'):
+    def set_height(self, number_a, unit='height_in_meters'):
         if unit == 'height_in_meters':
             self.height_in_meters = number_a
-        elif unit == 'height_in_feet':
-            self.height_in_meters = number_a * .30 + number_b *.03
+        # elif unit == 'height_in_feet':
+        #     self.height_in_meters = number_a * .30 + number_b *.03
+        elif unit == 'height_in_inches':
+            self.height_in_meters = number_a /39.37
         return self
 
     #need setter functions for height,activity

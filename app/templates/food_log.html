@@ -10,21 +10,29 @@
     {{ render_field(form.fat_goal) }}
     {{ render_field(form.weekly_change_level) }}
 </div> #}
+
+<h2 class="welcome">
+    Welcome <span id="user_name">{{ user.name }}!</span> Here is Your Personal Food Log Page!
+</h2>
+
+
+{# <h2>Here is Your Personal Food Log Page!</h2> #}
 <div>
-    Welcome: {{ user.name }}
-    Protein Goal: {{ user.protein_goal }}%
-    Carbohydrate Goal: {{  user.carbohydrate_goal }}%
-    Fat Goal: {{ user.fat_goal }}%
-    
-    Weekly Weight Change Goal: {{ user.weekly_weight_change }}
+    Daily Caloric Needs: {{ user.get_adjusted_daily_caloric_needs()|round|int }}
+    Weekly Weight Change Goal in Kilograms: {{ user.weekly_weight_change }}
     {#getter functions are attributes to be referred to as user.get_....#}
-    Caloric Change Weekly: {{ user.get_caloric_change_weekly()|round|int }}
-    Caloric Change Daily: {{ user.get_caloric_change_daily()|round|int }}
-    Caloric Needs Daily: {{ user.get_adjusted_daily_caloric_needs()|round|int }}
+    Change Calories: Daily {{ user.get_caloric_change_daily()|round|int }} or Weekly: {{ user.get_caloric_change_weekly()|round|int }}
+    Body Mass Index: {{ user.get_body_mass_index()|round|int }}
+   
+
 
 </div>
-
-<h2>Here is Your Personal Food Log Page!</h2>
+<div>
+    Macro Nutrient Goals as a Percentage of Calorie Goal:
+    Protein: {{ user.protein_goal }}%
+    Carbohydrate: {{  user.carbohydrate_goal }}%
+    Fat: {{ user.fat_goal }}%
+</div> 
 <p>
     <strong>Please select the food groups you wish to search.</strong>
 </p>
