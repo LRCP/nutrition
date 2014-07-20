@@ -13,6 +13,9 @@ from flask import Flask
 
 # Then initialize the variables
 app = Flask(__name__)
+# to iterate ove an ordered dictionary in jinja2, import the module enumerate.
+# see stackoverflow: http://stackoverflow.com/questions/6036082/call-a-python-function-from-jinja2
+app.jinja_env.globals.update(enumerate=enumerate)
 app.config.from_object('config')
 engineUSDA = create_engine('sqlite:///nutrient.db')
 engineNutrition = create_engine('sqlite:///app.db')

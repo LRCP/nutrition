@@ -8,6 +8,7 @@ from models import *
 import json
 from sqlalchemy import or_
 from constants import food_nutrient_dictionary, food_groups_dictionary
+from collections import OrderedDict
 
 @app.route('/')
 @app.route('/index')
@@ -35,7 +36,7 @@ def profile_post():
     form = ProfileForm(request.form)
     #print request.form
 
-    if request.method == 'POST' and form.validate():
+    if form.validate():
 
         #get the user from the database session
         user = session.query(User).filter_by(email="happy").first()
@@ -138,10 +139,16 @@ def food_log_get():
         food_log_dictionary = {}
         
         #get the nutrient values associated with the food
+        #food_nutrient_dictionary is a dictionary with 
+        #   a key called nutrient_category, and 
+        #   a value called OrderedDictionary which is nutrient_category_name
+        #nutrient_category_ name is the key in food_nutrient_dictionary which is a string
+        #nutrient category is the value in food_nutrient_dictionary which is an Ordered Dictionary
+        #values_nutrient_category is an empty dictionary
         values_nutrient_dictionary = {}
         for nutrient_category_name in food_nutrient_dictionary:
             nutrient_category = food_nutrient_dictionary[nutrient_category_name]
-            values_nutrient_category = values_nutrient_dictionary[nutrient_category_name] = {}
+            values_nutrient_category = values_nutrient_dictionary[nutrient_category_name] = OrderedDict()
             for nutrient_name in nutrient_category:              
                 nutrient_number = nutrient_category[nutrient_name]
                 try:

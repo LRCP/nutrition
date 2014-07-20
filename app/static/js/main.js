@@ -9,6 +9,7 @@ $(document).ready(function() {
     var foodEnterred = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
+        limit: 50,
         remote: {
             url: '/queries/',
             /*filter code is saving the data as datums variable so that we can use it later.*/
