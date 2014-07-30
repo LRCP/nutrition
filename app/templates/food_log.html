@@ -84,7 +84,8 @@ multiple gives the property of the tag of we can pick more than one item. #}
         <div class="col-xs-2"></div>
     </div>
 
-    {% for food in food_nutrient_list %}
+    
+    {% for food_index, food in enumerate(food_nutrient_list) %}
     <div class="row">
         <div class="col-xs-2">
             {{food["name"]}}
@@ -102,185 +103,188 @@ multiple gives the property of the tag of we can pick more than one item. #}
             {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}}
         </div> 
         <div class="col-xs-2">
-            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details">
+            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
                 <span class="glyphicon glyphicon-chevron-down"></span>
             </button>
         </div>
     </div>
-    {% endfor %}
-</div>
+    
 
 
-<p><h4>NUTRIENT BREAKDOWN FOR THE FOOD:</h4></p> 
-<div class="container-fluid collapse" id="Food-Details"> 
-    {% for food in food_nutrient_list %} 
 
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Calories</h3>
-            <p>Total: {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]}}</p>
+     
+    <div class="collapse" id="Food-Details-{{food_index}}"> 
+        <p><h4>NUTRIENT BREAKDOWN FOR THE FOOD:</h4></p>
         
-            <div>Protein {{food["nutrients"]["Protein & Amino Acids"][ "Protein"]}}</div>
-            <div>Carbs{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]}}</div>
-            <div>Fats {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}} </div>
-        </div>
 
-        <div class="col-md-4">
-            <h3>Protein</h3>
-            <p>Total {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]}}</p>
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Calories</h3>
+                <p>Total {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]}}</p>
             
-            <div>    
-            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Protein-Details">
-                More Details
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
+                <div>Protein {{food["nutrients"]["Protein & Amino Acids"][ "Protein"]}}</div>
+                <div>Carbs{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]}}</div>
+                <div>Fats {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}} </div>
             </div>
-            <div id="Protein-Details" class="collapse">
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
-                {% if index > 0 %}
 
-                <div>
-                    {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]}}
+            <div class="col-md-4">
+                <h3>Protein</h3>
+                <p>Total {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]}}</p>
+                
+                <div>    
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Protein-Details-{{food_index}}">
+                    More Details
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
                 </div>
-                {% endif %}
-                {% endfor %}
+                <div id="Protein-Details-{{food_index}}" class="collapse">
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
+                    {% if index > 0 %}
+
+                    <div>
+                        {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                        
             </div>
-                    
-        </div>
-        
             
-        
+                
+            
 
-        <div class="col-md-4">
-            <h3>Carbohydrates</h3>
-            {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-            {% if index < 4 %}
-            <div>{{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]}}
-            </div>
-            {% endif %}
-            {% endfor %}
-
-            <div>
-            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sugars-Details">
-                More Details
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            </div>
-            <div id="Sugars-Details" class="collapse">
+            <div class="col-md-4">
+                <h3>Carbohydrates</h3>
                 {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                {% if index >= 4 %}
+                {% if index < 4 %}
                 <div>{{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]}}
                 </div>
                 {% endif %}
                 {% endfor %}
-            </div>                           
-        </div>           
-    </div>
 
-    <div class-"row">
-        <div class="col-md-4">
-            <h3>Fats</h3>
-            <div>
-                <h6>Saturated</h6>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                {% if index < 15 %}
-                <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
+                <div>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sugars-Details-{{food_index}}">
+                    More Details
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
                 </div>
-                {% endif %}
-                {% endfor %}
-                
-                <h6>Monounsaturated</h6>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                {% if index < 16 %}
-                <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
-                </div>
-                {% endif %}
-                {% endfor %}
-
-                
-                <h6>Polyunsaturated</h6>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                {% if index < 22 %}
-                <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
-                </div>
-                {% endif %}
-                {% endfor %}
-                
-
-                <h6>Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty Acids, total trans"]}}</h6>
-                <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
-                <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
-            </div>
+                <div id="Sugars-Details-{{food_index}}" class="collapse">
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
+                    {% if index >= 4 %}
+                    <div>{{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>                           
+            </div>           
         </div>
-        <div class="col-md-4">
-            <h3>Vitamins</h3>
-            {% for index, nutrient_name in enumerate(food["nutrients"]["Vitamins"]) %}
-                
-            <div>{{nutrient_name}} {{food["nutrients"]["Vitamins"][nutrient_name]}}
-            </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Fats</h3>
+                <div>
+                    <h6>Saturated</h6>
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
+                    {% if index < 15 %}
+                    <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                     
-            {% endfor %}
-            
-        </div>
-        <div class="col-md-4">
-            <h3>Minerals</h3>
-            {% for index, nutrient_name in enumerate(food["nutrients"]["Minerals"]) %}
+                    <h6>Monounsaturated</h6>
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
+                    {% if index < 16 %}
+                    <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+
+                    
+                    <h6>Polyunsaturated</h6>
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
+                    {% if index < 22 %}
+                    <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    
+
+                    <h6>Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty Acids, total trans"]}}</h6>
+                    <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
+                    <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>Vitamins</h3>
+                {% for index, nutrient_name in enumerate(food["nutrients"]["Vitamins"]) %}
+                    
+                <div>{{nutrient_name}} {{food["nutrients"]["Vitamins"][nutrient_name]}}
+                </div>
+                        
+                {% endfor %}
                 
-            <div>{{nutrient_name}} {{food["nutrients"]["Minerals"][nutrient_name]}}
-            </div>               
-            {% endfor %}
-            
+            </div>
+            <div class="col-md-4">
+                <h3>Minerals</h3>
+                {% for index, nutrient_name in enumerate(food["nutrients"]["Minerals"]) %}
+                    
+                <div>{{nutrient_name}} {{food["nutrients"]["Minerals"][nutrient_name]}}
+                </div>               
+                {% endfor %}
+                
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h3>Sterols</h3>
-            
-            {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-            {% if index < 2 %}
-            <div>
-                {{nutrient_name}} {{food["nutrients"]["Sterols"][nutrient_name]}}
-            </div>
-            {% endif %}
-            {% endfor %}
-            
-            <div>
-            <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sterols-Details">
-                More Details
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-            </div>
-
-            <div id="Sterols-Details" class="collapse"> 
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Sterols</h3>
+                
                 {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-                {% if index >= 2 %}                
+                {% if index < 2 %}
                 <div>
                     {{nutrient_name}} {{food["nutrients"]["Sterols"][nutrient_name]}}
                 </div>
                 {% endif %}
-                {% endfor %}              
-                {# <div>Stigmasterol 
-                    {{food["nutrients"]["Sterols"]["Stigmasterol"]}}
-                </div>
-                <div>Campesterol 
-                    {{food["nutrients"]["Sterols"]["Campesterol"]}}
-                </div>
-                <div>Beta-sitosterol 
-                    {{food["nutrients"]["Sterols"]["Beta-sitosterol"]}}
-                </div> #}
-            </div>
-        </div>
-                   
-        <div class="col-md-4">
-            <h3>Other</h3>
-            {% for index, nutrient_name in enumerate(food["nutrients"]["Other"]) %}
+                {% endfor %}
                 
-            <div>{{nutrient_name}} {{food["nutrients"]["Other"][nutrient_name]}}
-            </div>              
-            {% endfor %}
-        </div>          
+                <div>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sterols-Details-{{food_index}}">
+                    More Details
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+                </div>
+
+                <div id="Sterols-Details-{{food_index}}" class="collapse"> 
+                    {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
+                    {% if index >= 2 %}                
+                    <div>
+                        {{nutrient_name}} {{food["nutrients"]["Sterols"][nutrient_name]}}
+                    </div>
+                    {% endif %}
+                    {% endfor %}              
+                    {# <div>Stigmasterol 
+                        {{food["nutrients"]["Sterols"]["Stigmasterol"]}}
+                    </div>
+                    <div>Campesterol 
+                        {{food["nutrients"]["Sterols"]["Campesterol"]}}
+                    </div>
+                    <div>Beta-sitosterol 
+                        {{food["nutrients"]["Sterols"]["Beta-sitosterol"]}}
+                    </div> #}
+                </div>
+            </div>
+                       
+            <div class="col-md-4">
+                <h3>Other</h3>
+                {% for index, nutrient_name in enumerate(food["nutrients"]["Other"]) %}
+                    
+                <div>{{nutrient_name}} {{food["nutrients"]["Other"][nutrient_name]}}
+                </div>              
+                {% endfor %}
+            </div>          
+        </div>
     </div>
     {% endfor %} 
+
 </div>  
 {% endblock %}

@@ -110,7 +110,6 @@ food_nutrient_dictionary["Vitamins"]["Retinol"] = 319
 food_nutrient_dictionary["Vitamins"]["Carotene, beta"] = 321
 food_nutrient_dictionary["Vitamins"]["Carotene, alpha"] = 322
 food_nutrient_dictionary["Vitamins"]["Cryptoxanthin, beta"] = 334
-food_nutrient_dictionary["Vitamins"]["Vitamin A, IU"] = 318
 food_nutrient_dictionary["Vitamins"]["Lycopene"] = 337
 food_nutrient_dictionary["Vitamins"]["Lutein + Zeaxanthin"] = 338
 food_nutrient_dictionary["Vitamins"]["Vitamin C, total ascorbic acid"] = 401
