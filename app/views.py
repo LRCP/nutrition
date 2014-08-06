@@ -146,17 +146,18 @@ def food_log_get():
         #nutrient category is the value in food_nutrient_dictionary which is an Ordered Dictionary
         #values_nutrient_category is an empty dictionary
         values_nutrient_dictionary = {}
+        #find the OrderedDict() for each nutrient_category_dictionary
         for nutrient_category_name in food_nutrient_dictionary:
-            nutrient_category = food_nutrient_dictionary[nutrient_category_name]
-            values_nutrient_category = values_nutrient_dictionary[nutrient_category_name] = OrderedDict()
-            for nutrient_name in nutrient_category:              
-                nutrient_number = nutrient_category[nutrient_name]
+            nutrient_category_dictionary = food_nutrient_dictionary[nutrient_category_name]
+            values_nutrient_category_dictionary = values_nutrient_dictionary[nutrient_category_name] = OrderedDict()
+            for nutrient_name in nutrient_category_dictionary:              
+                nutrient_number = nutrient_category_dictionary[nutrient_name]
                 try:
                     nutrient_value = next(x.Nutr_Val for x in nutrients if int(x.Nutr_No) == 
                         nutrient_number)
-                    values_nutrient_category[nutrient_name] = float(nutrient_value) * association.quantity
+                    values_nutrient_category_dictionary[nutrient_name] = float(nutrient_value) * association.quantity
                 except StopIteration:
-                    values_nutrient_category[nutrient_name] = "N/A"
+                    values_nutrient_category_dictionary[nutrient_name] = "N/A"
          
         #example           
         #values_nutrient_dictionary["Carbohydrates"]["Fiber"]
@@ -166,17 +167,35 @@ def food_log_get():
             "name": association.food.Long_Desc, 
             "nutrients": values_nutrient_dictionary,
             })
-
-        totals = defaultdict(float)
+        #create a new dictionary totalling the amount of nutrients consumed.
+        #make the dictionary a nested dictionary to show the category_name
+        totals = defaultdict(lambda: defaultdict(float))
         for food_dictionary in food_nutrient_list:
             nutrient_category_dictionary = food_dictionary["nutrients"]
             for nutrient_category_name in nutrient_category_dictionary:
                 nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
                 for nutrient_name in nutrient_dictionary:
-                    totals[nutrient_name] = nutrient_dictionary[nutrient_name]
-        print totals[nutrient_name]
-        print nutrient_dictionary[nutrient_name]
+                    nutrient_value = nutrient_dictionary[nutrient_name]
+                    totals[nutrient_category_name][nutrient_name] = nutrient_value
+        #print totals[nutrient_name]
+        #print nutrient_dictionary[nutrient_name]
         print totals
+        for food_dictionary in food_nutrient_list:
+            nutrient_category_dictionary = food_dictionary["nutrients"]
+            for key in nutrient_category_dictionary:
+                totals[key] = nutrient_category_dictionary[key] 
+            for nutrient_category_name in totals:
+                nutrient_name = totals[nutrient_category_name]
+                print "{}: {}: {}".format(nutrient_category_name, nutrient_name, totals[nutrient_category_name])
+        # for nutrient_name in nutrient_category_dictionary[nutrient_category_name]:
+        #     print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name] )
+
+        # for food_dictionary in food_nutrient_list:
+        #     nutrient_category_dictionary = food_dictionary["nutrients"]
+        #     for nutrient_category_name in nutrient_category_dictionary:
+        #         nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
+        #         for nutrient_name in nutrient_dictionary:
+
         
 
     return render_template(
