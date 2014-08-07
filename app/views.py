@@ -176,10 +176,12 @@ def food_log_get():
                 nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
                 for nutrient_name in nutrient_dictionary:
                     nutrient_value = nutrient_dictionary[nutrient_name]
-                    totals[nutrient_category_name][nutrient_name] = nutrient_value
+                    totals[nutrient_category_name][nutrient_name] += nutrient_value
+                    #totals[nutrient_category_name][nutrient_name] += nutrient_dictionary[nutrient_category_name][nutrient_name]
+                print totals
         #print totals[nutrient_name]
         #print nutrient_dictionary[nutrient_name]
-        print totals
+            #print totals
         for food_dictionary in food_nutrient_list:
             nutrient_category_dictionary = food_dictionary["nutrients"]
             for key in nutrient_category_dictionary:
@@ -188,7 +190,7 @@ def food_log_get():
                 nutrient_name = totals[nutrient_category_name]
                 print "{}: {}: {}".format(nutrient_category_name, nutrient_name, totals[nutrient_category_name])
         # for nutrient_name in nutrient_category_dictionary[nutrient_category_name]:
-        #     print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name] )
+            print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name] )
 
         # for food_dictionary in food_nutrient_list:
         #     nutrient_category_dictionary = food_dictionary["nutrients"]
