@@ -2,7 +2,7 @@
 # The views are the handlers that respond to requests from web browsers.
 from flask import render_template, flash, request, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
-from app import app, lm, oid, session
+from app import app, lm, oid, session, ordered_defaultdict
 from forms import ProfileForm, RegistrationForm, LoginForm
 from models import *
 import json
@@ -140,11 +140,12 @@ def food_log_get():
         
         #get the nutrient values associated with the food
         #food_nutrient_dictionary is a dictionary with 
-        #   a key called nutrient_category, and 
-        #   a value called OrderedDictionary (which is nutrient_category_name?)
-        #nutrient_category_ name is the key in food_nutrient_dictionary which is a string
-        #nutrient category is the value in food_nutrient_dictionary which is an Ordered Dictionary
+        #   a key called nutrient_category_name, and 
+        #   a value called OrderedDictionary 
+        #nutrient_category_name is the key in food_nutrient_dictionary which is a string
+        #nutrient_category_dic is the value in food_nutrient_dictionary which is an Ordered Dictionary
         #values_nutrient_category is an empty dictionary
+        #contains the amount of values of each food
         values_nutrient_dictionary = {}
         #find the OrderedDict() for each nutrient_category_dictionary
         for nutrient_category_name in food_nutrient_dictionary:
@@ -169,36 +170,24 @@ def food_log_get():
             })
         #create a new dictionary totalling the amount of nutrients consumed.
         #make the dictionary a nested dictionary to show the category_name
-        totals = defaultdict(lambda: defaultdict(float))
-        for food_dictionary in food_nutrient_list:
-            nutrient_category_dictionary = food_dictionary["nutrients"]
-            for nutrient_category_name in nutrient_category_dictionary:
-                nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
-                for nutrient_name in nutrient_dictionary:
-                    nutrient_value = nutrient_dictionary[nutrient_name]
-                    totals[nutrient_category_name][nutrient_name] += nutrient_value
-                    #totals[nutrient_category_name][nutrient_name] += nutrient_dictionary[nutrient_category_name][nutrient_name]
-                print totals
-        #print totals[nutrient_name]
-        #print nutrient_dictionary[nutrient_name]
-            #print totals
-        for food_dictionary in food_nutrient_list:
-            nutrient_category_dictionary = food_dictionary["nutrients"]
-            for key in nutrient_category_dictionary:
-                totals[key] = nutrient_category_dictionary[key] 
-            for nutrient_category_name in totals:
-                nutrient_name = totals[nutrient_category_name]
-                print "{}: {}: {}".format(nutrient_category_name, nutrient_name, totals[nutrient_category_name])
-        # for nutrient_name in nutrient_category_dictionary[nutrient_category_name]:
-            print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name] )
+    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(float))
+    for food_dictionary in food_nutrient_list:
+        nutrient_category_dictionary = food_dictionary["nutrients"]
+        for nutrient_category_name in nutrient_category_dictionary:
+            nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
+            for nutrient_name in nutrient_dictionary:
+                if nutrient_dictionary[nutrient_name] != "N/A":
+                    totals[nutrient_category_name][nutrient_name] += nutrient_dictionary[nutrient_name]
+    for nutrient_category_name in totals:
+        nutrient_dictionary = totals[nutrient_category_name]
+        for nutrient_name in nutrient_dictionary:  
+            print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name])  
 
-        # for food_dictionary in food_nutrient_list:
-        #     nutrient_category_dictionary = food_dictionary["nutrients"]
-        #     for nutrient_category_name in nutrient_category_dictionary:
-        #         nutrient_dictionary = nutrient_category_dictionary[nutrient_category_name]
-        #         for nutrient_name in nutrient_dictionary:
 
-        
+    food_nutrient_list.append({
+            "name": "Totals",
+            "nutrients": totals
+            })
 
     return render_template(
         'food_log.html', title="FoodLog",

@@ -120,16 +120,16 @@ multiple gives the property of the tag of we can pick more than one item. #}
         <div class="row">
             <div class="col-md-4">
                 <h3>Calories</h3>
-                <p>Total {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]}}</p>
+                <div class="total">TOTAL {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]}}</div>
             
-                <div>Protein {{food["nutrients"]["Protein & Amino Acids"][ "Protein"]}}</div>
-                <div>Carbs{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]}}</div>
-                <div>Fats {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}} </div>
+                <div>From Protein {{ (food["nutrients"]["Protein & Amino Acids"][ "Protein"]) * 4}}</div>
+                <div class="value">From Carbs{{((food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]) - (food["nutrients"]["Carbohydrates"]["Fiber, total dietary"])) * 4}}</div>
+                <div class="value">From Fats {{(food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]) * 9}} </div>
             </div>
 
             <div class="col-md-4">
                 <h3>Protein</h3>
-                <p>Total {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]}}</p>
+                <div class="total">TOTAL {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]}}</div>
                 
                 <div>    
                 <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Protein-Details-{{food_index}}">
@@ -156,7 +156,12 @@ multiple gives the property of the tag of we can pick more than one item. #}
             <div class="col-md-4">
                 <h3>Carbohydrates</h3>
                 {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                {% if index < 4 %}
+                {% if index == 0 %}
+                <div class="total">{{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]}}
+                </div>
+                {% endif %}
+
+                {% if 0 < index < 4 %}
                 <div>{{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]}}
                 </div>
                 {% endif %}
@@ -183,15 +188,17 @@ multiple gives the property of the tag of we can pick more than one item. #}
             <div class="col-md-4">
                 <h3>Fats</h3>
                 <div>
-                    <h6>Saturated</h6>
+                    <div> Total Fats {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]}}
+                    </div>
+                    <div class="total">Saturated</div>
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if index < 15 %}
+                    {% if 0 < index < 15 %}
                     <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
                     </div>
                     {% endif %}
                     {% endfor %}
                     
-                    <h6>Monounsaturated</h6>
+                    <div class="total">Monounsaturated</div>
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
                     {% if index < 16 %}
                     <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
@@ -200,7 +207,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     {% endfor %}
 
                     
-                    <h6>Polyunsaturated</h6>
+                    <div class="total">Polyunsaturated</div>
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
                     {% if index < 22 %}
                     <div>{{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]}}
@@ -209,9 +216,9 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     {% endfor %}
                     
 
-                    <h6>Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty Acids, total trans"]}}</h6>
-                    <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
-                    <h6>Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</h6>
+                    <div class="total">Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty Acids, total trans"]}}</div>
+                    <div class="total">Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</div>
+                    <div class="total">Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]}}</div>
                 </div>
             </div>
             <div class="col-md-4">

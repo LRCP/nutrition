@@ -18,7 +18,7 @@ class DB(object):
     def __init__(self, metadata):
         self.metadata = metadata
  
-migrate = Migrate(app, DB(Base.metadata))
+migrate = Migrate(app, DB(BaseNutrition.metadata))
 manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 

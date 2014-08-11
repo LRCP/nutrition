@@ -36,6 +36,9 @@ tr {
   font-size: 20;
   font-weight: bold;
 }
+.total {
+  font-weight: bold;
+}
 #user_name {
   /*color: #C2A36D;*/
   color: black;
@@ -45,3 +48,10 @@ tr {
 h4 {
   font_size: 20;
 }
+
+.value {
+  right: 0;
+/*}
+.col_xs-2 {
+  text-align: right;
+}*/
