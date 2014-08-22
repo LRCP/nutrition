@@ -87,7 +87,8 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans"] = 605
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-monoenoic"] = 693 
 
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"] = 695 #index 58
-
+#add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
+#and omega-6: linoleic(18:2), arachidonic(20:4).
 food_nutrient_dictionary["Protein & Amino Acids"]["Protein"] = 203
 food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 food_nutrient_dictionary["Protein & Amino Acids"]["Tryptophan"] = 501

@@ -45,31 +45,50 @@ $(document).ready(function() {
             }
     });
 
-        foodEnterred.initialize();
+    foodEnterred.initialize();
+    /*find the element with the class typeahead.*/ 
+    // $ is a function selects elements of my DOM
+    var input = $('.typeahead');
 
-        var input = $('.typeahead');
 
-
-
-        input.typeahead({autoselect: true}, {
-            name: 'food-enterred',
-            displayKey: 'value',
-            source: foodEnterred.ttAdapter()
-        });
-        /*The blur function cause the text to disappear if the full
-        name of the food is not selected*/
-        
-        input.blur(function(engine, event) {
-            var input = $(event.target);
-            
- 
-            for (var i = 0; i < datums.length; i++) {
-                var datum = datums[i];
-                if (input.val().toLowerCase() == datum.value.toLowerCase()) {
-                    return;
-                }
+    /*sets up typeahead*/
+    input.typeahead({autoselect: true}, {
+        name: 'food-enterred',
+        displayKey: function(suggestion){
+            $("#units").empty()
+            for (var i = 0; i < suggestion.units.length; i++) {
+                var unit = suggestion.units[i];
+                var option = $("<option>");
+                option.attr("value", unit.name);
+                option.text(unit.name);
+                $("#units").append(option);
             }
-            input.val("");
-        }.bind(null, foodEnterred));
-       
-    })
+            return suggestion.name;
+        },
+        /* need something in addition to displayKey: 'units'*/
+        source: foodEnterred.ttAdapter()
+    });
+    /*The blur function cause the text to disappear if the full
+    name of the food is not selected*/
+    /*when the imput loses focus, run the function we pass to the blur function.*/
+    input.blur(function(engine, event) {
+        /*our variable input inside the function is 
+        the same as the variable outside the function.*/
+        var input = $(event.target);
+        /*looping over the datums, the options for the food
+        we may want.*/
+        for (var i = 0; i < datums.length; i++) {
+            var datum = datums[i];
+            /*if what we typed in is one of the options, do nothing and we are good to go*/
+            if (input.val().toLowerCase() == datum.name.toLowerCase()) {           
+                $("#units").prop('disabled', false);
+                $("#quantity-input").prop('disabled', false);
+                return;
+            }
+        }
+        $("#units").prop('disabled', true);
+        $("#quantity-input").prop('disabled', true);
+        input.val("");
+    }.bind(null, foodEnterred));
+   
+})

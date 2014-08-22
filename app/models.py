@@ -19,7 +19,9 @@ class Association(BaseNutrition):
     __tablename__ = 'association'
     id = Column(Integer, Sequence('association_id_seq'), primary_key=True)
     food_logs_id = Column(Integer, ForeignKey('food_logs.id'))
+    units_id = Column(String, ForeignKey('Weight.NDB_No.id'))
     quantity = Column(Float)
+    #unit = Column(String)
     
 
 ROLE_USER = 0
@@ -269,7 +271,12 @@ class FoodLog(BaseNutrition):
 
     #foods, an attribute, is being modified to be defined via the Association Object.
     foods = relationship('Association')
- 
+    units = relationship('Association')
+class Units(BaseNutrition):
+    __tablename__ = 'units'
+    id = Column(String, primary_key=True)
+    #food_log_id = Column(Integer, ForeignKey('food_logs.id'))
+    #units = relationship('Association') 
 
 class DataDerivationCodeDescription(BaseUSDA):
     __table__ = Table(
@@ -341,6 +348,8 @@ class Weight(BaseUSDA):
 
 Association.food = relationship(FoodDescription, backref='foodlog_assocs')
 Association.food_description_NDB_No = Column(Text, ForeignKey(FoodDescription.__table__.c.NDB_No))
+Association.units = relationship(FoodDescription, backref='foodlog_assocs')
+Association.units = Column(Text, ForeignKey(Weight.__table__.c.NDB_No))
 #This is where we create the database.
 BaseNutrition.metadata.create_all(engineNutrition)
 

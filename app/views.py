@@ -124,7 +124,7 @@ def food_log_get():
     #gets the food groups list from the database
     #session.query(FoodGroupDescription) is a function that returns a variable.
     if user.protein_goal == None:
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile_get'))
 
     food_groups_list = session.query(FoodGroupDescription).order_by(FoodGroupDescription.FdGrp_Desc).all()
     food_log = get_food_log(user)
@@ -135,6 +135,9 @@ def food_log_get():
     for association in food_log.foods:
         nutrients = session.query(NutrientData).filter_by(
             NDB_No=association.food.NDB_No).all()
+        weights = session.query(Weight).filter_by(
+            NDB_No=association.food.NDB_No).all()
+            
         
         
         
@@ -167,6 +170,8 @@ def food_log_get():
         food_nutrient_list.append({
             "name": association.food.Long_Desc, 
             "nutrients": values_nutrient_dictionary,
+            "quantities": association.quantity,
+            #"unit": association.unit
             })
         #create a new dictionary totalling the amount of nutrients consumed.
         #make the dictionary a nested dictionary to show the category_name
@@ -178,15 +183,16 @@ def food_log_get():
             for nutrient_name in nutrient_dictionary:
                 if nutrient_dictionary[nutrient_name] != "N/A":
                     totals[nutrient_category_name][nutrient_name] += nutrient_dictionary[nutrient_name]
-    for nutrient_category_name in totals:
-        nutrient_dictionary = totals[nutrient_category_name]
-        for nutrient_name in nutrient_dictionary:  
-            print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name])  
+    # for nutrient_category_name in totals:
+    #     nutrient_dictionary = totals[nutrient_category_name]
+    #     for nutrient_name in nutrient_dictionary:  
+    #         print "{}: {}: {}".format(nutrient_category_name, nutrient_name, nutrient_dictionary[nutrient_name])  
 
 
     food_nutrient_list.append({
             "name": "Totals",
-            "nutrients": totals
+            "nutrients": totals,
+            #"quantities": quantities
             })
 
     return render_template(
@@ -209,6 +215,9 @@ def food_log_post():
     for food_name, food_quantity in zip(foods, quantities):
         food = session.query(FoodDescription).filter(
             FoodDescription.Long_Desc.ilike('%{}%'.format(food_name))).first()
+        
+        #weight = session.query(Weight.NDB_No == association.food.NDB_No)
+        
         if food is None:
             print 'The item %s you enterred is not a proper food. Please try again.' % food_name
             continue
@@ -219,6 +228,7 @@ def food_log_post():
         association.quantity = float(food_quantity)
         #the association will contain one food and one food_log
         association.food = food 
+        weight = session.query(Weight.NDB_No == association.food.NDB_No)
         food_log.foods.append(association)
         
     session.commit()
@@ -276,6 +286,22 @@ def query(query_string):
     foods = foods.filter(FoodDescription.Long_Desc.ilike('%{}%'.format(query_string)))
     foods = foods.filter(or_(*group_filters))
     foods = foods.all()
-    food_list = [{"value": food.Long_Desc} for food in foods]
+    food_list = []
+    for food in foods:
+        unit_query = session.query(Weight).filter(Weight.NDB_No == \
+        food.NDB_No).all()
+        unit_list = []
+        for unit in unit_query:
+            unit_list.append({
+                "name": unit.Msre_Desc,
+                #"gram weight": units
+                "units": units,
+                #add more relevant columns for the weights
+                })
+        food_list.append({
+            "value": food.Long_Desc,
+            "units": unit_list
+            })
+
     return json.dumps(food_list)
     
