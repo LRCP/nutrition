@@ -17,6 +17,7 @@ app = Flask(__name__)
 # see stackoverflow: http://stackoverflow.com/questions/6036082/call-a-python-function-from-jinja2
 app.jinja_env.globals.update(enumerate=enumerate)
 app.config.from_object('config')
+#sqlite lives in the computer
 engineUSDA = create_engine('sqlite:///nutrient.db')
 engineNutrition = create_engine('sqlite:///app.db')
 BaseUSDA = declarative_base()

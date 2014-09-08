@@ -1,13 +1,17 @@
 
 # The views are the handlers that respond to requests from web browsers.
 from flask import render_template, flash, request, redirect, url_for, request
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import login_user, logout_user
+from flask.ext.login import current_user, login_required
 from app import app, lm, oid, session, ordered_defaultdict
-from forms import ProfileForm, RegistrationForm, LoginForm
-from models import *
+from app.forms import ProfileForm, RegistrationForm, LoginForm
+from app.models.association import *
+from app.models.foodlog import *
+from app.models.user import *
+from app.models.usda import *
 import json
 from sqlalchemy import or_
-from constants import food_nutrient_dictionary, food_groups_dictionary
+from app.constants import food_nutrient_dictionary, food_groups_dictionary
 from collections import OrderedDict, defaultdict
 
 @app.route('/')
@@ -23,10 +27,11 @@ from collections import OrderedDict, defaultdict
 @app.route('/profile', methods=['GET'])
 def profile_get():
     form = ProfileForm(request.form)
-    return render_template('profile.html', 
+    return render_template('profile.html',
         #title is the name of the page for Profile: Nutrition
-        title = 'Profile',
-        #make a variable in the template called form. The value of the form should be
+        title='Profile',
+        #make a variable in the template called form. 
+        #The value of the form should be
         #equal to the variable form in the local function.
         form=form)
 
@@ -52,21 +57,22 @@ def profile_post():
         user.set_weight(form.weight.data, form.weight_unit.data)
         user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
         user.set_height(form.height.data, form.height_unit.data)
-        user.gender = form.gender.data       
+        user.gender = form.gender.data    
         user.activity_level = form.activity_level.data
         user.set_weekly_weight_change(form.weekly_change_level.data)
         session.commit()
         #Here we need to save the information enterred by the User.
         #need access to the user object.
         #return redirect(url_for('profile_get'))
-        return render_template('profile.html',
-            title = 'Profile',
+        return render_template(
+            'profile.html', title='Profile',
             form=form)
 
 # @app.route('/profile', methods=['GET', 'POST'])
 # def profile():
-#     #request contains all the completed information that the user's browser sends to the host's server.
-#     #request.form contains all the filled-in information.
+#     request contains all the completed information 
+#     that the user's browser sends to the host's server.
+#     request.form contains all the filled-in information.
 #     form = ProfileForm(request.form)
 #     #print request.form
     
@@ -104,15 +110,12 @@ def profile_post():
 def get_food_log(user):
     #pass the user as a parameter
     
-    food_log = session.query(FoodLog).filter_by(user=user).first()
-    
+    food_log = session.query(FoodLog).filter_by(user=user).first()   
     if food_log is None:
         food_log = FoodLog()
-        food_log.user = user
-        
+        food_log.user = user      
         session.add(food_log)
         #session.commit(food_log)
-
         #session.add()
         session.commit()
     return food_log
@@ -126,7 +129,11 @@ def food_log_get():
     if user.protein_goal == None:
         return redirect(url_for('profile_get'))
 
-    food_groups_list = session.query(FoodGroupDescription).order_by(FoodGroupDescription.FdGrp_Desc).all()
+    food_groups_list = session.query(FoodGroupDescription).order_by(
+        FoodGroupDescription.FdGrp_Desc).all()
+    #pylint suggested FdGrp_Cd
+    #food_groups_list = session.query(FoodGroupDescription).order_by(
+    #    FoodGroupDescription.FdGrp_Cd).all()
     food_log = get_food_log(user)
     
     # The food_log contains a list of associations between foods and quantities.
@@ -157,8 +164,8 @@ def food_log_get():
             for nutrient_name in nutrient_category_dictionary:              
                 nutrient_number = nutrient_category_dictionary[nutrient_name]
                 try:
-                    nutrient_value = next(x.Nutr_Val for x in nutrients if int(x.Nutr_No) == 
-                        nutrient_number)
+                    nutrient_value = next(
+                        x.Nutr_Val for x in nutrients if int(x.Nutr_No) == nutrient_number)                   
                     values_nutrient_category_dictionary[nutrient_name] = float(nutrient_value) * association.quantity
                 except StopIteration:
                     values_nutrient_category_dictionary[nutrient_name] = "N/A"
@@ -168,7 +175,7 @@ def food_log_get():
 
 
         food_nutrient_list.append({
-            "name": association.food.Long_Desc, 
+            "name": association.food.Long_Desc,
             "nutrients": values_nutrient_dictionary,
             "quantities": association.quantity,
             #"unit": association.unit
@@ -190,14 +197,13 @@ def food_log_get():
 
 
     food_nutrient_list.append({
-            "name": "Totals",
-            "nutrients": totals,
-            #"quantities": quantities
-            })
+        "name": "Totals",
+        "nutrients": totals,
+        })
 
     return render_template(
         'food_log.html', title="FoodLog",
-        food_nutrient_list=food_nutrient_list, 
+        food_nutrient_list=food_nutrient_list,
         food_groups_list=food_groups_list,
         # pass the user into the template. 
         # need a user object to display something in python on views.
@@ -219,7 +225,8 @@ def food_log_post():
         #weight = session.query(Weight.NDB_No == association.food.NDB_No)
         
         if food is None:
-            print 'The item %s you enterred is not a proper food. Please try again.' % food_name
+            print 'The item %s you enterred is not a proper food. \
+            Please try again.' % food_name
             continue
         
         
@@ -227,7 +234,9 @@ def food_log_post():
         #quantity is an attribute of a class
         association.quantity = float(food_quantity)
         #the association will contain one food and one food_log
-        association.food = food 
+        association.food = food
+        #unit = session.query()
+        association.unit = unit
         weight = session.query(Weight.NDB_No == association.food.NDB_No)
         food_log.foods.append(association)
         
@@ -250,10 +259,10 @@ def login():
         db_session.add(user)
     
         return redirect(url_for('index'))
-    return render_template('login.html', 
-        title = 'Sign In',
-        form = form,
-        providers = app.config['OPENID_PROVIDERS'])
+    return render_template(
+        'login.html', title='Sign In',
+    form=form,
+        providers=app.config['OPENID_PROVIDERS'])
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -263,11 +272,11 @@ def register():
         #user = session.query(User).filter_by(email="happy").first()
         #register = session.query(RegistrationForm).filter_by(user=user).first()
         user = User(form.username.data, form.email.data, 
-                form.password.data)
+            form.password.data)
         db_session.add(User)
         return redirect(url_for('login'))
-    return render_template('register.html', 
-        title = "Register",
+    return render_template(
+        'register.html', title="Register",
         form=form)
 
 
@@ -295,7 +304,7 @@ def query(query_string):
             unit_list.append({
                 "name": unit.Msre_Desc,
                 #"gram weight": units
-                "units": units,
+                "units": units
                 #add more relevant columns for the weights
                 })
         food_list.append({
