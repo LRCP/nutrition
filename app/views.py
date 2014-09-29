@@ -13,6 +13,7 @@ import json
 from sqlalchemy import or_
 from app.constants import food_nutrient_dictionary, food_groups_dictionary
 from collections import OrderedDict, defaultdict
+import sys
 
 @app.route('/')
 @app.route('/index')
@@ -178,7 +179,7 @@ def food_log_get():
             "name": association.food.Long_Desc,
             "nutrients": values_nutrient_dictionary,
             "quantities": association.quantity,
-            #"unit": association.unit
+            "unit": association.unit.Msre_Desc,
             })
         #create a new dictionary totalling the amount of nutrients consumed.
         #make the dictionary a nested dictionary to show the category_name
@@ -216,6 +217,10 @@ def food_log_post():
     user = session.query(User).filter_by(email="happy").first()
     foods = request.form.getlist('food')
     quantities = request.form.getlist('quantity')
+    unit = request.form.get('unit')
+    #redifine unit to the JSON version to decode JSON
+    #print unit
+    unit = json.loads(unit)
     food_log = get_food_log(user)
     
     for food_name, food_quantity in zip(foods, quantities):
@@ -225,8 +230,8 @@ def food_log_post():
         #weight = session.query(Weight.NDB_No == association.food.NDB_No)
         
         if food is None:
-            print 'The item %s you enterred is not a proper food. \
-            Please try again.' % food_name
+            print ('The item %s you entered is not a proper food. '
+            'Please try again.') % food_name
             continue
         
         
@@ -236,10 +241,18 @@ def food_log_post():
         #the association will contain one food and one food_log
         association.food = food
         #unit = session.query()
-        association.unit = unit
-        weight = session.query(Weight.NDB_No == association.food.NDB_No)
-        food_log.foods.append(association)
+        #query the weight table where the ndb_no = session.query(Weight.NDB_No ==
+        #    )
         
+        #unit = json.loads(unit)
+
+        weight = session.query(Weight)
+        weight = weight.filter(Weight.NDB_No==association.food.NDB_No, 
+            Weight.Seq==unit["Seq"]).first()
+        print >>sys.stderr,association.food.NDB_No
+        association.unit = weight
+        food_log.foods.append(association)
+        #return json.dumps(food_log.foods)
     session.commit()
 
 
@@ -287,9 +300,11 @@ def load_user(id):
 @app.route('/queries/<query_string>.json', methods=['GET'])
 def query(query_string):
 
-    food_list = []
+    
     # construct a list of all the groups that we want to use as filters.
+    # groups is a list of numbers
     groups = request.args.getlist("group")
+
     group_filters = [FoodDescription.FdGrp_Cd == group for group in groups]
     foods = session.query(FoodDescription)
     foods = foods.filter(FoodDescription.Long_Desc.ilike('%{}%'.format(query_string)))
@@ -297,20 +312,24 @@ def query(query_string):
     foods = foods.all()
     food_list = []
     for food in foods:
+        #find all the weights that match the foods.
         unit_query = session.query(Weight).filter(Weight.NDB_No == \
         food.NDB_No).all()
         unit_list = []
         for unit in unit_query:
             unit_list.append({
                 "name": unit.Msre_Desc,
-                #"gram weight": units
-                "units": units
-                #add more relevant columns for the weights
+                "Gm_Wgt": unit.Gm_Wgt,
+                "NDB_No": unit.NDB_No,
+                "Seq": unit.Seq,
                 })
         food_list.append({
-            "value": food.Long_Desc,
+            "name": food.Long_Desc,
             "units": unit_list
             })
-
+        #to reference units this is the code:
+        #food_list[0]
+        #food_list[0]["units"]
+        #to test queries: type localhost:5000/queries/butter, salted.json
     return json.dumps(food_list)
     

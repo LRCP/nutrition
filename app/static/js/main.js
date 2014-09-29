@@ -54,23 +54,35 @@ $(document).ready(function() {
     /*sets up typeahead*/
     input.typeahead({autoselect: true}, {
         name: 'food-enterred',
+        /*displayKey should be adding the units and should tell us
+        suggestion object dictionary, containing the names, 
+        values, and unit_list is appended to the food_list.
+        */
         displayKey: function(suggestion){
-            $("#units").empty()
-            for (var i = 0; i < suggestion.units.length; i++) {
-                var unit = suggestion.units[i];
-                var option = $("<option>");
-                option.attr("value", unit.name);
-                option.text(unit.name);
-                $("#units").append(option);
-            }
+            console.log(suggestion.name);
+            
             return suggestion.name;
         },
         /* need something in addition to displayKey: 'units'*/
         source: foodEnterred.ttAdapter()
     });
+
+    input.on("typeahead:selected",function(event, suggestion, dataset) {
+       $("#units").empty()
+        for (var i = 0; i < suggestion.units.length; i++) {
+            var unit = suggestion.units[i];
+            var option = $("<option>");
+            option.text(unit.name);
+            option.attr("value", JSON.stringify(unit));
+            $("#units").append(option);
+        } 
+    });
+
     /*The blur function cause the text to disappear if the full
     name of the food is not selected*/
     /*when the imput loses focus, run the function we pass to the blur function.*/
+
+    /*input.on("blur", function() {})*/
     input.blur(function(engine, event) {
         /*our variable input inside the function is 
         the same as the variable outside the function.*/

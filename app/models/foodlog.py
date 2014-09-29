@@ -1,6 +1,7 @@
 from app import BaseNutrition
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, Sequence, ForeignKey
+from app.models.user import User
 
 class FoodLog(BaseNutrition):
 # FoodLog is a list of foods eaten and the quantity eaten.

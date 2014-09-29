@@ -6,7 +6,7 @@
 #     main()
 
 #New code:
-
+#handles both run.py and migrate.py
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.script import Manager
@@ -20,6 +20,8 @@ class DB(object):
  
 migrate = Migrate(app, DB(BaseNutrition.metadata))
 manager = Manager(app)
+#add migrate to the manager
+#default run file is built into the manager
 manager.add_command('db', MigrateCommand)
 
 if __name__ == '__main__':

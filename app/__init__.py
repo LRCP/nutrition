@@ -11,6 +11,8 @@ from flask import Flask
 
 
 
+
+
 # Then initialize the variables
 app = Flask(__name__)
 # to iterate ove an ordered dictionary in jinja2, import the module enumerate.
@@ -32,7 +34,10 @@ oid = OpenID(app, os.path.join(basedir, 'tmp'))
 
 # Then import needed files already existing in the root folder
 
-from app.models import *
+from app.models.association import Association
+from app.models.user import User
+from app.models.usda import *
+from app.models.foodlog import FoodLog
 Session = sessionmaker()
 session = Session(binds={
     Association:engineNutrition, 
@@ -53,13 +58,13 @@ session = Session(binds={
     })
 
 # to import the user into our views and access the user, we must first
-# define the user. We need the user model to make the user so this must come
-# after importing models.
-# models.User is used because User is in models.
+# define the user. We need the User class to make the user so this must come
+# after importing app.models.user.
+# User is used because User is in app.models.user.
 
-user = session.query(models.User).filter_by(email='happy').first()
+user = session.query(User).filter_by(email='happy').first()
 if user is None:
-    user = models.User('Linda', 'lp', 'happy')
+    user = User('Linda', 'lp', 'happy')
     session.add(user)
     session.commit()
 

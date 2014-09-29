@@ -4,6 +4,8 @@ from sqlalchemy import Sequence, SmallInteger, Float, Text, Date
 from sqlalchemy.orm import relationship
 from datetime import date
 
+ROLE_USER = 0
+ROLE_ADMIN = 1
 
 class User(BaseNutrition):
     __tablename__ = 'users'
@@ -173,6 +175,5 @@ class User(BaseNutrition):
         return "<User('%s','%s', '%s')>" % (self.name,
             self.password, self.email)
 
-ROLE_USER = 0
-ROLE_ADMIN = 1
+
 
