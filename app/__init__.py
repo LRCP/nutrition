@@ -13,6 +13,7 @@ from flask import Flask
 
 
 
+
 # Then initialize the variables
 app = Flask(__name__)
 # to iterate ove an ordered dictionary in jinja2, import the module enumerate.
@@ -71,5 +72,6 @@ if user is None:
 session.close()
 
 from app import views
+from app import filters
 
 

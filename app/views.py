@@ -165,9 +165,14 @@ def food_log_get():
             for nutrient_name in nutrient_category_dictionary:              
                 nutrient_number = nutrient_category_dictionary[nutrient_name]
                 try:
+                    
+                    #remember that the USDA database is populated by strings 
+                    #and references tonumbers must be converted into floats.
                     nutrient_value = next(
                         x.Nutr_Val for x in nutrients if int(x.Nutr_No) == nutrient_number)                   
-                    values_nutrient_category_dictionary[nutrient_name] = float(nutrient_value) * association.quantity
+                    values_nutrient_category_dictionary[nutrient_name] = (
+                        float(nutrient_value) * association.quantity * float(association.unit.Gm_Wgt)/100
+                        )
                 except StopIteration:
                     values_nutrient_category_dictionary[nutrient_name] = "N/A"
          
@@ -191,6 +196,7 @@ def food_log_get():
             for nutrient_name in nutrient_dictionary:
                 if nutrient_dictionary[nutrient_name] != "N/A":
                     totals[nutrient_category_name][nutrient_name] += nutrient_dictionary[nutrient_name]
+    #to debug:
     # for nutrient_category_name in totals:
     #     nutrient_dictionary = totals[nutrient_category_name]
     #     for nutrient_name in nutrient_dictionary:  
@@ -215,47 +221,27 @@ def food_log_get():
 @app.route('/food_log', methods=['POST'])
 def food_log_post():
     user = session.query(User).filter_by(email="happy").first()
-    foods = request.form.getlist('food')
-    quantities = request.form.getlist('quantity')
+    
+    quantity = request.form.get('quantity')
     unit = request.form.get('unit')
     #redifine unit to the JSON version to decode JSON
     #print unit
     unit = json.loads(unit)
     food_log = get_food_log(user)
-    
-    for food_name, food_quantity in zip(foods, quantities):
-        food = session.query(FoodDescription).filter(
-            FoodDescription.Long_Desc.ilike('%{}%'.format(food_name))).first()
-        
-        #weight = session.query(Weight.NDB_No == association.food.NDB_No)
-        
-        if food is None:
-            print ('The item %s you entered is not a proper food. '
-            'Please try again.') % food_name
-            continue
-        
-        
-        association = Association()
-        #quantity is an attribute of a class
-        association.quantity = float(food_quantity)
-        #the association will contain one food and one food_log
-        association.food = food
-        #unit = session.query()
-        #query the weight table where the ndb_no = session.query(Weight.NDB_No ==
-        #    )
-        
-        #unit = json.loads(unit)
-
-        weight = session.query(Weight)
-        weight = weight.filter(Weight.NDB_No==association.food.NDB_No, 
-            Weight.Seq==unit["Seq"]).first()
-        print >>sys.stderr,association.food.NDB_No
-        association.unit = weight
-        food_log.foods.append(association)
-        #return json.dumps(food_log.foods)
+    food = session.query(FoodDescription)
+    food = food.filter(FoodDescription.NDB_No==unit["NDB_No"]).first()
+    association = Association()
+    #quantity is an attribute of a class
+    association.quantity = float(quantity)
+    #the association will contain one food and one food_log
+    association.food = food
+    weight = session.query(Weight)
+    weight = weight.filter(Weight.NDB_No==association.food.NDB_No, 
+        Weight.Seq==unit["Seq"]).first()
+    print >>sys.stderr,association.food.NDB_No
+    association.unit = weight
+    food_log.foods.append(association)
     session.commit()
-
-
     #after adding the requests, want to take a look at the food log
     return redirect(url_for('food_log_get'))
     
