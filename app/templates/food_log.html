@@ -232,9 +232,13 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     {% endfor %}
                     
 
-                    <div class="total">Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty Acids, total trans"]|num_round()}}</div>
+
+                    <div class="total">Fatty Acids, total trans {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans"]|num_round()}}</div>
                     <div class="total">Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]|num_round()}}</div>
                     <div class="total">Fatty acids, total trans-polyenoic {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]|num_round()}}</div>
+                    <div class="total">Fatty acids, total omega-3 {{food["nutrients"]["Fats & Fatty Acids"]["omega_3"]|num_round()}}</div>
+                    <div class="total">Fatty acids, total omega-6 {{food["nutrients"]["Fats & Fatty Acids"]["omega_6"]|num_round()}}</div>
+
                 </div>
             </div>
             <div class="col-md-4">

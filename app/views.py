@@ -69,43 +69,6 @@ def profile_post():
             'profile.html', title='Profile',
             form=form)
 
-# @app.route('/profile', methods=['GET', 'POST'])
-# def profile():
-#     request contains all the completed information 
-#     that the user's browser sends to the host's server.
-#     request.form contains all the filled-in information.
-#     form = ProfileForm(request.form)
-#     #print request.form
-    
-#     if request.method == 'POST' and form.validate():
-
-#         #get the user from the database session
-#         user = session.query(User).filter_by(email="happy").first()
-#         # do not store the results of calculations using variable defined in
-#         # models.py That is what models.py is for.
-#         user.calorie_goal = form.calorie_goal.data
-#         user.protein_goal = form.protein_goal.data
-
-#         user.carbohydrate_goal = form.carbohydrate_goal.data
-#         user.fat_goal = form.fat_goal.data
-#         #user.nutrient_goal = form.nutrient_goal.data
-#         user.birthday = form.birthday.data
-#         user.set_weight(form.weight.data, form.weight_unit.data)
-#         user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
-#         user.set_height(form.height.data, form.height_unit.data)
-#         user.gender = form.gender.data       
-#         user.activity_level = form.activity_level.data
-#         user.set_weekly_weight_change(form.weekly_change_level.data)
-#         session.commit()
-#         #Here we need to save the information enterred by the User.
-#         #need access to the user object.
-#         #return redirect(url_for('profile'))
-#     return render_template('profile.html', 
-#         #title is the name of the page for Profile: Nutrition
-#         title = 'Profile',
-#         #make a variable in the template called form. The value of the form should be
-#         #equal to the variable form in the local function.
-#         form=form)
 
 
 def get_food_log(user):
@@ -116,8 +79,7 @@ def get_food_log(user):
         food_log = FoodLog()
         food_log.user = user      
         session.add(food_log)
-        #session.commit(food_log)
-        #session.add()
+        
         session.commit()
     return food_log
 
@@ -178,6 +140,40 @@ def food_log_get():
          
         #example           
         #values_nutrient_dictionary["Carbohydrates"]["Fiber"]
+        ffa = values_nutrient_dictionary["Fats & Fatty Acids"]
+        omega_3 = (
+            ffa["18:3 n-3 c,c,c (ALA) alpha-linolenic"] + 
+            ffa["20:3 n-3 eicosatrienoic acid (ETE)"] + 
+            ffa["20:4 undifferentiated arachidonic"] + 
+            ffa["20:5 n-3 (EPA) eicosapentaenoic timnodonic"] + 
+            ffa["22:5 n-3 (DPA) docosapentaenoic acid"] + 
+            ffa["22:6 n-3 (DHA)"]
+            )
+
+        # for fat_3 in ffa["omega_3"]:
+        #     if fat_3 = "N/A":
+        #         ffa["omega_3"] = 0
+        #     else:
+        #         ffa["omega_3"] = omega_3
+        ffa["omega_3"] = omega_3
+
+        omega_6 = (
+            ffa["18:2 n-6 c,c Linoleic acid (LA)"] + 
+            ffa["18:3 n-6 c,c,c (GLA) gamma-linolenic acid "] + 
+            ffa["20:2 n-6 c,c eicosadienoic acid"] + 
+            ffa["20:3 n-6 (DGLA) dihomo-gamma-linolenic acid"] + 
+            ffa["20:4 n-6 (AA) arachidonic acid"]
+            )
+
+        # for fat_6 in ffa["omega_6"]:
+        #     if fat_6 = "N/A":
+        #         ffa["omega_6"] = 0
+        #     else:
+        #         ffa["omega_6"] = omega_6
+        ffa["omega_6"] = omega_6
+        #what if the value is "N/A"? Can't concantenate strings and floats.
+        #need to have a code to set the value to 0 where value is N/A.
+
 
 
         food_nutrient_list.append({
