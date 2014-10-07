@@ -83,6 +83,15 @@ def get_food_log(user):
         session.commit()
     return food_log
 
+
+def sum_nutrients(nutrient_keys, nutrient_dictionary):
+    total = 0
+    for key in nutrient_keys:
+        if nutrient_dictionary[key] == "N/A":
+            continue
+        total  = total + nutrient_dictionary[key]
+    return total
+
 @app.route('/food_log', methods=['GET'])
 def food_log_get():
    
@@ -141,41 +150,27 @@ def food_log_get():
         #example           
         #values_nutrient_dictionary["Carbohydrates"]["Fiber"]
         ffa = values_nutrient_dictionary["Fats & Fatty Acids"]
-        omega_3 = (
-            ffa["18:3 n-3 c,c,c (ALA) alpha-linolenic"] + 
-            ffa["20:3 n-3 eicosatrienoic acid (ETE)"] + 
-            ffa["20:4 undifferentiated arachidonic"] + 
-            ffa["20:5 n-3 (EPA) eicosapentaenoic timnodonic"] + 
-            ffa["22:5 n-3 (DPA) docosapentaenoic acid"] + 
-            ffa["22:6 n-3 (DHA)"]
-            )
+        omega_3_keys = [
+            "18:3 n-3 c,c,c (ALA) alpha-linolenic",
+            "20:3 n-3 eicosatrienoic acid (ETE)",
+            "20:4 undifferentiated arachidonic",
+            "20:5 n-3 (EPA) eicosapentaenoic timnodonic",
+            "22:5 n-3 (DPA) docosapentaenoic acid",
+            "22:6 n-3 (DHA)"
+            ]
+        
+        ffa["omega_3"] = sum_nutrients(omega_3_keys, ffa)
 
-        # for fat_3 in ffa["omega_3"]:
-        #     if fat_3 = "N/A":
-        #         ffa["omega_3"] = 0
-        #     else:
-        #         ffa["omega_3"] = omega_3
-        ffa["omega_3"] = omega_3
-
-        omega_6 = (
-            ffa["18:2 n-6 c,c Linoleic acid (LA)"] + 
-            ffa["18:3 n-6 c,c,c (GLA) gamma-linolenic acid "] + 
-            ffa["20:2 n-6 c,c eicosadienoic acid"] + 
-            ffa["20:3 n-6 (DGLA) dihomo-gamma-linolenic acid"] + 
-            ffa["20:4 n-6 (AA) arachidonic acid"]
-            )
-
-        # for fat_6 in ffa["omega_6"]:
-        #     if fat_6 = "N/A":
-        #         ffa["omega_6"] = 0
-        #     else:
-        #         ffa["omega_6"] = omega_6
-        ffa["omega_6"] = omega_6
-        #what if the value is "N/A"? Can't concantenate strings and floats.
-        #need to have a code to set the value to 0 where value is N/A.
-
-
-
+        omega_6_keys = [
+            "18:2 n-6 c,c Linoleic acid (LA)",
+            "18:3 n-6 c,c,c (GLA) gamma-linolenic acid ",
+            "20:2 n-6 c,c eicosadienoic acid",
+            "20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
+            "20:4 n-6 (AA) arachidonic acid"
+        ]
+        
+        ffa["omega_6"] = sum_nutrients(omega_6_keys, ffa)
+        
         food_nutrient_list.append({
             "name": association.food.Long_Desc,
             "nutrients": values_nutrient_dictionary,
@@ -240,6 +235,9 @@ def food_log_post():
     session.commit()
     #after adding the requests, want to take a look at the food log
     return redirect(url_for('food_log_get'))
+
+@app.route('/food_log/delete/<id>', methods=['POST'])
+def delete_food(id):
     
     
 @app.route('/login', methods=['GET', 'POST'])
