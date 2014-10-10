@@ -176,6 +176,7 @@ def food_log_get():
             "nutrients": values_nutrient_dictionary,
             "quantities": association.quantity,
             "unit": association.unit.Msre_Desc,
+            "id": association.id
             })
         #create a new dictionary totalling the amount of nutrients consumed.
         #make the dictionary a nested dictionary to show the category_name
@@ -236,11 +237,15 @@ def food_log_post():
     #after adding the requests, want to take a look at the food log
     return redirect(url_for('food_log_get'))
 
-@app.route('/food_log/delete/<id>', methods=['POST'])
+@app.route('/food_log/delete/<id>', methods=['GET','POST'])
 def delete_food(id):
-    
+    association = session.query(Association).filter_by(id=id).first()
+    session.delete(association)
+    return redirect(url_for('food_log_get'))
+
     
 @app.route('/login', methods=['GET', 'POST'])
+
 @oid.loginhandler
 def login():
     
@@ -249,7 +254,7 @@ def login():
         #user = session.query(User).filter_by(email="happy").first()
         #login = session.query(LoginForm).filter_by(user=user).first()
         user = User(form.openid.data, form.remember_me.data)
-        db_session.add(user)
+        session.add(user)
     
         return redirect(url_for('index'))
     return render_template(
@@ -266,7 +271,8 @@ def register():
         #register = session.query(RegistrationForm).filter_by(user=user).first()
         user = User(form.username.data, form.email.data, 
             form.password.data)
-        db_session.add(User)
+        session.add(user)
+        session.commit()
         return redirect(url_for('login'))
     return render_template(
         'register.html', title="Register",
