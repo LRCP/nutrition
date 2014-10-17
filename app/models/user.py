@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy import Sequence, SmallInteger, Float, Text, Date
 from sqlalchemy.orm import relationship
 from datetime import date
+from werkzeug.security import generate_password_hash
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -22,6 +23,7 @@ class User(BaseNutrition):
     height_in_meters = Column(Float)
     gender = Column(String)
     weekly_weight_change = Column(Integer)
+    #openid will be removed after fixing migration.py
     openid = Column(String(64),
             Sequence('user_openid_seq'), index=True, unique=True)
     remember_me = Column(String, default=False)
@@ -166,10 +168,11 @@ class User(BaseNutrition):
     def get_id(self):
         return unicode(self.id)
 
-    def __init__(self, name, password, email):
+    def __init__(self, name, email, password):
         self.name = name
-        self.password = password
         self.email = email
+        self.password = generate_password_hash(password)
+        
 
     def __repr__(self):
         return "<User('%s','%s', '%s')>" % (self.name,

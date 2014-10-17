@@ -7,18 +7,22 @@ from datetime import date, timedelta
 
 
 class LoginForm(Form):
-    openid = TextField('openid', validators=[Required()])
+    #add email field or username field
+    password = PasswordField('Password', [
+        validators.Required(),    
+    ])
+    username_or_email = TextField('Username or Email Address', [validators.Length(min=4, max=35)])
     remember_me = BooleanField('remember_me', default=False)
 
 class RegistrationForm(Form):
     username = TextField('Username', [validators.Length(min=4, max=25)])
     email = TextField('Email Address', [validators.Length(min=6, max=35)])
     password = PasswordField('New Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
+        validators.Required(),    
     ])
-    confirm = PasswordField('Repeat Password')
-    
+    confirm = PasswordField('Repeat Password', [  
+    validators.EqualTo('password', message='Passwords must match')
+    ])
 
 class ProfileForm(Form):
 

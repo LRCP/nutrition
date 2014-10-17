@@ -1,33 +1,37 @@
+{#We are using WTF library#}
+
 {% extends "base.html" %}
 
 {% block content %}
-<script type="text/javascript">
-function set_openid(openid, pr)
-{
-    u = openid.search('<username>');
-    if (u != -1) {
-        // openid requires username
-        user = prompt('Enter your ' + pr + ' username:');
-        openid = openid.substr(0, u) + user;
-    }
-    form = document.forms['login'];
-    form.elements['openid'].value = openid;
-}
-</script>
+{% from "_formhelpers.html" import render_field %}
+
 <h1>Sign In</h1>
 <form action="" method="post" name="login">
-    
-    <p>
-        Please enter your OpenID, or select one of the providers below:<br>
-        {{form.openid(size=80)}}
-        {% for error in form.errors.openid %}
-        <span style="color: red;">[{{error}}]</span>
-        {% endfor %}<br>
-        |{% for pr in providers %}
-        <a href="javascript:set_openid('{{pr.url}}', '{{pr.name}}');">{{pr.name}}</a> |
-        {% endfor %}
-    </p>
+    {# <table>
+        <tbody>
+            <tr>
+                <td class="right">Email:</td>
+                <td>
+                    <input type="text" name="username" id="usernameBox">
+                </td>
+            </tr>
+            <tr>
+                <td class="right">Password:</td>
+                <td>
+                    <input type="password" name="password">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
     <p>{{form.remember_me}} Remember Me</p>
-    <p><input type="submit" value="Sign In"></p>
+    <p><input type="submit" value="Sign In"></p> #}
+    <dl>
+    {{ render_field(form.username_or_email) }}
+    {{ render_field(form.password) }} 
+    {{ form.csrf_token }}
+  </dl>
+  <p><p><input type=submit value=Login></p></p>
 </form>
 {% endblock %}
+

@@ -27,10 +27,10 @@ BaseUSDA = declarative_base()
 BaseNutrition = declarative_base()
 metadata = MetaData(bind=engineUSDA)
 
-lm = LoginManager()
-lm.init_app(app)
-lm.login_view = 'login'
-oid = OpenID(app, os.path.join(basedir, 'tmp'))
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager_view = 'login'
+
 
 
 # Then import needed files already existing in the root folder

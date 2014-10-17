@@ -7,7 +7,8 @@
     {{ render_field(form.email) }}
     {{ render_field(form.password) }}
     {{ render_field(form.confirm) }}
+    {{ form.csrf_token }}
   </dl>
-  <p><input type=submit value=Register>
+  <p><input type=submit value=Register></p>
 </form>
 {% endblock %}

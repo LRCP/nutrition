@@ -3,7 +3,7 @@
 from flask import render_template, flash, request, redirect, url_for, request
 from flask.ext.login import login_user, logout_user
 from flask.ext.login import current_user, login_required
-from app import app, lm, oid, session, ordered_defaultdict
+from app import app, login_manager, session, ordered_defaultdict#, oid
 from app.forms import ProfileForm, RegistrationForm, LoginForm
 from app.models.association import *
 from app.models.foodlog import *
@@ -11,9 +11,11 @@ from app.models.user import *
 from app.models.usda import *
 import json
 from sqlalchemy import or_
+from sqlalchemy.exc import IntegrityError
 from app.constants import food_nutrient_dictionary, food_groups_dictionary
 from collections import OrderedDict, defaultdict
 import sys
+from werkzeug.security import check_password_hash
 
 @app.route('/')
 @app.route('/index')
@@ -50,6 +52,25 @@ def profile_post():
         # models.py That is what models.py is for.
         user.calorie_goal = form.calorie_goal.data
         user.protein_goal = form.protein_goal.data
+        #what about user.amino_acid_goals?
+        #Institute of Medicine's Food and Nutrition Board
+        # Essential Amino Acid    Needed per g of Protein Needed for 50g of Protein
+        #     Trytophan   7mg/.007g   .35g
+        #     Threonine   27mg/.027g  1.35g
+        #     Isoleucine  25mg/025g   1.25g
+        #     Leucine 55mg/.055g  2.76g
+        #     Lysine  51mg/.051g  2.56g
+        #     Methionine+Cystine  25mg/.025g  1.25g
+        #     Phenylalanine+Tyrosine  47mg/.047g  2.36g
+        #     Valine  32mg/.032g  1.60g
+        #     Histidine   18mg/.018g  .90g
+        #age of user determines multiplier of x times kg of weight
+        # 1.5g per kg - infants
+        # 1.1g per kg - 1-3 years
+        # .95g per kg - 4-13 years
+        # .85g per kg - 14-18 years
+        # .80g per kg - adults
+        # 1.1g per kg - pregnant and lactating women
 
         user.carbohydrate_goal = form.carbohydrate_goal.data
         user.fat_goal = form.fat_goal.data
@@ -243,45 +264,86 @@ def delete_food(id):
     session.delete(association)
     return redirect(url_for('food_log_get'))
 
-    
-@app.route('/login', methods=['GET', 'POST'])
+#login_manager = LoginManager() 
+#login_manager.init_app(app)
+#@login_manager.user_loader
+def load_user(userid):
+    return User.get(userid)
 
-@oid.loginhandler
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    #login_manager = LoginManager()
+    #login_manager.init_app()
     
     form = LoginForm(request.form)
+    #form = LoginForm()
+    #if form.validate_on_submit():
+    
     if request.method == 'POST' and form.validate():
         #user = session.query(User).filter_by(email="happy").first()
         #login = session.query(LoginForm).filter_by(user=user).first()
-        user = User(form.openid.data, form.remember_me.data)
-        session.add(user)
+        #want to find the user with the username or email address as enterred
+        user = session.query(User).filter(
+            (User.email==form.username_or_email.data) | 
+            (User.username==form.username_or_email.data)
+            ).first()
+        #want to check to see if the user is registered and password info is correct.
+        if user is None or not check_password_hash(user.password,
+                                                   form.password.data):
+            flash("Your login information is incorrect. Please try again.")
+            return redirect(url_for('login'))
+        #check to see if the password is correct.
+        
+
+        #then log in the user
+        login_user(user)
+        
+        flash("Logged in successfully.")
+        
     
-        return redirect(url_for('index'))
+        return redirect(url_for('food_log_get'))
     return render_template(
-        'login.html', title='Sign In',
-    form=form,
-        providers=app.config['OPENID_PROVIDERS'])
+        'login.html', 
+        title='Sign In',
+        form=form
+        #providers=app.config['OPENID_PROVIDERS'])
+        )
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+
     form = RegistrationForm(request.form)
+    print form.validate()
+    print form.errors
     if request.method == 'POST' and form.validate():
-        #user = session.query(User).filter_by(email="happy").first()
-        #register = session.query(RegistrationForm).filter_by(user=user).first()
         user = User(form.username.data, form.email.data, 
             form.password.data)
         session.add(user)
-        session.commit()
+        try:
+            session.commit()
+        except IntegrityError as error:
+            flash("Registration is unsucessful. A user with the same username or email address is already in use.")
+            print error
+            session.rollback()
+            return render_template(
+                'register.html', 
+                title="Register",
+                form=form
+            )
+        flash("Registration is successful.")
         return redirect(url_for('login'))
     return render_template(
-        'register.html', title="Register",
-        form=form)
+        'register.html', 
+        title="Register",
+        form=form
+        )
 
 
-@lm.user_loader
+@login_manager.user_loader
 def load_user(id):  
-    return User.query.get(int(id))()
+    return session.query(User).get(int(id))
 
 @app.route('/queries/<query_string>.json', methods=['GET'])
 def query(query_string):
