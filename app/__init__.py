@@ -63,13 +63,14 @@ session = Session(binds={
 # after importing app.models.user.
 # User is used because User is in app.models.user.
 
-user = session.query(User).filter_by(email='happy').first()
-if user is None:
-    user = User('Linda', 'lp', 'happy')
-    session.add(user)
-    session.commit()
+#need to change the user.
+# user = session.query(User).filter_by(email='happy').first()
+# if user is None:
+#     user = User('Linda', 'lp', 'happy')
+#     session.add(user)
+#     session.commit()
 
-session.close()
+#session.close()
 
 from app import views
 from app import filters

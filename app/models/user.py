@@ -65,6 +65,8 @@ class User(BaseNutrition):
             self.weekly_weight_change = 1.5 * .45
         elif weekly_change_level == 'plus_two_pounds':
             self.weekly_weight_change = 2 * .45
+        else:
+            raise ValueError("The weekly change level " + weekly_change_level + " is incorrect.")
         return self
 
 
@@ -168,15 +170,15 @@ class User(BaseNutrition):
     def get_id(self):
         return unicode(self.id)
 
-    def __init__(self, name, email, password):
-        self.name = name
+    def __init__(self, username, email, password):
+        self.username = username
         self.email = email
         self.password = generate_password_hash(password)
         
 
     def __repr__(self):
-        return "<User('%s','%s', '%s')>" % (self.name,
-            self.password, self.email)
+        return "<User('%s','%s', '%s')>" % (self.username, self.name,
+            self.email)
 
 
 

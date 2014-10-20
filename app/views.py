@@ -44,10 +44,11 @@ def profile_post():
     form = ProfileForm(request.form)
     #print request.form
 
+
     if form.validate():
 
         #get the user from the database session
-        user = session.query(User).filter_by(email="happy").first()
+        user = current_user
         # do not store the results of calculations using variable defined in
         # models.py That is what models.py is for.
         user.calorie_goal = form.calorie_goal.data
@@ -86,10 +87,15 @@ def profile_post():
         #Here we need to save the information enterred by the User.
         #need access to the user object.
         #return redirect(url_for('profile_get'))
+
+
         return render_template(
             'profile.html', title='Profile',
             form=form)
-
+    else:
+        return render_template(
+            'profile.html', title='Profile',
+            form=form)
 
 
 def get_food_log(user):
@@ -116,7 +122,7 @@ def sum_nutrients(nutrient_keys, nutrient_dictionary):
 @app.route('/food_log', methods=['GET'])
 def food_log_get():
    
-    user = session.query(User).filter_by(email="happy").first()
+    user = current_user
     #gets the food groups list from the database
     #session.query(FoodGroupDescription) is a function that returns a variable.
     if user.protein_goal == None:
