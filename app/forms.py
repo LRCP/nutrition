@@ -161,7 +161,7 @@ class ProfileForm(Form):
 
 #finish the changes.
     weekly_change_level = SelectField('Weekly Change Level', choices=[
-        ('minus-two_pounds', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
+        ('minus_two_pounds', 'Lose -2.0lbs/-.91kg/-.14 Stones per Week'),
         ('minus_one_and_one_half_pounds', 'Lose -1.5lbs/-.68kg/-.11 Stones per Week'),
         ('minus_one_pound', 'Lose -1.0lbs/-.45kg/-.07 Stones per Week'),
         ('minus_one_half_pound', 'Lose -.5 lbs/-.23kg/-.03 Stones per Week'),

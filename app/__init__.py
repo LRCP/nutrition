@@ -21,7 +21,7 @@ app = Flask(__name__)
 app.jinja_env.globals.update(enumerate=enumerate)
 app.config.from_object('config')
 #sqlite lives in the computer
-engineUSDA = create_engine('sqlite:///nutrient.db')
+engineUSDA = create_engine('sqlite:///sr27.db')
 engineNutrition = create_engine('sqlite:///app.db')
 BaseUSDA = declarative_base()
 BaseNutrition = declarative_base()
@@ -29,7 +29,7 @@ metadata = MetaData(bind=engineUSDA)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager_view = 'login'
+login_manager.login_view = 'login'
 
 
 
