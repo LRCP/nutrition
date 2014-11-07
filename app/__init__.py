@@ -72,7 +72,13 @@ session = Session(binds={
 
 #session.close()
 
-from app import views
+from app.views import food_log
+from app.views import index
+from app.views import login
+from app.views import logout
+from app.views import profile
+from app.views import queries
+from app.views import register
 from app import filters
 
 

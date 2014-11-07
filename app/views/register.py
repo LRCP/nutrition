@@ -1,7 +1,6 @@
-from app import app, session, flash, render_template, redirect
-from app import url_for, render_template
+from app import app, session
 from app.forms import RegistrationForm
-from flask import request
+from flask import request, flash, render_template, redirect, url_for
 from app.models.user import User
 from sqlalchemy.exc import IntegrityError
 

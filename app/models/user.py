@@ -46,29 +46,41 @@ class User(BaseNutrition):
         age = date.today() - self.birthday
         return age.days / 365
   
-    def set_weekly_weight_change(self, weekly_change_level):     
-        if weekly_change_level == 'minus_two_pounds':
-            self.weekly_weight_change = -2 * .45
-        elif weekly_change_level == 'minus_one_and_one_half_pound':
-            self.weekly_weight_change = -1.5 * .45
-        elif weekly_change_level == 'minus_one_pound':
-            self.weekly_weight_change = -1 * .45
-        elif weekly_change_level == 'minus_one_half_pound':
-            self.weekly_weight_change = -.5 * .45
-        elif weekly_change_level == 'maintain':
-            self.weekly_weight_change = 0 * .45
-        elif weekly_change_level == 'plus_one_half_pound':
-            self.weekly_weight_change = .5 * .45
-        elif weekly_change_level == 'plus_one_pound':
-            self.weekly_weight_change = 1 * .45
-        elif weekly_change_level == 'plus one_and_one_half_pound':
-            self.weekly_weight_change = 1.5 * .45
-        elif weekly_change_level == 'plus_two_pounds':
-            self.weekly_weight_change = 2 * .45
+    def set_weekly_weight_change(self, weekly_change_level):
+        weekly_weight_change_dictionary={
+            'minus_two_pounds': -2,
+            'minus_one_and_one_half_pound': -1.5,
+            'minus_one_pound': -1,
+            'minus_one_half_pound': -.5,
+            'maintain': 0,
+            'plus_one_half_pound': .5,
+            'plus_one_pound': 1,
+            'plus one_and_one_half_pound': 1.5,
+            'plus_two_pounds': 2
+        } 
+        if weekly_change_level in weekly_weight_change_dictionary:
+            self.weekly_weight_change = (
+                weekly_weight_change_dictionary[weekly_change_level]
+                )        
         else:
             raise ValueError("The weekly change level " + weekly_change_level + " is incorrect.")
         return self
 
+    def get_weekly_change_level(self):
+        weekly_change_level_dictionary={
+        -2: 'minus_two_pounds',
+        -1.5: 'minus_one_and_one_half_pound',
+        -1: 'minus_one_pound',
+        -.5: 'minus_one_half_pound',
+        0: 'maintain',
+        .5: 'plus_one_half_pound',
+        1:'plus_one_pound',
+        1.5: 'plus one_and_one_half_pound',
+        2: 'plus_two_pounds'    
+        }
+
+        if self.weekly_weight_change in weekly_change_level_dictionary:
+            return weekly_change_level_dictionary[self.weekly_weight_change]
 
     def get_caloric_change_weekly(self):
         caloric_change_weekly = self.weekly_weight_change * 3500

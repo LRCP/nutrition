@@ -102,5 +102,47 @@ $(document).ready(function() {
         $("#quantity-input").prop('disabled', true);
         input.val("");
     }.bind(null, foodEnterred));
-   
+    var weight_ranges = $(".weight_range");
+    weight_ranges.each(function(index, range){
+        var range = $(range);
+        var input = range.find("input");
+        input.on("input change", function(event){
+            var input = $(event.target);
+            var kilograms = input.val();
+            var pounds = kilograms * .45;
+            var stones = kilograms * 6.35;
+            var kilogramsSpan = range.find(".kilograms");
+            var poundsSpan = range.find(".pounds");
+            var stonesSpan = range.find(".stones");
+            pounds = Math.round(pounds * 4) / 4;
+            kilograms = parseFloat(kilograms).toFixed(1);
+            stones = stones.toFixed(2);
+            poundsSpan.text(pounds + " pounds");
+            kilogramsSpan.text(kilograms + " kg");
+            stonesSpan.text(stones + " st");
+        });
+    });
+    /*accessing the class in profile.html*/
+    var height_ranges = $(".height_range");
+    /* http://api.jquery.com/each/ */
+    height_ranges.each(function(index, range){
+        /* jquery loops through the html elements.*/
+        /* we are converting the javascript/html element into jquery javascript/html elements*/
+        var range = $(range);
+        var input = range.find("input");
+        input.on("input change", function(event){
+            var input = $(event.target);
+            var meters = input.val();
+            var inches = meters * 39.37;
+            var feet = Math.floor(inches / 12);
+            /*in javascript, use var to declare the variable for the first time.
+            thereafter, do not need the var*/
+            inches = Math.round(inches % 12 *4) / 4;
+            meters = parseFloat(meters).toFixed(2);
+            var metersSpan = range.find(".meters");
+            var feetSpan = range.find(".feet");
+            metersSpan.text(meters + " m");
+            feetSpan.text(feet + "'" + inches + '"');
+        });
+    }); 
 })

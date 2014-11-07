@@ -1,10 +1,10 @@
-from app import session, login_manager
+from app import app, session, login_manager
 from flask import g, request, flash, redirect
 from flask import url_for, render_template
-from flask.ext.Login import current_user, login_user, LoginManager
-from app import 
+from flask.ext.login import current_user, login_user, LoginManager
 from app.models.user import User
 from werkzeug.security import check_password_hash
+from app.forms import LoginForm
 
 
 

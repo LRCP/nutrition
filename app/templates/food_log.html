@@ -137,7 +137,12 @@ multiple gives the property of the tag of we can pick more than one item. #}
 
         <div class="row">
             <div class="col-md-4">
-                <h3>Calories</h3>
+                {# {% set percentage = 
+                    food["nutrients"]["Calorie Information"]["Energy_KCAL"] / user.get_adjusted_daily_caloric_needs() * 100
+                    %} #}
+                <h3 style="background-image: linear-gradient(
+                to right, #FF0000, #FF0000 20%, #FFFFFF 20%); border: 1px #000 solid;")>Calories</h3>
+                {# {% endset %} #}
                 <div class="total">TOTAL {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</div>
             
                 <div>From Protein {{ (food["nutrients"]["Protein & Amino Acids"][ "Protein"]) * 4|num_round()}}</div>

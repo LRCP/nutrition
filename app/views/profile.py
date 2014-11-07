@@ -1,5 +1,5 @@
-from flask import request, render_template,
-from app import session
+from flask import request, render_template
+from app import app, session
 from flask.ext.login import login_user, current_user, login_required
 from app.forms import ProfileForm
 
@@ -7,10 +7,26 @@ from app.forms import ProfileForm
 #from sqlalchemy.orm import relationship
 
 @app.route('/profile', methods=['GET'])
-#logint_required is a decorator function
+#login_required is a decorator function
 @login_required
 def profile_get():
-    form = ProfileForm(request.form)
+    user=current_user
+    form = ProfileForm(
+        request.form, 
+        calorie_goal=user.calorie_goal,
+        protein_goal=user.protein_goal,
+        carbohydrate_goal=user.carbohydrate_goal,
+        fat_goal=user.fat_goal,
+        birthday=user.birthday,
+        weight_unit="weight_in_kilograms",
+        weight=user.weight_in_kilograms,
+        weight_goal=user.weight_goal,
+        height_unit="height_in_meters",
+        height=user.height_in_meters,
+        gender=user.gender,
+        activity_level=user.activity_level,
+        weekly_change_level=user.get_weekly_change_level()
+        )
     return render_template(
         'profile.html',
         #title is the name of the page for Profile: Nutrition
@@ -64,7 +80,7 @@ def profile_post():
         user.set_weight(form.weight.data, form.weight_unit.data)
         user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
         user.set_height(form.height.data, form.height_unit.data)
-        user.gender = form.gender.data    
+        user.gender = form.gender.data 
         user.activity_level = form.activity_level.data
         user.set_weekly_weight_change(form.weekly_change_level.data)
         session.commit()
