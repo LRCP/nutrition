@@ -124,6 +124,7 @@ $(document).ready(function() {
     });
     /*accessing the class in profile.html*/
     var height_ranges = $(".height_range");
+
     /* http://api.jquery.com/each/ */
     height_ranges.each(function(index, range){
         /* jquery loops through the html elements.*/
@@ -144,5 +145,13 @@ $(document).ready(function() {
             metersSpan.text(meters + " m");
             feetSpan.text(feet + "'" + inches + '"');
         });
-    }); 
+    });
+   var feet_input = $("#height_in_feet");
+   var inches_input = $("#height_in_inches");
+   var centimeters_input = $("#height_in_centimeters");
+   feet_input.on("input change", function(event){
+        var inches = feet_input.val() * 12;
+        inches += inches_input.val();
+        centimeters_input.val(inches / 0.3937);
+   });  
 })

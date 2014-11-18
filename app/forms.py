@@ -27,28 +27,28 @@ class RegistrationForm(Form):
 class ProfileForm(Form):
 
     calorie_goal = IntegerField(
-        'Calorie Goal', 
+        'Calories', 
         [validators.NumberRange(
             min=500, 
-            max=5000,
-            message="Enter an integer between 500 and 5000")]
+            max=10000,
+            message="Enter the number of calories between 500 and 10,000.")]
         )
     protein_goal = IntegerField(
-        'Protein Goal', 
+        'Protein', 
         [validators.NumberRange(
             min=1, 
             max=100,
-            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
+            message="Enter the percentage of your calories to consume as protein.")]
         )
     carbohydrate_goal = IntegerField(
-        'Carbohydrate Goal',
-        [validators.NumberRange(
-            min=1, 
-            max=100,
-            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
+        'Carbohydrate',
+        # [validators.NumberRange(
+        #     min=1, 
+        #     max=300,
+        #     message="Enter the number of Carbohydrate grams between 1 and 300.")]
         )
     fat_goal = IntegerField(
-        'Fat Goal',
+        'Fat',
         [validators.NumberRange(
             min=1, 
             max=100,
@@ -65,18 +65,18 @@ class ProfileForm(Form):
         )
 
     
-    weight_unit = SelectField('Weight', choices=[
-        ('weight_in_pounds', 'Weight in Pounds'),
+    weight_unit = SelectField('Weight Unit: ', choices=[
+        ('weight_in_pounds', 'Pounds'),
             # [validators.NumberRange(
             # min=2, 
             # max=1000,
             # message="Enter an integer between 2 and 1000")]),
-        ('weight_in_kilograms', 'Weight in Kilograms'),
+        ('weight_in_kilograms', 'Kilograms'),
             # [validators.NumberRange(
             #     min=1, 
             #     max=454,
             #     message="Enter a number between 1 and 454")])
-        ('weight_in_stones', 'Weight in Stones')], 
+        ('weight_in_stones', 'Stones')], 
             # [validators.NumberRange(
             #     min=2, 
             #     max=71)]), 
@@ -85,7 +85,7 @@ class ProfileForm(Form):
         )
 
     weight = IntegerField(
-        'Weight', 
+        'Weight:', 
         [validators.NumberRange(
             min=1, 
             max=1000,
@@ -99,21 +99,54 @@ class ProfileForm(Form):
             max=1000,
             message="Enter a number between and including 1 and 1000")]
         )
+    
     height_unit = SelectField('Height', choices=[
-        # ('height_in_feet','Height in Feet'), 
-        ('height_in_inches','Height in Inches'), 
-            # [validators.NumberRange(
-            #     min=1, 
-            #     max=12)])
-        ('height_in_meters', 'Height in Meters')],
-            # [validators.NumberRange(
-            #     min=1, 
-            #     max=300)])
-        validators=[validators.Required(
-            message='Make a Selection')]
+        ('unit in feet and inches', 'height_in_feet','height_in_inches'),
+        ('unit_in_centimeters', 'Height')],
         )
-    height = FloatField(
-        'Height', 
+    height_in_feet = SelectField('Feet', choices=[
+        ('1','1'),
+        ('2','2'),
+        ('3,''3'),
+        ('4','4'),
+        ('5','5'),
+        ('6','6'),
+        ('7','7'),
+        ('8','8'),
+        ('9', '9'),
+        ('10','10'),
+        ('11', '11'),
+        ('12', '12')],
+        )
+    height_in_inches = SelectField('Inches', choices=[
+        ('1','1'),
+        ('1.5','1.5'),
+        ('2','2'),
+        ('2.5','2.5'),
+        ('3','3'),
+        ('3.5','3.5'),
+        ('4','4'),
+        ('4.5','4.5'),
+        ('5','5'),
+        ('5.5','5.5'),
+        ('6','6'),
+        ('6.5','6.5'),
+        ('7','7'),
+        ('7.5','7.5'),
+        ('8','8'),
+        ('8.5','8.5'),
+        ('9', '9'),
+        ('9.5','9.5'),
+        ('10','10'),
+        ('10.5','10.5'),
+        ('11', '11'),
+        ('11.5','11.5'),
+        ('12','12')],     
+        )
+
+        
+    height_in_centimeters = FloatField(
+        'Centimeters', 
         [validators.NumberRange(
             min=0, 
             max=300,

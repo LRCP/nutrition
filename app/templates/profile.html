@@ -6,51 +6,64 @@
     
 
     <h3>Here is the profile page!</h3>
+    <div>
+        {{ render_field(form.birthday) }} 
+        {{ render_field(form.gender) }}      
+    </div>
+
+    <div id="height">
+        <h6>Your Height:</h6>
+        {# {{ render_field(form.height_unit) }} #}
+        {{ render_field(form.height_in_feet) }}
+        {{ render_field(form.height_in_inches) }}
+        {{ render_field(form.height_in_centimeters) }}
+    </div>
+
+    <div id="weight">
+        <h6>Your Weight: </h6>
+        {{ render_field(form.weight_unit) }}  
+        {{ render_field(form.weight) }}
+    </div>
         {# {{ render_field(form.user.food_log) }} #}
 
+    <div>
+        {{ render_field(form.activity_level) }}    
+        {{ render_field(form.weekly_change_level) }}
+    </div>
+    <div id="profile_goals">
+
+        <h5>Goals:</h5>
+        {# <h5>Please enter the amount of calories you wish to consume.</h5>
+        {{ render_field(form.calorie_goal) }} #}
+        <h5>Please set your target ratio of calories (for Protein, Carbs and Fats):</h5>
+        {{ render_field(form.protein_goal) }}
+        {{ render_field(form.carbohydrate_goal) }}
+        {{ render_field(form.fat_goal) }}
+    </div> 
+
     
-    {{ render_field(form.calorie_goal) }}
-    {{ render_field(form.protein_goal) }}
-    {{ render_field(form.carbohydrate_goal) }}
-    {{ render_field(form.fat_goal) }}   
-    {{ render_field(form.birthday) }}     
+
+
+    {# <div id="weight">
     {{ render_field(form.weight_unit) }}
     {{ render_field(form.weight) }}
     {{ render_field(form.weight_goal) }}
-    <dt>Weight</dt>
-
-    <dd>
-        <div class="weight_range">
-            <input type="range" min="2.2" max="227" step=".23">
-            Pounds: <span class="pounds">249</span> /
-            Kilograms: <span class="kilograms">113</span> /
-            Stones: <span class="stones">17.8</span>
-        </div>      
-    </dd>
-    <dt>Weight Goal</dt>
-
-    <dd>
-        <div class="weight_range">
-            <input type="range" min="2.2" max="227" step=".23">
-            Pounds: <span class="pounds">249</span> /
-            Kilograms: <span class="kilograms">113</span> /
-            Stones: <span class="stones">17.8</span>
-        </div>      
-    </dd>
+    </div> #}
     
   
+    
+    {# <dt>Height</dt> #}
+  
 
-    <dt>Height</dt>
-    <dd>
+    {# <dd>
         <div class="height_range">
             <input type="range" min="0.5" max="2.5" step="0.00635">          
             Feet: <span class="feet">4'/11"</span> /
             Meters: <span class="meters">1.5m</span>
         </div>  
-    </dd>
-    {{ render_field(form.gender) }}
-    {{ render_field(form.activity_level) }}    
-    {{ render_field(form.weekly_change_level) }}
+    </dd> #}
+    
+    
 
     
         

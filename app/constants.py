@@ -89,6 +89,11 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-monoeno
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"] = 695 #index 58
 #add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
 #and omega-6: linoleic(18:2), arachidonic(20:4).
+#linoleic acids are found in high concentrations in the oils of 
+#safflower, sunflower, corn, soybean, peanut oil. Canola oil is 29% linoleic.
+#and 12-16 carbon atoms: lauric acid, myristic acid and palmitic have the
+#greatest effect on increasing LDL cholesterol levels. Foudn in animal products
+#and tropical oils, including palm palm kernel and coconut.
 food_nutrient_dictionary["Protein & Amino Acids"]["Protein"] = 203
 food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 food_nutrient_dictionary["Protein & Amino Acids"]["Tryptophan"] = 501

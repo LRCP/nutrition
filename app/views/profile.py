@@ -92,7 +92,9 @@ def profile_post():
         return render_template(
             'profile.html',
             title='Profile',
-            form=form
+            form=form,
+            text='Either stay on your Profile or go to the Home, Foodlog or Logout Page.',
+
             )
     else:
         return render_template(
