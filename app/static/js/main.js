@@ -153,5 +153,14 @@ $(document).ready(function() {
         var inches = feet_input.val() * 12;
         inches += inches_input.val();
         centimeters_input.val(inches / 0.3937);
-   });  
-})
+   });
+   inches_input.on("input change", function(event){
+        var inches = feet_input.val() * 12;
+        inches += inches_input.val();
+        centimeters_input.val(inches / 0.3937);
+   });
+   centimeters_input.on("input change", function(event){
+        var inches = feet_input.val() * 12;
+        inches += inches_input.val();
+        centimeters_input.val(inches / 0.3937);
+   })
