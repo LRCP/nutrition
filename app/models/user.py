@@ -38,6 +38,7 @@ class User(BaseNutrition):
     adjusted_daily_caloric_needs = Column(Integer)
     body_mass_index = Column(Float)
     
+    
     def get_body_mass_index(self):
         bmi = self.weight_in_kilograms / (self.height_in_meters **2)
         return bmi

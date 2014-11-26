@@ -8,6 +8,8 @@ from app.constants import food_nutrient_dictionary
 from collections import OrderedDict, defaultdict
 import json
 import sys
+from sqlalchemy import or_
+
 def get_food_log(user):
     #pass the user as a parameter
     
@@ -177,6 +179,9 @@ def food_log_post():
     food_log.foods.append(association)
     session.commit()
     #after adding the requests, want to take a look at the food log
+    #http://stackoverflow.com/a/11774434/2561528
+    #get the groups and print them out
+    #split the list of numbers into an actual list.
     return redirect(url_for('food_log_get'))
 
 @app.route('/food_log/delete/<id>', methods=['GET', 'POST'])
@@ -186,6 +191,24 @@ def delete_food(id):
     session.delete(association)
     return redirect(url_for('food_log_get'))
 
-#login_manager = LoginManager() 
-#login_manager.init_app(app)
-#@login_manager.user_loader
+@app.route('/food_log/selected_food_groups', methods=['GET', 'POST'])
+@login_required
+def selected_food_groups():
+    #? is a query string which gets info from front end to back end.
+    #queries retrieve one long list of one string.
+    #need to split up the string with string.split method.
+    #remember the food_group codes are stored as texts, not integers.
+    food_groups = request.args.get('food_groups')
+    food_groups = food_groups.split(',')
+    group_filters = [FoodGroupDescription.FdGrp_Cd == group for group in food_groups]
+    food_groups = session.query(FoodGroupDescription)
+    food_groups = food_groups.filter(or_(*group_filters))
+    food_groups = food_groups.all()
+
+
+    print food_groups
+    return ""
+
+
+
+

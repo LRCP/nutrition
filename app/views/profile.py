@@ -1,7 +1,8 @@
-from flask import request, render_template
+from flask import request, render_template, flash
 from app import app, session
 from flask.ext.login import login_user, current_user, login_required
 from app.forms import ProfileForm
+
 
 #from sqlalchemy import Column, Integer, Sequence, ForeignKey
 #from sqlalchemy.orm import relationship
@@ -20,7 +21,7 @@ def profile_get():
         birthday=user.birthday,
         weight_unit="weight_in_kilograms",
         weight=user.weight_in_kilograms,
-        weight_goal=user.weight_goal,
+        #weight_goal=user.weight_goal,
         height_unit="height_in_meters",
         height=user.height_in_meters,
         gender=user.gender,
@@ -78,8 +79,8 @@ def profile_post():
         #user.nutrient_goal = form.nutrient_goal.data
         user.birthday = form.birthday.data
         user.set_weight(form.weight.data, form.weight_unit.data)
-        user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
-        user.set_height(form.height.data, form.height_unit.data)
+        #user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
+        user.set_height(form.height_in_centimeters.data / 100 , "meters")
         user.gender = form.gender.data 
         user.activity_level = form.activity_level.data
         user.set_weekly_weight_change(form.weekly_change_level.data)
@@ -88,7 +89,8 @@ def profile_post():
         #need access to the user object.
         #return redirect(url_for('profile_get'))
 
-
+        flash("You have successfully enterred your Profile Information.")
+        flash("Select Foodlog to continue.")
         return render_template(
             'profile.html',
             title='Profile',
@@ -97,6 +99,8 @@ def profile_post():
 
             )
     else:
+        flash("Try again")
+        print form.errors
         return render_template(
             'profile.html',
             title='Profile',

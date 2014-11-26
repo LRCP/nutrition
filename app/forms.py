@@ -2,6 +2,7 @@ from flask.ext.wtf import Form
 from wtforms import BooleanField, PasswordField, DateTimeField, validators
 from wtforms import DecimalField, TextField, IntegerField, DateField, SelectField, FloatField
 from wtforms.validators import Required, Length, NumberRange
+from wtforms.fields.html5 import DateField
 import datetime
 from datetime import date, timedelta
 
@@ -58,10 +59,12 @@ class ProfileForm(Form):
 
     #research how to validate a datefield
     birthday = DateField(
-        'Enter your Birthday in this format: Year - Month - Day',
-        [validators.NumberRange(
-            min=datetime.date.today() - datetime.timedelta(days=45657),
-            max=datetime.date.today())]
+        # 'Enter your Birthday in this format: Year - Month - Day',
+        # [validators.NumberRange(
+        #     min=datetime.date.today() - datetime.timedelta(days=45657),
+        #     max=datetime.date.today())]
+        'Select your birthday.',
+        validators=[Required()]
         )
 
     
@@ -92,18 +95,14 @@ class ProfileForm(Form):
             message="Enter a number between and including 1 and 1000")]
         )
 
-    weight_goal = IntegerField(
-        'Weight Goal',
-        [validators.NumberRange(
-            min=1,
-            max=1000,
-            message="Enter a number between and including 1 and 1000")]
-        )
+    # weight_goal = IntegerField(
+    #     'Weight Goal',
+    #     [validators.NumberRange(
+    #         min=1,
+    #         max=1000,
+    #         message="Enter a number between and including 1 and 1000")]
+    #     )
     
-    height_unit = SelectField('Height', choices=[
-        ('unit in feet and inches', 'height_in_feet','height_in_inches'),
-        ('unit_in_centimeters', 'Height')],
-        )
     height_in_feet = SelectField('Feet', choices=[
         ('1','1'),
         ('2','2'),

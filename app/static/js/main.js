@@ -152,15 +152,24 @@ $(document).ready(function() {
    feet_input.on("input change", function(event){
         var inches = feet_input.val() * 12;
         inches += inches_input.val();
-        centimeters_input.val(inches / 0.3937);
+        var centimeters = inches / 3.937;
+        centimeters_input.val(Math.round(centimeters));
    });
    inches_input.on("input change", function(event){
         var inches = feet_input.val() * 12;
         inches += inches_input.val();
-        centimeters_input.val(inches / 0.3937);
+        var centimeters = inches / 3.937;
+        centimeters_input.val(Math.round(centimeters));
    });
    centimeters_input.on("input change", function(event){
-        var inches = feet_input.val() * 12;
-        inches += inches_input.val();
-        centimeters_input.val(inches / 0.3937);
+        var centimeters = centimeters_input.val();
+        var meters = centimeters / 100;
+        var inches = meters * 39.37;
+        var feet = Math.floor(inches / 12);
+        // This returns in .5 increments
+        inches = Math.round(inches % 12 *2) / 2;
+        feet_input.val(feet);
+        inches_input.val(inches);
+        
    });
+});
