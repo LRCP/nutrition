@@ -157,7 +157,8 @@ multiple gives the property of the tag of we can pick more than one item. #}
             </div>
 
             <div class="col-md-4">
-                <h3 style="background-image: linear-gradient(
+                <h3 style="background-image">Protein</h3>
+                <!-- <h3 style="background-image: linear-gradient(
                         to right,
                         #FF0000,
                         #FF0000 {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%,
@@ -165,7 +166,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     ); 
                     border: 1px #000 solid;"
 
-                >Protein</h3>
+                >Protein</h3> -->
                 <div class="total">TOTAL: {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]|num_round(0)}} g</div>
                 
                 <div>    

@@ -1,9 +1,22 @@
+// http://davidstutz.github.io/bootstrap-multiselect/#further-examples
 $(document).ready(function() {
     $('.multiselect').multiselect({    
         includeSelectAllOption: true, 
         enableFiltering: true, 
         filterBehavior: 'both', 
-        enableCaseInsensitiveFiltering: true
+        enableCaseInsensitiveFiltering: true,
+        onChange: function(option, checked, select) {
+            var selectedOptions = $('.multiselect option:selected');
+            var selected_food_groups = "";
+            selectedOptions.each(function(index, selectedOption){
+                selected_food_groups += $(selectedOption).val();
+                selected_food_groups += ',';
+            });
+            console.log(selected_food_groups);
+            // need to add the selected food
+            $.post("/food_log/selected_food_groups?food_groups=" + selected_food_groups);
+
+        }
     });
     var datums = [];
     var foodEnterred = new Bloodhound({

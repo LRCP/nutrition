@@ -60,3 +60,13 @@ h4 {
   width: 50px;
   /*display: inline-block;*/
 }
+
+
+.background-image: linear-gradient(
+  to right,#FF0000, #FF0000 {{
+    100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())
+    }}%,
+  #FFFFFF {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
+    ; 
+  border: 1px #000 solid;
+}

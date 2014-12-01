@@ -199,6 +199,8 @@ def selected_food_groups():
     #need to split up the string with string.split method.
     #remember the food_group codes are stored as texts, not integers.
     food_groups = request.args.get('food_groups')
+    if food_groups == None:
+        return ""
     food_groups = food_groups.split(',')
     group_filters = [FoodGroupDescription.FdGrp_Cd == group for group in food_groups]
     food_groups = session.query(FoodGroupDescription)

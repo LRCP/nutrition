@@ -3,4 +3,4 @@ from app import app
 @app.route('/index')
 #this will be the home page
 def index():
-    pass
+    return "index"
