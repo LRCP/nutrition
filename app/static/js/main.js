@@ -2,9 +2,6 @@
 $(document).ready(function() {
     $('.multiselect').multiselect({    
         includeSelectAllOption: true, 
-        enableFiltering: true, 
-        filterBehavior: 'both', 
-        enableCaseInsensitiveFiltering: true,
         onChange: function(option, checked, select) {
             var selectedOptions = $('.multiselect option:selected');
             var selected_food_groups = "";

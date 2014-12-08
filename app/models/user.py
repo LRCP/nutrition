@@ -1,5 +1,6 @@
 from app import BaseNutrition
-from sqlalchemy import Column, Integer, String
+from usda import FoodGroupDescription
+from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy import Sequence, SmallInteger, Float, Text, Date
 from sqlalchemy.orm import relationship
 from datetime import date
@@ -7,6 +8,11 @@ from werkzeug.security import generate_password_hash
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
+
+user_foodgroup_association_table = Table('user_foodgroup_association', BaseNutrition.metadata,
+    Column('user_id', Integer, ForeignKey('users.id')),
+    Column('food_group_code', Text, ForeignKey(FoodGroupDescription.FdGrp_Cd)))
+
 
 class User(BaseNutrition):
     __tablename__ = 'users'
@@ -23,9 +29,8 @@ class User(BaseNutrition):
     height_in_meters = Column(Float)
     gender = Column(String)
     weekly_weight_change = Column(Integer)
-    #openid will be removed after fixing migration.py
-    openid = Column(String(64),
-            Sequence('user_openid_seq'), index=True, unique=True)
+    openid = Column(String(64), 
+        Sequence('user_openid_seq'), index=True, unique=True)
     remember_me = Column(String, default=False)
     username = Column(String(25))
     confirm = Column(Text)
@@ -38,7 +43,8 @@ class User(BaseNutrition):
     adjusted_daily_caloric_needs = Column(Integer)
     body_mass_index = Column(Float)
     
-    
+        
+ 
     def get_body_mass_index(self):
         bmi = self.weight_in_kilograms / (self.height_in_meters **2)
         return bmi
@@ -193,5 +199,8 @@ class User(BaseNutrition):
         return "<User('%s','%s', '%s')>" % (self.username, self.name,
             self.email)
 
-
+User.selected_food_groups = relationship(
+    "FoodGroupDescription", secondary=user_foodgroup_association_table)
+       
+    
 

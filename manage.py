@@ -12,13 +12,14 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from app import app
-from app import BaseNutrition
+from app import BaseNutrition, BaseUSDA
 
 class DB(object):
     def __init__(self, metadata):
         self.metadata = metadata
  
 migrate = Migrate(app, DB(BaseNutrition.metadata))
+    
 manager = Manager(app)
 #add migrate to the manager
 #default run file is built into the manager
