@@ -9,9 +9,9 @@ from werkzeug.security import generate_password_hash
 ROLE_USER = 0
 ROLE_ADMIN = 1
 
-user_foodgroup_association_table = Table('user_foodgroup_association', BaseNutrition.metadata,
-    Column('user_id', Integer, ForeignKey('users.id')),
-    Column('food_group_code', Text, ForeignKey(FoodGroupDescription.FdGrp_Cd)))
+# user_foodgroup_association_table = Table('user_foodgroup_association', BaseNutrition.metadata,
+#     Column('user_id', Integer, ForeignKey('users.id')),
+#     Column('food_group_code', Text, ForeignKey(FoodGroupDescription.FdGrp_Cd)))
 
 
 class User(BaseNutrition):
@@ -200,7 +200,7 @@ class User(BaseNutrition):
             self.email)
 
 User.selected_food_groups = relationship(
-    "FoodGroupDescription", secondary=user_foodgroup_association_table)
+    FoodGroupDescription, secondary=user_foodgroup_association_table)
        
     
 

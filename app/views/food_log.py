@@ -174,7 +174,7 @@ def food_log_post():
     weight = session.query(Weight)
     weight = weight.filter(Weight.NDB_No == association.food.NDB_No,
                 Weight.Seq == unit["Seq"]).first()
-    print >>sys.stderr, association.food.NDB_No
+    #print >>sys.stderr, association.food.NDB_No
     association.unit = weight
     food_log.foods.append(association)
     session.commit()
@@ -201,14 +201,26 @@ def selected_food_groups():
     food_groups = request.args.get('food_groups')
     if food_groups == None:
         return ""
+    #we are taking a string of food groups separated by commas and transforming
+    #them into a list of strings separated by commas.
     food_groups = food_groups.split(',')
+    #we are looping throught the list of group codes and setting up
+    # a list of filters for each group code.
     group_filters = [FoodGroupDescription.FdGrp_Cd == group for group in food_groups]
+    #query the FoodGroupDescriptions in the database.
     food_groups = session.query(FoodGroupDescription)
+    #we only want to get the food _groups that match our filters, the ones sedlected.
     food_groups = food_groups.filter(or_(*group_filters))
+    #we want all the food_groups selected.
+
     food_groups = food_groups.all()
+    #then we want to store the food_groups in the user selected_food_groups fields.
+    #print current_user.selected_food_groups
+    current_user.selected_food_groups = food_groups
 
 
-    print food_groups
+    #print food_groups
+    session.commit()
     return ""
 
 

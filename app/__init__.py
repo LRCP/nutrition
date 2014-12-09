@@ -34,9 +34,10 @@ login_manager.login_view = 'login'
 
 
 # Then import needed files already existing in the root folder
+#can import values, functions, classes.
 
 from app.models.association import Association
-from app.models.user import User
+from app.models.user import User, user_foodgroup_association_table
 from app.models.usda import *
 from app.models.foodlog import FoodLog
 Session = sessionmaker()
@@ -55,7 +56,8 @@ session = Session(binds={
     SourcesofData:engineUSDA, 
     SourcesOfDataLink:engineUSDA, 
     SourceCode:engineUSDA,   
-    Weight:engineUSDA
+    Weight:engineUSDA,
+    user_foodgroup_association_table:engineNutrition,
     })
 
 # to import the user into our views and access the user, we must first
