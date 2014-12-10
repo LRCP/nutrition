@@ -8,6 +8,7 @@ from flask.ext.login import login_required, current_user
 from app import app, session, ordered_defaultdict
 from app.models.food_log import FoodLog
 from app.models.food_log_food_association import FoodLogFoodAssociation
+from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.usda import FoodDescription, FoodGroupDescription, Weight
 from app.models.usda import NutrientData
 from app.constants import food_nutrient_dictionary
