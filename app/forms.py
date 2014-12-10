@@ -64,7 +64,7 @@ class ProfileForm(Form):
         #     min=datetime.date.today() - datetime.timedelta(days=45657),
         #     max=datetime.date.today())]
         'Select your birthday.',
-        validators=[Required()]
+        validators=[]
         )
 
     
