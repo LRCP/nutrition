@@ -1,6 +1,6 @@
 #first import what is needed to support the code
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.ext.declarative import declarative_base 
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 from flask.ext.login import LoginManager
@@ -8,11 +8,6 @@ from flask.ext.openid import OpenID
 from config import basedir
 
 from flask import Flask
-
-
-
-
-
 
 # Then initialize the variables
 app = Flask(__name__)
@@ -36,29 +31,34 @@ login_manager.login_view = 'login'
 # Then import needed files already existing in the root folder
 #can import values, functions, classes.
 
-from app.models.association import Association
-from app.models.user import User, user_foodgroup_association_table
+from app.models.user import User
+from app.models.food_log import FoodLog
+from app.models.food_log_food_association import FoodLogFoodAssociation
+from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.usda import *
-from app.models.foodlog import FoodLog
+
+BaseNutrition.metadata.create_all(engineNutrition)
+
 Session = sessionmaker()
 session = Session(binds={
-    Association:engineNutrition, 
-    User:engineNutrition, 
-    DataDerivationCodeDescription:engineUSDA, 
-    FoodLog:engineNutrition, 
-    FoodDescription:engineUSDA, 
-    FoodGroupDescription:engineUSDA, 
-    Footnote:engineUSDA, 
-    LangualFactorsDescription:engineUSDA, 
-    LangualFactor:engineUSDA, 
-    NutrientData:engineUSDA, 
-    NutrientDefinition:engineUSDA, 
-    SourcesofData:engineUSDA, 
-    SourcesOfDataLink:engineUSDA, 
-    SourceCode:engineUSDA,   
+    User:engineNutrition,
+    FoodLog: engineNutrition,
+    FoodLogFoodAssociation:engineNutrition,
+    UserFoodGroupAssociation:engineNutrition,
+    DataDerivationCodeDescription:engineUSDA,
+    FoodLog:engineNutrition,
+    FoodDescription:engineUSDA,
+    FoodGroupDescription:engineUSDA,
+    Footnote:engineUSDA,
+    LangualFactorsDescription:engineUSDA,
+    LangualFactor:engineUSDA,
+    NutrientData:engineUSDA,
+    NutrientDefinition:engineUSDA,
+    SourcesofData:engineUSDA,
+    SourcesOfDataLink:engineUSDA,
+    SourceCode:engineUSDA,
     Weight:engineUSDA,
-    user_foodgroup_association_table:engineNutrition,
-    })
+})
 
 # to import the user into our views and access the user, we must first
 # define the user. We need the User class to make the user so this must come

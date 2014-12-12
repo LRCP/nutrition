@@ -80,7 +80,7 @@ def profile_post():
         user.birthday = form.birthday.data
         user.set_weight(form.weight.data, form.weight_unit.data)
         #user.set_weight_goal(form.weight_goal.data, form.weight_unit.data)
-        user.set_height(form.height_in_centimeters.data / 100 , "meters")
+        user.set_height(form.height_in_centimeters.data / 100)
         user.gender = form.gender.data 
         user.activity_level = form.activity_level.data
         user.set_weekly_weight_change(form.weekly_change_level.data)

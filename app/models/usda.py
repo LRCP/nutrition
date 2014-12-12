@@ -1,8 +1,6 @@
 from app import BaseUSDA, metadata
 from sqlalchemy import Table, Column, Text
 
-
-
 class DataDerivationCodeDescription(BaseUSDA):
     __table__ = Table(
         'deriv_cd', metadata, Column('Deriv_Cd', Text, primary_key=True),
