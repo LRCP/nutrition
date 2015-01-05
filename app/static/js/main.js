@@ -1,7 +1,7 @@
 // http://davidstutz.github.io/bootstrap-multiselect/#further-examples
 $(document).ready(function() {
     $('.multiselect').multiselect({    
-        includeSelectAllOption: true, 
+        includeSelectAllOption: true,
         onChange: function(option, checked, select) {
             var selectedOptions = $('.multiselect option:selected');
             var selected_food_groups = "";

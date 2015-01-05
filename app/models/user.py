@@ -34,6 +34,7 @@ class User(BaseNutrition):
     adjusted_daily_caloric_needs = Column(Integer)
     body_mass_index = Column(Float)
     selected_food_groups = relationship('UserFoodGroupAssociation')
+    favorite_foods = relationship('FavoriteAssociation')
 
     def get_body_mass_index(self):
         bmi = self.weight_in_kilograms / (self.height_in_meters **2)

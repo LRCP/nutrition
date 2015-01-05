@@ -35,6 +35,7 @@ from app.models.user import User
 from app.models.food_log import FoodLog
 from app.models.food_log_food_association import FoodLogFoodAssociation
 from app.models.user_food_group_association import UserFoodGroupAssociation
+from app.models.favorite_association import FavoriteAssociation
 from app.models.usda import *
 
 BaseNutrition.metadata.create_all(engineNutrition)
@@ -45,6 +46,7 @@ session = Session(binds={
     FoodLog: engineNutrition,
     FoodLogFoodAssociation:engineNutrition,
     UserFoodGroupAssociation:engineNutrition,
+    FavoriteAssociation:engineNutrition,
     DataDerivationCodeDescription:engineUSDA,
     FoodLog:engineNutrition,
     FoodDescription:engineUSDA,

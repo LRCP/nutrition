@@ -43,9 +43,23 @@ def food_log_get():
         return redirect(url_for('profile_get'))
 
     # Get a list of all of the food groups
-    food_groups = session.query(FoodGroupDescription)
-    food_groups = food_groups.order_by(FoodGroupDescription.FdGrp_Desc)
-    food_groups = food_groups.all()
+    all_food_groups = session.query(FoodGroupDescription)
+    #order_by orders the food groups alphabetically according to the description
+    all_food_groups = all_food_groups.order_by(FoodGroupDescription.FdGrp_Desc)
+    all_food_groups = all_food_groups.all()
+    food_groups = []
+    for food_group in all_food_groups:
+        for selected_food_group in user.selected_food_groups:
+            if food_group.FdGrp_Cd == selected_food_group.food_group_code:
+                food_groups.append((food_group, True))
+                break 
+        else:
+            food_groups.append((food_group, False))  
+    #for food_group in user.selected_food_groups:
+
+
+
+
 
     # Get the current food log
     food_log = get_food_log(user)

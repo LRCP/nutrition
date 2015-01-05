@@ -5,7 +5,7 @@
 <form method=post action="/food_log">
 
 <h2 class="welcome">
-    Welcome <span id="user_name">{{ user.name }}!</span> Here is Your Personal Food Log Page!
+    Welcome <span id="user_name">{{ user.username }}!</span> Here is Your Personal Food Log Page!
 </h2>
 
 
@@ -35,10 +35,13 @@
 class is a way to identify the element for purposes of css. class is a multiple identifier, not a unique identifier.
 multiple gives the property of the tag of we can pick more than one item. #}
 <select class="multiselect" multiple="multiple" id="food_group_select">
-    {% for food_group in food_groups_list %} 
+    {% for food_group, selected in food_groups_list %} 
         {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
         {# food_group is a class. FodGrp_Desc is an attribute of food_group #}
-        <option value ="{{food_group.FdGrp_Cd}}">{{ food_group.FdGrp_Desc }}</option>
+        <option value ="{{food_group.FdGrp_Cd}}"
+            {% if selected %} selected {% endif %}>
+            {{ food_group.FdGrp_Desc }}
+        </option>
 
     {% endfor %}
 
