@@ -12,6 +12,7 @@ from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.usda import FoodDescription, FoodGroupDescription, Weight
 from app.models.usda import NutrientData
 from app.constants import food_nutrient_dictionary
+from app.models.favorite_association import FavoriteAssociation
 
 def get_food_log(user):
     food_log = session.query(FoodLog).filter_by(user=user).first()
@@ -20,7 +21,7 @@ def get_food_log(user):
         food_log.user = user
         session.add(food_log)
 
-        session.commit()
+        session.commit()    
     return food_log
 
 
@@ -162,12 +163,29 @@ def food_log_post():
         quantity=float(quantity)
     )
 
+
     food_log.foods.append(association)
 
+    #build the query
+    favorite_query = session.query(FavoriteAssociation)
+    favorite_query = favorite_query.filter_by(NDB_No=unit["NDB_No"], user_id=user.id)
+    #executing the query
+    favorite = favorite_query.first()
+
+    if favorite == None:
+        favorite = FavoriteAssociation(
+            NDB_No=unit["NDB_No"],
+            user_id=user.id,
+            popularity=1
+        )
+        session.add(favorite)
+    else:
+        favorite.popularity += 1
     session.commit()
     return redirect(url_for('food_log_get'))
 
 @app.route('/food_log/delete/<id>', methods=['GET', 'POST'])
+
 @login_required
 def delete_food(id):
     association = session.query(Association).get(id)
