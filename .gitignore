@@ -1,2 +1,6 @@
 *.pyc
 *.sublime*
+
+app.db-journal
+app.db
+
