@@ -188,7 +188,7 @@ def food_log_post():
 
 @login_required
 def delete_food(id):
-    association = session.query(Association).get(id)
+    association = session.query(FoodLogFoodAssociation).get(id)
     session.delete(association)
     return redirect(url_for('food_log_get'))
 
