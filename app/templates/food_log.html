@@ -306,7 +306,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
                 <h3>Sterols</h3>
                 
                 {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-                {% if index < 2 %}
+                {% if index < 1 %}
                 <div>
                     {{nutrient_name}}: {{food["nutrients"]["Sterols"][nutrient_name]|num_round()}}
                 </div>
@@ -322,7 +322,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
 
                 <div id="Sterols-Details-{{food_index}}" class="collapse"> 
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-                    {% if index >= 2 %}                
+                    {% if index >= 1 %}                
                     <div>
                         {{nutrient_name}}: {{food["nutrients"]["Sterols"][nutrient_name]|num_round()}}
                     </div>

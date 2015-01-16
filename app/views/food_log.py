@@ -94,20 +94,20 @@ def food_log_get():
         # Post-process the list to add some extra nutrients
         ffa = nutrient_dict["Fats & Fatty Acids"]
         omega_3_keys = [
-            "18:3 n-3 c,c,c (ALA)  alpha-linolenic",
+            "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic",
             "20:3 n-3 eicosatrienoic acid (ETE)",
             "20:4 undifferentiated arachidonic",
             "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
             "22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
-            "22:6 n-3 docosahexaenoic (DHA)"
+            "22:6 n-3 docosahexaenoic (DHA)  cervonic"
             ]
 
         ffa["omega_3"] = sum_nutrients(omega_3_keys, ffa)
 
         omega_6_keys = [
-            "18:2 n-6 c,c",
-            "18:3 n-6 c,c,c (GLA)  gamma-linolenic",
-            "20:2 n-6 c,c eicosadienoic",
+            "18:2 n-6 cis,cis  linoleic",
+            "18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
+            "20:2 n-6 cis,cis eicosadienoic",
             "20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
             "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
         ]
