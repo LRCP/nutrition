@@ -27,17 +27,21 @@
 
     </head>
     <body>
-        <div>Nutrition: 
+        <header>Nutrition: 
             {% if g.logged_in %}
             <a href="/index">Home</a>
             <a href="/profile">Profile</a>
             <a href="/food_log">Foodlog</a>
-            <a href="/logout">Logout</a>
+            
+            <span id="login_logout">Welcome {{ user.username }}!
+                <a href="/logout">Logout</a></span>
+            
             {% else %}
             <a href="/login">Login</a>
             <a href="/register">Register</a>
+
             {% endif %}
-        </div>
+        </header>
         
 
         

@@ -137,13 +137,18 @@ def food_log_get():
         "name": "Totals",
         "nutrients": totals,
     })
-
+    calorie_percentage = (
+        totals["nutrients"]["Calorie Information"]["Energy_KCAL"] *100
+        )
+    calorie_percentage /= user.get_adjusted_daily_caloric_needs()
+    
     return render_template(
         'food_log.html', title="FoodLog",
         food_nutrient_list=foods,
         food_groups_list=food_groups,
-        user=user
-    )
+        user=user,
+        calorie_percentage=calorie_percentage,
+        )
 
 
 @app.route('/food_log', methods=['POST'])

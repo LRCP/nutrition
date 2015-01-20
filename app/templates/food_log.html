@@ -4,28 +4,65 @@
 {% from "_formhelpers.html" import render_field %}
 <form method=post action="/food_log">
 
-<h2 class="welcome">
-    Welcome <span id="user_name">{{ user.username }}!</span> Here is Your Personal Food Log Page!
-</h2>
+
 
 
 {# <h2>Here is Your Personal Food Log Page!</h2> #}
-<div>
+{# <div>
     Daily Caloric Needs: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
     Weekly Weight Change Goal in Kilograms: {{ user.weekly_weight_change }}
-    {#getter functions are attributes to be referred to as user.get_....#}
+    getter functions are attributes to be referred to as user.get_....
     Change Calories: Daily {{ user.get_caloric_change_daily()|num_round()|int }} or Weekly: {{ user.get_caloric_change_weekly()|num_round()|int }}
     Body Mass Index: {{ user.get_body_mass_index()|num_round()|int }}
    
 
 
+</div> #}
+
+<div id="intro">
+    Craft and Track Meals and Snacks that Satisfy Your Nutritional Goals!<br>
+    <script>
+        $(function() {
+            $( "#date" ).datepicker({
+             changeMonth: true,
+             changeYear: true,
+             minDate: new Date(1915, 0, 1),
+             yearRange: "1915:+0",
+            });
+        });
+        </script>
+    <span>Food Log For {{ user.username }}: Date: <input type="date" id="date"></span>
+
 </div>
-<div>
-    Macro Nutrient Goals:
-    Protein: {{ user.protein_goal }}%
-    Carbohydrate: {{  user.carbohydrate_goal }}%
-    Fat: {{ user.fat_goal }}%
-</div> 
+<div id="nutrient_goals">
+    <span>Calories:</span>
+    <div style="background-image: linear-gradient(
+        to right, red, red {{ calorie_percentage }}%, 
+        white {{ calorie_percentage }}%);">
+
+    </div>
+    <span>Protein:</span>
+    <div>
+        
+    </div>
+    <span>Carbs:</span>
+    <div>
+        
+    </div>
+    <span>Fats:</span>
+    <div>
+        
+    </div>
+
+</div>
+{# <div id="calorie_goals">
+    Calorie Goals: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
+    <span id="macro-nutrient-goals">Macro Nutrient Goals:
+        Protein: {{ user.protein_goal }}%
+        Carbohydrate: {{  user.carbohydrate_goal }}%
+        Fat: {{ user.fat_goal }}%
+    </span>
+</div>  #}
 <p>
     <strong>Please select the food groups you wish to search.</strong>
 </p>
@@ -255,7 +292,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     
                     <div class="total">Monounsaturated</div>
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if index < 16 %}
+                    {% if 14 < index < 31 %}
                     <div>{{nutrient_name}}: {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
                     </div>
                     {% endif %}
@@ -264,7 +301,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
                     
                     <div class="total">Polyunsaturated</div>
                     {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if index < 22 %}
+                    {% if 31 < index < 56 %}
                     <div>{{nutrient_name}}: {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
                     </div>
                     {% endif %}

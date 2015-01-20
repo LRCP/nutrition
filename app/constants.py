@@ -47,7 +47,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 undifferentiated hexadeceno
 food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 cis  palmitoleic"] = 673
 food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 trans"] = 662
 food_nutrient_dictionary["Fats & Fatty Acids"]["17:1 heptadecenoic"] = 687
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic"] = 617
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
@@ -68,8 +68,8 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 undifferentiated octadecatr
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 trans (other isomers)"] = 856
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i (mixed isomers)"] = 866
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i (mixed isomers)octadecatetraenoic  parinaric"] = 627
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i trans (mixed isomers)"] = 866
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:4 octadecatetraenoic  parinaric"] = 627
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:2 n-6 cis,cis eicosadienoic"] = 672
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadienoic"] = 689
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-3 eicosatrienoic acid (ETE)"] = 852
