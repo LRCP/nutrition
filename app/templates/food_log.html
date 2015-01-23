@@ -34,27 +34,73 @@
     <span>Food Log For {{ user.username }}: Date: <input type="date" id="date"></span>
 
 </div>
+
 <div id="nutrient_goals">
     <span>Calories:</span>
     <div style="background-image: linear-gradient(
         to right, red, red {{ calorie_percentage }}%, 
         white {{ calorie_percentage }}%);">
-
     </div>
     <span>Protein:</span>
-    <div>
-        
+    <div style="background-image: linear-gradient(
+        to right, red, red {{ protein_percentage }}%, 
+        white {{ protein_percentage }}%);">
     </div>
     <span>Carbs:</span>
-    <div>
-        
+    <div style="background-image: linear-gradient(
+        to right, red, red {{ carbohydrate_percentage }}%, 
+        white {{ carbohydrate_percentage }}%);">
     </div>
     <span>Fats:</span>
+    <div style="background-image: linear-gradient(
+        to right, red, red {{ fat_percentage }}%, 
+        white {{ fat_percentage }}%);">
+    </div>
+    <span>More:</span>
     <div>
         
     </div>
 
 </div>
+
+<div>
+    <form class="form-inline">
+        <ul class="nav nav-pills" id="existing_dropdown">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    Add Existing Meal, Snack or Food <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Breakfast</a></li>
+                    <li><a href="#">Lunch</a></li>
+                    <li><a href="#">Dinner</a></li>
+                    <li><a href="#">Snack</a></li>
+                    <li><a href="#">Food</a></li>
+                </ul>
+            </li>
+  
+        </ul>
+
+        <select class="multiselect" multiple="multiple" id="food_group_select">
+            {% for food_group, selected in food_groups_list %} 
+        {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
+        {# food_group is a class. FodGrp_Desc is an attribute of food_group #}
+            <option value ="{{food_group.FdGrp_Cd}}"
+            {% if selected %} selected {% endif %}>
+            {{ food_group.FdGrp_Desc }}
+            </option>
+
+        {% endfor %}
+
+        </select>
+        <input class="typeahead" type="text" name="food" required placeholder="Food">
+        <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
+        <select id="units" name="unit" required></select>
+        <button type="submit class"="btn">Add</button>
+
+    </form>
+
+</div> 
 {# <div id="calorie_goals">
     Calorie Goals: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
     <span id="macro-nutrient-goals">Macro Nutrient Goals:
@@ -63,18 +109,16 @@
         Fat: {{ user.fat_goal }}%
     </span>
 </div>  #}
-<p>
-    <strong>Please select the food groups you wish to search.</strong>
-</p>
+
 
 
 {# select is the type of tag/element, as opposed to div, p, input.
 class is a way to identify the element for purposes of css. class is a multiple identifier, not a unique identifier.
 multiple gives the property of the tag of we can pick more than one item. #}
-<select class="multiselect" multiple="multiple" id="food_group_select">
-    {% for food_group, selected in food_groups_list %} 
+<select class="multiselect" multiple="multiple" id="existing meal or snack" placeholder="Add Existing Meal or Snack">
+    {% for meal_snack, selected in meal_snack_groups_list %} 
         {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
-        {# food_group is a class. FodGrp_Desc is an attribute of food_group #}
+        food_group is a class. FodGrp_Desc is an attribute of food_group
         <option value ="{{food_group.FdGrp_Cd}}"
             {% if selected %} selected {% endif %}>
             {{ food_group.FdGrp_Desc }}
@@ -83,38 +127,7 @@ multiple gives the property of the tag of we can pick more than one item. #}
     {% endfor %}
 
 </select>
-<p>
-    <strong>Please enter the Food and Amount of Food</strong>
-</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Food</th>
-            <th>Quantity</th> 
-            <th>Unit</th>           
-        </tr>
-        <tr>
-            <td><input class="typeahead" type="text" name="food" required placeholder="Food"></td>
-            <td><input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity" disabled></td>
-            <td><select id="units" name="unit" disabled></select></td>
-            
-        </tr>      
-    </thead>
-</table>
-
-<div>
-    <br>
-</div>
-
-
-<div>
-</div>
-<div>
-    <br>
-</div>
-<input type="submit">
-</form>
 
 <div class="container-fluid">
     <p><h4>HERE ARE THE FOOD NUTRIENTS:</h4></p>
@@ -197,16 +210,16 @@ multiple gives the property of the tag of we can pick more than one item. #}
             </div>
 
             <div class="col-md-4">
-                <h3 style="background-image">Protein</h3>
-                <!-- <h3 style="background-image: linear-gradient(
+                <h3>Protein</h3>
+                {# <h3  style="background-image: linear-gradient(
                         to right,
                         #FF0000,
-                        #FF0000 {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%,
-                        #FFFFFF {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
+                        #FF0000 {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] * 4/ ((user.protein_goal / 100) *user.get_adjusted_daily_caloric_needs())}}%,
+                        #FFFFFF {{100 * food["nutrients"]"Protein & Amino Acids"]["Protein"] * 4/ ((user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
                     ); 
                     border: 1px #000 solid;"
 
-                >Protein</h3> -->
+                >Protein</h3> #}
                 <div class="total">TOTAL: {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]|num_round(0)}} g</div>
                 
                 <div>    

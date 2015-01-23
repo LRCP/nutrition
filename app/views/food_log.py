@@ -95,10 +95,10 @@ def food_log_get():
         ffa = nutrient_dict["Fats & Fatty Acids"]
         omega_3_keys = [
             "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic",
-            "20:3 n-3 eicosatrienoic acid (ETE)",
+            #"20:3 n-3 eicosatrienoic acid (ETE)",
             "20:4 undifferentiated arachidonic",
             "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
-            "22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
+            #"22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
             "22:6 n-3 docosahexaenoic (DHA)  cervonic"
             ]
 
@@ -106,9 +106,9 @@ def food_log_get():
 
         omega_6_keys = [
             "18:2 n-6 cis,cis  linoleic",
-            "18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
-            "20:2 n-6 cis,cis eicosadienoic",
-            "20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
+            #"18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
+            #"20:2 n-6 cis,cis eicosadienoic",
+            #"20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
             "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
         ]
 
@@ -138,9 +138,24 @@ def food_log_get():
         "nutrients": totals,
     })
     calorie_percentage = (
-        totals["nutrients"]["Calorie Information"]["Energy_KCAL"] *100
+        totals["Calorie Information"]["Energy_KCAL"] *100
         )
     calorie_percentage /= user.get_adjusted_daily_caloric_needs()
+
+    protein_percentage = (
+        totals["Protein & Amino Acids"]["Protein"] * 100
+        )
+    protein_percentage /= user.get_adjusted_daily_caloric_needs()
+
+    carbohydrate_percentage = (
+        totals["Carbohydrates"]["Carbohydrate, by difference"] * 100
+        )
+    carbohydrate_percentage /= user.get_adjusted_daily_caloric_needs()
+    fat_percentage = (
+        totals["Fats & Fatty Acids"]["Total lipid (fat)"] * 100
+        )
+    fat_percentage /= user.get_adjusted_daily_caloric_needs()
+
     
     return render_template(
         'food_log.html', title="FoodLog",
@@ -148,6 +163,9 @@ def food_log_get():
         food_groups_list=food_groups,
         user=user,
         calorie_percentage=calorie_percentage,
+        protein_percentage=protein_percentage,
+        carbohydrate_percentage=carbohydrate_percentage,
+        fat_percentage=fat_percentage,
         )
 
 

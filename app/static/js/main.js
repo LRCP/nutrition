@@ -103,13 +103,13 @@ $(document).ready(function() {
             var datum = datums[i];
             /*if what we typed in is one of the options, do nothing and we are good to go*/
             if (input.val().toLowerCase() == datum.name.toLowerCase()) {           
-                $("#units").prop('disabled', false);
-                $("#quantity-input").prop('disabled', false);
+                /*$("#units").prop('disabled', false);
+                $("#quantity-input").prop('disabled', false);*/
                 return;
             }
         }
-        $("#units").prop('disabled', true);
-        $("#quantity-input").prop('disabled', true);
+        /*$("#units").prop('disabled', true);
+        $("#quantity-input").prop('disabled', true);*/
         input.val("");
     }.bind(null, foodEnterred));
     var weight_ranges = $(".weight_range");

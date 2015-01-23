@@ -14,6 +14,10 @@ header {
 
 }
 
+#existing_dropdown{
+  display: inline;
+}
+
 .tt-dropdown-menu{
   width: 308px;
   margin-top: 12px; 
