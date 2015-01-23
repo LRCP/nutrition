@@ -15,8 +15,19 @@ header {
 }
 
 #existing_dropdown{
-  display: inline;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid black;
+
 }
+.add_foods{
+  min-width: 100%
+}
+
+.form-inline > ul {
+  height: 20px;
+}
+
 
 .tt-dropdown-menu{
   width: 308px;
