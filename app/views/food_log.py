@@ -117,7 +117,7 @@ def food_log_get():
         foods.append({
             "name": food.Long_Desc,
             "id": association.id,
-            "quantities": association.quantity,
+            "quantity": association.quantity,
             "nutrients": nutrient_dict,
             "unit": unit.Msre_Desc,
         })

@@ -1,4 +1,4 @@
-
+{#  #}
 {% extends "base.html" %}
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
@@ -77,9 +77,23 @@
                     <li><a href="#">Snack</a></li>
                     <li><a href="#">Food</a></li>
                 </ul>
-            </li>
-  
+            </li> 
         </ul>
+        <!-- <ul class="nav nav-pills" id="existing_dropdown">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                    Add Existing Meal, Snack or Food <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Breakfast</a></li>
+                    <li><a href="#">Lunch</a></li>
+                    <li><a href="#">Dinner</a></li>
+                    <li><a href="#">Snack</a></li>
+                    <li><a href="#">Food</a></li>
+                </ul>
+            </li> 
+        </ul> -->
+
 
         <select class="multiselect" multiple="multiple" id="food_group_select">
             {% for food_group, selected in food_groups_list %} 
@@ -110,31 +124,50 @@
     </span>
 </div>  #}
 
+<table class="table">
+    <tr>
+        <th>FOOD</th>
+        <th>CALS</th>
+        <th>PROT</th>
+        <th>CARBS</th>
+        <th>FATS</th>
+        <th>More Button</th>
+        <th>Delete Button</th>
+    </tr>
+    {% for food_index, food in enumerate(food_nutrient_list) %}
+    <tr>
+        <td class="food_name">{{food["name"]}}<br>
+            <span class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</span>
+            </td>
+        
+        <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>
+        <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}</td>
+        <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
+        <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}</td>
+        <td class="more_button">
+            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </button>
+        </td>
+        <td class="delete_button">
+            <a href="food_log/delete/{{food["id"]}}">
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </a> 
+        </td>      
+    </tr>
+
+    <div class="collapse" id="Food-Details-{{food_index}}">
 
 
-{# select is the type of tag/element, as opposed to div, p, input.
-class is a way to identify the element for purposes of css. class is a multiple identifier, not a unique identifier.
-multiple gives the property of the tag of we can pick more than one item. #}
-<select class="multiselect" multiple="multiple" id="existing meal or snack" placeholder="Add Existing Meal or Snack">
-    {% for meal_snack, selected in meal_snack_groups_list %} 
-        {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
-        food_group is a class. FodGrp_Desc is an attribute of food_group
-        <option value ="{{food_group.FdGrp_Cd}}"
-            {% if selected %} selected {% endif %}>
-            {{ food_group.FdGrp_Desc }}
-        </option>
-
+    </div>
     {% endfor %}
-
-</select>
-
-
+</table>
 <div class="container-fluid">
-    <p><h4>HERE ARE THE FOOD NUTRIENTS:</h4></p>
     <div class="row">
         <div class="col-xs-2"><strong>FOOD</strong></div>
-        <div class="col-xs-1"><strong>QUANT</strong></div>
-        <div class="col-xs-1"><strong>UNIT</strong></div>
+        
         <div class="col-xs-1"><strong>CALS</strong></div>
         <div class="col-xs-1"><strong>PROT</strong></div>
         <div class="col-xs-1"><strong>CARBS</strong></div>
@@ -147,14 +180,13 @@ multiple gives the property of the tag of we can pick more than one item. #}
     {% for food_index, food in enumerate(food_nutrient_list) %}
     <div class="row">
         <div class="col-xs-2">
-            {{food["name"]}}
-        </div> 
-        <div class="col-xs-1">
-            {{food["quantities"]}}
-        </div> 
-        <div class="col-xs-1">
-            {{food["unit"]}}
-        </div> 
+            <div class="food_name">
+                {{food["name"]}}
+            </div>
+            <div class="quantity_unit">
+                {{food["quantity"]}} {{food["unit"]}}
+            </div> 
+        </div>
         <div class="col-xs-1">{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}
         </div> 
         <div class="col-xs-1">

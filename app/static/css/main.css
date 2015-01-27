@@ -42,6 +42,20 @@ header {
   /*-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2); 
      -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2); 
           box-shadow: 0 5px 10px rgba(0,0,0,.2); */
+} 
+
+.quantity_unit{
+  padding-left: 5px;
+  font-weight: normal;
+}
+
+.food_name{
+  font-weight: bold;
+  width: 20%;
+}
+
+.indent{
+  padding-left: 5px
 }
 h2 {
   padding: 5px;
