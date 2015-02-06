@@ -20,19 +20,8 @@
 </div> #}
 
 <div id="intro">
-    Craft and Track Meals and Snacks that Satisfy Your Nutritional Goals!<br>
-    <script>
-        $(function() {
-            $( "#date" ).datepicker({
-             changeMonth: true,
-             changeYear: true,
-             minDate: new Date(1915, 0, 1),
-             yearRange: "1915:+0",
-            });
-        });
-        </script>
-    <span>Food Log For {{ user.username }}: Date: <input type="date" id="date"></span>
-
+    Craft and Track Meals and Snacks to Satisfy Your Nutritional Goals!<br>
+    Food Log For {{ user.username }}: Date: <input type="date" id="date">
 </div>
 
 <div id="nutrient_goals">
@@ -63,13 +52,12 @@
 
 </div>
 
-<div>
+<div class="food-body">
     <form class="form-inline">
-        <ul class="nav nav-pills" id="existing_dropdown">
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+        <div class="btn-group" id="existing-dropdown">
+                <button type="button" class="dropdown-toggle btn btn-default" aria-expanded="false" data-toggle="dropdown">
                     Add Existing Meal, Snack or Food <span class="caret"></span>
-                </a>
+                </button>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="#">Breakfast</a></li>
                     <li><a href="#">Lunch</a></li>
@@ -77,24 +65,9 @@
                     <li><a href="#">Snack</a></li>
                     <li><a href="#">Food</a></li>
                 </ul>
-            </li> 
-        </ul>
-        <!-- <ul class="nav nav-pills" id="existing_dropdown">
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                    Add Existing Meal, Snack or Food <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Breakfast</a></li>
-                    <li><a href="#">Lunch</a></li>
-                    <li><a href="#">Dinner</a></li>
-                    <li><a href="#">Snack</a></li>
-                    <li><a href="#">Food</a></li>
-                </ul>
-            </li> 
-        </ul> -->
-
-
+            </div>
+       
+        
         <select class="multiselect" multiple="multiple" id="food_group_select">
             {% for food_group, selected in food_groups_list %} 
         {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
@@ -107,10 +80,10 @@
         {% endfor %}
 
         </select>
-        <input class="typeahead" type="text" name="food" required placeholder="Food">
+        <input class="typeahead" type="text" name="food" required placeholder="  Food">
         <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
         <select id="units" name="unit" required></select>
-        <button type="submit class"="btn">Add</button>
+        <button type="submit" class="btn btn-default">Add</button>
 
     </form>
 
@@ -123,47 +96,49 @@
         Fat: {{ user.fat_goal }}%
     </span>
 </div>  #}
-
-<table class="table">
-    <tr>
-        <th>FOOD</th>
-        <th>CALS</th>
-        <th>PROT</th>
-        <th>CARBS</th>
-        <th>FATS</th>
-        <th>More Button</th>
-        <th>Delete Button</th>
-    </tr>
-    {% for food_index, food in enumerate(food_nutrient_list) %}
-    <tr>
-        <td class="food_name">{{food["name"]}}<br>
-            <span class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</span>
-            </td>
-        
-        <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>
-        <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}</td>
-        <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
-        <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}</td>
-        <td class="more_button">
-            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-        </td>
-        <td class="delete_button">
-            <a href="food_log/delete/{{food["id"]}}">
-                <button type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-remove"></span>
+{#can have multiple classes in one class separated by a space#}
+<div class="food-container">
+    <table class="table">
+        <tr>
+            <th>FOOD</th>
+            <th>CALS</th>
+            <th>PROT</th>
+            <th>CARBS</th>
+            <th>FATS</th>
+            <th>More Button</th>
+            <th>Delete Button</th>
+        </tr>
+        {% for food_index, food in enumerate(food_nutrient_list) %}
+        <tr>
+            <td class="food_name">{{food["name"]}}<br>
+                <span class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</span>
+                </td>
+            
+            <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>
+            <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}</td>
+            <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
+            <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}</td>
+            <td class="more_button">
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
-            </a> 
-        </td>      
-    </tr>
+            </td>
+            <td class="delete_button">
+                <a href="food_log/delete/{{food["id"]}}">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </a> 
+            </td>      
+        </tr>
 
-    <div class="collapse" id="Food-Details-{{food_index}}">
+        <div class="collapse" id="Food-Details-{{food_index}}">
 
 
-    </div>
-    {% endfor %}
-</table>
+        </div>
+        {% endfor %}
+    </table>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-2"><strong>FOOD</strong></div>
@@ -180,10 +155,10 @@
     {% for food_index, food in enumerate(food_nutrient_list) %}
     <div class="row">
         <div class="col-xs-2">
-            <div class="food_name">
+            <div class="food-name">
                 {{food["name"]}}
             </div>
-            <div class="quantity_unit">
+            <div class="quantity-unit">
                 {{food["quantity"]}} {{food["unit"]}}
             </div> 
         </div>

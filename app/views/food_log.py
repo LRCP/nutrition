@@ -96,7 +96,7 @@ def food_log_get():
         omega_3_keys = [
             "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic",
             #"20:3 n-3 eicosatrienoic acid (ETE)",
-            "20:4 undifferentiated arachidonic",
+            #"20:4 undifferentiated arachidonic",
             "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
             #"22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
             "22:6 n-3 docosahexaenoic (DHA)  cervonic"
@@ -111,6 +111,8 @@ def food_log_get():
             #"20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
             "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
         ]
+
+        
 
         ffa["omega_6"] = sum_nutrients(omega_6_keys, ffa)
 

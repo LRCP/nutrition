@@ -32,9 +32,10 @@
             <a href="/index">Home</a>
             <a href="/profile">Profile</a>
             <a href="/food_log">Foodlog</a>
+            <a href="/logout">Logout</a>
             
-            <span id="login_logout">Welcome {{ user.username }}!
-                <a href="/logout">Logout</a></span>
+            {# <span id="login-logout">Welcome {{ user.username }}!</span> #}
+                
             
             {% else %}
             <a href="/login">Login</a>
@@ -42,6 +43,7 @@
 
             {% endif %}
         </header>
+        {# <p id="login-logout">Welcome {{ user.username }}!</p> #}
         
 
         

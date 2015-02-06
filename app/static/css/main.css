@@ -5,57 +5,193 @@
 header {
   padding: 15px;
 }
+#intro {
+  padding: 15px;
+  text-align:justify;
+}
 
+#date{
+  line-height: normal;
+}
+
+#nutrient_goals {
+  padding-left: 10px;
+}
+/*We are selecting the div child of the nutrient_goals parent.*/
 #nutrient_goals div {
   display: inline-block;
-  width: 60px;
+  width: 30px;
+  /*height: 12px;*/
   height: 1em;
   border: 1px solid black;
+  vertical-align: text-bottom;
 
 }
 
-#existing_dropdown{
-  display: inline-block;
+
+#nutrient_goals span {
+  padding: 0px;
+  width: 320px;
+  display: inline block;
+}
+
+
+#existing-dropdown button{
+  /*display: inline-block;
   vertical-align: middle;
   border: 1px solid black;
+  padding: 2px;
+  */
+  border: 1px solid black;
+  border-radius: 0;
+  width: 233px;
 
 }
+.btn-group button{
+  /*border: 1px solid black;
+  border-radius: 0;*/
+  display: block;
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 2px;
+  height: 30px;
+  width: 87px;
+}
+
 .add_foods{
-  min-width: 100%
+  min-width: 100%;
+  
 }
 
-.form-inline > ul {
+.food-body{
+  padding: 15px;
+}
+.food-body input {
+  padding: 5px 0;
+}
+
+.form-inline{
   height: 20px;
 }
 
+.multiselect{
+  display: block;
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 2px;
+  height: 30px;
 
+
+
+}
+/*Bootstrap 3 style fixes for using Typeahead.js*/
 .tt-dropdown-menu{
+
+  min-width: 160px;
+  margin-top: 2px;
+  padding: 5px 0;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+ 
+}
+/*.tt-dropdown-menu{
   width: 308px;
   margin-top: 12px; 
   padding: 8px 0; 
   background-color: #fff; 
   border: 1px solid #ccc; 
   border: 1px solid rgba(0, 0, 0, 0.2); 
-  /*-webkit-border-radius: 8px; 
-     -moz-border-radius: 8px; 
-          border-radius: 8px; */
-  /*-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2); 
-     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2); 
-          box-shadow: 0 5px 10px rgba(0,0,0,.2); */
-} 
+  
+} */
+.typeahead {
+  border: 1px solid black;
+  width: 60px;
+  
+ 
+}
+.twitter-typeahead{
+  display: inline!important;
 
-.quantity_unit{
-  padding-left: 5px;
-  font-weight: normal;
+
 }
 
-.food_name{
+#quantity-input {
+  /*border: 1px solid black;*/
+  
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 2px;
+  height: 30px;
+  width: 60px;
+  
+}
+
+.typeahead.tt-input{
+  /*display: inline;
+  vertical-align: middle;
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 2px;
+  height: 28px;*/
+  
+ 
+  border: 1px solid black;
+  border-radius: 0;
+  padding: 2px;
+  height: 30px;
+}
+
+#units {
+  border: 1px solid black;
+  border-radius: 0!important;
+  border-color: black;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 0;
+  vertical-align: middle;
+  height: 30px; 
+}
+
+
+.quantity-unit{
+  padding-left: 5px;
+  font-weight: normal;
+
+}
+.food-container{
+  padding: 15px;
+}
+td.food_name {
+  font-weight: bold;
+}
+td span.quantity_unit{
+  font-weight: normal;
+  padding-left: 5px;
+}
+
+.food-name{
   font-weight: bold;
   width: 20%;
+
 }
 
 .indent{
   padding-left: 5px
+}
+
+
 }
 h2 {
   padding: 5px;
@@ -75,11 +211,8 @@ tr {
 .total {
   font-weight: bold;
 }
-#user_name {
-  /*color: #C2A36D;*/
-  color: black;
-  font-size: 30;
-}
+
+
 
 h4 {
   font_size: 20;
@@ -92,12 +225,12 @@ h4 {
 .col_xs-2 {
   text-align: right;
 }*/
-#profile_goals input{
+#profile-goals input{
   width: 50px;
   /*display: inline-block;*/
 }
-#login_logout {
-  float: right;
+#login-logout {
+  float: left;
   
 }
 
