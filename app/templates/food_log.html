@@ -20,7 +20,6 @@
 </div> #}
 
 <div id="intro">
-    Craft and Track Meals and Snacks to Satisfy Your Nutritional Goals!<br>
     Food Log For {{ user.username }}: Date: <input type="date" id="date">
 </div>
 
@@ -103,15 +102,15 @@
             <th>FOOD</th>
             <th>CALS</th>
             <th>PROT</th>
-            <th>CARBS</th>
+            <th>CARB</th>
             <th>FATS</th>
-            <th>More Button</th>
-            <th>Delete Button</th>
+            <th>More</th>
+            <th>Delete</th>
         </tr>
         {% for food_index, food in enumerate(food_nutrient_list) %}
         <tr>
             <td class="food_name">{{food["name"]}}<br>
-                <span class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</span>
+                <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
                 </td>
             
             <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>

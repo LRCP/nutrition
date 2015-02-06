@@ -4,6 +4,13 @@
 
 header {
   padding: 15px;
+  background-color: #FFE054;
+  font-size: 16px;
+  font-weight: bold;
+
+}
+header a{
+  color: #7D106A;
 }
 #intro {
   padding: 15px;
@@ -15,7 +22,7 @@ header {
 }
 
 #nutrient_goals {
-  padding-left: 10px;
+  padding-left: 15px;
 }
 /*We are selecting the div child of the nutrient_goals parent.*/
 #nutrient_goals div {
@@ -44,8 +51,6 @@ header {
   */
   border: 1px solid black;
   border-radius: 0;
-  width: 233px;
-
 }
 .btn-group button{
   /*border: 1px solid black;
@@ -175,23 +180,31 @@ header {
 }
 td.food_name {
   font-weight: bold;
+
 }
-td span.quantity_unit{
+th{
+  width: 60px;
+}
+td div.quantity_unit{
   font-weight: normal;
   padding-left: 5px;
+
 }
 
 .food-name{
   font-weight: bold;
-  width: 20%;
-
 }
 
 .indent{
   padding-left: 5px
 }
 
-
+.more_button{
+  width: 54px;
+}
+.delete_button{
+  width: 54px;
+}
 }
 h2 {
   padding: 5px;
@@ -202,6 +215,7 @@ p {
 }
 th {
   padding: 5px;
+  width: 66px;
 }
 
 tr {
