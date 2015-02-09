@@ -13,10 +13,18 @@ header {
 header a{
   color: white;
 }
+
+.title {
+  float: left;
+}
+
 .nav-links{
   float: right;
   text-align: top;
 
+}
+.nav-links a:hover{
+  color: rgb(188, 163, 184);
 }
 #intro {
   padding: 15px;
@@ -254,11 +262,31 @@ h4 {
   
 }
 
-.background-image: linear-gradient(
+/*.background-image: linear-gradient(
   to right,#FF0000, #FF0000 {{
     100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())
     }}%,
   #FFFFFF {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] *4 /(( user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
     ; 
   border: 1px #000 solid;
+}*/
+
+/**
+ * Nicholas Gallagher clearfix
+ */
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ */
+.cf {
+    *zoom: 1;
 }
