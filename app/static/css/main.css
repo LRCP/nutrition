@@ -14,13 +14,13 @@ header a{
   color: white;
 }
 .nav-links{
-  float:right;
+  float: right;
   text-align: top;
 
 }
 #intro {
   padding: 15px;
-  text-align:justify;
+  text-align: justify;
 }
 
 #date{

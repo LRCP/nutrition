@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-<form method=post action="/food_log">
+<form method=post action="/food_log"></form>
 
 
 
@@ -11,7 +11,7 @@
 {# <div>
     Daily Caloric Needs: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
     Weekly Weight Change Goal in Kilograms: {{ user.weekly_weight_change }}
-    getter functions are attributes to be refer#7280DE to as user.get_....
+    getter functions are attributes to be referred to as user.get_....
     Change Calories: Daily {{ user.get_caloric_change_daily()|num_round()|int }} or Weekly: {{ user.get_caloric_change_weekly()|num_round()|int }}
     Body Mass Index: {{ user.get_body_mass_index()|num_round()|int }}
    
@@ -79,9 +79,9 @@
         {% endfor %}
 
         </select>
-        <input class="typeahead" type="text" name="food" requi#7280DE placeholder="  Food">
-        <input type="integer" name="quantity" id="quantity-input" requi#7280DE placeholder="Quantity">
-        <select id="units" name="unit" requi#7280DE></select>
+        <input class="typeahead" type="text" name="food" required placeholder="  Food">
+        <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
+        <select id="units" name="unit" required></select>
         <button type="submit" class="btn btn-default">Add</button>
 
     </form>
@@ -140,277 +140,5 @@
         {% endfor %}
     </table>
 </div>
-{# <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-2"><strong>FOOD</strong></div>
-        
-        <div class="col-xs-1"><strong>CALS</strong></div>
-        <div class="col-xs-1"><strong>PROT</strong></div>
-        <div class="col-xs-1"><strong>CARBS</strong></div>
-        <div class="col-xs-1"><strong>FATS</strong></div>
-        <div class="col-xs-1"></div>
-        <div class="col-xs-1"></div>
-    </div>
 
-    
-    {% for food_index, food in enumerate(food_nutrient_list) %}
-    <div class="row">
-        <div class="col-xs-2">
-            <div class="food-name">
-                {{food["name"]}}
-            </div>
-            <div class="quantity-unit">
-                {{food["quantity"]}} {{food["unit"]}}
-            </div> 
-        </div>
-        <div class="col-xs-1">{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}
-        </div> 
-        <div class="col-xs-1">
-            {{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}
-        </div>
-        <div class="col-xs-1">
-            {{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}  
-        </div>
-        <div class="col-xs-1">
-            {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}
-        </div> 
-        <div class="col-xs-1">
-            <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </button>
-        </div>
-        <div class="col-xs-1">
-            <a href="food_log/delete/{{food["id"]}}">
-                <button type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
-            </a>
-        </div>
-    </div>
-    
-
-
-
-     
-    <div class="collapse" id="Food-Details-{{food_index}}"> 
-        <p><h4>NUTRIENT BREAKDOWN FOR THE FOOD:</h4></p>
-        
-
-        <div class="row">
-            <div class="col-md-4">
-                {# {% set percentage = 
-                    food["nutrients"]["Calorie Information"]["Energy_KCAL"] / user.get_adjusted_daily_caloric_needs() * 100
-                    %} #}
-                <h3 style="
-                    background-image: linear-gradient(
-                        to right,
-                        #FF0000,
-                        #FF0000 {{food["nutrients"]["Calorie Information"]["Energy_KCAL"] / user.get_adjusted_daily_caloric_needs() * 100}}%,
-                        #FFFFFF {{food["nutrients"]["Calorie Information"]["Energy_KCAL"] / user.get_adjusted_daily_caloric_needs() * 100}}%
-                    ); 
-                    border: 1px #000 solid;")>Calories</h3>
-                {# {% endset %} #}
-                <div class="total">TOTAL: {{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round(0)}} cal</div>
-            
-                <div>From Protein: {{ ((food["nutrients"]["Protein & Amino Acids"][ "Protein"]) * 4)|num_round(0)}} cal</div>
-                <div class="value">From Carbs: {{(((food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]) - (food["nutrients"]["Carbohydrates"]["Fiber, total dietary"])) * 4)|num_round(0)}} cal</div>
-                <div class="value">From Fats: {{((food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]) * 9)|num_round(0)}} cal</div>
-            </div>
-
-            <div class="col-md-4">
-                <h3>Protein</h3>
-                {# <h3  style="background-image: linear-gradient(
-                        to right,
-                        #FF0000,
-                        #FF0000 {{100 * food["nutrients"]["Protein & Amino Acids"]["Protein"] * 4/ ((user.protein_goal / 100) *user.get_adjusted_daily_caloric_needs())}}%,
-                        #FFFFFF {{100 * food["nutrients"]"Protein & Amino Acids"]["Protein"] * 4/ ((user.protein_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
-                    ); 
-                    border: 1px #000 solid;"
-
-                >Protein</h3> #}
-                <div class="total">TOTAL: {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"]["Protein"]|num_round(0)}} g</div>
-                
-                <div>    
-                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Protein-Details-{{food_index}}">
-                    More Details
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-                </div>
-                <div id="Protein-Details-{{food_index}}" class="collapse">
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
-                    {% if index > 0 %}
-
-                    <div>
-                        {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]|num_round()}}
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-                        
-            </div>
-            
-                
-            
-
-            <div class="col-md-4">
-                <h3 style="background-image: linear-gradient(
-                        to right,
-                        #FF0000,
-                        #FF0000 {{100 * food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"] * 4/ ((user.carbohydrate_goal / 100) *user.get_adjusted_daily_caloric_needs())}}%,
-                        #FFFFFF {{100 * food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]  * 4/ ((user.carbohydrate_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
-                    ); 
-                    border: 1px #000 solid;"
-                >Carbohydrates</h3>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                {% if index == 0 %}
-                <div class="total">{{nutrient_name}}: {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round(0)}} g
-                </div>
-                {% endif %}
-
-                {% if 0 < index < 4 %}
-                <div>{{nutrient_name}}: {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
-                </div>
-                {% endif %}
-                {% endfor %}
-
-                <div>
-                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sugars-Details-{{food_index}}">
-                    More Details
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-                </div>
-                <div id="Sugars-Details-{{food_index}}" class="collapse">
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                    {% if index >= 4 %}
-                    <div>{{nutrient_name}}: {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>                           
-            </div>           
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h3 style="background-image: linear-gradient(
-                        to right,
-                        #FF0000,
-                        #FF0000 {{100 * food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"] * 9/ ((user.fat_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%,
-                        #FFFFFF {{100 * food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"] * 9/ ((user.fat_goal / 100) * user.get_adjusted_daily_caloric_needs())}}%
-                    ); 
-                    border: 1px #000 solid;"
-                >Fats</h3>
-                <div>
-                    <div> Total Fats: {{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round(0)}} g
-                    </div>
-                    <div class="total">Saturated</div>
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if 0 < index < 15 %}
-                    <div>{{nutrient_name}}: {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                    
-                    <div class="total">Monounsaturated</div>
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if 14 < index < 31 %}
-                    <div>{{nutrient_name}}: {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-
-                    
-                    <div class="total">Polyunsaturated</div>
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-                    {% if 31 < index < 56 %}
-                    <div>{{nutrient_name}}: {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                    
-
-
-                    <div class="total">Fatty Acids, total trans: {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans"]|num_round()}} g</div>
-                    <div class="total">Fatty acids, total trans-polyenoic: {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]|num_round()}} g</div>
-                    <div class="total">Fatty acids, total trans-polyenoic: {{food["nutrients"]["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"]|num_round()}} g</div>
-                    <div class="total">Fatty acids, total omega-3: {{food["nutrients"]["Fats & Fatty Acids"]["omega_3"]|num_round()}} g</div>
-                    <div class="total">Fatty acids, total omega-6: {{food["nutrients"]["Fats & Fatty Acids"]["omega_6"]|num_round()}} g</div>
-
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h3>Vitamins</h3>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Vitamins"]) %}
-                    
-                <div>{{nutrient_name}}: {{food["nutrients"]["Vitamins"][nutrient_name]|num_round()}} 
-                </div>
-                        
-                {% endfor %}
-                
-            </div>
-            <div class="col-md-4">
-                <h3>Minerals</h3>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Minerals"]) %}
-                    
-                <div>{{nutrient_name}}: {{food["nutrients"]["Minerals"][nutrient_name]|num_round()}}
-                </div>               
-                {% endfor %}
-                
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <h3>Sterols</h3>
-                
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-                {% if index < 1 %}
-                <div>
-                    {{nutrient_name}}: {{food["nutrients"]["Sterols"][nutrient_name]|num_round()}}
-                </div>
-                {% endif %}
-                {% endfor %}
-                
-                <div>
-                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Sterols-Details-{{food_index}}">
-                    More Details
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
-                </div>
-
-                <div id="Sterols-Details-{{food_index}}" class="collapse"> 
-                    {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
-                    {% if index >= 1 %}                
-                    <div>
-                        {{nutrient_name}}: {{food["nutrients"]["Sterols"][nutrient_name]|num_round()}}
-                    </div>
-                    {% endif %}
-                    {% endfor %}              
-                    {# <div>Stigmasterol 
-                        {{food["nutrients"]["Sterols"]["Stigmasterol"]}}
-                    </div>
-                    <div>Campesterol 
-                        {{food["nutrients"]["Sterols"]["Campesterol"]}}
-                    </div>
-                    <div>Beta-sitosterol 
-                        {{food["nutrients"]["Sterols"]["Beta-sitosterol"]}}
-                    </div> #}
-                </div>
-            </div>
-                       
-            <div class="col-md-4">
-                <h3>Other</h3>
-                {% for index, nutrient_name in enumerate(food["nutrients"]["Other"]) %}
-                    
-                <div>{{nutrient_name}}: {{food["nutrients"]["Other"][nutrient_name]|num_round()}}
-                </div>              
-                {% endfor %}
-            </div>          
-        </div>
-    </div>
-    {% endfor %} 
-
-</div>   
-</form>
 {% endblock %}
-#}
