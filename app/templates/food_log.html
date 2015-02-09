@@ -11,7 +11,7 @@
 {# <div>
     Daily Caloric Needs: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
     Weekly Weight Change Goal in Kilograms: {{ user.weekly_weight_change }}
-    getter functions are attributes to be referred to as user.get_....
+    getter functions are attributes to be refer#7280DE to as user.get_....
     Change Calories: Daily {{ user.get_caloric_change_daily()|num_round()|int }} or Weekly: {{ user.get_caloric_change_weekly()|num_round()|int }}
     Body Mass Index: {{ user.get_body_mass_index()|num_round()|int }}
    
@@ -26,22 +26,22 @@
 <div id="nutrient_goals">
     <span>Calories:</span>
     <div style="background-image: linear-gradient(
-        to right, red, red {{ calorie_percentage }}%, 
+        to right, #7280DE, #7280DE {{ calorie_percentage }}%, 
         white {{ calorie_percentage }}%);">
     </div>
     <span>Protein:</span>
     <div style="background-image: linear-gradient(
-        to right, red, red {{ protein_percentage }}%, 
+        to right, #7280DE, #7280DE {{ protein_percentage }}%, 
         white {{ protein_percentage }}%);">
     </div>
     <span>Carbs:</span>
     <div style="background-image: linear-gradient(
-        to right, red, red {{ carbohydrate_percentage }}%, 
+        to right, #7280DE, #7280DE {{ carbohydrate_percentage }}%, 
         white {{ carbohydrate_percentage }}%);">
     </div>
     <span>Fats:</span>
     <div style="background-image: linear-gradient(
-        to right, red, red {{ fat_percentage }}%, 
+        to right, #7280DE, #7280DE {{ fat_percentage }}%, 
         white {{ fat_percentage }}%);">
     </div>
     <span>More:</span>
@@ -79,9 +79,9 @@
         {% endfor %}
 
         </select>
-        <input class="typeahead" type="text" name="food" required placeholder="  Food">
-        <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
-        <select id="units" name="unit" required></select>
+        <input class="typeahead" type="text" name="food" requi#7280DE placeholder="  Food">
+        <input type="integer" name="quantity" id="quantity-input" requi#7280DE placeholder="Quantity">
+        <select id="units" name="unit" requi#7280DE></select>
         <button type="submit" class="btn btn-default">Add</button>
 
     </form>
@@ -96,6 +96,8 @@
     </span>
 </div>  #}
 {#can have multiple classes in one class separated by a space#}
+
+{# do I wrap the class="table" with <div class="table-responsive"></div> #}
 <div class="food-container">
     <table class="table">
         <tr>
@@ -138,7 +140,7 @@
         {% endfor %}
     </table>
 </div>
-<div class="container-fluid">
+{# <div class="container-fluid">
     <div class="row">
         <div class="col-xs-2"><strong>FOOD</strong></div>
         
@@ -408,6 +410,7 @@
     </div>
     {% endfor %} 
 
-</div>  
+</div>   
 </form>
 {% endblock %}
+#}

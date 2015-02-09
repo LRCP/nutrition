@@ -27,21 +27,23 @@
 
     </head>
     <body>
-        <header>Nutrition: 
-            {% if g.logged_in %}
-            <a href="/index">Home</a>
-            <a href="/profile">Profile</a>
-            <a href="/food_log">Foodlog</a>
-            <a href="/logout">Logout</a>
-            
-            {# <span id="login-logout">Welcome {{ user.username }}!</span> #}
+        <header>Nutrition
+            <div class="nav-links">
+                {% if g.logged_in %}
+                <a href="/index">Home</a>
+                <a href="/profile">Profile</a>
+                <a href="/food_log">Foodlog</a>
+                <a href="/logout">Logout</a>
                 
-            
-            {% else %}
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+                {# <span id="login-logout">Welcome {{ user.username }}!</span> #}
+                    
+                
+                {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
 
-            {% endif %}
+                {% endif %}
+            </div>
         </header>
         {# <p id="login-logout">Welcome {{ user.username }}!</p> #}
         

@@ -4,13 +4,19 @@
 
 header {
   padding: 15px;
-  background-color: #FFE054;
+  background-color: #7280DE;
   font-size: 16px;
   font-weight: bold;
+  color: white;
 
 }
 header a{
-  color: #7D106A;
+  color: white;
+}
+.nav-links{
+  float:right;
+  text-align: top;
+
 }
 #intro {
   padding: 15px;
