@@ -120,23 +120,25 @@
             <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
             <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}</td>
             <td class="more_button">
-                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}">
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </button>
             </td>
             <td class="delete_button">
+                {% if food["name"] != "Totals" %}
                 <a href="food_log/delete/{{food["id"]}}">
                     <button type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
-                </a> 
+                </a>
+                {% endif %} 
             </td>      
         </tr>
 
-        <div class="collapse" id="Food-Details-{{food_index}}">
+        <tr id="Food-Details-{{food_index}}" class="collapse" >
+            <td>Text</td>
+        </tr>
 
-
-        </div>
         {% endfor %}
     </table>
 </div>
