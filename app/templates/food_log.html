@@ -107,7 +107,7 @@
             <th>CARB</th>
             <th>FATS</th>
             <th>More</th>
-            <th>Delete</th>
+            <th>Delete</th>                                                                 
         </tr>
         {% for food_index, food in enumerate(food_nutrient_list) %}
         <tr>
@@ -135,9 +135,33 @@
             </td>      
         </tr>
 
-        <tr id="Food-Details-{{food_index}}" class="collapse" >
-            <td>Text</td>
-        </tr>
+      
+        <tr id="Food-Details-{{food_index}}" class="collapse">
+        
+        {# <tr>
+            <td colspan="1">Protein</td>
+            <td colspan="1">Histidine</td>
+            <td colspan="1">Leucine</td>
+            <td colspan="1">Lysine</td>
+            <td colspan="1">Methionine</td> 
+            <td colspan="1">Phenylalanine</td>
+            <td colspan="1">Tryptophan</td>
+            <td colspan="1">Threonine</td>  
+            <td colspan="1">Valine</td>      
+        </tr> #}
+            
+            <td>Protein</td>
+            <td>Histidine</td>
+            <td>Leucine</td>
+            <td>Lysine</td>
+            <td>Methionine</td>
+            <td>Phenylalanine</td>
+            <td>Tryptophan</td>
+            <td>Threonine</td>
+            <td>Valine</td>
+           
+        </tr>  
+        
 
         {% endfor %}
     </table>
