@@ -137,6 +137,50 @@
 
       
         <tr id="Food-Details-{{food_index}}" class="collapse">
+            <td colspan="7">
+                <div>
+                    <p>Protein</p>
+                    <p>Histidine</p>
+                    <p>Leucine</p>
+                    <p>Lysine</p>
+                    <p>Methionine</p>
+                    <p>Phenylalanine</p>
+                    <p>Tryptophan</p>
+                    <p>Threonine</p>
+                    <p>Valine</p>
+                    
+                </div>
+            </td>
+            {# <div>
+            <td colspan="4">
+                <div>Protein</div>
+            </td>
+            <td>
+                <div>Amount</div>
+            </td>
+            <td>
+                <div>Unit</div>
+            </td>
+            <td>
+                <div>Progress Bar</div>
+            </td>
+            </div>
+            <div>
+            <td colspan="4">
+                <div>Histidine</div>
+            <td>
+                <div>Amount</div>
+            </td>
+            <td>
+                <div>Unit</div>
+            </td>
+            <td>
+                <div>Progress Bar</div>
+            </td>
+            </div>
+
+ #}
+        </tr>
         
         {# <tr>
             <td colspan="1">Protein</td>
@@ -150,7 +194,7 @@
             <td colspan="1">Valine</td>      
         </tr> #}
             
-            <td>Protein</td>
+            {# <td>Protein</td>
             <td>Histidine</td>
             <td>Leucine</td>
             <td>Lysine</td>
@@ -159,10 +203,10 @@
             <td>Tryptophan</td>
             <td>Threonine</td>
             <td>Valine</td>
-           
-        </tr>  
+            </td>
         
-
+        
+ #}
         {% endfor %}
     </table>
 </div>
