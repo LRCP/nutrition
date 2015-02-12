@@ -79,6 +79,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nerv
 #Monounsaturated Fats Omega-9 Other:
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
+food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
 
 
 #Saturated Fats
@@ -117,7 +118,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadien
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 undifferentiated arachidonic"] = 620
 food_nutrient_dictionary["Fats & Fatty Acids"]["21:5"] = 857
 
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
+
 food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
 
 
