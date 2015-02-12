@@ -152,24 +152,40 @@
                             {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]|num_round()}}
                         </td>
                         {% endfor %}
-                    </tr>
-
-                    
-
+                   </tr>
+                        
                     <tr>
-                        <td><strong>SUGAR</strong></td> 
+                        <td><strong>CARBOHYDRATES</strong></td> 
                         <td>+ add more button</td>
                     </tr>
                     <tr>
-                        <td>Histidine</td>
-                        <td>Isoleucine</td>
-                        <td>Leucine</td>
+                        {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
+
+                        <td>
+                            {{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
+                        </td>
+                        {% endfor %}
+                   </tr>
+
+                   <tr>
+                        <td><strong>FATS</strong></td>
+                        <td>+ add more button</td>
                     </tr>
                     <tr>
-                        <td>Histidine</td>
-                        <td>Leucine</td>
-                        <td>Leucine</td>
-                    </tr>
+                        {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
+
+                        <td>
+                            {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                        </td>
+                        {% endfor %}
+                        <td>Total Omega 3</td>
+                        <td>Total Omega 6</td>
+                   </tr>
+
+
+
+                    
+                    
                     <tr>
                         <td>Histidine</td>
                         <td>Leucine</td>
