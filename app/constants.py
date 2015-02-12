@@ -95,7 +95,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-polyeno
 #greatest effect on increasing LDL cholesterol levels. Foudn in animal products
 #and tropical oils, including palm palm kernel and coconut.
 food_nutrient_dictionary["Protein & Amino Acids"]["Protein"] = 203
-food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
+#food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 food_nutrient_dictionary["Protein & Amino Acids"]["Tryptophan"] = 501
 food_nutrient_dictionary["Protein & Amino Acids"]["Threonine"] = 502
 food_nutrient_dictionary["Protein & Amino Acids"]["Isoleucine"] = 503
