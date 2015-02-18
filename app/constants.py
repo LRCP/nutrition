@@ -12,10 +12,13 @@ food_nutrient_dictionary = {
 }
 
 food_nutrient_dictionary["Calorie Information"]["Energy_KCAL"] = 208
+#First Level
 food_nutrient_dictionary["Carbohydrates"]["Carbohydrate, by difference"] = 205
+#Second Level
 food_nutrient_dictionary["Carbohydrates"]["Fiber, total dietary"] = 291
 food_nutrient_dictionary["Carbohydrates"]["Starch"] = 209
 food_nutrient_dictionary["Carbohydrates"]["Sugars, total"] = 269
+#Third Level
 food_nutrient_dictionary["Carbohydrates"]["Fructose"] = 212
 food_nutrient_dictionary["Carbohydrates"]["Galactose"] = 287
 food_nutrient_dictionary["Carbohydrates"]["Sucrose"] = 210
@@ -23,8 +26,9 @@ food_nutrient_dictionary["Carbohydrates"]["Glucose(dextrose)"] = 211
 food_nutrient_dictionary["Carbohydrates"]["Lactose"] = 213
 food_nutrient_dictionary["Carbohydrates"]["Maltose"] = 214
 
-
+#Level 1
 food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
+#Level 2
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total saturated"] = 606
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total monounsaturated"] = 645
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total polyunsaturated"] = 646
@@ -33,25 +37,34 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total polyunsaturat
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans"] = 605
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-monoenoic"] = 693 
 food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total trans-polyenoic"] = 695 #index 58
-
+#Level 2
 #Polyunsaturated Omega 3's
 food_nutrient_dictionary["Fats & Fatty Acids"]["22:6 n-3 docosahexaenoic (DHA)  cervonic"] = 621
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:5 n-3 eicosapentaenoic (EPA)  timnodonic"] = 629
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
+#Level 2 Polyunsaturated Omega-6
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 undifferentiated octadecadienoic"] = 618
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis  linoleic"] = 675
+food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
+#Level 2
+#Monounsaturated Fats Omega-9:
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
+food_nutrient_dictionary["Fats & Fatty Acids"]["20:1 eicosenoic  gadoleic"] = 628
+food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 undifferentiated docosenoic"] = 630
+food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 cis  erucic"] = 676
+food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nervonic"] = 671 #index 31
 
-#More Omega 3:
+
+#Level 3 More Polyunsaturated Omega 3's:
 
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-3 eicosatrienoic acid (ETE)"] = 852
 food_nutrient_dictionary["Fats & Fatty Acids"]["22:5 n-3 docosapentaenoic (DPA)  clupanodonic"] = 631
 
 
 
-#Polyunsaturated Omega-6
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 undifferentiated octadecadienoic"] = 618
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis  linoleic"] = 675
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
 
-#Polyunsaturated Other Omega-6
+#Level 3 Polyunsaturated Other Omega-6
 
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:2 n-6 cis,cis eicosadienoic"] = 672
@@ -68,14 +81,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i trans (mixed isomers)"] =
 
 
 
-#Monounsaturated Fats Omega-9:
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:1 eicosenoic  gadoleic"] = 628
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 undifferentiated docosenoic"] = 630
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 cis  erucic"] = 676
-food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nervonic"] = 671 #index 31
-
+#Level 3
 #Monounsaturated Fats Omega-9 Other:
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
@@ -83,7 +89,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
 
 
 #Saturated Fats
-#food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total saturated"] = 606
+#Level 4
 food_nutrient_dictionary["Fats & Fatty Acids"]["4:0 butanoic  butyric"] = 607
 food_nutrient_dictionary["Fats & Fatty Acids"]["6:0 hexanoic  caproic "] = 608
 food_nutrient_dictionary["Fats & Fatty Acids"]["8:0 octanoic  caprylic"] = 609
@@ -101,7 +107,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["24:0 tetracosanoic  lignoceric"]
 
 
 
-#Monounsaturated fats
+# Level 4 Monounsaturated fats
 food_nutrient_dictionary["Fats & Fatty Acids"]["14:1 tetradecenoic  myristoleic"] = 625
 food_nutrient_dictionary["Fats & Fatty Acids"]["15:1 pentadecenoic"] = 697
 food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 undifferentiated hexadecenoic palmitoleic"] = 626
@@ -111,7 +117,7 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["17:1 heptadecenoic"] = 687
 
 
 
-#More Polyunsaturated fats
+#Level 4 More Polyunsaturated fats
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 undifferentiated octadecatrienoic"] = 619
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:4 octadecatetraenoic  parinaric"] = 627
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadienoic"] = 689
@@ -177,14 +183,11 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
 
 #add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
 #and omega-6: linoleic(18:2), arachidonic(20:4).
-#linoleic acids are found in high concentrations in the oils of 
-#safflower, sunflower, corn, soybean, peanut oil. Canola oil is 29% linoleic.
-#and 12-16 carbon atoms: lauric acid, myristic acid and palmitic have the
-#greatest effect on increasing LDL cholesterol levels. Foudn in animal products
-#and tropical oils, including palm palm kernel and coconut.
+#Level 1
 food_nutrient_dictionary["Protein & Amino Acids"]["Protein"] = 203
 #food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 # 9 essential aminio acids
+#Level 2
 food_nutrient_dictionary["Protein & Amino Acids"]["Histidine"] = 512
 food_nutrient_dictionary["Protein & Amino Acids"]["Isoleucine"] = 503
 food_nutrient_dictionary["Protein & Amino Acids"]["Leucine"] = 504
@@ -197,6 +200,7 @@ food_nutrient_dictionary["Protein & Amino Acids"]["Valine"] = 510
 
 # Nonessential amino acids but should be consumed:
 #are there listings for asparagine?
+#Level 3
 food_nutrient_dictionary["Protein & Amino Acids"]["Alanine"] = 513
 food_nutrient_dictionary["Protein & Amino Acids"]["Aspartic acid"] = 514
 food_nutrient_dictionary["Protein & Amino Acids"]["Glutamic acid"] = 515
@@ -210,45 +214,85 @@ food_nutrient_dictionary["Protein & Amino Acids"]["Glycine"] = 516
 food_nutrient_dictionary["Protein & Amino Acids"]["Proline"] = 517
 food_nutrient_dictionary["Protein & Amino Acids"]["Serine"] = 518#
 
-#food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
+# food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
+     
 
+#Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin A, IU"] = 318
+#In plant foods, where individual carotenoids are not reported, 1 RAE = IU /20
+#In animal products, where individual caratenoids are not reported, 1 RAE = IU / 3.33
+#Level 1
+# 1 IU retinol = 0.3 mcg RAE
+# 1 IU beta-carotene from dietary supplements = 0.15 mcg RAE
+# 1 IU beta-carotene from food = 0.05 mcg RAE
+# 1 IU alpha-carotene or beta-cryptoxanthin = 0.025 mcg RAE
+
 food_nutrient_dictionary["Vitamins"]["Vitamin A, RAE"] = 320
+#1 RAE of Vitamin A = 1 mcg retinol, 12 mcg B-carotene, 24 mcg a carotene or 24 umcgB-cryptoxanthin
+#Level 3
 food_nutrient_dictionary["Vitamins"]["Retinol"] = 319
 food_nutrient_dictionary["Vitamins"]["Carotene, beta"] = 321
 food_nutrient_dictionary["Vitamins"]["Carotene, alpha"] = 322
 food_nutrient_dictionary["Vitamins"]["Cryptoxanthin, beta"] = 334
+#Level 2 Other carotenoids
 food_nutrient_dictionary["Vitamins"]["Lycopene"] = 337
 food_nutrient_dictionary["Vitamins"]["Lutein + Zeaxanthin"] = 338
+
+#Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin C, total ascorbic acid"] = 401
+#Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin D(D2 + D3)"] = 328
+#1 mcg Vitamin D =  Vitamin D1 + Vitamin D3
+food_nutrient_dictionary["Vitamins"]["Vitamin D"] = 324
+#1 IU Vitamin D = (Vitamin D2+ Vitamin D3) x 40
+
+#Level 3
 food_nutrient_dictionary["Vitamins"]["Vitamin D2(ergocalciforol)"] = 325
 food_nutrient_dictionary["Vitamins"]["Vitamin D3(cholecalciferol)"] = 326
-food_nutrient_dictionary["Vitamins"]["Vitamin D"] = 324
+
+
+
+#Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin E(alpha-tocopherol)"] = 323
 
 food_nutrient_dictionary["Vitamins"]["Vitamin E, added"] = 573
+
+
+#Level 3
 food_nutrient_dictionary["Vitamins"]["Tocopherol, beta"] = 341
 food_nutrient_dictionary["Vitamins"]["Tocopherol, gamma"] = 342
 food_nutrient_dictionary["Vitamins"]["Tocopherol, delta"] = 343
+
 food_nutrient_dictionary["Vitamins"]["Tocotrienol, alpha"] = 344
 food_nutrient_dictionary["Vitamins"]["Tocotrienol, beta"] = 345
 food_nutrient_dictionary["Vitamins"]["Tocotrienol, gamma"] = 346
 food_nutrient_dictionary["Vitamins"]["Tocotrienol, delta"] = 347
+
+#Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin K (phylloquinone)"] = 430
+#Level 3
 food_nutrient_dictionary["Vitamins"]["Dihydrophylloquinone"] = 429
 food_nutrient_dictionary["Vitamins"]["Menaquinone-4"] = 428
+# Level 2
 food_nutrient_dictionary["Vitamins"]["Vitamin B1(Thiamin)"] = 404
 food_nutrient_dictionary["Vitamins"]["Vitamin B2(Riboflavin)"] = 405
+#mg Niacin equivalents = mg niacin + (mg tryptophan / 60).
 food_nutrient_dictionary["Vitamins"]["Vitamin B3(Niacin)"] = 406
 food_nutrient_dictionary["Vitamins"]["Vitamin B5(Pantothenic Acid)"] = 410 
 food_nutrient_dictionary["Vitamins"]["Vitamin B-6(Pyridoxine)"] = 415
+
 food_nutrient_dictionary["Vitamins"]["Folate, total"] = 417
-food_nutrient_dictionary["Vitamins"]["Folic acid"] = 431
-food_nutrient_dictionary["Vitamins"]["Folate, food"] = 432
 food_nutrient_dictionary["Vitamins"]["Folate, DFE"] = 435
+food_nutrient_dictionary["Vitamins"]["Folate, food"] = 432
+
+#1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
+food_nutrient_dictionary["Vitamins"]["Folic acid"] = 431
+
+
+#Vitamin B-12 = 418 + 578
 food_nutrient_dictionary["Vitamins"]["Vitamin B-12(Cobalamin)"] = 418
 food_nutrient_dictionary["Vitamins"]["Vitamin B-12(Cobalamin), added"] = 578
+
 food_nutrient_dictionary["Vitamins"]["Choline, total"] = 421
 food_nutrient_dictionary["Vitamins"]["Betaine"] = 435
 
@@ -264,12 +308,14 @@ food_nutrient_dictionary["Minerals"]["Manganese, Mn"] = 315
 food_nutrient_dictionary["Minerals"]["Selenium, Se"] = 317
 food_nutrient_dictionary["Minerals"]["Flouride, F"] = 313
 
+#Level 2
 food_nutrient_dictionary["Sterols"]["Cholesterol"] = 601
 food_nutrient_dictionary["Sterols"]["Phytosterols"] = 636
+#Level 2
 food_nutrient_dictionary["Sterols"]["Stigmasterol"] = 638
 food_nutrient_dictionary["Sterols"]["Campesterol"] = 639
 food_nutrient_dictionary["Sterols"]["Beta-sitosterol"] = 641
-
+#Level 2
 food_nutrient_dictionary["Other"]["Water"] = 255
 food_nutrient_dictionary["Other"]["Alcohol, ethyl"] = 221
 food_nutrient_dictionary["Other"]["Caffeine"] = 262

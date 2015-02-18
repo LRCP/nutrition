@@ -2,7 +2,7 @@
 {% extends "base.html" %}
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
-<form method=post action="/food_log"></form>
+
 
 
 
@@ -52,7 +52,7 @@
 </div>
 
 <div class="food-body">
-    <form class="form-inline">
+    <form class="form-inline" method=post action="/food_log">
         <div class="btn-group" id="existing-dropdown">
                 <button type="button" class="dropdown-toggle btn btn-default" aria-expanded="false" data-toggle="dropdown">
                     Add Existing Meal, Snack or Food <span class="caret"></span>
@@ -140,78 +140,106 @@
             {#THIS IS ONE VARIATION: LINES 141-154#}
             <td  colspan="7">
                 <div id="Food-Details-{{food_index}}" class="collapse">
-                <table class="table">
-                    <tr>
-                        <td><strong>PROTEIN </strong></td>
-                        <td>+ add more button</td>
-                    </tr>
-                    <tr>
+                    <table class="table">
+                        <tr>
+                            <td><strong>PROTEIN </strong></td>
+                            <td>+ add more button</td>
+                        </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
-
-                        <td>
-                            {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]|num_round()}}
-                        </td>
-                        {% endfor %}
-                   </tr>
-                        
-                    <tr>
-                        <td><strong>CARBOHYDRATES</strong></td> 
-                        <td>+ add more button</td>
-                    </tr>
-                    <tr>
-                        {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-
-                        <td>
-                            {{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
-                        </td>
-                        {% endfor %}
-                   </tr>
-
-                   <tr>
-                        <td><strong>FATS</strong></td>
-                        <td>+ add more button</td>
-                    </tr>
-                    <tr>
-                        {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-
-                        <td>
-                            {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
-                        </td>
-                        {% endfor %}
-                        <td>Total Omega 3</td>
-                        <td>Total Omega 6</td>
-                   </tr>
-
-
-
-                    
-                    
-                    <tr>
-                        <td>Histidine</td>
-                        <td>Leucine</td>
-                        <td>Leucine</td>
-                    </tr>
-
-
-
-                        
-
-                        {# <div>
-                            <p>Protein</p>
-                            <p>Histidine</p>
-                            <p>Isoleucine</p>
-                            <p>Leucine</p>
-                            <p>Lysine</p>
-                            <p>Methionine</p>
-                            <p>Phenylalanine</p>
-                            <p>Tryptophan</p>
-                            <p>Threonine</p>
-                            <p>Valine</p>
+                        {% if index > 0 and index < 10%}
+                        {% if index % 4 == 1%}
+                        <tr>
+                        {% endif %}
                             
-                        </div> #}
-                    </tr>
-                </table>
-            </div>
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]|num_round()}}
+                            </td>
+                        {% if index % 4 == 1 %}
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                            
+                        <tr>
+                            <td><strong>CARBOHYDRATES</strong></td> 
+                            <td>+ add more button</td>
+                        </tr>
+                        <tr>
+                            {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
+                            {% if index > 0 and index < 4 %}
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
+                            </td>
+                            {% endif %}
+                            {% endfor %}
+                       </tr>
+
+                       <tr>
+                            <td><strong>FATS</strong></td>
+                            <td>+ add more button</td>
+                        </tr>
+                        {% for index, nutrient_name in enumerate
+                            (food["nutrients"]["Fats & Fatty Acids"]) %}
+                        {% if index > 0 and index < 19 %}
+                        {% if index % 4 == 1%}
+                        <tr>
+                        {% endif %}
+
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                            </td>
+                        {% if index % 4 == 1 %}
+
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+
+                        
+
+
+
+                            
+                        {% if index > 18 and index < 33 %}
+                        {% if index % 4 == 1%}
+                        <tr>
+                        {% endif %}
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                            </td>
+                        {% if index % 4 == 1 %}
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+
+                        {% if index > 32 %}
+                        {% if index % 4 == 1%}
+                        <tr>
+                        {% endif %}
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                            </td>
+                        {% if index % 4 == 1 %}
+                        </tr>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                        
+                        {# <tr>
+                            {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
+
+                            <td>
+                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                            </td>
+                            {% endfor %}
+                            <td>Total Omega 3</td>
+                            <td>Total Omega 6</td>
+                       </tr>
+     #}
+
+
+                    </table>
+                </div>
             </td>
             {#THIS IS A SECOND VARIATION: LINES 156-184#}
             {# <div>
