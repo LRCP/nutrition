@@ -132,57 +132,6 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
 
 
 
-
-
-
-
-
-
-#food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total monounsaturated"] = 645
-# food_nutrient_dictionary["Fats & Fatty Acids"]["14:1 tetradecenoic  myristoleic"] = 625
-# food_nutrient_dictionary["Fats & Fatty Acids"]["15:1 pentadecenoic"] = 697
-# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 undifferentiated hexadecenoic"] = 626
-# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 cis  palmitoleic"] = 673
-# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 trans"] = 662
-# food_nutrient_dictionary["Fats & Fatty Acids"]["17:1 heptadecenoic"] = 687
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:1 eicosenoic  gadoleic"] = 628
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 undifferentiated docosenoic"] = 630
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 cis  erucic"] = 676
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
-# food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nervonic"] = 671 #index 31
-
-#food_nutrient_dictionary["Fats & Fatty Acids"]["Fatty acids, total polyunsaturated"] = 646
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 undifferentiated octadecadienoic"] = 618
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans not further defined"] = 665
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 i (mixed isomers)"] = 666
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis  linoleic"] = 675
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans,trans"] = 669
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 congugated linoleic acid(CLAs)"] = 670
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 undifferentiated octadecatrienoic"] = 619
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 trans (other isomers)"] = 856
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i trans (mixed isomers)"] = 866
-# food_nutrient_dictionary["Fats & Fatty Acids"]["18:4 octadecatetraenoic  parinaric"] = 627
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:2 n-6 cis,cis eicosadienoic"] = 672
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadienoic"] = 689
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-3 eicosatrienoic acid (ETE)"] = 852
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-6 (DGLA) dihomo-gamma-linolenic acid"] = 853
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 undifferentiated arachidonic"] = 620
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
-# food_nutrient_dictionary["Fats & Fatty Acids"]["20:5 n-3 eicosapentaenoic (EPA)  timnodonic"] = 629
-# food_nutrient_dictionary["Fats & Fatty Acids"]["21:5"] = 857
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:5 n-3 docosapentaenoic (DPA)  clupanodonic"] = 631
-# food_nutrient_dictionary["Fats & Fatty Acids"]["22:6 n-3 docosahexaenoic (DHA)  cervonic"] = 621
-
-
-
-
 #add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
 #and omega-6: linoleic(18:2), arachidonic(20:4).
 #Level 1
@@ -216,7 +165,7 @@ food_nutrient_dictionary["Protein & Amino Acids"]["Glycine"] = 516
 food_nutrient_dictionary["Protein & Amino Acids"]["Proline"] = 517
 food_nutrient_dictionary["Protein & Amino Acids"]["Serine"] = 518#
 
-# food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
+food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
      
 
 #Level 1
