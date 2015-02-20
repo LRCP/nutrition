@@ -2,7 +2,7 @@ from app import app
 
 
 @app.template_filter('num_round')
-def num_round_filter(s, precision=2):
+def num_round_filter(s, precision=1):
     if s == 'N/A':
         return s
     elif precision == 0:
