@@ -38,13 +38,14 @@ food_nutrient_dictionary["Fats & Fatty Acids"]["Trans"] = 605
 food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Monoenoic"] = 693 
 food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Polyenoic"] = 695 #index 58
 #Level 2
-#Polyunsaturated Omega 3's
+#Polyunsaturated Omega 3/DHA, EPA's
 food_nutrient_dictionary["Fats & Fatty Acids"]["22:6 n-3 docosahexaenoic (DHA)  cervonic"] = 621
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:5 n-3 eicosapentaenoic (EPA)  timnodonic"] = 629
+#Polyunsaturated Omega-3/ALA
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
 #Level 2 Polyunsaturated Omega-6
 
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis  linoleic"] = 675
+food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis (LA)  linoleic"] = 675
 food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
 food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
 #Level 2
@@ -149,23 +150,31 @@ food_nutrient_dictionary["Protein & Amino Acids"]["Threonine"] = 502
 food_nutrient_dictionary["Protein & Amino Acids"]["Tryptophan"] = 501
 food_nutrient_dictionary["Protein & Amino Acids"]["Valine"] = 510
 
+#Conditional Amino Acids are only esssential in times of illness and stress:
+#is there one for glutamine,ornithine?
+food_nutrient_dictionary["Protein & Amino Acids"]["Arginine"] = 511
+food_nutrient_dictionary["Protein & Amino Acids"]["Cystine"] = 507
+#where is glutamine?
+food_nutrient_dictionary["Protein & Amino Acids"]["Glycine"] = 516
+food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
+food_nutrient_dictionary["Protein & Amino Acids"]["Proline"] = 517
+
+food_nutrient_dictionary["Protein & Amino Acids"]["Tyrosine"] = 509
+
+
 # Nonessential amino acids but should be consumed:
 #are there listings for asparagine?
 #Level 3
 food_nutrient_dictionary["Protein & Amino Acids"]["Alanine"] = 513
 food_nutrient_dictionary["Protein & Amino Acids"]["Aspartic acid"] = 514
+#where is asparagine?
 food_nutrient_dictionary["Protein & Amino Acids"]["Glutamic acid"] = 515
+food_nutrient_dictionary["Protein & Amino Acids"]["Serine"] = 518
 
-#Conditional Amino Acids are only esssential in times of illness and stress:
-#is there one for glutamine,ornithine?
-food_nutrient_dictionary["Protein & Amino Acids"]["Arginine"] = 511
-food_nutrient_dictionary["Protein & Amino Acids"]["Cystine"] = 507
-food_nutrient_dictionary["Protein & Amino Acids"]["Tyrosine"] = 509
-food_nutrient_dictionary["Protein & Amino Acids"]["Glycine"] = 516
-food_nutrient_dictionary["Protein & Amino Acids"]["Proline"] = 517
-food_nutrient_dictionary["Protein & Amino Acids"]["Serine"] = 518#
 
-food_nutrient_dictionary["Protein & Amino Acids"]["Hydroxyproline"] = 521
+
+
+
      
 
 #Level 1
