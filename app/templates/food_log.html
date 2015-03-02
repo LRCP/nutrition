@@ -4,21 +4,6 @@
 {% from "_formhelpers.html" import render_field %}
 
 
-
-
-
-{# <h2>Here is Your Personal Food Log Page!</h2> #}
-{# <div>
-    Daily Caloric Needs: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
-    Weekly Weight Change Goal in Kilograms: {{ user.weekly_weight_change }}
-    getter functions are attributes to be referred to as user.get_....
-    Change Calories: Daily {{ user.get_caloric_change_daily()|num_round()|int }} or Weekly: {{ user.get_caloric_change_weekly()|num_round()|int }}
-    Body Mass Index: {{ user.get_body_mass_index()|num_round()|int }}
-   
-
-
-</div> #}
-
 <div id="intro">
     Food Log For {{ user.username }}: Date: <input type="date" id="date">
 </div>
@@ -77,7 +62,7 @@
             {{ food_group.FdGrp_Desc }}
             </option>
 
-        {% endfor %}
+            {% endfor %}
 
         </select>
         <input class="typeahead" type="text" name="food" required placeholder="Food">
@@ -88,17 +73,7 @@
     </form>
 
 </div> 
-{# <div id="calorie_goals">
-    Calorie Goals: {{ user.get_adjusted_daily_caloric_needs()|num_round()|int }}
-    <span id="macro-nutrient-goals">Macro Nutrient Goals:
-        Protein: {{ user.protein_goal }}%
-        Carbohydrate: {{  user.carbohydrate_goal }}%
-        Fat: {{ user.fat_goal }}%
-    </span>
-</div>  #}
-{#can have multiple classes in one class separated by a space#}
 
-{# do I wrap the class="table" with <div class="table-responsive"></div> #}
 <div class="food-container">
     <table class="table">
         <tr>
@@ -142,7 +117,7 @@
         <tr>
             {#THIS IS ONE VARIATION: LINES 141-154#}
             <td  colspan="7">
-                <div id="Food-Details-{{food_index}}" class="collapse">
+                <div id="Food-Details-{{food_index}}" class="collapse food_details">
                     <table class="table">
                         <tr>
                             <td><strong>PROTEIN </strong></td>
@@ -150,18 +125,20 @@
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
                         {% if index > 0 and index < 10 %}
-                        {% if index % 3 == 1 %}
+                        
                         <tr>
-                        {% endif %}
+                        
                             
                             <td>
                                {{nutrient_name}} {{food["nutrients"]["Protein & Amino Acids"][nutrient_name]|num_round()}} g
                             </td>
-                        {% if index % 3 == 0 %}
+                        
                         </tr>
-                        {% endif %}
+                        
                         {% endif %}
                         {% endfor %}
+                    </table>
+                    <table class="table">
                             
                         <tr>
                             <td><strong>CARBOHYDRATES</strong></td> 
@@ -176,7 +153,8 @@
                             {% endif %}
                             {% endfor %}
                        </tr>
-
+                    </table>
+                    <table class="table">
                        <tr>
                             <td><strong>FATS</strong></td>
                             <td>+ add more button</td>
@@ -184,17 +162,18 @@
                         {% for index, nutrient_name in enumerate
                             (food["nutrients"]["Fats & Fatty Acids"]) %}
                         {% if index > 0 and index < 7 %}
-                        {% if index % 3 == 1%}
+                        
                         <tr>
-                        {% endif %}
+                       
 
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
                             </td>
-                        {% if index % 3 == 0 %}
+                        
 
                         </tr>
-                        {% endif %}
+
+                        
                         {% endif %}
 
                         
@@ -226,6 +205,8 @@
                         {% endif %}
                         {% endif %} #}
                         {% endfor %}
+                    </table>
+                    <table class="table">
                         <tr>
                             <td><strong>Vitamins </strong></td>
                             <td>+ add more button</td>
@@ -239,61 +220,54 @@
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Vitamins"][nutrient_name]|num_round()}}
                             </td>
-                        {% if index % 3 == 2 %}
+                        
                         </tr>
-                        {% endif %}
+                       
                         {% endif %}
                         {% endfor %}
-
-                        
-                        {# <tr>
-                            {% for index, nutrient_name in enumerate(food["nutrients"]["Fats & Fatty Acids"]) %}
-
-                            <td>
-                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
-                            </td>
-                            {% endfor %}
-                            <td>Total Omega 3</td>
-                            <td>Total Omega 6</td>
-                       </tr>
-     #}
-                        
+    
+                    </table>
+                    <table class="table">
                         <tr>
                             <td><strong>Minerals </strong></td>
                             <td>+ add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Minerals"]) %}
                         {% if index >= 0 and index < 12 %}
-                        {% if index % 3 == 0 %}
+                        
                         <tr>
-                        {% endif %}
+                        
                             
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Minerals"][nutrient_name]|num_round()}}
                             </td>
-                        {% if index % 3 == 2 %}
+                        
                         </tr>
-                        {% endif %}
+                       
                         {% endif %}
                         {% endfor %}
+                    </table>
+                    <table class="table">
                         <tr>
                             <td><strong>Sterols</strong></td>
                             <td>+ add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
                         {% if index >= 0 and index < 2%}
-                        {% if index % 3 == 0%}
+                        
                         <tr>
-                        {% endif %}
+                       
                             
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Sterols"][nutrient_name]|num_round()}}
                             </td>
-                        {% if index % 3 == 2%}
+                        
                         </tr>
-                        {% endif %}
+                   
                         {% endif %}
                         {% endfor %}
+                    </table>
+                    <table class="table">
                         <tr>
                             <td><strong>Other</strong></td>
                             <td>+ add more button</td>
@@ -307,73 +281,18 @@
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Other"][nutrient_name]|num_round()}}
                             </td>
-                        {% if index % 3 == 2 %}
+                        
                         </tr>
-                        {% endif %}
+                       
                         {% endif %}
                         {% endfor %}
 
                     </table>
                 </div>
             </td>
-            {#THIS IS A SECOND VARIATION: LINES 156-184#}
-            {# <div>
-            <td colspan="4">
-                <div>Protein</div>
-            </td>
-            <td>
-                <div>Amount</div>
-            </td>
-            <td>
-                <div>Unit</div>
-            </td>
-            <td>
-                <div>Progress Bar</div>
-            </td>
-            </div>
-            <div>
-            <td colspan="4">
-                <div>Histidine</div>
-            <td>
-                <div>Amount</div>
-            </td>
-            <td>
-                <div>Unit</div>
-            </td>
-            <td>
-                <div>Progress Bar</div>
-            </td>
-            </div>
-
- #}
-        </tr>
-        {#HERE IS A THIRD VARIATION LINES 187-208#}
-        {# <tr>
-            <td colspan="1">Protein</td>
-            <td colspan="1">Histidine</td>
-            <td colspan="1">Leucine</td>
-            <td colspan="1">Lysine</td>
-            <td colspan="1">Methionine</td> 
-            <td colspan="1">Phenylalanine</td>
-            <td colspan="1">Tryptophan</td>
-            <td colspan="1">Threonine</td>  
-            <td colspan="1">Valine</td>      
-        </tr> #}
             
-            {# <td>Protein</td>
-            <td>Histidine</td>
-            <td>Leucine</td>
-            <td>Lysine</td>
-            <td>Methionine</td>
-            <td>Phenylalanine</td>
-            <td>Tryptophan</td>
-            <td>Threonine</td>
-            <td>Valine</td>
-            </td>
+        </tr>
         
-        
- #}
-
 
         {% endfor %}
     </table>

@@ -191,6 +191,14 @@ header a{
 }
 .food-container{
   padding: 15px;
+  
+}
+
+/*Only need to pull one class name within the quotes*/
+.food_details{
+  columns: 320px;
+ -webkit-columns: 320px;
+ -moz-columns: 320px;
 }
 td.food_name {
   font-weight: bold;
