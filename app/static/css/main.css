@@ -200,6 +200,11 @@ header a{
  -webkit-columns: 320px;
  -moz-columns: 320px;
 }
+.food_details table{
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
 td.food_name {
   font-weight: bold;
 

@@ -120,8 +120,8 @@
                 <div id="Food-Details-{{food_index}}" class="collapse food_details">
                     <table class="table">
                         <tr>
-                            <td><strong>PROTEIN </strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>PROTEIN </strong>
+                            + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Protein & Amino Acids"]) %}
                         {% if index > 0 and index < 10 %}
@@ -141,23 +141,26 @@
                     <table class="table">
                             
                         <tr>
-                            <td><strong>CARBOHYDRATES</strong></td> 
-                            <td>+ add more button</td>
+                            <td><strong>CARBOHYDRATES</strong>
+                            + add more button</td>
                         </tr>
+                        
+                        {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
+                        {% if index > 0 and index < 4 %}
                         <tr>
-                            {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                            {% if index > 0 and index < 4 %}
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
                             </td>
-                            {% endif %}
-                            {% endfor %}
-                       </tr>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+
+                       
                     </table>
                     <table class="table">
                        <tr>
-                            <td><strong>FATS</strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>FATS</strong>
+                            + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate
                             (food["nutrients"]["Fats & Fatty Acids"]) %}
@@ -208,8 +211,8 @@
                     </table>
                     <table class="table">
                         <tr>
-                            <td><strong>Vitamins </strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>Vitamins </strong>
+                           + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Vitamins"]) %}
                         {% if index >= 0 and index < 16%}
@@ -229,8 +232,8 @@
                     </table>
                     <table class="table">
                         <tr>
-                            <td><strong>Minerals </strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>Minerals </strong>
+                            + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Minerals"]) %}
                         {% if index >= 0 and index < 12 %}
@@ -249,8 +252,8 @@
                     </table>
                     <table class="table">
                         <tr>
-                            <td><strong>Sterols</strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>Sterols</strong>
+                            + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Sterols"]) %}
                         {% if index >= 0 and index < 2%}
@@ -269,8 +272,8 @@
                     </table>
                     <table class="table">
                         <tr>
-                            <td><strong>Other</strong></td>
-                            <td>+ add more button</td>
+                            <td><strong>Other</strong>
+                            + add more button</td>
                         </tr>
                         {% for index, nutrient_name in enumerate(food["nutrients"]["Other"]) %}
                         {% if index >= 0 and index < 6 %}
