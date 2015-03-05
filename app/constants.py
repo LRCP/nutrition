@@ -298,22 +298,24 @@ food_nutrient_dictionary_new = {
     "Fats & Fatty Acids": OrderedDict(),
 }
 
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Total lipid (fat)"] = (204, OrderedDict())
 #Level 2
-#Create a nested Ordered Dictionary within the first Ordered Dictionary of Saturated.
+#Create a nested Ordered Dictionary within the first Ordered Dictionary of Saturated Fats.
 #We do so by having it be the second argument to the key Saturated.
-#To reach the first Saturated fat is actually the secon in the list of Saturated,
+#To reach the first Saturated fat is actually the second in the list of Saturated,
 #the first or 0 index being the 606.
+#The ndb no of the satuated fats is the first item of the tuple.
+#The subitems of the saturated fats in the OrderedDict is the second part of the tuple.
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"] = (606, OrderedDict())
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["4:0 butanoic  butyric"] = 607
 
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"] = 645
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"] = 646
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"] = (645, OrderedDict())
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"] = (646, OrderedDict())
 
 
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans"] = 605
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Monoenoic"] = 693 
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Polyenoic"] = 695 #index 58
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans"] = (605, OrderedDict())
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Monoenoic"] = (693, OrderedDict())
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Polyenoic"] = (695, OrderedDict())
 
 
 

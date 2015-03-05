@@ -11,7 +11,7 @@ from app.models.food_log_food_association import FoodLogFoodAssociation
 from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.usda import FoodDescription, FoodGroupDescription, Weight
 from app.models.usda import NutrientData
-from app.constants import food_nutrient_dictionary
+from app.constants import food_nutrient_dictionary, food_nutrient_dictionary_new
 from app.models.favorite_association import FavoriteAssociation
 
 def get_food_log(user):
@@ -80,16 +80,38 @@ def food_log_get():
 
         nutrient_dict = copy.deepcopy(food_nutrient_dictionary)
         for category_name, category in food_nutrient_dictionary.iteritems():
-            for nutrient_name, nutrient_number in category.iteritems():
-                nutrient_number = str(nutrient_number)
-                try:
-                    value = next(x.Nutr_Val for x in nutrients
-                                 if x.Nutr_No == nutrient_number)
-                    value = (float(value) * association.quantity *
-                             float(unit.Gm_Wgt) / 100)
-                except StopIteration:
-                    value = "N/A"
-                nutrient_dict[category_name][nutrient_name] = value
+            if category_name == "Fats & Fatty Acids":
+                category = food_nutrient_dictionary_new[category_name]
+                for nutrient_name, nutrient_tuple in category.iteritems():
+                    #to reach the desired saturated fat, must loop through the
+                    #the tuple, which is a string, by indices.
+                    #Since we are already in the ordered Dictionary, we want the
+                    #first item reached by index [0].
+                   
+                    nutrient_number = str(nutrient_tuple[0])
+                    try:
+                        value = next(x.Nutr_Val for x in nutrients
+                                     if x.Nutr_No == nutrient_number)
+                        value = (float(value) * association.quantity *
+                                 float(unit.Gm_Wgt) / 100)
+                    except StopIteration:
+                        value = "N/A"     
+                    #puts the value into the nutrient_dict
+                    nutrient_dict[category_name][nutrient_name] = value
+                    for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
+                        print subnutrient_name, subnutrient_number
+
+            else:
+                for nutrient_name, nutrient_number in category.iteritems():
+                    nutrient_number = str(nutrient_number)
+                    try:
+                        value = next(x.Nutr_Val for x in nutrients
+                                     if x.Nutr_No == nutrient_number)
+                        value = (float(value) * association.quantity *
+                                 float(unit.Gm_Wgt) / 100)
+                    except StopIteration:
+                        value = "N/A"
+                    nutrient_dict[category_name][nutrient_name] = value
 
         # Post-process the list to add some extra nutrients
         ffa = nutrient_dict["Fats & Fatty Acids"]
@@ -127,39 +149,7 @@ def food_log_get():
             "unit": unit.Msre_Desc,
         })
 
-    foods = []
-    for association in food_log.foods:
-        ndb = association.food_NDB_No
-        seq = association.unit_Seq
-
-        food = session.query(FoodDescription).get(ndb)
-        unit = session.query(Weight).filter_by(NDB_No=ndb, Seq=seq).first()
-
-        nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
-        units = session.query(Weight).filter_by(NDB_No=ndb).all()
-
-        #make a copy of the nutrient dictionary as it has been relabeled.
-        nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
-        #the new dictionary now contains a tuple, rather than a simple nutrient number.
-        for category_name, category in food_nutrient_dictionary.iteritems():
-            #the food_nutrient_dictionary_new is now a tuple
-            #composed of a nutrient number an OrderedDict().
-                       for nutrient_name, nutrient_tuple in category.iteritems():
-                #to reach the desired saturated fat, must loop through the
-                #the tuple, which is a string, by indices.
-                #Since we are already in the ordered Dictionary, we want the
-                #first item reached by index [0].
-                nutrient_number = str(nutrient_tuple[0])
-                try:
-                    value = next(x.Nutr_Val for x in nutrients
-                                 if x.Nutr_No == nutrient_number)
-                    value = (float(value) * association.quantity *
-                             float(unit.Gm_Wgt) / 100)
-                except StopIteration:
-                    value = "N/A"
-                nutrient_dict[category_name][nutrient_name] = value
-
-
+    
     # Total the number of nutrients consumed
     totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(float))
     for food in foods:
