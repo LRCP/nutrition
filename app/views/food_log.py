@@ -33,6 +33,21 @@ def sum_nutrients(nutrient_keys, nutrient_dictionary):
         total = total + nutrient_dictionary[key]
     return total
 
+def nutrient_number_to_quantity(nutrients, nutrient_number, association, units):
+    #consider passing quantity and weight instead of association and unit.
+    try:
+        value = next(x.Nutr_Val for x in nutrients
+            if x.Nutr_No == nutrient_number)
+        value = (float(value) * association.quantity *
+            float(unit.Gm_Wgt) / 100)
+    except StopIteration:
+        value = "N/A"     
+            #puts the value into the nutrient_dict
+    #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
+    return value
+   
+
+
 
 @app.route('/food_log', methods=['GET'])
 @login_required
@@ -79,15 +94,16 @@ def food_log_get():
 
 
         nutrient_dict = copy.deepcopy(food_nutrient_dictionary)
+        #nutrient_dict contains a category_name mapped to a dictionary
+        #containing the nutrient_numbers.
         for category_name, category in food_nutrient_dictionary.iteritems():
+            #hack
             if category_name == "Fats & Fatty Acids":
+                #the category, which is a dictionary maps the name of a nutrient to 
+                #a tuple that contains the nutrient_number plus a dictionary of 
+                #subnutrients.
                 category = food_nutrient_dictionary_new[category_name]
                 for nutrient_name, nutrient_tuple in category.iteritems():
-                    #to reach the desired saturated fat, must loop through the
-                    #the tuple, which is a string, by indices.
-                    #Since we are already in the ordered Dictionary, we want the
-                    #first item reached by index [0].
-                   
                     nutrient_number = str(nutrient_tuple[0])
                     try:
                         value = next(x.Nutr_Val for x in nutrients
@@ -98,6 +114,7 @@ def food_log_get():
                         value = "N/A"     
                     #puts the value into the nutrient_dict
                     nutrient_dict[category_name][nutrient_name] = value
+                    #loop throught the subnutrients to get the name and number.
                     for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
                         print subnutrient_name, subnutrient_number
 
