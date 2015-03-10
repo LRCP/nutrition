@@ -95,7 +95,7 @@
             <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>
             <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}</td>
             <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
-            <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]|num_round()}}</td>
+            <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]|num_round()}}</td>
             <td>{{food["nutrients"]["Other"]["Water"]|num_round()}}</td>
             <td class="more_button">
                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
@@ -164,20 +164,20 @@
                         </tr>
                         {% for index, nutrient_name in enumerate
                             (food["nutrients"]["Fats & Fatty Acids"]) %}
-                        {% if index > 0 and index < 7 %}
+                        
                         
                         <tr>
                        
 
                             <td>
-                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name]|num_round()}} g
+                                {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name][0]|num_round()}} g
                             </td>
                         
 
                         </tr>
 
                         
-                        {% endif %}
+                       
 
                         
 

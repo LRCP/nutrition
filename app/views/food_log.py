@@ -1,6 +1,6 @@
 import json
 import copy
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 from flask import redirect, url_for, render_template, request
 from flask.ext.login import login_required, current_user
@@ -33,7 +33,7 @@ def sum_nutrients(nutrient_keys, nutrient_dictionary):
         total = total + nutrient_dictionary[key]
     return total
 
-def nutrient_number_to_quantity(nutrients, nutrient_number, association, units):
+def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
     #consider passing quantity and weight instead of association and unit.
     try:
         value = next(x.Nutr_Val for x in nutrients
@@ -105,58 +105,56 @@ def food_log_get():
                 category = food_nutrient_dictionary_new[category_name]
                 for nutrient_name, nutrient_tuple in category.iteritems():
                     nutrient_number = str(nutrient_tuple[0])
-                    try:
-                        value = next(x.Nutr_Val for x in nutrients
-                                     if x.Nutr_No == nutrient_number)
-                        value = (float(value) * association.quantity *
-                                 float(unit.Gm_Wgt) / 100)
-                    except StopIteration:
-                        value = "N/A"     
+                    value = nutrient_number_to_quantity(
+                        nutrients, nutrient_number, association, unit
+                        )
                     #puts the value into the nutrient_dict
-                    nutrient_dict[category_name][nutrient_name] = value
+                    nutrient_dict[category_name][nutrient_name] = (value, OrderedDict())
                     #loop throught the subnutrients to get the name and number.
                     for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
-                        print subnutrient_name, subnutrient_number
+                        value = nutrient_number_to_quantity(
+                        nutrients, subnutrient_number, association, unit
+                        )
+                        # to access the value of OrderedDict
+                        nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
+
+                        print subnutrient_name, value
 
             else:
                 for nutrient_name, nutrient_number in category.iteritems():
                     nutrient_number = str(nutrient_number)
-                    try:
-                        value = next(x.Nutr_Val for x in nutrients
-                                     if x.Nutr_No == nutrient_number)
-                        value = (float(value) * association.quantity *
-                                 float(unit.Gm_Wgt) / 100)
-                    except StopIteration:
-                        value = "N/A"
+                    value = nutrient_number_to_quantity(
+                        nutrients, nutrient_number, association, unit
+                        )
                     nutrient_dict[category_name][nutrient_name] = value
 
         # Post-process the list to add some extra nutrients
-        ffa = nutrient_dict["Fats & Fatty Acids"]
-        omega_3_keys_ALA = [
-            "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"
-            ]
-            #"20:3 n-3 eicosatrienoic acid (ETE)",
-            #"20:4 undifferentiated arachidonic",
-        omega_3_keys_EPA_DHA = [
-            "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
-            #"22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
-            "22:6 n-3 docosahexaenoic (DHA)  cervonic"
-            ]
+        # ffa = nutrient_dict["Fats & Fatty Acids"]
+        # omega_3_keys_ALA = [
+        #     "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"
+        #     ]
+        #     #"20:3 n-3 eicosatrienoic acid (ETE)",
+        #     #"20:4 undifferentiated arachidonic",
+        # omega_3_keys_EPA_DHA = [
+        #     "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
+        #     #"22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
+        #     "22:6 n-3 docosahexaenoic (DHA)  cervonic"
+        #     ]
 
-        ffa["omega_3_ALA"] = sum_nutrients(omega_3_keys_ALA, ffa)
-        ffa["omega_3_keys_EPA_DHA"] = sum_nutrients(omega_3_keys_EPA_DHA, ffa)
+        # ffa["omega_3_ALA"] = sum_nutrients(omega_3_keys_ALA, ffa)
+        # ffa["omega_3_keys_EPA_DHA"] = sum_nutrients(omega_3_keys_EPA_DHA, ffa)
 
-        omega_6_keys = [
-            "18:2 n-6 cis,cis (LA)  linoleic",
-            "18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
-            #"20:2 n-6 cis,cis eicosadienoic",
-            #"20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
-            "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
-        ]
+        # omega_6_keys = [
+        #     "18:2 n-6 cis,cis (LA)  linoleic",
+        #     "18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
+        #     #"20:2 n-6 cis,cis eicosadienoic",
+        #     #"20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
+        #     "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
+        # ]
 
         
 
-        ffa["omega_6"] = sum_nutrients(omega_6_keys, ffa)
+        # ffa["omega_6"] = sum_nutrients(omega_6_keys, ffa)
 
         foods.append({
             "name": food.Long_Desc,
@@ -175,7 +173,7 @@ def food_log_get():
             for nutrient_name, nutrient_value in category.iteritems():
                 if nutrient_value == "N/A":
                     continue
-                totals[category_name][nutrient_name] += nutrient_value
+                #totals[category_name][nutrient_name] += nutrient_value
 
     foods.append({
         "name": "Totals",

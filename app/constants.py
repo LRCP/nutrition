@@ -28,114 +28,114 @@ food_nutrient_dictionary["Carbohydrates"]["Lactose"] = 213
 food_nutrient_dictionary["Carbohydrates"]["Maltose"] = 214
 
 #Level 1
-food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
-#Level 2
-food_nutrient_dictionary["Fats & Fatty Acids"]["Saturated"] = 606
-food_nutrient_dictionary["Fats & Fatty Acids"]["Monounsaturated"] = 645
-food_nutrient_dictionary["Fats & Fatty Acids"]["Polyunsaturated"] = 646
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
+# #Level 2
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Saturated"] = 606
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Monounsaturated"] = 645
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Polyunsaturated"] = 646
 
 
-food_nutrient_dictionary["Fats & Fatty Acids"]["Trans"] = 605
-food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Monoenoic"] = 693 
-food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Polyenoic"] = 695 #index 58
-#Level 2
-#Polyunsaturated Omega 3/DHA, EPA's
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:6 n-3 docosahexaenoic (DHA)  cervonic"] = 621
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:5 n-3 eicosapentaenoic (EPA)  timnodonic"] = 629
-#Polyunsaturated Omega-3/ALA
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
-#Level 2 Polyunsaturated Omega-6
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Trans"] = 605
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Monoenoic"] = 693 
+# food_nutrient_dictionary["Fats & Fatty Acids"]["Trans-Polyenoic"] = 695 #index 58
+# #Level 2
+# #Polyunsaturated Omega 3/DHA, EPA's
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:6 n-3 docosahexaenoic (DHA)  cervonic"] = 621
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:5 n-3 eicosapentaenoic (EPA)  timnodonic"] = 629
+# #Polyunsaturated Omega-3/ALA
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"] = 851
+# #Level 2 Polyunsaturated Omega-6
 
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis (LA)  linoleic"] = 675
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
-#Level 2
-#Monounsaturated Fats Omega-9:
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:1 eicosenoic  gadoleic"] = 628
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 undifferentiated docosenoic"] = 630
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 cis  erucic"] = 676
-food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nervonic"] = 671 #index 31
-
-
-#Level 3 More Polyunsaturated Omega 3's:
-
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-3 eicosatrienoic acid (ETE)"] = 852
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:5 n-3 docosapentaenoic (DPA)  clupanodonic"] = 631
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 n-6 cis,cis (LA)  linoleic"] = 675
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 n-6 eicosatetraenoic (AA)  arachidonic"] = 855
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic"] = 685
+# #Level 2
+# #Monounsaturated Fats Omega-9:
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 undifferentiated octadecenoic  oleic"] = 617
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 cis  oleic"] = 674
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:1 eicosenoic  gadoleic"] = 628
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 undifferentiated docosenoic"] = 630
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 cis  erucic"] = 676
+# food_nutrient_dictionary["Fats & Fatty Acids"]["24:1 cis cis-tetracosenoic  nervonic"] = 671 #index 31
 
 
+# #Level 3 More Polyunsaturated Omega 3's:
 
-
-#Level 3 Polyunsaturated Other Omega-6
-
-
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:2 n-6 cis,cis eicosadienoic"] = 672
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-6 (DGLA) dihomo-gamma-linolenic acid"] = 853
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 undifferentiated octadecadienoic"] = 618
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans not further defined"] = 665
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 i (mixed isomers)"] = 666
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans,trans"] = 669
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 congugated linoleic acid(CLAs)"] = 670
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 trans (other isomers)"] = 856
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i trans (mixed isomers)"] = 866
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-3 eicosatrienoic acid (ETE)"] = 852
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:5 n-3 docosapentaenoic (DPA)  clupanodonic"] = 631
 
 
 
 
+# #Level 3 Polyunsaturated Other Omega-6
 
 
-#Level 3
-#Monounsaturated Fats Omega-9 Other:
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
-
-
-#Saturated Fats
-#Level 4
-food_nutrient_dictionary["Fats & Fatty Acids"]["4:0 butanoic  butyric"] = 607
-food_nutrient_dictionary["Fats & Fatty Acids"]["6:0 hexanoic  caproic "] = 608
-food_nutrient_dictionary["Fats & Fatty Acids"]["8:0 octanoic  caprylic"] = 609
-food_nutrient_dictionary["Fats & Fatty Acids"]["10:0 decanoic  capric"] =  610
-food_nutrient_dictionary["Fats & Fatty Acids"]["12:0 dodecanoic  lauric"] = 611
-food_nutrient_dictionary["Fats & Fatty Acids"]["13:0 tridecanoic"] = 696
-food_nutrient_dictionary["Fats & Fatty Acids"]["14:0 tetradecanoic  myristic"] = 612
-food_nutrient_dictionary["Fats & Fatty Acids"]["15:0 pentadecanoic"] = 652
-food_nutrient_dictionary["Fats & Fatty Acids"]["16:0 hexadecanoic  palmitic"] = 613
-food_nutrient_dictionary["Fats & Fatty Acids"]["17:0 heptadecanoic  margaric"] = 653
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:0 octadecanoic  stearic"] = 614
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:0 eicosanoic  arachidic"] = 615
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:0 docosanoic  behenic"] = 624
-food_nutrient_dictionary["Fats & Fatty Acids"]["24:0 tetracosanoic  lignoceric"] = 654 #index 15
-
-
-
-# Level 4 Monounsaturated fats
-food_nutrient_dictionary["Fats & Fatty Acids"]["14:1 tetradecenoic  myristoleic"] = 625
-food_nutrient_dictionary["Fats & Fatty Acids"]["15:1 pentadecenoic"] = 697
-food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 undifferentiated hexadecenoic palmitoleic"] = 626
-food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 cis  palmitoleic"] = 673
-food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 trans"] = 662
-food_nutrient_dictionary["Fats & Fatty Acids"]["17:1 heptadecenoic"] = 687
-
-
-
-#Level 4 More Polyunsaturated fats
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 undifferentiated octadecatrienoic"] = 619
-food_nutrient_dictionary["Fats & Fatty Acids"]["18:4 octadecatetraenoic  parinaric"] = 627
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadienoic"] = 689
-food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 undifferentiated arachidonic"] = 620
-food_nutrient_dictionary["Fats & Fatty Acids"]["21:5"] = 857
-
-
-food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:2 n-6 cis,cis eicosadienoic"] = 672
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 n-6 (DGLA) dihomo-gamma-linolenic acid"] = 853
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 undifferentiated octadecadienoic"] = 618
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans not further defined"] = 665
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 i (mixed isomers)"] = 666
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 trans,trans"] = 669
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:2 congugated linoleic acid(CLAs)"] = 670
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 trans (other isomers)"] = 856
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 i trans (mixed isomers)"] = 866
 
 
 
 
-#add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
-#and omega-6: linoleic(18:2), arachidonic(20:4).
+
+
+# #Level 3
+# #Monounsaturated Fats Omega-9 Other:
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1 trans"] = 663
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:1-11t(18:1t n-7)"] = 859
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:1 trans"] = 664
+
+
+# #Saturated Fats
+# #Level 4
+# food_nutrient_dictionary["Fats & Fatty Acids"]["4:0 butanoic  butyric"] = 607
+# food_nutrient_dictionary["Fats & Fatty Acids"]["6:0 hexanoic  caproic "] = 608
+# food_nutrient_dictionary["Fats & Fatty Acids"]["8:0 octanoic  caprylic"] = 609
+# food_nutrient_dictionary["Fats & Fatty Acids"]["10:0 decanoic  capric"] =  610
+# food_nutrient_dictionary["Fats & Fatty Acids"]["12:0 dodecanoic  lauric"] = 611
+# food_nutrient_dictionary["Fats & Fatty Acids"]["13:0 tridecanoic"] = 696
+# food_nutrient_dictionary["Fats & Fatty Acids"]["14:0 tetradecanoic  myristic"] = 612
+# food_nutrient_dictionary["Fats & Fatty Acids"]["15:0 pentadecanoic"] = 652
+# food_nutrient_dictionary["Fats & Fatty Acids"]["16:0 hexadecanoic  palmitic"] = 613
+# food_nutrient_dictionary["Fats & Fatty Acids"]["17:0 heptadecanoic  margaric"] = 653
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:0 octadecanoic  stearic"] = 614
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:0 eicosanoic  arachidic"] = 615
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:0 docosanoic  behenic"] = 624
+# food_nutrient_dictionary["Fats & Fatty Acids"]["24:0 tetracosanoic  lignoceric"] = 654 #index 15
+
+
+
+# # Level 4 Monounsaturated fats
+# food_nutrient_dictionary["Fats & Fatty Acids"]["14:1 tetradecenoic  myristoleic"] = 625
+# food_nutrient_dictionary["Fats & Fatty Acids"]["15:1 pentadecenoic"] = 697
+# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 undifferentiated hexadecenoic palmitoleic"] = 626
+# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 cis  palmitoleic"] = 673
+# food_nutrient_dictionary["Fats & Fatty Acids"]["16:1 trans"] = 662
+# food_nutrient_dictionary["Fats & Fatty Acids"]["17:1 heptadecenoic"] = 687
+
+
+
+# #Level 4 More Polyunsaturated fats
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:3 undifferentiated octadecatrienoic"] = 619
+# food_nutrient_dictionary["Fats & Fatty Acids"]["18:4 octadecatetraenoic  parinaric"] = 627
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:3 undifferentiated eicosadienoic"] = 689
+# food_nutrient_dictionary["Fats & Fatty Acids"]["20:4 undifferentiated arachidonic"] = 620
+# food_nutrient_dictionary["Fats & Fatty Acids"]["21:5"] = 857
+
+
+# food_nutrient_dictionary["Fats & Fatty Acids"]["22:4"] = 858
+
+
+
+
+# #add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
+# #and omega-6: linoleic(18:2), arachidonic(20:4).
 #Level 1
 food_nutrient_dictionary["Protein & Amino Acids"]["Protein"] = 203
 #food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
