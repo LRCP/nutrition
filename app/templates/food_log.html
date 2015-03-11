@@ -86,7 +86,7 @@
             <th>More</th>
             <th>Delete</th>                                                                 
         </tr>
-        {% for food_index, food in enumerate(food_nutrient_list) %}
+        {% for food_index, food in enumerate(food_nutrient_list[:-1]) %}
         <tr>
             <td class="food_name">{{food["name"]}}<br>
                 <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>

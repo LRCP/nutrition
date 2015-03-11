@@ -92,7 +92,7 @@ def food_log_get():
         nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
         units = session.query(Weight).filter_by(NDB_No=ndb).all()
 
-
+        print 95, food_nutrient_dictionary
         nutrient_dict = copy.deepcopy(food_nutrient_dictionary)
         #nutrient_dict contains a category_name mapped to a dictionary
         #containing the nutrient_numbers.
@@ -103,6 +103,7 @@ def food_log_get():
                 #a tuple that contains the nutrient_number plus a dictionary of 
                 #subnutrients.
                 category = food_nutrient_dictionary_new[category_name]
+                print 106, category
                 for nutrient_name, nutrient_tuple in category.iteritems():
                     nutrient_number = str(nutrient_tuple[0])
                     value = nutrient_number_to_quantity(
@@ -110,6 +111,7 @@ def food_log_get():
                         )
                     #puts the value into the nutrient_dict
                     nutrient_dict[category_name][nutrient_name] = (value, OrderedDict())
+                    print 114, nutrient_tuple[1]
                     #loop throught the subnutrients to get the name and number.
                     for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
                         value = nutrient_number_to_quantity(
@@ -118,9 +120,10 @@ def food_log_get():
                         # to access the value of OrderedDict
                         nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
 
-                        print subnutrient_name, value
+                        print 123, subnutrient_name, value
 
             else:
+                print 126, category_name
                 for nutrient_name, nutrient_number in category.iteritems():
                     nutrient_number = str(nutrient_number)
                     value = nutrient_number_to_quantity(

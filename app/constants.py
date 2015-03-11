@@ -308,6 +308,18 @@ food_nutrient_dictionary_new["Fats & Fatty Acids"]["Total lipid (fat)"] = (204, 
 #The subitems of the saturated fats in the OrderedDict is the second part of the tuple.
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"] = (606, OrderedDict())
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["4:0 butanoic  butyric"] = 607
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["6:0 hexanoic  caproic "] = 608
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["8:0 octanoic  caprylic"] = 609
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["10:0 decanoic  capric"] =  610
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["12:0 dodecanoic  lauric"] = 611
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["13:0 tridecanoic"] = 696
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["14:0 tetradecanoic  myristic"] = 612
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["15:0 pentadecanoic"] = 652
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["16:0 hexadecanoic  palmitic"] = 613
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["17:0 heptadecanoic  margaric"] = 653
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["18:0 octadecanoic  stearic"] = 614
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["20:0 eicosanoic  arachidic"] = 615
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["22:0 docosanoic  behenic"] = 624
 
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"] = (645, OrderedDict())
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"] = (646, OrderedDict())
