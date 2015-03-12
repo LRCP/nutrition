@@ -164,17 +164,20 @@
                         </tr>
                         {% for index, nutrient_name in enumerate
                             (food["nutrients"]["Fats & Fatty Acids"]) %}
-                        
-                        
                         <tr>
-                       
-
                             <td>
                                 {{nutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name][0]|num_round()}} g
                             </td>
-                        
-
+                            <td>
+                                {{subnutrient_name}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name][1][subnutrient_name]}} 
+                            </td>
+                            <td>
+                                {{value}} {{food["nutrients"]["Fats & Fatty Acids"][nutrient_name][1][value]}} 
+                            </td>
                         </tr>
+
+                        
+                        
 
                         
                        
