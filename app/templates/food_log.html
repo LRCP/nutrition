@@ -90,9 +90,10 @@
         <tr>
             <td class="food_name">{{food["name"]}}<br>
                 <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
-                </td>
+            </td>
             
-            <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}</td>
+            <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"]|num_round()}}
+            </td>
             <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"]|num_round()}}</td>
             <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]|num_round()}}</td>
             <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]|num_round()}}</td>
@@ -133,7 +134,7 @@
                             (food["nutrients"]["Protein & Amino Acids"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[1]|num_round()}} g
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate

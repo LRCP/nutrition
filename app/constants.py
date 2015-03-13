@@ -22,7 +22,7 @@ food_nutrient_dictionary_new = {
     "Other": OrderedDict(),
 }
 
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = 208
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = (208, OrderedDict())
 #First Level
 food_nutrient_dictionary_new["Carbohydrates"]["Carbohydrate, by difference"] = (205, OrderedDict())
 #Second Level
@@ -335,9 +335,9 @@ food_nutrient_dictionary_new["Other"]["Theobromine"] = (263, OrderedDict())
 food_nutrient_dictionary_new["Other"]["Ash"] = (207, OrderedDict())
 
 
-food_nutrient_dictionary_new = {
-    "Fats & Fatty Acids": OrderedDict(),
-}
+# food_nutrient_dictionary_new = {
+#     "Fats & Fatty Acids": OrderedDict(),
+# }
 
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Total lipid (fat)"] = (204, OrderedDict())
 #Level 2
