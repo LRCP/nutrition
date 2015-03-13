@@ -24,18 +24,18 @@ food_nutrient_dictionary_new = {
 
 food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = (208, OrderedDict())
 #First Level
-food_nutrient_dictionary_new["Carbohydrates"]["Carbohydrate, by difference"] = (205, OrderedDict())
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"] = (205, OrderedDict())
 #Second Level
-food_nutrient_dictionary_new["Carbohydrates"]["Fiber"] = (291, OrderedDict())
-food_nutrient_dictionary_new["Carbohydrates"]["Starch"] = (209, OrderedDict())
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"] = (269, OrderedDict())
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Fiber"] = 291
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Starch"] = (209, OrderedDict())
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"] = (269, OrderedDict())
 #Third Level
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Fructose"] = 212
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Galactose"] = 287
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Sucrose"] = 210
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Glucose(dextrose)"] = 211
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Lactose"] = 213
-food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Maltose"] = 214
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Fructose"] = 212
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Galactose"] = 287
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Sucrose"] = 210
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Glucose(dextrose)"] = 211
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Lactose"] = 213
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Maltose"] = 214
 
 #Level 1
 # food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
