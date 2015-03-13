@@ -329,10 +329,10 @@ food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Campesterol"] = 639
 food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Beta-sitosterol"] = 641
 #Level 1
 food_nutrient_dictionary_new["Other"]["Water"] = (255, OrderedDict())
-food_nutrient_dictionary_new["Other"]["Alcohol, ethyl"] = (221, OrderedDict())
-food_nutrient_dictionary_new["Other"]["Caffeine"] = (262, OrderedDict())
-food_nutrient_dictionary_new["Other"]["Theobromine"] = (263, OrderedDict())
-food_nutrient_dictionary_new["Other"]["Ash"] = (207, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Water"][1]["Alcohol, ethyl"] = 221
+food_nutrient_dictionary_new["Other"]["Water"][1]["Caffeine"] = 262
+food_nutrient_dictionary_new["Other"]["Water"][1]["Theobromine"] = 263
+food_nutrient_dictionary_new["Other"]["Water"][1]["Ash"] = 207
 
 
 # food_nutrient_dictionary_new = {
