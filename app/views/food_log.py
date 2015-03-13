@@ -11,7 +11,8 @@ from app.models.food_log_food_association import FoodLogFoodAssociation
 from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.usda import FoodDescription, FoodGroupDescription, Weight
 from app.models.usda import NutrientData
-from app.constants import food_nutrient_dictionary, food_nutrient_dictionary_new
+from app.constants import food_nutrient_dictionary_new
+#from app.constants import food_nutrient_dictionary
 from app.models.favorite_association import FavoriteAssociation
 
 def get_food_log(user):
@@ -92,11 +93,11 @@ def food_log_get():
         nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
         units = session.query(Weight).filter_by(NDB_No=ndb).all()
 
-        print 95, food_nutrient_dictionary
-        nutrient_dict = copy.deepcopy(food_nutrient_dictionary)
+        print 95, food_nutrient_dictionary_new
+        nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
         #nutrient_dict contains a category_name mapped to a dictionary
         #containing the nutrient_numbers.
-        for category_name, category in food_nutrient_dictionary.iteritems():
+        for category_name, category in food_nutrient_dictionary_new.iteritems():
             #hack
             if category_name == "Fats & Fatty Acids":
                 #the category, which is a dictionary maps the name of a nutrient to 

@@ -1,7 +1,17 @@
 from collections import OrderedDict
 import copy
 #refer to page 9 of the USDA database
-food_nutrient_dictionary = {
+# food_nutrient_dictionary = {
+#     "Calorie Information": OrderedDict(),
+#     "Carbohydrates": OrderedDict(),
+#     "Fats & Fatty Acids": OrderedDict(),
+#     "Protein & Amino Acids": OrderedDict(),
+#     "Vitamins": OrderedDict(),
+#     "Minerals": OrderedDict(),
+#     "Sterols": OrderedDict(),
+#     "Other": OrderedDict(),
+# }
+food_nutrient_dictionary_new = {
     "Calorie Information": OrderedDict(),
     "Carbohydrates": OrderedDict(),
     "Fats & Fatty Acids": OrderedDict(),
@@ -12,20 +22,20 @@ food_nutrient_dictionary = {
     "Other": OrderedDict(),
 }
 
-food_nutrient_dictionary["Calorie Information"]["Energy_KCAL"] = 208
+food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = 208
 #First Level
-food_nutrient_dictionary["Carbohydrates"]["Carbohydrate, by difference"] = 205
+food_nutrient_dictionary_new["Carbohydrates"]["Carbohydrate, by difference"] = (205, OrderedDict())
 #Second Level
-food_nutrient_dictionary["Carbohydrates"]["Fiber"] = 291
-food_nutrient_dictionary["Carbohydrates"]["Starch"] = 209
-food_nutrient_dictionary["Carbohydrates"]["Sugars"] = 269
+food_nutrient_dictionary_new["Carbohydrates"]["Fiber"] = (291, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Starch"] = (209, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"] = (269, OrderedDict())
 #Third Level
-food_nutrient_dictionary["Carbohydrates"]["Fructose"] = 212
-food_nutrient_dictionary["Carbohydrates"]["Galactose"] = 287
-food_nutrient_dictionary["Carbohydrates"]["Sucrose"] = 210
-food_nutrient_dictionary["Carbohydrates"]["Glucose(dextrose)"] = 211
-food_nutrient_dictionary["Carbohydrates"]["Lactose"] = 213
-food_nutrient_dictionary["Carbohydrates"]["Maltose"] = 214
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Fructose"] = 212
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Galactose"] = 287
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Sucrose"] = 210
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Glucose(dextrose)"] = 211
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Lactose"] = 213
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Maltose"] = 214
 
 #Level 1
 # food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
@@ -137,41 +147,41 @@ food_nutrient_dictionary["Carbohydrates"]["Maltose"] = 214
 # #add another 2 lines for Omega-3 totals: linolenic(18:3), EPA (20:5), DHA(22:6))
 # #and omega-6: linoleic(18:2), arachidonic(20:4).
 #Level 1
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"] = (203, OrderedDict()
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"] = (203, OrderedDict())
 #food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 # 9 essential aminio acids
 #Level 2
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Histidine"] = 512
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Isoleucine"] = 503
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Isoleucine"] = 503
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Leucine"] = 504
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Lysine"] = 505
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Methionine"] = 506
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Phenylalanine"] = 508
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Threonine"] = 502
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Tryptophan"] = 501
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Valine"] = 510
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Histidine"] = 512
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Isoleucine"] = 503
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Isoleucine"] = 503
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Leucine"] = 504
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Lysine"] = 505
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Methionine"] = 506
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Phenylalanine"] = 508
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Threonine"] = 502
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Tryptophan"] = 501
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Valine"] = 510
 
 #Conditional Amino Acids are only esssential in times of illness and stress:
 #is there one for glutamine,ornithine?
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Arginine"] = 511
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Cystine"] = 507
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Arginine"] = 511
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Cystine"] = 507
 #where is glutamine?
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Glycine"] = 516
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Hydroxyproline"] = 521
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Proline"] = 517
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Glycine"] = 516
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Hydroxyproline"] = 521
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Proline"] = 517
 
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Tyrosine"] = 509
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Tyrosine"] = 509
 
 
 # Nonessential amino acids but should be consumed:
 #are there listings for asparagine?
 #Level 3
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Alanine"] = 513
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Aspartic acid"] = 514
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Alanine"] = 513
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Aspartic acid"] = 514
 #where is asparagine?
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Glutamic acid"] = 515
-food_nutrient_dictionary["Protein & Amino Acids"][1]["Serine"] = 518
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Glutamic acid"] = 515
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Serine"] = 518
 
 
 
@@ -180,60 +190,59 @@ food_nutrient_dictionary["Protein & Amino Acids"][1]["Serine"] = 518
      
 
 #Level 1
-food_nutrient_dictionary_new["Vitamins"]["Vitamin A"]["A, RAE"] = (320, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin A, IU"] = 318
-food_nutrient_dictionary_new["Vitamins"][1]["Retinol"] = 319
-food_nutrient_dictionary_new["Vitamins"][1]["Carotene, beta"] = 321
-food_nutrient_dictionary_new["Vitamins"][1]["Carotene, alpha"] = 322
-food_nutrient_dictionary_new["Vitamins"][1]["Cryptoxanthin, beta"] = 334
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"] = (320, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Vitamin A, IU"] = 318
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Retinol"] = 319
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Carotene, beta"] = 321
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Carotene, alpha"] = 322
+food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Cryptoxanthin, beta"] = 334
 #Level 2 Other carotenoids
-food_nutrient_dictionary_new["Vitamins"][1]["Lycopene"] = 337
-food_nutrient_dictionary_new["Vitamins"][1]["Lutein + Zeaxanthin"] = 338
+food_nutrient_dictionary_new["Vitamins"]["Lycopene"] = (337, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Lutein + Zeaxanthin"] = (338, OrderedDict())
 
-food_nutrient_dictionary_new["Vitamins"]["Vitamin B"]["B1 (Thiamin)"] = 404
-food_nutrient_dictionary_new["Vitamins"]"Vitamin B"]["B2 (Riboflavin)"] = 405
+food_nutrient_dictionary_new["Vitamins"]["B1 (Thiamin)"] = (404, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B2 (Riboflavin)"] = (405, OrderedDict())
 #mg Niacin equivalents = mg niacin + (mg tryptophan / 60).
-food_nutrient_dictionary_new["Vitamins"]"Vitamin B"]["B3 (Niacin)"] = 406
-food_nutrient_dictionary_new["Vitamins"]"Vitamin B"]["B5 (Pantothenic Acid)"] = 410 
-food_nutrient_dictionary_new["Vitamins"]"Vitamin B"]["B6 (Pyridoxine)"] = 415
+food_nutrient_dictionary_new["Vitamins"]["B3 (Niacin)"] = (406, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B5 (Pantothenic Acid)"] = (410, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B6 (Pyridoxine)"] = (415, OrderedDict())
 
-food_nutrient_dictionary_new["Vitamins"]["Vitamin B"]["B9 Folate"] = 417
-food_nutrient_dictionary_new["Vitamins"]["Vitamin B"]["B12 (Cobalamin)"] = 418
-food_nutrient_dictionary_new["Vitamins"]["Vitamin B"]["B12 (Cobalamin), added"] = 578
-food_nutrient_dictionary_new["Vitamins"]["VitaminC"]["C, (ascorbic acid)"] = (401, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B9 Folate"] = (417, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"] = (418, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin), added"] = 578
+food_nutrient_dictionary_new["Vitamins"]["C, (ascorbic acid)"] = (401, OrderedDict())
 #Level 1
-food_nutrient_dictionary_new["Vitamins"]["Vitamin D"]["D (D2 + D3)"] = (328, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin D"] = 324
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin D2(Ergocalciforol)"] = 325
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin D3(Cholecalciferol)"] = 326
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (328, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D"] = 324
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["Vitamin D2(Ergocalciforol)"] = 325
 
-food_nutrient_dictionary_new["Vitamins"]["Vitamin E"]["E (Alpha-Tocopherol)"] = (323, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["E, added"] = 573
-
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["K (Phylloquinone)"] = 430
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocopherol, beta"] = 341
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocopherol, gamma"] = 342
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocopherol, delta"] = 343
-
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocotrienol, alpha"] = 344
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocotrienol, beta"] = 345
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin E"]["Tocotrienol, gamma"] = 346
-food_nutrient_dictionary_new["Vitamins"][[1]["Vitamin E"]"Tocotrienol, delta"] = 347
+food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"] = (323, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["E, added"] = 573
 
 
+food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, beta"] = 341
+food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, gamma"] = 342
+food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, delta"] = 343
 
-food_nutrient_dictionary_new["Vitamins"]["Choline"] = 421
-food_nutrient_dictionary_new["Vitamins"]["Betaine"] = 435
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, alpha"] = (344, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, beta"] = (345, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, gamma"] = (346, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, delta"] = (347, OrderedDict())
+
+
+
+food_nutrient_dictionary_new["Vitamins"]["Choline"] = (421, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Betaine"] = (435, OrderedDict())
 
 food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"] = (435, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Folate, food"] = 432
-food_nutrient_dictionary_new["Vitamins"]["Folic acid"] = 431
+food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folate, food"] = 432
+food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folic acid"] = 431
 
 #1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
-food_nutrient_dictionary["Vitamins"]["Folic acid"] = 431
-food_nutrient_dictionary_new["Vitamins"]["Vitamin K"]["K (Phylloquinone)"] = (430, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin K"]["Dihydrophylloquinone"] = 429
-food_nutrient_dictionary_new["Vitamins"][1]["Vitamin K"]["Menaquinone-4"] = 428
+
+food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"] = (430, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"][1]["Vitamin K Dihydrophylloquinone"] = 429
+food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"][1]["Vitamin K Menaquinone-4"] = 428
 
 #In plant foods, where individual carotenoids are not reported, 1 RAE = IU /20
 #In animal products, where individual caratenoids are not reported, 1 RAE = IU / 3.33
@@ -246,84 +255,84 @@ food_nutrient_dictionary_new["Vitamins"][1]["Vitamin K"]["Menaquinone-4"] = 428
 
 #1 RAE of Vitamin A = 1 mcg retinol, 12 mcg B-carotene, 24 mcg a carotene or 24 umcgB-cryptoxanthin
 #Level 2
-food_nutrient_dictionary["Vitamins"]["Vitamin A, IU"] = 318
-food_nutrient_dictionary["Vitamins"]["Retinol"] = 319
-food_nutrient_dictionary["Vitamins"]["Carotene, beta"] = 321
-food_nutrient_dictionary["Vitamins"]["Carotene, alpha"] = 322
-food_nutrient_dictionary["Vitamins"]["Cryptoxanthin, beta"] = 334
-#Level 2 Other carotenoids
-food_nutrient_dictionary["Vitamins"]["Lycopene"] = 337
-food_nutrient_dictionary["Vitamins"]["Lutein + Zeaxanthin"] = 338
+# food_nutrient_dictionary["Vitamins"]["Vitamin A, IU"] = 318
+# food_nutrient_dictionary["Vitamins"]["Retinol"] = 319
+# food_nutrient_dictionary["Vitamins"]["Carotene, beta"] = 321
+# food_nutrient_dictionary["Vitamins"]["Carotene, alpha"] = 322
+# food_nutrient_dictionary["Vitamins"]["Cryptoxanthin, beta"] = 334
+# #Level 2 Other carotenoids
+# food_nutrient_dictionary["Vitamins"]["Lycopene"] = 337
+# food_nutrient_dictionary["Vitamins"]["Lutein + Zeaxanthin"] = 338
+
+# #Level 1
+
+# #1 mcg Vitamin D =  Vitamin D1 + Vitamin D3
+# food_nutrient_dictionary["Vitamins"]["Vitamin D"] = 324
+# #1 IU Vitamin D = (Vitamin D2+ Vitamin D3) x 40
+
+
+# #Level 2
+# food_nutrient_dictionary["Vitamins"]["Vitamin D2(ergocalciforol)"] = 325
+# food_nutrient_dictionary["Vitamins"]["Vitamin D3(cholecalciferol)"] = 326
+
+
+
+# #Level 1
+
+
+
+# #Level 2
+# food_nutrient_dictionary["Vitamins"]["Tocopherol, beta"] = 341
+# food_nutrient_dictionary["Vitamins"]["Tocopherol, gamma"] = 342
+# food_nutrient_dictionary["Vitamins"]["Tocopherol, delta"] = 343
+
+# food_nutrient_dictionary["Vitamins"]["Tocotrienol, alpha"] = 344
+# food_nutrient_dictionary["Vitamins"]["Tocotrienol, beta"] = 345
+# food_nutrient_dictionary["Vitamins"]["Tocotrienol, gamma"] = 346
+# food_nutrient_dictionary["Vitamins"]["Tocotrienol, delta"] = 347
+
+# #Level 1
+
+# #Level 1
+# food_nutrient_dictionary["Vitamins"]["Dihydrophylloquinone"] = 429
+# food_nutrient_dictionary["Vitamins"]["Menaquinone-4"] = 428
+# # Level 1
+
+# food_nutrient_dictionary["Vitamins"]["Folate, DFE"] = 435
+# food_nutrient_dictionary["Vitamins"]["Folate, food"] = 432
+
+# #1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
+# food_nutrient_dictionary["Vitamins"]["Folic acid"] = 431
+
+
+# #Vitamin B-12 = 418 + 578
+
+
+food_nutrient_dictionary_new["Minerals"]["Calcium"] = (301, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Iron"] = (303, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Magnesium"] = (304, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Phosphorus"] = (305, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Potassium"] = (306, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Sodium"] = (307, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Zinc"] = (309, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Copper"] = (312, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Manganese"] = (315, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Selenium"] = (317, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Flouride"] = (313, OrderedDict())
 
 #Level 1
-
-#1 mcg Vitamin D =  Vitamin D1 + Vitamin D3
-food_nutrient_dictionary["Vitamins"]["Vitamin D"] = 324
-#1 IU Vitamin D = (Vitamin D2+ Vitamin D3) x 40
-
-
+food_nutrient_dictionary_new["Sterols"]["Cholesterol"] = (601, OrderedDict())
+food_nutrient_dictionary_new["Sterols"]["Phytosterols"] = (636, OrderedDict())
 #Level 2
-food_nutrient_dictionary["Vitamins"]["Vitamin D2(ergocalciforol)"] = 325
-food_nutrient_dictionary["Vitamins"]["Vitamin D3(cholecalciferol)"] = 326
-
-
-
+food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Stigmasterol"] = 638
+food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Campesterol"] = 639
+food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Beta-sitosterol"] = 641
 #Level 1
-
-
-
-#Level 2
-food_nutrient_dictionary["Vitamins"]["Tocopherol, beta"] = 341
-food_nutrient_dictionary["Vitamins"]["Tocopherol, gamma"] = 342
-food_nutrient_dictionary["Vitamins"]["Tocopherol, delta"] = 343
-
-food_nutrient_dictionary["Vitamins"]["Tocotrienol, alpha"] = 344
-food_nutrient_dictionary["Vitamins"]["Tocotrienol, beta"] = 345
-food_nutrient_dictionary["Vitamins"]["Tocotrienol, gamma"] = 346
-food_nutrient_dictionary["Vitamins"]["Tocotrienol, delta"] = 347
-
-#Level 1
-
-#Level 1
-food_nutrient_dictionary["Vitamins"]["Dihydrophylloquinone"] = 429
-food_nutrient_dictionary["Vitamins"]["Menaquinone-4"] = 428
-# Level 1
-
-food_nutrient_dictionary["Vitamins"]["Folate, DFE"] = 435
-food_nutrient_dictionary["Vitamins"]["Folate, food"] = 432
-
-#1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
-food_nutrient_dictionary["Vitamins"]["Folic acid"] = 431
-
-
-#Vitamin B-12 = 418 + 578
-
-
-food_nutrient_dictionary["Minerals"]["Calcium"] = 301
-food_nutrient_dictionary["Minerals"]["Iron"] = 303
-food_nutrient_dictionary["Minerals"]["Magnesium"] = 304
-food_nutrient_dictionary["Minerals"]["Phosphorus"] = 305
-food_nutrient_dictionary["Minerals"]["Potassium"] = 306
-food_nutrient_dictionary["Minerals"]["Sodium"] = 307
-food_nutrient_dictionary["Minerals"]["Zinc"] = 309
-food_nutrient_dictionary["Minerals"]["Copper"] = 312
-food_nutrient_dictionary["Minerals"]["Manganese"] = 315
-food_nutrient_dictionary["Minerals"]["Selenium"] = 317
-food_nutrient_dictionary["Minerals"]["Flouride"] = 313
-
-#Level 1
-food_nutrient_dictionary["Sterols"]["Cholesterol"] = 601
-food_nutrient_dictionary["Sterols"]["Phytosterols"] = 636
-#Level 2
-food_nutrient_dictionary["Sterols"]["Stigmasterol"] = 638
-food_nutrient_dictionary["Sterols"]["Campesterol"] = 639
-food_nutrient_dictionary["Sterols"]["Beta-sitosterol"] = 641
-#Level 1
-food_nutrient_dictionary["Other"]["Water"] = 255
-food_nutrient_dictionary["Other"]["Alcohol, ethyl"] = 221
-food_nutrient_dictionary["Other"]["Caffeine"] = 262
-food_nutrient_dictionary["Other"]["Theobromine"] = 263
-food_nutrient_dictionary["Other"]["Ash"] = 207
+food_nutrient_dictionary_new["Other"]["Water"] = (255, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Alcohol, ethyl"] = (221, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Caffeine"] = (262, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Theobromine"] = (263, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Ash"] = (207, OrderedDict())
 
 
 food_nutrient_dictionary_new = {
@@ -357,7 +366,7 @@ food_nutrient_dictionary_new["Fats & Fatty Acids"]["Saturated"][1]["24:0 tetraco
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"] = (645, OrderedDict())
 #Omega-9
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][1]["18:1 undifferentiated octadecenoic  oleic"] = 617
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][[1]["18:1 cis  oleic"] = 674
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][1]["18:1 cis  oleic"] = 674
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][1]["20:1 eicosenoic  gadoleic"] = 628
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][1]["22:1 undifferentiated docosenoic"] = 630
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Monounsaturated"][1]["22:1 cis  erucic"] = 676
@@ -410,8 +419,8 @@ food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["22:4"]
 
 
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans"] = (605, OrderedDict())
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Monoenoic"][1] = 693
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans-Polyenoic"][1] = 695
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans"][1]["Trans-Monoenoic"] = 693
+food_nutrient_dictionary_new["Fats & Fatty Acids"]["Trans"][1]["Trans-Polyenoic"] = 695
 
 
 
