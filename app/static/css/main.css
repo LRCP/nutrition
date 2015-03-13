@@ -78,6 +78,18 @@ header a{
   width: 87px;
 }
 
+.more td:first-child{
+    padding-left: 15px;
+
+
+}
+.more.collapse.in{
+    display: table-row!important;
+}
+td.nutrient{
+  font-weight: bold;
+}
+
 .add_foods{
   min-width: 100%;
   
