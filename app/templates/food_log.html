@@ -94,7 +94,7 @@
             
             <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"][0]|num_round()}}
             </td>
-            <td>{{food["nutrients"]["Protein & Amino Acids"][ "Protein"][0]|num_round()}}</td>
+            <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"][0]|num_round()}}</td>
             <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"][0]|num_round()}}</td>
             <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]|num_round()}}</td>
             <td>{{food["nutrients"]["Other"]["Water"][0]|num_round()}}</td>
@@ -148,23 +148,32 @@
                         {% endfor %}
                     </table>
                     <table class="table">
-                            
-                        <tr>
-                            <td><strong>CARBOHYDRATES</strong>
-                            + add more button</td>
-                        </tr>
-                        
-                        {% for index, nutrient_name in enumerate(food["nutrients"]["Carbohydrates"]) %}
-                        {% if index > 0 and index < 4 %}
-                        <tr>
+                       <tr>
                             <td>
-                                {{nutrient_name}} {{food["nutrients"]["Carbohydrates"][nutrient_name]|num_round()}} g
+                                <strong>CARBOHYDRATES</strong>
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                    <span class="glyphicon glyphicon-chevron-down">
+                                    </span>
+                                </button>
                             </td>
                         </tr>
-                        {% endif %}
+                        {# .items() returns a list of tuples of (key, value) #}
+                        {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                            (food["nutrients"]["Carbohydrates"].items()) %}
+                        <tr>
+                            <td class="nutrient">
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                            </td>
+                        </tr>
+                        {% for index, (subnutrient_name, value) in enumerate
+                            (nutrient_tuple[1].items()) %}
+                        <tr class="more">
+                            <td>
+                                {{subnutrient_name}} {{ value }} 
+                            </td>
+                        </tr>
                         {% endfor %}
-
-                       
+                        {% endfor %}
                     </table>
                     <table class="table">
                        <tr>

@@ -24,18 +24,18 @@ food_nutrient_dictionary_new = {
 
 food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = (208, OrderedDict())
 #First Level
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"] = (205, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Carbohydrate, by difference"] = (205, OrderedDict())
 #Second Level
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Fiber"] = 291
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Starch"] = (209, OrderedDict())
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"] = (269, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Fiber"] = (291, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Starch"] = (209, OrderedDict())
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"] = (269, OrderedDict())
 #Third Level
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Fructose"] = 212
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Galactose"] = 287
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Sucrose"] = 210
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Glucose(dextrose)"] = 211
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Lactose"] = 213
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"][1]["Carbohydrate, by difference"][1]["Sugars"][1]["Maltose"] = 214
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Fructose"] = 212
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Galactose"] = 287
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Sucrose"] = 210
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Glucose(dextrose)"] = 211
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Lactose"] = 213
+food_nutrient_dictionary_new["Carbohydrates"]["Sugars"][1]["Maltose"] = 214
 
 #Level 1
 # food_nutrient_dictionary["Fats & Fatty Acids"]["Total lipid (fat)"] = 204
@@ -151,37 +151,39 @@ food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"] = (203, Ordered
 #food_nutrient_dictionary["Protein & Amino Acids"]["Adjusted Protein"] = 257
 # 9 essential aminio acids
 #Level 2
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Histidine"] = 512
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Isoleucine"] = 503
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Isoleucine"] = 503
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Leucine"] = 504
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Lysine"] = 505
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Methionine"] = 506
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Phenylalanine"] = 508
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Threonine"] = 502
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Tryptophan"] = 501
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Valine"] = 510
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Histidine"] = 512
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Isoleucine"] = 503
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Leucine"] = 504
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Lysine"] = 505
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Methionine"] = 506
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Phenylalanine"] = 508
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Threonine"] = 502
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Tryptophan"] = 501
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Essential"][1]["Valine"] = 510
 
 #Conditional Amino Acids are only esssential in times of illness and stress:
 #is there one for glutamine,ornithine?
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Arginine"] = 511
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Cystine"] = 507
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Arginine"] = 511
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Cystine"] = 507
 #where is glutamine?
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Glycine"] = 516
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Hydroxyproline"] = 521
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Proline"] = 517
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Glycine"] = 516
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Hydroxyproline"] = 521
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Proline"] = 517
 
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Tyrosine"] = 509
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Conditional"][1]["Tyrosine"] = 509
 
 
 # Nonessential amino acids but should be consumed:
 #are there listings for asparagine?
 #Level 3
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Alanine"] = 513
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Aspartic acid"] = 514
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Nonessential"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Nonessential"][1]["Alanine"] = 513
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Nonessential"][1]["Aspartic acid"] = 514
 #where is asparagine?
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Glutamic acid"] = 515
-food_nutrient_dictionary_new["Protein & Amino Acids"]["Protein"][1]["Serine"] = 518
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Nonessential"][1]["Glutamic acid"] = 515
+food_nutrient_dictionary_new["Protein & Amino Acids"]["Nonessential"][1]["Serine"] = 518
 
 
 
@@ -197,8 +199,9 @@ food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Carotene, beta"] = 321
 food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Carotene, alpha"] = 322
 food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Cryptoxanthin, beta"] = 334
 #Level 2 Other carotenoids
-food_nutrient_dictionary_new["Vitamins"]["Lycopene"] = (337, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Lutein + Zeaxanthin"] = (338, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Carotenoids"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lycopene"] = (337, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lutein + Zeaxanthin"] = (338, OrderedDict())
 
 food_nutrient_dictionary_new["Vitamins"]["B1 (Thiamin)"] = (404, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B2 (Riboflavin)"] = (405, OrderedDict())
@@ -208,38 +211,48 @@ food_nutrient_dictionary_new["Vitamins"]["B5 (Pantothenic Acid)"] = (410, Ordere
 food_nutrient_dictionary_new["Vitamins"]["B6 (Pyridoxine)"] = (415, OrderedDict())
 
 food_nutrient_dictionary_new["Vitamins"]["B9 Folate"] = (417, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"] = (418, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin)"] = (418, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin), added"] = 578
 food_nutrient_dictionary_new["Vitamins"]["C, (ascorbic acid)"] = (401, OrderedDict())
 #Level 1
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (328, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D"] = 324
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["Vitamin D2(Ergocalciforol)"] = 325
-
-food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"] = (323, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["E, added"] = 573
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"] = (328, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"][1]["D"] = 324
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"][1]["D2 (Ergocalciforol)"] = 325
 
 
-food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, beta"] = 341
-food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, gamma"] = 342
-food_nutrient_dictionary_new["Vitamins"]["E (Alpha-Tocopherol)"][1]["Tocopherol, delta"] = 343
+food_nutrient_dictionary_new["Vitamins"]["Vitamin E"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"] = (None, OrderedDict())
 
-food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, alpha"] = (344, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, beta"] = (345, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, gamma"] = (346, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol, delta"] = (347, OrderedDict())
+
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"][1]["E (Alpha-Tocopherol)"] = 323
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"][1]["E, added"] = 573
+
+
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"][1]["Tocopherol, beta"] = 341
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"][1]["Tocopherol, gamma"] = 342
+food_nutrient_dictionary_new["Vitamins"]["Alpha-Tocopherol"][1]["Tocopherol, delta"] = 343
+
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"] = (None, OrderedDict())
+
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"][1]["E Tocotrienol, alpha"] = 344
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"][1]["E Tocotrienol, beta"] = 345
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"][1]["E Tocotrienol, gamma"] = 346
+food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"][1]["E Tocotrienol, delta"] = 347
 
 
 
 food_nutrient_dictionary_new["Vitamins"]["Choline"] = (421, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["Betaine"] = (435, OrderedDict())
 
+food_nutrient_dictionary_new["Vitamins"]["Folate"] = (None, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"] = (435, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folate, food"] = 432
 food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folic acid"] = 431
 
 #1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
-
+food_nutrient_dictionary_new["Vitamins"]["Vitamin K"] = (None, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"] = (430, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"][1]["Vitamin K Dihydrophylloquinone"] = 429
 food_nutrient_dictionary_new["Vitamins"]["Vitamin K (Phylloquinone)"][1]["Vitamin K Menaquinone-4"] = 428

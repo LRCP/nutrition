@@ -99,38 +99,31 @@ def food_log_get():
         #containing the nutrient_numbers.
         for category_name, category in food_nutrient_dictionary_new.iteritems():
             #hack
-            if category_name == "Fats & Fatty Acids":
+            
                 #the category, which is a dictionary maps the name of a nutrient to 
                 #a tuple that contains the nutrient_number plus a dictionary of 
                 #subnutrients.
-                category = food_nutrient_dictionary_new[category_name]
-                print 106, category
-                for nutrient_name, nutrient_tuple in category.iteritems():
-                    nutrient_number = str(nutrient_tuple[0])
+            category = food_nutrient_dictionary_new[category_name]
+            print 106, category
+            for nutrient_name, nutrient_tuple in category.iteritems():
+                nutrient_number = str(nutrient_tuple[0])
+                value = nutrient_number_to_quantity(
+                    nutrients, nutrient_number, association, unit
+                    )
+                #puts the value into the nutrient_dict
+                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict())
+                print 114, nutrient_tuple[1]
+                #loop throught the subnutrients to get the name and number.
+                for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
                     value = nutrient_number_to_quantity(
-                        nutrients, nutrient_number, association, unit
-                        )
-                    #puts the value into the nutrient_dict
-                    nutrient_dict[category_name][nutrient_name] = (value, OrderedDict())
-                    print 114, nutrient_tuple[1]
-                    #loop throught the subnutrients to get the name and number.
-                    for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
-                        value = nutrient_number_to_quantity(
-                        nutrients, subnutrient_number, association, unit
-                        )
-                        # to access the value of OrderedDict
-                        nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
+                    nutrients, subnutrient_number, association, unit
+                    )
+                    # to access the value of OrderedDict
+                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
 
-                        print 123, subnutrient_name, value
+                    print 123, subnutrient_name, value
 
-            else:
-                print 126, category_name
-                for nutrient_name, nutrient_number in category.iteritems():
-                    nutrient_number = str(nutrient_number)
-                    value = nutrient_number_to_quantity(
-                        nutrients, nutrient_number, association, unit
-                        )
-                    nutrient_dict[category_name][nutrient_name] = value
+            
 
         # Post-process the list to add some extra nutrients
         # ffa = nutrient_dict["Fats & Fatty Acids"]
