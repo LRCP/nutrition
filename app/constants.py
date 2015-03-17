@@ -210,7 +210,15 @@ food_nutrient_dictionary_new["Vitamins"]["B3 (Niacin)"] = (406, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B5 (Pantothenic Acid)"] = (410, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B6 (Pyridoxine)"] = (415, OrderedDict())
 
-food_nutrient_dictionary_new["Vitamins"]["B9 Folate"] = (417, OrderedDict())
+#food_nutrient_dictionary_new["Vitamins"]
+
+food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"] = (417, OrderedDict())
+#food_nutrient_dictionary_new["Vitamins"]["Folate"] = (None, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"][1]["Folate, DFE"] = 435
+food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"][1]["Folate, food"] = 432
+
+food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"][1]["Folic acid"] = 431
+
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"] = (None, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin)"] = (418, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin), added"] = 578
@@ -244,12 +252,13 @@ food_nutrient_dictionary_new["Vitamins"]["E Tocotrienol"][1]["E Tocotrienol, del
 
 
 food_nutrient_dictionary_new["Vitamins"]["Choline"] = (421, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Betaine"] = (435, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Betaine"] = (454, OrderedDict())
 
-food_nutrient_dictionary_new["Vitamins"]["Folate"] = (None, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"] = (435, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folate, food"] = 432
-food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"][1]["Folic acid"] = 431
+# food_nutrient_dictionary_new["Vitamins"]["Folate"] = (None, OrderedDict())
+# food_nutrient_dictionary_new["Vitamins"]["Folate, DFE"] = (435, OrderedDict())
+# food_nutrient_dictionary_new["Vitamins"][1]["Folate, food"] = 432
+
+# food_nutrient_dictionary_new["Vitamins"][1]["Folic acid"] = 431
 
 #1 DFE = 1 ug food folate = 0.6 ug folic acid from fortified food or .5 ug supplement on empty stomach
 food_nutrient_dictionary_new["Vitamins"]["Vitamin K"] = (None, OrderedDict())
