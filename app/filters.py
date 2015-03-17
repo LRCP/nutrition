@@ -7,6 +7,8 @@ def num_round_filter(s, precision=1):
         return s
     elif precision == 0:
         return int(round(s, precision))
+    elif s == None:
+        return ""
     else:
         return round(s, precision)
 

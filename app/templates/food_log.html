@@ -134,7 +134,7 @@
                             (food["nutrients"]["Protein & Amino Acids"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -162,7 +162,7 @@
                             (food["nutrients"]["Carbohydrates"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -190,7 +190,7 @@
                             (food["nutrients"]["Fats & Fatty Acids"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -218,7 +218,7 @@
                             (food["nutrients"]["Vitamins"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -246,7 +246,7 @@
                             (food["nutrients"]["Minerals"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -274,7 +274,7 @@
                             (food["nutrients"]["Sterols"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -302,7 +302,7 @@
                             (food["nutrients"]["Other"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} g
+                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate

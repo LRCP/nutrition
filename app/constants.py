@@ -226,11 +226,11 @@ food_nutrient_dictionary_new["Vitamins"]["C, (ascorbic acid)"] = (401, OrderedDi
 #Level 1
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (None, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"] = (328, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"][1]["D"] = 324
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D"] = 324
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["Vitamin D3(cholecalciferol)"] = 326
 
 
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"][1]["D2 (Ergocalciforol)"] = 325
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D2 (Ergocalciforol)"] = 325
 
 
 food_nutrient_dictionary_new["Vitamins"]["Vitamin E"] = (None, OrderedDict())

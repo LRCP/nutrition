@@ -98,20 +98,31 @@ def food_log_get():
         #nutrient_dict contains a category_name mapped to a dictionary
         #containing the nutrient_numbers.
         for category_name, category in food_nutrient_dictionary_new.iteritems():
-            #hack
+            
             
                 #the category, which is a dictionary maps the name of a nutrient to 
                 #a tuple that contains the nutrient_number plus a dictionary of 
                 #subnutrients.
             category = food_nutrient_dictionary_new[category_name]
             print 106, category
+          
             for nutrient_name, nutrient_tuple in category.iteritems():
-                nutrient_number = str(nutrient_tuple[0])
-                value = nutrient_number_to_quantity(
-                    nutrients, nutrient_number, association, unit
-                    )
+                nutrient_number = nutrient_tuple[0]
+                if nutrient_number != None:
+                    value = nutrient_number_to_quantity(
+                        nutrients, str(nutrient_number), association, unit
+                        )
+                    nutrient_unit = "g"
+                else:
+                    value = None
+                    nutrient_unit = ""
+                    
+
+                
+                
+                
                 #puts the value into the nutrient_dict
-                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict())
+                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
                 print 114, nutrient_tuple[1]
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
