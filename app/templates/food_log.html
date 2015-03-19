@@ -123,7 +123,7 @@
                        <tr>
                             <td>
                                 <strong>Protein</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -139,7 +139,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_protein">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -151,7 +151,7 @@
                        <tr>
                             <td>
                                 <strong>CARBOHYDRATES</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_carbohydrates">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -167,7 +167,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_carbohydrates">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -179,7 +179,7 @@
                        <tr>
                             <td>
                                 <strong>FATS</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_fats">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -195,7 +195,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_fats">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -207,7 +207,7 @@
                        <tr>
                             <td>
                                 <strong>Vitamins</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_vitamins">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -223,7 +223,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_vitamins">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -235,7 +235,7 @@
                        <tr>
                             <td>
                                 <strong>Minerals</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_minerals">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -251,7 +251,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_minerals">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -263,7 +263,7 @@
                        <tr>
                             <td>
                                 <strong>Sterols</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_sterols">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -279,7 +279,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_sterols">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -291,7 +291,7 @@
                        <tr>
                             <td>
                                 <strong>Other</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more">
+                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_other">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
@@ -307,7 +307,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more">
+                        <tr class="more_other">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>

@@ -9,7 +9,7 @@ from app import app, session, ordered_defaultdict
 from app.models.food_log import FoodLog
 from app.models.food_log_food_association import FoodLogFoodAssociation
 from app.models.user_food_group_association import UserFoodGroupAssociation
-from app.models.usda import FoodDescription, FoodGroupDescription, Weight
+from app.models.usda import FoodDescription, FoodGroupDescription, Weight, NutrientDefinition
 from app.models.usda import NutrientData
 from app.constants import food_nutrient_dictionary_new
 #from app.constants import food_nutrient_dictionary
@@ -76,6 +76,8 @@ def food_log_get():
 
 
 
+    nutrient_definitions = session.query(NutrientDefinition).all()
+    print nutrient_definitions[0].NutrDesc
 
 
     # Get the current food log
@@ -90,10 +92,11 @@ def food_log_get():
         food = session.query(FoodDescription).get(ndb)
         unit = session.query(Weight).filter_by(NDB_No=ndb, Seq=seq).first()
 
+        #get all the nutrient's data by serching by its ndb.no
         nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
         units = session.query(Weight).filter_by(NDB_No=ndb).all()
 
-        print 95, food_nutrient_dictionary_new
+       
         nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
         #nutrient_dict contains a category_name mapped to a dictionary
         #containing the nutrient_numbers.
@@ -104,7 +107,7 @@ def food_log_get():
                 #a tuple that contains the nutrient_number plus a dictionary of 
                 #subnutrients.
             category = food_nutrient_dictionary_new[category_name]
-            print 106, category
+            
           
             for nutrient_name, nutrient_tuple in category.iteritems():
                 nutrient_number = nutrient_tuple[0]
@@ -112,7 +115,14 @@ def food_log_get():
                     value = nutrient_number_to_quantity(
                         nutrients, str(nutrient_number), association, unit
                         )
-                    nutrient_unit = "g"
+                    # lambda function finds the matching nutrient_definition in the nutr_def table
+                    # filtering by nutrient number. It will return the information in the form of a list.
+                    
+                    nutrient_definition = filter(
+                        lambda nutrient_definition: 
+                           nutrient_definition.Nutr_No == str(nutrient_number), 
+                        nutrient_definitions)[0]
+                    nutrient_unit = nutrient_definition.Units
                 else:
                     value = None
                     nutrient_unit = ""
@@ -123,7 +133,7 @@ def food_log_get():
                 
                 #puts the value into the nutrient_dict
                 nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
-                print 114, nutrient_tuple[1]
+                
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
                     value = nutrient_number_to_quantity(
@@ -132,7 +142,7 @@ def food_log_get():
                     # to access the value of OrderedDict
                     nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
 
-                    print 123, subnutrient_name, value
+                   
 
             
 
