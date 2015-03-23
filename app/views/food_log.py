@@ -123,6 +123,10 @@ def food_log_get():
                            nutrient_definition.Nutr_No == str(nutrient_number), 
                         nutrient_definitions)[0]
                     nutrient_unit = nutrient_definition.Units
+                    unit_precision = nutrient_definition.Num_Dec
+                    if isinstance(value, float):
+                        value = round(value, int(unit_precision))
+
                 else:
                     value = None
                     nutrient_unit = ""

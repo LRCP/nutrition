@@ -122,11 +122,14 @@
                     <table class="table">
                        <tr>
                             <td>
-                                <strong>Protein</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
+                                <div class="nutrient_header">
+                                    <strong>Protein</strong>
+                                
+                                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein">
+                                        <span class="glyphicon glyphicon-chevron-down">
+                                        </span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -139,7 +142,7 @@
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_protein">
+                        <tr class="more_protein more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -150,11 +153,13 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>CARBOHYDRATES</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_carbohydrates">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                            </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -162,12 +167,12 @@
                             (food["nutrients"]["Carbohydrates"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_carbohydrates">
+                        <tr class="more_carbohydrates more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -178,11 +183,13 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>FATS</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_fats">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                            </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -190,12 +197,12 @@
                             (food["nutrients"]["Fats & Fatty Acids"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_fats">
+                        <tr class="more_fats more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -206,27 +213,33 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>Vitamins</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_vitamins">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                            </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
                         {% for index, (nutrient_name, nutrient_tuple) in enumerate
                             (food["nutrients"]["Vitamins"].items()) %}
                         <tr>
+                            <div class="nutrient_header">
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
+                            </div>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_vitamins">
+                        <tr class="more_vitamins more">
+                            <div class="nutrient_header">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
+                            </div>
                         </tr>
                         {% endfor %}
                         {% endfor %}
@@ -234,11 +247,13 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>Minerals</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_minerals">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -246,12 +261,12 @@
                             (food["nutrients"]["Minerals"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_minerals">
+                        <tr class="more_minerals more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -262,11 +277,13 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>Sterols</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_sterols">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -274,12 +291,12 @@
                             (food["nutrients"]["Sterols"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_sterols">
+                        <tr class="more_sterols more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>
@@ -290,11 +307,13 @@
                     <table class="table">
                        <tr>
                             <td>
+                                <div class="nutrient_header">
                                 <strong>Other</strong>
                                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_other">
                                     <span class="glyphicon glyphicon-chevron-down">
                                     </span>
                                 </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -302,12 +321,12 @@
                             (food["nutrients"]["Other"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
-                        <tr class="more_other">
+                        <tr class="more_other more">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
                             </td>

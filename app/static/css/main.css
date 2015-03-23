@@ -78,6 +78,13 @@ header a{
   width: 87px;
 }
 
+td {
+  /*padding-left: 15px;*/
+}
+.nutrient_header{
+  text-align: center;
+}
+
 .more td:first-child{
     padding-left: 15px;
 
@@ -87,7 +94,7 @@ header a{
     display: table-row!important;
 }
 td.nutrient{
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 .add_foods{
