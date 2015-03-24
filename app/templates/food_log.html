@@ -92,12 +92,12 @@
                 <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
             </td>
             
-            <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"][0]|num_round()}}
+            <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"][0]}}
             </td>
-            <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"][0]|num_round()}}</td>
-            <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"][0]|num_round()}}</td>
-            <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]|num_round()}}</td>
-            <td>{{food["nutrients"]["Other"]["Water"][0]|num_round()}}</td>
+            <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"][0]}}</td>
+            <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"][0]}}</td>
+            <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]}}</td>
+            <td>{{food["nutrients"]["Other"]["Water"][0]}}</td>
             <td class="more_button">
                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
                     <span class="glyphicon glyphicon-chevron-down"></span>
@@ -124,11 +124,10 @@
                             <td>
                                 <div class="nutrient_header">
                                     <strong>Protein</strong>
-                                
-                                    <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein">
-                                        <span class="glyphicon glyphicon-chevron-down">
-                                        </span>
-                                    </button>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
                                 </div>
                             </td>
                         </tr>
@@ -137,7 +136,7 @@
                             (food["nutrients"]["Protein & Amino Acids"].items()) %}
                         <tr>
                             <td class="nutrient">
-                                {{nutrient_name}} {{nutrient_tuple[0]|num_round()}} {{ nutrient_tuple[2] }}
+                                {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
                         {% for index, (subnutrient_name, value) in enumerate
@@ -154,12 +153,12 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>CARBOHYDRATES</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_carbohydrates">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
-                            </div>
+                                    <strong>CARBOHYDRATES</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_carbohydrates">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                         </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -184,12 +183,12 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>FATS</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_fats">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
-                            </div>
+                                    <strong>FATS</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_fats">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -214,12 +213,12 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>Vitamins</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_vitamins">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
-                            </div>
+                                    <strong>Vitamins</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_vitamins">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
+                                </div>
                             </td>
                         </tr>
                         {# .items() returns a list of tuples of (key, value) #}
@@ -235,11 +234,9 @@
                         {% for index, (subnutrient_name, value) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_vitamins more">
-                            <div class="nutrient_header">
                             <td>
                                 {{subnutrient_name}} {{ value }} 
-                            </td>
-                            </div>
+                             </td>
                         </tr>
                         {% endfor %}
                         {% endfor %}
@@ -248,11 +245,11 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>Minerals</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_minerals">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
+                                    <strong>Minerals</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_minerals">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
                                 </div>
                             </td>
                         </tr>
@@ -278,11 +275,11 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>Sterols</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_sterols">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
+                                    <strong>Sterols</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_sterols">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
                                 </div>
                             </td>
                         </tr>
@@ -308,11 +305,11 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                <strong>Other</strong>
-                                <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_other">
-                                    <span class="glyphicon glyphicon-chevron-down">
-                                    </span>
-                                </button>
+                                    <strong>Other</strong>
+                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_other">
+                                            <span class="glyphicon glyphicon-chevron-down">
+                                            </span>
+                                        </button>
                                 </div>
                             </td>
                         </tr>

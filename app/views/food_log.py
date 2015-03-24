@@ -115,6 +115,7 @@ def food_log_get():
                     value = nutrient_number_to_quantity(
                         nutrients, str(nutrient_number), association, unit
                         )
+                    
                     # lambda function finds the matching nutrient_definition in the nutr_def table
                     # filtering by nutrient number. It will return the information in the form of a list.
                     
@@ -128,7 +129,7 @@ def food_log_get():
                         value = round(value, int(unit_precision))
 
                 else:
-                    value = None
+                    value = ""
                     nutrient_unit = ""
                     
 
@@ -140,9 +141,31 @@ def food_log_get():
                 
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
-                    value = nutrient_number_to_quantity(
-                    nutrients, subnutrient_number, association, unit
-                    )
+                    if subnutrient_number != None:
+                        value = nutrient_number_to_quantity(
+                            nutrients, str(subnutrient_number), association, unit
+                            )
+                        subnutrient_definition = filter(
+                            lambda subnutrient_definition: 
+                                subnutrient_definition.Nutr_No == str(subnutrient_number), 
+                            nutrient_definitions)[0]
+                    subnutrient_unit = subnutrient_definition.Units
+                    unit_precision = subnutrient_definition.Num_Dec
+                    if isinstance(value, float):
+                        value = round(value, int(unit_precision))
+
+                else:
+                    value = ""
+                    subnutrient_unit = ""
+                    
+
+
+
+                    if subnutrient_number == 318:
+                        print value
+
+
+                    
                     # to access the value of OrderedDict
                     nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
 
