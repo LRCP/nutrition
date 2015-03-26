@@ -149,14 +149,14 @@ def food_log_get():
                             lambda subnutrient_definition: 
                                 subnutrient_definition.Nutr_No == str(subnutrient_number), 
                             nutrient_definitions)[0]
-                    subnutrient_unit = subnutrient_definition.Units
-                    unit_precision = subnutrient_definition.Num_Dec
-                    if isinstance(value, float):
-                        value = round(value, int(unit_precision))
+                        subnutrient_unit = subnutrient_definition.Units
+                        unit_precision = subnutrient_definition.Num_Dec
+                        if isinstance(value, float):
+                            value = round(value, int(unit_precision))
 
-                else:
-                    value = ""
-                    subnutrient_unit = ""
+                    else:
+                        value = ""
+                        subnutrient_unit = ""
                     
 
 

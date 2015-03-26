@@ -200,8 +200,8 @@ food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Carotene, alpha"] = 322
 food_nutrient_dictionary_new["Vitamins"]["A, RAE"][1]["Cryptoxanthin, beta"] = 334
 #Level 2 Other carotenoids
 food_nutrient_dictionary_new["Vitamins"]["Carotenoids"] = (None, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lycopene"] = (337, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lutein + Zeaxanthin"] = (338, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lycopene"] = 337
+food_nutrient_dictionary_new["Vitamins"]["Carotenoids"][1]["Lutein + Zeaxanthin"] = 338
 
 food_nutrient_dictionary_new["Vitamins"]["B1 (Thiamin)"] = (404, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["B2 (Riboflavin)"] = (405, OrderedDict())
@@ -220,12 +220,12 @@ food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"][1]["Folate, food"] =
 food_nutrient_dictionary_new["Vitamins"]["B9 Folate Total"][1]["Folic acid"] = 431
 
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"] = (None, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin)"] = (418, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin)"] = 418
 food_nutrient_dictionary_new["Vitamins"]["B12 (Cobalamin)"][1]["B12 (Cobalamin), added"] = 578
 food_nutrient_dictionary_new["Vitamins"]["C, (ascorbic acid)"] = (401, OrderedDict())
 #Level 1
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (None, OrderedDict())
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"] = (328, OrderedDict())
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"] = 328
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D"] = 324
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["Vitamin D3(cholecalciferol)"] = 326
 
