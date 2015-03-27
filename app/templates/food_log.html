@@ -139,11 +139,11 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_protein more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -169,11 +169,15 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {# there are 3 levels of tuples: value is a tuple which consists of (value, unit) #}
+                        {# the items are a tuple which consists of (key, value) #}
+                        {# enumerate gives a tuple which consists of (indes, item) #}
+
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_carbohydrates more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -199,11 +203,11 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_fats more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -231,11 +235,11 @@
                             </td>
                             </div>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_vitamins more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                              </td>
                         </tr>
                         {% endfor %}
@@ -261,11 +265,11 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_minerals more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -291,11 +295,11 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_sterols more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}
@@ -321,11 +325,11 @@
                                 {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
                             </td>
                         </tr>
-                        {% for index, (subnutrient_name, value) in enumerate
+                        {% for index, (subnutrient_name, (value, unit)) in enumerate
                             (nutrient_tuple[1].items()) %}
                         <tr class="more_other more">
                             <td>
-                                {{subnutrient_name}} {{ value }} 
+                                {{subnutrient_name}} {{ value }} {{ unit }}
                             </td>
                         </tr>
                         {% endfor %}

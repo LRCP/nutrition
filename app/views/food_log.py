@@ -46,6 +46,18 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
             #puts the value into the nutrient_dict
     #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
     return value
+    nutrient_definition = filter(
+                        lambda nutrient_definition: 
+                           nutrient_definition.Nutr_No == str(nutrient_number), 
+                        nutrient_definitions)[0]
+                    nutrient_unit = nutrient_definition.Units
+                    #will work Python 3
+                    #if nutrient_unit == u"\xc2g":
+                        #nutrient_unit = "mcg"
+                    unit_precision = nutrient_definition.Num_Dec
+                    if isinstance(value, float):
+                        value = round(value, int(unit_precision))
+
    
 
 
@@ -124,6 +136,9 @@ def food_log_get():
                            nutrient_definition.Nutr_No == str(nutrient_number), 
                         nutrient_definitions)[0]
                     nutrient_unit = nutrient_definition.Units
+                    #will work Python 3
+                    #if nutrient_unit == u"\xc2g":
+                        #nutrient_unit = "mcg"
                     unit_precision = nutrient_definition.Num_Dec
                     if isinstance(value, float):
                         value = round(value, int(unit_precision))
@@ -167,7 +182,7 @@ def food_log_get():
 
                     
                     # to access the value of OrderedDict
-                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = value
+                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = (value, subnutrient_unit)
 
                    
 

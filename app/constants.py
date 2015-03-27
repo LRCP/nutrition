@@ -433,7 +433,7 @@ food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:2 i
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:2 trans,trans"] = 669
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:2 congugated linoleic acid(CLAs)"] = 670
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:3 trans (other isomers)"] = 856
-food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:3 i trans (mixed isomers)"] = 866
+#food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:3 i trans (mixed isomers)"] = 866
 #Other Polyunsaturated fats
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:3 undifferentiated octadecatrienoic"] = 619
 food_nutrient_dictionary_new["Fats & Fatty Acids"]["Polyunsaturated"][1]["18:4 octadecatetraenoic  parinaric"] = 627
