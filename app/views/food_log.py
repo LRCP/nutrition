@@ -47,16 +47,16 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
     #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
     return value
     nutrient_definition = filter(
-                        lambda nutrient_definition: 
-                           nutrient_definition.Nutr_No == str(nutrient_number), 
-                        nutrient_definitions)[0]
-                    nutrient_unit = nutrient_definition.Units
+        lambda nutrient_definition: 
+            nutrient_definition.Nutr_No == str(nutrient_number), 
+        nutrient_definitions)[0]
+        nutrient_unit = nutrient_definition.Units
                     #will work Python 3
                     #if nutrient_unit == u"\xc2g":
                         #nutrient_unit = "mcg"
-                    unit_precision = nutrient_definition.Num_Dec
-                    if isinstance(value, float):
-                        value = round(value, int(unit_precision))
+        unit_precision = nutrient_definition.Num_Dec
+        if isinstance(value, float):
+            value = round(value, int(unit_precision))
 
    
 
