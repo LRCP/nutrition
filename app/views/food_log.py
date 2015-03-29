@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 import copy
 from collections import defaultdict, OrderedDict
@@ -50,13 +51,13 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
         lambda nutrient_definition: 
             nutrient_definition.Nutr_No == str(nutrient_number), 
         nutrient_definitions)[0]
-        nutrient_unit = nutrient_definition.Units
+    nutrient_unit = nutrient_definition.Units
                     #will work Python 3
                     #if nutrient_unit == u"\xc2g":
                         #nutrient_unit = "mcg"
-        unit_precision = nutrient_definition.Num_Dec
-        if isinstance(value, float):
-            value = round(value, int(unit_precision))
+    unit_precision = nutrient_definition.Num_Dec
+    if isinstance(value, float):
+        value = round(value, int(unit_precision))
 
    
 
@@ -137,8 +138,8 @@ def food_log_get():
                         nutrient_definitions)[0]
                     nutrient_unit = nutrient_definition.Units
                     #will work Python 3
-                    #if nutrient_unit == u"\xc2g":
-                        #nutrient_unit = "mcg"
+                    if nutrient_unit == u"µg":
+                        nutrient_unit = u"mcg"
                     unit_precision = nutrient_definition.Num_Dec
                     if isinstance(value, float):
                         value = round(value, int(unit_precision))
@@ -165,6 +166,9 @@ def food_log_get():
                                 subnutrient_definition.Nutr_No == str(subnutrient_number), 
                             nutrient_definitions)[0]
                         subnutrient_unit = subnutrient_definition.Units
+                        if subnutrient_unit == u"µg":
+                            subnutrient_unit = u"mcg"
+
                         unit_precision = subnutrient_definition.Num_Dec
                         if isinstance(value, float):
                             value = round(value, int(unit_precision))
