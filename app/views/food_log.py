@@ -35,7 +35,9 @@ def sum_nutrients(nutrient_keys, nutrient_dictionary):
         total = total + nutrient_dictionary[key]
     return total
 
-def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
+
+
+def nutrient_number_to_quantity(nutrients, nutrient_number, subnutrient_number, association, unit):
     #consider passing quantity and weight instead of association and unit.
     try:
         value = next(x.Nutr_Val for x in nutrients
