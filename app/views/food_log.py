@@ -99,7 +99,7 @@ def food_log_get():
 
 
     nutrient_definitions = session.query(NutrientDefinition).all()
-    print nutrient_definitions[0].NutrDesc
+    
 
 
     # Get the current food log
@@ -116,7 +116,7 @@ def food_log_get():
 
         #get all the nutrient's data by serching by its ndb.no
         nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
-        units = session.query(Weight).filter_by(NDB_No=ndb).all()
+       
 
        
         nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
@@ -140,7 +140,12 @@ def food_log_get():
                     
                     # lambda function finds the matching nutrient_definition in the nutr_def table
                     # filtering by nutrient number. It will return the information in the form of a list.
+
+                    # unpack the tuple that returns nutrient_unit when 
+                    # the arguments nutrient_definitions and nutrient are passed into the get_nutrient_unit function.
                     nutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, nutrient_number)
+                    # unpack the tuple that returns the value and nutrient_unit when
+                    # the arguments value, nutrient_unit and unit_precision are passed into the format_unit_for_display function.
                     value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)
                     
 
@@ -161,30 +166,11 @@ def food_log_get():
                         value = nutrient_number_to_quantity(
                             nutrients, str(subnutrient_number), association, unit
                             )
-                        # subnutrient_definition = filter(
-                        #     lambda subnutrient_definition: 
-                        #         subnutrient_definition.Nutr_No == str(subnutrient_number), 
-                        #     nutrient_definitions)[0]
-                        # subnutrient_unit = subnutrient_definition.Units
-                        # if subnutrient_unit == u"µg":
-                        #     subnutrient_unit = u"mcg"
-
-                        # unit_precision = subnutrient_definition.Num_Dec
-                        # if isinstance(value, float):
-                        #     value = round(value, int(unit_precision))
                         subnutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, subnutrient_number)
                         value, subnutrient_unit = format_unit_for_display(value, subnutrient_unit, unit_precision)
                     else:
                         value = ""
                         subnutrient_unit = ""
-                    
-
-
-
-                    if subnutrient_number == 318:
-                        print value
-
-
                     
                     # to access the value of OrderedDict
                     nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = (value, subnutrient_unit)
