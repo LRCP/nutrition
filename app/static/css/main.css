@@ -82,7 +82,8 @@ td {
   /*padding-left: 15px;*/
 }
 .nutrient_header{
-  text-align: center;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 .more td:first-child{
@@ -102,10 +103,10 @@ td.nutrient{
   
 }
 
-.food-body{
+.add_food_bar{
   padding: 15px;
 }
-.food-body input {
+.add_food_bar input {
   padding: 5px 0;
 }
 
@@ -195,7 +196,7 @@ td.nutrient{
   vertical-align: middle;
 }
 
-.btn {
+.add_food_bar .btn {
   border: 1px solid black;
   border-radius: 0;
   vertical-align: middle;

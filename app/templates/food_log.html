@@ -37,7 +37,7 @@
 
 </div>
 
-<div class="food-body">
+<div class="add_food_bar">
     <form class="form-inline" method=post action="/food_log">
         <div class="btn-group" id="existing-dropdown">
                 <button type="button" class="dropdown-toggle btn btn-default" aria-expanded="false" data-toggle="dropdown">
@@ -101,14 +101,14 @@
             <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]}}</td>
             <td>{{food["nutrients"]["Other"]["Water"][0]}}</td>
             <td class="more_button">
-                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
+                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
+                    <span class="glyphicon glyphicon-plus"></span>
                 </button>
             </td>
             <td class="delete_button">
                 {% if food["name"] != "Totals" %}
                 <a href="food_log/delete/{{food["id"]}}">
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default btn-xs">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                 </a>
@@ -125,9 +125,9 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                    <strong>Protein</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_protein-{{ food_index }}">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                    <strong>PROTEIN</strong>
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_protein-{{ food_index }}">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                         </button>
                                 </div>
@@ -156,8 +156,8 @@
                             <td>
                                 <div class="nutrient_header">
                                     <strong>CARBOHYDRATES</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_carbohydrates-{{ food_index }} ">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_carbohydrates-{{ food_index }} ">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                          </button>
                                 </div>
@@ -190,8 +190,8 @@
                             <td>
                                 <div class="nutrient_header">
                                     <strong>FATS</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_fats-{{ food_index }}">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_fats-{{ food_index }}">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                         </button>
                                 </div>
@@ -219,9 +219,9 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                    <strong>Vitamins</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_vitamins-{{ food_index }}">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                    <strong>VITAMINS</strong>
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_vitamins-{{ food_index }}">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                         </button>
                                 </div>
@@ -251,11 +251,7 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                    <strong>Minerals</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_minerals">
-                                            <span class="glyphicon glyphicon-chevron-down">
-                                            </span>
-                                        </button>
+                                    <strong>MINERALS</strong>
                                 </div>
                             </td>
                         </tr>
@@ -281,9 +277,9 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                    <strong>Sterols</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_sterols-{{ food_index }}">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                    <strong>STEROLS</strong>
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_sterols-{{ food_index }}">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                         </button>
                                 </div>
@@ -311,9 +307,9 @@
                        <tr>
                             <td>
                                 <div class="nutrient_header">
-                                    <strong>Other</strong>
-                                        <button type="button" class="btn btn-default" data-toggle="collapse" data-target=".more_other-{{ food_index }}">
-                                            <span class="glyphicon glyphicon-chevron-down">
+                                    <strong>OTHER</strong>
+                                        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_other-{{ food_index }}">
+                                            <span class="glyphicon glyphicon-plus">
                                             </span>
                                         </button>
                                 </div>
