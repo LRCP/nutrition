@@ -183,4 +183,7 @@ $(document).ready(function() {
         inches_input.val(inches);
         
    });
+
+   var food_row = $(".food_row");
+   console.log(food_row)
 });

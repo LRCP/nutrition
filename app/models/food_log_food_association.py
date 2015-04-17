@@ -10,3 +10,5 @@ class FoodLogFoodAssociation(BaseNutrition):
     unit_Seq = Column(Text)
     quantity = Column(Float)
 
+    
+
