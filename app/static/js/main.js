@@ -184,6 +184,13 @@ $(document).ready(function() {
         
    });
 
-   var food_row = $(".food_row");
-   console.log(food_row)
+    var food_row = $(".food_row");
+    console.log(food_row)
+    // $ searches for an element on the page, reutrns it to javascript
+    // and lets me use it. alert is a function built into javascipt.
+    // alert will pop up a message.
+    food_row.click(function() {
+        $( this ).toggleClass( "highlight");
+    
+});
 });
