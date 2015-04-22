@@ -185,12 +185,24 @@ $(document).ready(function() {
    });
 
     var food_row = $(".food_row");
+    //console. log is similar to print in python used for debugging.
     console.log(food_row)
     // $ searches for an element on the page, reutrns it to javascript
     // and lets me use it. alert is a function built into javascipt.
     // alert will pop up a message.
     food_row.click(function() {
         $( this ).toggleClass( "highlight");
+        
+    });
+
+    var save_changes_btn = $("#save_changes_btn");
+    save_changes_btn.click(function(){
+        var selected_foods = $(".food_row.highlight");
+        console.log(selected_foods)
+        $.post("food_log/save_meal?selected_foods=demo")
+    });
+
+
+
     
-});
 });

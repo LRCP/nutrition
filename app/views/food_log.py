@@ -71,6 +71,15 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
             #puts the value into the nutrient_dict
     #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
     return value
+@app.route('/food_log/save_meal', methods=['POST'])
+@login_required
+def saved_foods_post():
+    user = current_user
+
+    print "save_meal"
+    print request.args.get('selected_foods')
+
+
 
 @app.route('/food_log', methods=['GET'])
 @login_required
