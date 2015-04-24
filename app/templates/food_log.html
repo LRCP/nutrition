@@ -114,7 +114,8 @@
         {# we get a tuple with emumerate and then we unpack it as
         food_index, food_nutrient_list. We want all but the very last one. food_index will be an integer. #}
         {% for food_index, food in enumerate(food_nutrient_list[:-1]) %}
-        <tr class="food_row">
+        {# Can create any data type attributes by starting its name as data-#}
+        <tr class="food_row" data-association-id="{{food["id"]}}">
             <td class="food_name">{{food["name"]}}<br>
                 <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
             </td>

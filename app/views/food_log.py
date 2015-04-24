@@ -71,13 +71,30 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
             #puts the value into the nutrient_dict
     #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
     return value
-@app.route('/food_log/save_meal', methods=['POST'])
+@app.route('/food_log/saved_meal', methods=['POST'])
 @login_required
-def saved_foods_post():
+def saved_meal_post():
     user = current_user
-
+    saved_meal = request.args.get('selected_foods')
+    if saved_meal == None:
+        return ""
+        #splits the string into a list of strings separated by commas
+    saved_meal = saved_meal.split(',')
+    #find examples in the food_log.py
+    #create an instance of the Meal model
+    user.saved_meal_post = []
+    #loop through the ids
+    for code in saved_meal:
+        #query the Food_Log_Food_Association to get the info about the food
+        association = Food_Log_Food_Association(food_group_code=code)
+        #add a meal food association to the meal containing the same info as the 
+        #Food_Log_Food_Association
+        user.saved_meal.append(association)
+        #save the meal
+    session.commit()
     print "save_meal"
     print request.args.get('selected_foods')
+    return ""
 
 
 

@@ -7,6 +7,7 @@ $(document).ready(function() {
             var selectedOptions = $('.multiselect option:selected');
             var selected_food_groups = "";
             selectedOptions.each(function(index, selectedOption){
+                //.val() is used to get values from form )inputs, dropdowns) elements
                 selected_food_groups += $(selectedOption).val();
                 selected_food_groups += ',';
             });
@@ -194,12 +195,25 @@ $(document).ready(function() {
         $( this ).toggleClass( "highlight");
         
     });
-
+    //select btn
     var save_changes_btn = $("#save_changes_btn");
+    //do something when you click on the btn
     save_changes_btn.click(function(){
-        var selected_foods = $(".food_row.highlight");
+        //selects the foods rows that have been highlighted
+        var selected_food_rows = $(".food_row.highlight");
+        var selected_foods = "";
+        selected_food_rows.each(function(index, selected_food_row){
+            selected_foods += $(selected_food_row).data("association-id");
+                selected_foods += ',';
+
+        });
+
+
         console.log(selected_foods)
-        $.post("food_log/save_meal?selected_foods=demo")
+        //post request to the url food_log/saved_meal
+        // the query string matches up to the request.args.get('selected_foods')
+        $.post("/food_log/saved_meal?selected_foods=" + selected_foods);
+        
     });
 
 
