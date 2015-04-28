@@ -75,22 +75,38 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
 @login_required
 def saved_meal_post():
     user = current_user
-    saved_meal = request.args.get('selected_foods')
-    if saved_meal == None:
+
+    selected_foods = request.args.get('selected_foods')
+    if selected_foods == None:
         return ""
         #splits the string into a list of strings separated by commas
-    saved_meal = saved_meal.split(',')
-    #find examples in the food_log.py
+    selected_foods = selected_foods.split(',')
+    
     #create an instance of the Meal model
-    user.saved_meal_post = []
-    #loop through the ids
-    for code in saved_meal:
-        #query the Food_Log_Food_Association to get the info about the food
-        association = Food_Log_Food_Association(food_group_code=code)
-        #add a meal food association to the meal containing the same info as the 
-        #Food_Log_Food_Association
-        user.saved_meal.append(association)
+    saved_meal = Meal()
+    
+    #loop through the food_ids to save the selected foods as a meal.
+    for food_id in selected_foods:
+        #making an instance of the  Class MealFoodAssociation
+        meal_food_association = MealFoodAssociation()
+
+        #query the FoodLogFoodAssociation table to get the row (the matching association) that has the specific 
+        #food_id.
+        
+        food_log_food_association = session.query(FoodLogFoodAssociation).get(food_id)
+
+        #access the attribute of the variable which is an instance of the class
+        #copy the attributes from the food_log_food_association to the
+        #attribute mealfoodassociation
+        #integer primary keys are automatically filled in.
+        meal_food_association.food_NDB_No = food_log_food_association.food_NDB_No
+        meal_food_association.unit_Seq = food_log_food_association.unit_Seq
+        meal_food_association.quantity = food_log_food_association.quantity
+
+
+        saved_meal.foods.append(association)
         #save the meal
+    session.add(saved_meal)
     session.commit()
     print "save_meal"
     print request.args.get('selected_foods')
