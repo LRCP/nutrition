@@ -15,6 +15,8 @@ from app.models.usda import NutrientData
 from app.constants import food_nutrient_dictionary_new
 #from app.constants import food_nutrient_dictionary
 from app.models.favorite_association import FavoriteAssociation
+from app.models.meal import Meal
+from app.models.meal_food_association import MealFoodAssociation
 
 def get_food_log(user):
     food_log = session.query(FoodLog).filter_by(user=user).first()
@@ -77,23 +79,31 @@ def saved_meal_post():
     user = current_user
 
     selected_foods = request.args.get('selected_foods')
+
+    #think about keys and values. look at the flask documentation for requesting
+    #keys and values.
+
+
+
+    snacks = request.args.get('snacks')
     if selected_foods == None:
         return ""
-        #splits the string into a list of strings separated by commas
-    selected_foods = selected_foods.split(',')
+        #need to first strip leading and trailing commas to create a clean and valid list
+        #of strings separated by commas.
+    selected_foods = selected_foods.strip(",").split(',')
     
     #create an instance of the Meal model
     saved_meal = Meal()
     
     #loop through the food_ids to save the selected foods as a meal.
+    #selected_foods is a list.
     for food_id in selected_foods:
         #making an instance of the  Class MealFoodAssociation
         meal_food_association = MealFoodAssociation()
 
         #query the FoodLogFoodAssociation table to get the row (the matching association) that has the specific 
         #food_id.
-        
-        food_log_food_association = session.query(FoodLogFoodAssociation).get(food_id)
+        food_log_food_association = session.query(FoodLogFoodAssociation).get(int(food_id))
 
         #access the attribute of the variable which is an instance of the class
         #copy the attributes from the food_log_food_association to the
@@ -102,9 +112,11 @@ def saved_meal_post():
         meal_food_association.food_NDB_No = food_log_food_association.food_NDB_No
         meal_food_association.unit_Seq = food_log_food_association.unit_Seq
         meal_food_association.quantity = food_log_food_association.quantity
-
-
-        saved_meal.foods.append(association)
+        #add the saved food to the Meal
+        saved_meal.foods.append(meal_food_association)
+    #append the saved _meal to the list user.meals
+    #save it once. Take it out of the for loop.
+    user.meals.append(saved_meal)
         #save the meal
     session.add(saved_meal)
     session.commit()

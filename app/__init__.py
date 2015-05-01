@@ -30,12 +30,16 @@ login_manager.login_view = 'login'
 
 # Then import needed files already existing in the root folder
 #can import values, functions, classes.
-
+#need to import al the classes created in app/models
 from app.models.user import User
 from app.models.food_log import FoodLog
 from app.models.food_log_food_association import FoodLogFoodAssociation
 from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.favorite_association import FavoriteAssociation
+from app.models.meal import Meal
+from app.models.meal_food_association import MealFoodAssociation
+
+
 from app.models.usda import *
 
 BaseNutrition.metadata.create_all(engineNutrition)
@@ -49,8 +53,11 @@ session = Session(binds={
     FavoriteAssociation:engineNutrition,
     DataDerivationCodeDescription:engineUSDA,
     FoodLog:engineNutrition,
+    Meal:engineNutrition,
+    MealFoodAssociation:engineNutrition,
     FoodDescription:engineUSDA,
     FoodGroupDescription:engineUSDA,
+
     Footnote:engineUSDA,
     LangualFactorsDescription:engineUSDA,
     LangualFactor:engineUSDA,
@@ -60,6 +67,7 @@ session = Session(binds={
     SourcesOfDataLink:engineUSDA,
     SourceCode:engineUSDA,
     Weight:engineUSDA,
+
 })
 
 # to import the user into our views and access the user, we must first

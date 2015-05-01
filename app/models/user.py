@@ -35,6 +35,12 @@ class User(BaseNutrition):
     body_mass_index = Column(Float)
     selected_food_groups = relationship('UserFoodGroupAssociation')
     favorite_foods = relationship('FavoriteAssociation')
+    #link the user to several meals.
+    #sqlalchemy goes to te Meal Class, looks for the foreign key in Meal relating
+    #to the User Class.
+    #any alterations to the meal variable, like adding a new meal, will automatically
+    #add the user id to the meal.
+    meals = relationship('Meal')
 
     def get_body_mass_index(self):
         bmi = self.weight_in_kilograms / (self.height_in_meters **2)
