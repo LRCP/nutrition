@@ -212,7 +212,7 @@ $(document).ready(function() {
         console.log(selected_foods)
         //post request to the url food_log/saved_meal
         // the query string matches up to the request.args.get('selected_foods')
-        $.post("/food_log/saved_meal?selected_foods=" + selected_foods);
+        $.post("/food_log/saved_meal?meal_name=snack&selected_foods=" + selected_foods);
         
     });
 

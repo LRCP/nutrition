@@ -79,6 +79,8 @@ def saved_meal_post():
     user = current_user
 
     selected_foods = request.args.get('selected_foods')
+    meal_name = request.args.get('meal_name')
+
 
     #think about keys and values. look at the flask documentation for requesting
     #keys and values.
@@ -93,7 +95,11 @@ def saved_meal_post():
     selected_foods = selected_foods.strip(",").split(',')
     
     #create an instance of the Meal model
-    saved_meal = Meal()
+    #creating a Meal object by calling the Meal constructor.
+    #can set any column values as identified in the models, in this case models/meal.py
+    #creating a name for the saved_meal 
+    saved_meal = Meal(name=meal_name)
+
     
     #loop through the food_ids to save the selected foods as a meal.
     #selected_foods is a list.
