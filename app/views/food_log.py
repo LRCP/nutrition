@@ -76,6 +76,7 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
 @app.route('/food_log/saved_meal', methods=['POST'])
 @login_required
 def saved_meal_post():
+    #don't use the reequest.args.get('user') to avoid malicious user.
     user = current_user
 
     selected_foods = request.args.get('selected_foods')
@@ -128,7 +129,8 @@ def saved_meal_post():
     session.commit()
     print "save_meal"
     print request.args.get('selected_foods')
-    return ""
+    #return ""
+    #return render_template('food_log.html',saved_meal, selected_foods, error=error)
 
 
 

@@ -141,6 +141,9 @@ $(document).ready(function() {
     height_ranges.each(function(index, range){
         /* jquery loops through the html elements.*/
         /* we are converting the javascript/html element into jquery javascript/html elements*/
+        //$ in javascript is a query to find a subset of a DOM, or object. Usually a class or an id.
+        //"$" gives us html elements.
+        //to query for anelement, 
         var range = $(range);
         var input = range.find("input");
         input.on("input change", function(event){
@@ -208,11 +211,15 @@ $(document).ready(function() {
 
         });
 
-
+        //console.log is a debugging technique
         console.log(selected_foods)
         //post request to the url food_log/saved_meal
         // the query string matches up to the request.args.get('selected_foods')
-        $.post("/food_log/saved_meal?meal_name=snack&selected_foods=" + selected_foods);
+        //selected_foods is a list of ids for the selected foods.
+        //javascrit makes a posting request to python/terminal
+        //to get the value element, use .val()
+        var meal_name = $('div.modal-body [name="meal"]').val();
+        $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
         
     });
 
