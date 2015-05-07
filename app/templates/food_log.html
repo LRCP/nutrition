@@ -43,13 +43,13 @@
             <button type="button" class="dropdown-toggle btn btn-default" aria-expanded="false" data-toggle="dropdown">
                 Add Existing Meal, Snack or Food <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu">
+            {# <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Breakfast</a></li>
                 <li><a href="#">Lunch</a></li>
                 <li><a href="#">Dinner</a></li>
                 <li><a href="#">Snack</a></li>
                 <li><a href="#">Food</a></li>
-            </ul>
+            </ul> #}
         </div>
 
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#save_meal">Save Meal</button>
@@ -60,14 +60,18 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Save Meal</h4>
+                        <h4 class="modal-title" id="myModalLabel" >Save Meal</h4>
+                            <p>Consider saving your meal as Meal Category/Meal Name.<br>
+                               Example: Breakfast/Oatmeal, Lunch/Quinoa Brean Bowl.
+                            </p>
+                            
                     </div>
                     <div class="modal-body">
                         <input type="text" name="meal" required placeholder="Name Your Meal">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_changes_btn">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save changes</button>
                     </div>
                  </div>
             </div>

@@ -88,7 +88,7 @@ def saved_meal_post():
 
 
 
-    snacks = request.args.get('snacks')
+   
     if selected_foods == None:
         return ""
         #need to first strip leading and trailing commas to create a clean and valid list
@@ -127,10 +127,9 @@ def saved_meal_post():
         #save the meal
     session.add(saved_meal)
     session.commit()
-    print "save_meal"
-    print request.args.get('selected_foods')
-    #return ""
-    #return render_template('food_log.html',saved_meal, selected_foods, error=error)
+    #returning an empty string is saying that the code works.
+    return ""
+    
 
 
 

@@ -208,8 +208,9 @@ $(document).ready(function() {
         selected_food_rows.each(function(index, selected_food_row){
             selected_foods += $(selected_food_row).data("association-id");
                 selected_foods += ',';
-
         });
+        //un highlight selected_foods_rows
+        selected_food_rows.removeClass("highlight")
 
         //console.log is a debugging technique
         console.log(selected_foods)
@@ -218,7 +219,7 @@ $(document).ready(function() {
         //selected_foods is a list of ids for the selected foods.
         //javascrit makes a posting request to python/terminal
         //to get the value element, use .val()
-        var meal_name = $('div.modal-body [name="meal"]').val();
+        var meal_name = $('div#save_meal [name="meal"]').val();
         $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
         
     });
@@ -227,3 +228,5 @@ $(document).ready(function() {
 
     
 });
+
+
