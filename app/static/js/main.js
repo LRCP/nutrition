@@ -218,10 +218,13 @@ $(document).ready(function() {
         // the query string matches up to the request.args.get('selected_foods')
         //selected_foods is a list of ids for the selected foods.
         //javascrit makes a posting request to python/terminal
-        //to get the value element, use .val()
-        var meal_name = $('div#save_meal [name="meal"]').val();
+        //to return or get the value of the element, 
+        //or what has been typed in as save_meal, use .val()
+        var meal_name_input = $('div#save_meal [name="meal"]');
+        var meal_name = meal_name_input.val() 
+        console.log(meal_name)
         $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
-        
+        meal_name = meal_name_input.val("")
     });
 
 
