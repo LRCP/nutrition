@@ -215,16 +215,20 @@ $(document).ready(function() {
         //console.log is a debugging technique
         console.log(selected_foods)
         //post request to the url food_log/saved_meal
+        // post connects the front end, browser, to the back end, python code
         // the query string matches up to the request.args.get('selected_foods')
         //selected_foods is a list of ids for the selected foods.
         //javascrit makes a posting request to python/terminal
         //to return or get the value of the element, 
         //or what has been typed in as save_meal, use .val()
         var meal_name_input = $('div#save_meal [name="meal"]');
+        //meal_name is a copy of the immutable string returned by meal_name_input.val()
         var meal_name = meal_name_input.val() 
         console.log(meal_name)
+        //
         $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
-        meal_name = meal_name_input.val("")
+        //changing meal_name_input.val() won't change meal_name and visa-versa.
+        meal_name_input.val("")
     });
 
 
