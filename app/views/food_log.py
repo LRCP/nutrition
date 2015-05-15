@@ -3,7 +3,7 @@ import json
 import copy
 from collections import defaultdict, OrderedDict
 
-from flask import redirect, url_for, render_template, request
+from flask import flash, redirect, url_for, render_template, request
 from flask.ext.login import login_required, current_user
 
 from app import app, session, ordered_defaultdict
@@ -88,8 +88,8 @@ def saved_meal_post():
 
 
 
-   
-    if selected_foods == None:
+   #do not use 'if not selected_foods' because the id of 0 evaluates to False.
+    if selected_foods == None or selected_foods == "":  
         return ""
         #need to first strip leading and trailing commas to create a clean and valid list
         #of strings separated by commas.

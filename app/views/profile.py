@@ -2,6 +2,7 @@ from flask import request, render_template, flash
 from app import app, session
 from flask.ext.login import login_user, current_user, login_required
 from app.forms import ProfileForm
+#flash store information for a redirect or rendered template.
 
 
 #from sqlalchemy import Column, Integer, Sequence, ForeignKey

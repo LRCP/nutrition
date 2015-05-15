@@ -204,6 +204,11 @@ $(document).ready(function() {
     save_changes_btn.click(function(){
         //selects the foods rows that have been highlighted
         var selected_food_rows = $(".food_row.highlight");
+        if (selected_food_rows.length == 0){
+
+        };
+
+
         var selected_foods = "";
         selected_food_rows.each(function(index, selected_food_row){
             selected_foods += $(selected_food_row).data("association-id");
@@ -225,7 +230,10 @@ $(document).ready(function() {
         //meal_name is a copy of the immutable string returned by meal_name_input.val()
         var meal_name = meal_name_input.val() 
         console.log(meal_name)
-        //
+
+        //we are making a post request for 2 pieces of information to othe server.
+        //meal_name is a string
+        //selected_foods are integers of the id of the food in the food_log_food_association
         $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
         //changing meal_name_input.val() won't change meal_name and visa-versa.
         meal_name_input.val("")
