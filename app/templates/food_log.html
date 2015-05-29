@@ -51,8 +51,10 @@
                 <li><a href="#">Food</a></li>
             </ul> #}
         </div>
-
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#save_meal">Save Meal</button>
+        {# When we want to add ajavascript condition to a button, can't use attributes in the button. #}
+        <button type="button" class="btn btn-default" id="save_meal_btn">
+            Save Meal
+        </button>
 
 <!-- Modal -->
         <div class="modal fade" id="save_meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -60,9 +62,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel" >Save Meal</h4>
+                        <h4 class="modal-title" id="myModalLabel">Save Meal</h4>
                             <p>Consider saving your meal as Meal Category/Meal Name.<br>
-                               Example: Breakfast/Oatmeal, Lunch/Quinoa Brean Bowl.
+                               Example: Breakfast/Oatmeal, Lunch/Quinoa Bean Bowl.
                             </p>
                             
                     </div>
@@ -71,7 +73,29 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save Changes</button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
+<!-- Modal Error -->
+        <div class="modal fade" id="error_meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <!--
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                        <h4 class="modal-title" id="myModalLabel">Error</h4>
+                            
+                            
+                    </div>
+                    <div class="modal-body">
+                        <p>Please select foods before continuing.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
                     </div>
                  </div>
             </div>

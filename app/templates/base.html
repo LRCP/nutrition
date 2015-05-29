@@ -49,16 +49,18 @@
         {# <p id="login-logout">Welcome {{ user.username }}!</p> #}
         
 
-        
+        {# get_flashed_messages is a python function that returns a list of all the messages sent using the Python flash function. #}
+        {# with creates a variable #}
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
+        {# {% if messages %} #}
+        {# the message is only created if it comes from Python. #}
         <ul>
             {% for message in messages %}
                 <li>{{ message }} </li>
                 
             {% endfor %}
         </ul>
-        {% endif %}
+        {# {% endif %} #}
         {% endwith %} 
     {% block content %}{% endblock %}        
     </body>

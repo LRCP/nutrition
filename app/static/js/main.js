@@ -199,21 +199,35 @@ $(document).ready(function() {
         
     });
     //select btn
+    var save_meal_btn = $("#save_meal_btn");
     var save_changes_btn = $("#save_changes_btn");
+
     //do something when you click on the btn
+    save_meal_btn.click(function(){
+        var selected_food_rows = $(".food_row.highlight");
+        if (selected_food_rows.length !== 0){
+            $('#save_meal').modal();
+            //$('ul').append('<li>Please select the foods to be saved as a meal.</li>');
+        
+        }
+        else {
+            $('#error_meal').modal();
+        }
+       
+
+    })
     save_changes_btn.click(function(){
         //selects the foods rows that have been highlighted
         var selected_food_rows = $(".food_row.highlight");
-        if (selected_food_rows.length == 0){
 
-        };
-
-
+        
         var selected_foods = "";
         selected_food_rows.each(function(index, selected_food_row){
             selected_foods += $(selected_food_row).data("association-id");
                 selected_foods += ',';
         });
+        
+
         //un highlight selected_foods_rows
         selected_food_rows.removeClass("highlight")
 
@@ -227,11 +241,13 @@ $(document).ready(function() {
         //to return or get the value of the element, 
         //or what has been typed in as save_meal, use .val()
         var meal_name_input = $('div#save_meal [name="meal"]');
+
         //meal_name is a copy of the immutable string returned by meal_name_input.val()
         var meal_name = meal_name_input.val() 
         console.log(meal_name)
 
-        //we are making a post request for 2 pieces of information to othe server.
+
+        //we are making a post request for 2 pieces of information to other server.
         //meal_name is a string
         //selected_foods are integers of the id of the food in the food_log_food_association
         $.post("/food_log/saved_meal?meal_name=" + meal_name + "&selected_foods=" + selected_foods);
