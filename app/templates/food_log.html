@@ -40,16 +40,9 @@
 <div class="add_food_bar">
     <form class="form-inline" method=post action="/food_log">
         <div class="btn-group" id="existing-dropdown">
-            <button type="button" class="dropdown-toggle btn btn-default" aria-expanded="false" data-toggle="dropdown">
-                Add Existing Meal, Snack or Food <span class="caret"></span>
+            <button type="button" class="btn btn-default">
+                Saved Meals
             </button>
-            {# <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Breakfast</a></li>
-                <li><a href="#">Lunch</a></li>
-                <li><a href="#">Dinner</a></li>
-                <li><a href="#">Snack</a></li>
-                <li><a href="#">Food</a></li>
-            </ul> #}
         </div>
         {# When we want to add ajavascript condition to a button, can't use attributes in the button. #}
         <button type="button" class="btn btn-default" id="save_meal_btn">
@@ -57,10 +50,16 @@
         </button>
 
 <!-- Modal -->
+        {# All modals 3div classes: modal-header, modal-body and modal-footer #}
         <div class="modal fade" id="save_meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    {# Every modal has 3 classes: header, body, footer. 
+                    Each class can have different elements such as a button, header, paragraph, breaks, input...
+                    Any attributes listed in the elements will always appear. If certain attributes are not automatically desired, don't list them as attributes.
+                    #}
                     <div class="modal-header">
+
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title" id="myModalLabel">Save Meal</h4>
                             <p>Consider saving your meal as Meal Category/Meal Name.<br>
@@ -84,6 +83,8 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
+                        {# any attributes listed in the element body will always appear. If certain attributes are  not automatically desired, don't list them as attributes.#}
+                        {# The 'x' button needs attributes to appear and be effective. #}
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <!--
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->

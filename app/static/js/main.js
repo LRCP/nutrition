@@ -199,19 +199,23 @@ $(document).ready(function() {
         
     });
     //select btn
+    //create the btn variables to correspond to the html button.
     var save_meal_btn = $("#save_meal_btn");
     var save_changes_btn = $("#save_changes_btn");
 
     //do something when you click on the btn
+    //create a variable for selected_food_rows
     save_meal_btn.click(function(){
         var selected_food_rows = $(".food_row.highlight");
+         //if food_rows are highlighted, then open the save_meal modal.
         if (selected_food_rows.length !== 0){
             $('#save_meal').modal();
-            //$('ul').append('<li>Please select the foods to be saved as a meal.</li>');
-        
+            
         }
+        //else if no food_rows are highlighted, then open the error_meal modal.
         else {
             $('#error_meal').modal();
+            
         }
        
 
@@ -228,7 +232,7 @@ $(document).ready(function() {
         });
         
 
-        //un highlight selected_foods_rows
+        //un-highlight selected_foods_rows
         selected_food_rows.removeClass("highlight")
 
         //console.log is a debugging technique
