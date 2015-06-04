@@ -40,11 +40,11 @@
 <div class="add_food_bar">
     <form class="form-inline" method=post action="/food_log">
         <div class="btn-group" id="existing-dropdown">
-            <button type="button" class="btn btn-default">
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#saved_meals">
                 Saved Meals
             </button>
         </div>
-        {# When we want to add ajavascript condition to a button, can't use attributes in the button. #}
+        {# When we want to add a javascript condition to a button, can't use the following attributes in the button. We don't use data-toggle or data-target attributes. WHen there are no conditions to be satisfoed for the modal to pop up, we can use data attributes such as data-toggle and dat-target.#}
         <button type="button" class="btn btn-default" id="save_meal_btn">
             Save Meal
         </button>
@@ -102,6 +102,43 @@
             </div>
         </div>
 
+        <div class="modal fade" id="saved_meals" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    {# Every modal has 3 classes: header, body, footer. 
+                    Each class can have different elements such as a button, header, paragraph, breaks, input...
+                    Any attributes listed in the elements will always appear. If certain attributes are not automatically desired, don't list them as attributes.
+                    #}
+                    <div class="modal-header">
+                        {#x button in upper right corner closes modal. &times will give the mutiplication symbol of x times for the special character "x"#}
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Saved Meals</h4>
+                            
+                    </div>
+                    <div class="modal-body">
+                        
+                            <div class="">
+                                <input type="text" class="form-control" name="meal_name" required placeholder="Saved Meals">
+                            </div>
+                            <p>Select Meal to add to Foodlog.</p>
+                            <div class="checkbox" value="">
+
+
+
+                        
+                               
+                        <input type="text" name="meal" required placeholder="Saved Meals">
+
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save Changes</button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+
     
 
 
@@ -110,7 +147,7 @@
         <select class="multiselect" multiple="multiple" id="food_group_select">
             {% for food_group, selected in food_groups_list %} 
         {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
-        {# food_group is a class. FodGrp_Desc is an attribute of food_group #}
+        {# food_group is a class. FoodGrp_Desc is an attribute of food_group #}
             <option value ="{{food_group.FdGrp_Cd}}"
             {% if selected %} selected {% endif %}>
             {{ food_group.FdGrp_Desc }}
