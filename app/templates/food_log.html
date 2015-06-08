@@ -49,9 +49,37 @@
             Save Meal
         </button>
 
+
 <!-- Modal -->
         {# All modals 3div classes: modal-header, modal-body and modal-footer #}
-        <div class="modal fade" id="save_meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        
+
+    
+
+
+
+        
+        <select class="multiselect" multiple="multiple" id="food_group_select">
+            {% for food_group, selected in food_groups_list %} 
+        {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
+        {# food_group is a class. FoodGrp_Desc is an attribute of food_group #}
+            <option value ="{{food_group.FdGrp_Cd}}"
+            {% if selected %} selected {% endif %}>
+            {{ food_group.FdGrp_Desc }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+        <input class="typeahead" type="text" name="food" required placeholder="Food">
+        <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
+        <select id="units" name="unit" required></select>
+        <button type="submit" class="btn btn-default">Add</button>
+
+    </form>
+
+</div> 
+<div class="modal fade" id="save_meal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     {# Every modal has 3 classes: header, body, footer. 
@@ -117,53 +145,30 @@
                     </div>
                     <div class="modal-body">
                         
-                            <div class="">
-                                <input type="text" class="form-control" name="meal_name" required placeholder="Saved Meals">
-                            </div>
-                            <p>Select Meal to add to Foodlog.</p>
-                            <div class="checkbox" value="">
-
-
-
-                        
-                               
-                        <input type="text" name="meal" required placeholder="Saved Meals">
-
-                    </div>
+                        <div class="">
+                            <input type="text" class="form-control" name="meal_name" required placeholder="Saved Meals">
+                        </div>
+                        <p>Select Meal to add to Foodlog.</p>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Breakfast
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Breakfast
+                            </label>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save Changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Add selected meals to my Foodlog</button>
                     </div>
                  </div>
             </div>
         </div>
-
-    
-
-
-
-        
-        <select class="multiselect" multiple="multiple" id="food_group_select">
-            {% for food_group, selected in food_groups_list %} 
-        {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
-        {# food_group is a class. FoodGrp_Desc is an attribute of food_group #}
-            <option value ="{{food_group.FdGrp_Cd}}"
-            {% if selected %} selected {% endif %}>
-            {{ food_group.FdGrp_Desc }}
-            </option>
-
-            {% endfor %}
-
-        </select>
-        <input class="typeahead" type="text" name="food" required placeholder="Food">
-        <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
-        <select id="units" name="unit" required></select>
-        <button type="submit" class="btn btn-default">Add</button>
-
-    </form>
-
-</div> 
 
 <div class="food-container">
     <table class="table">
