@@ -149,7 +149,7 @@ td.nutrient{
   border: 1px solid rgba(0, 0, 0, 0.2); 
   
 } */
-.typeahead {
+#food-typeahead{
   border: 1px solid black;
   width: 60px;
   
@@ -173,7 +173,7 @@ td.nutrient{
   
 }
 
-.typeahead.tt-input{
+#food-typeahead.tt-input{
   /*display: inline;
   vertical-align: middle;
   border: 1px solid black;

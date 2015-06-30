@@ -1,5 +1,6 @@
 // http://davidstutz.github.io/bootstrap-multiselect/#further-examples
 $(document).ready(function() {
+    //class multiselect allows us to select the food groups
     $('.multiselect').multiselect({    
         includeSelectAllOption: true,
         numberDisplayed: 0,
@@ -17,6 +18,8 @@ $(document).ready(function() {
 
         }
     });
+    //bloodhound is a typeahead.js user suggestion engine.
+    //bloodhound makes get request to the server to best match to what we typed.
     var datums = [];
     var foodEnterred = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -56,11 +59,14 @@ $(document).ready(function() {
 
             }
     });
-
+    //created the variable foodEnterred. 
+    //initialize function initializes the engine.
     foodEnterred.initialize();
+    
+    //typeahead user interface section.
     /*find the element with the class typeahead.*/ 
     // $ is a function selects elements of my DOM
-    var input = $('.typeahead');
+    var input = $('#food-typeahead');
 
 
     /*sets up typeahead*/
@@ -114,6 +120,7 @@ $(document).ready(function() {
         $("#quantity-input").prop('disabled', true);*/
         input.val("");
     }.bind(null, foodEnterred));
+
     var weight_ranges = $(".weight_range");
     weight_ranges.each(function(index, range){
         var range = $(range);

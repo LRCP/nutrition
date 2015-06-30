@@ -71,7 +71,7 @@
             {% endfor %}
 
         </select>
-        <input class="typeahead" type="text" name="food" required placeholder="Food">
+        <input class="typeahead" id="food-typeahead" type="text" name="food" required placeholder="Food">
         <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
         <select id="units" name="unit" required></select>
         <button type="submit" class="btn btn-default">Add</button>
@@ -100,7 +100,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save Changes</button>
+                        <button type="button" class="btn btn-primary" id="save_changes_btn" data-dismiss="modal">Save</button>
                     </div>
                  </div>
             </div>

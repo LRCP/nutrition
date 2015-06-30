@@ -6,6 +6,7 @@ from flask import request
 import json
 
 #we are returning json data
+#can type into the url bar: localhost:5000/saved
 @app.route('/queries/<query_string>.json', methods=['GET'])
 #create a function with thestring passed in. Lines 8 and 10 must match up.
 def query_foods(query_string):
@@ -44,13 +45,20 @@ def query_foods(query_string):
         #to test queries: type localhost:5000/queries/butter, salted.json
     return json.dumps(food_list)
 
+#can type into the url bar: localhost:5000/saved_meals/<query_string>.json
+#ex: localhost:5000/saved_meals/butter.json
 @app.route('/saved_meals/<query_string>.json', methods=['GET'])
 def query_saved_meals(query_string):
     #query database called saved_meals
     #construct a query that has the name matching the query string.
+    #assign variable saved_meals to the querying of what is in the Meal class.
     saved_meals = session.query(Meal)
     #ilike is case insensitive
+    #find the meals that have been typed in '%{}%' and regurn it as a query_string
     saved_meals = saved_meals.filter(Meal.name.ilike('%{}%'.format(query_string)))
+    #convert the object designated as the variable saved_meals into a dictionary 
+    #using .all() that
+    #python can work with.
     saved_meals = saved_meals.all()
     saved_meals_list = []
     for saved_meal in saved_meals:
