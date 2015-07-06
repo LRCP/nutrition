@@ -71,7 +71,10 @@
             {% endfor %}
 
         </select>
-        <input class="typeahead" id="food-typeahead" type="text" name="food" required placeholder="Food">
+        {# <input class="typeahead" type="text" name="food" required placeholder="Food"> #}
+        {# <input class="food-typeahead" id="food-typeahead" type="text" name="food" required placeholder="Food"> #}
+        <input class="food-typeahead" type="text" name="food" required placeholder="Food">
+        {# <input class="meal-typeahead" type="text" name="saved-meal" required placeholder="Saved Meal"> #}
         <input type="integer" name="quantity" id="quantity-input" required placeholder="Quantity">
         <select id="units" name="unit" required></select>
         <button type="submit" class="btn btn-default">Add</button>
@@ -146,7 +149,7 @@
                     <div class="modal-body">
                         
                         <div class="">
-                            <input type="text" class="form-control" name="meal_name" required placeholder="Saved Meals">
+                            <input type="text" class="form-control meal-typeahead" name="meal_name" required placeholder="Saved Meals">
                         </div>
                         <p>Select Meal to add to Foodlog.</p>
                         <div class="checkbox">
