@@ -380,7 +380,8 @@ def selected_food_groups():
         return ""
     food_groups = food_groups.split(',')
 
-    user.selected_food_groups = []
+    # user.selected_food_groups is linked to the nutrition database.
+    session.query(UserFoodGroupAssociation).delete()
     for code in food_groups:
         association = UserFoodGroupAssociation(
             food_group_code=code

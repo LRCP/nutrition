@@ -1,7 +1,9 @@
 // http://davidstutz.github.io/bootstrap-multiselect/#further-examples
 //https://github.com/twitter/typeahead.js/blob/master/src/bloodhound/options_parser.js
 $(document).ready(function() {
-    //class multiselect allows us to select the food groups
+    //The dollar sign is a jquery element selector.
+    //In this part of the code, the selector is selecting the class multiselect allows us to 
+    //select the food groups
     $('.multiselect').multiselect({    
         includeSelectAllOption: true,
         numberDisplayed: 0,

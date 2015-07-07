@@ -47,7 +47,10 @@ def query_foods(query_string):
 
 #can type into the url bar: localhost:5000/saved_meals/<query_string>.json
 #ex: localhost:5000/saved_meals/butter.json
-@app.route('/saved_meals/<query_string>.json', methods=['GET'])
+#use <path:query_string> to allow slashes in the query string variable.
+#see http://flask.pocoo.org/snippets/76/
+@app.route('/saved_meals/<path:query_string>.json', methods=['GET'])
+#or app.route("saved_meals.json")
 def query_saved_meals(query_string):
     #query database called saved_meals
     #construct a query that has the name matching the query string.
