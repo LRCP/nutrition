@@ -16,7 +16,7 @@ $(document).ready(function() {
             /*filter code is saving the data as datums variable so that we can use it later.*/
             filter: function(data) {
                 datums = data;
-                console.log("Data", data);
+                //to debug console.log("Data", data);
                 return data;
             },
             //The word "SPAM" becomes what the user is searching for.
@@ -29,13 +29,13 @@ $(document).ready(function() {
     //created the variable foodEnterred. 
     //initialize function initializes the engine.
     mealEnterred.initialize();
-    console.log(mealEnterred)
+    //to debug:console.log(mealEnterred)
     
     //typeahead user interface section.
     //the variable input is tied to the element with the class meal-typeahead.*/ 
     // $ is a function selects elements of my DOM
     var input = $('.meal-typeahead');
-    console.log("saved meal", input)
+    //to debug console.log("saved meal", input)
 
 
     /*sets up typeahead*/
@@ -45,7 +45,7 @@ $(document).ready(function() {
         The name key is part of the suggestion object reurned from the server.
         */
         displayKey: function(suggestion){
-            console.log("name", suggestion.name);
+            //to debug console.log("name", suggestion.name);
             
             return suggestion.name;
         },

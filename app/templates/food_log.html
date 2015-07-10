@@ -58,8 +58,9 @@
 
 
 
-        
-        <select class="multiselect" multiple="multiple" id="food_group_select">
+        {# display:none allows to hide the element. js it will remove the entire multiselect button. Would be nice to find a subtler solution.#}
+        <select class="multiselect" style="display:none"
+        multiple="multiple" id="food_group_select">
             {% for food_group, selected in food_groups_list %} 
         {# This creates one option for each food_group. food_group.FdGrp_Desc gets replaced by the food_group value. #}
         {# food_group is a class. FoodGrp_Desc is an attribute of food_group #}
@@ -150,20 +151,7 @@
                         
                         <div class="">
                             <input type="text" class="form-control meal-typeahead" name="meal_name" required placeholder="Saved Meals">
-                        </div>
-                        <p>Select Meal to add to Foodlog.</p>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Breakfast
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Breakfast
-                            </label>
-                        </div>
+                        </div>                        
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
