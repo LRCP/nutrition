@@ -9,12 +9,17 @@ $(document).ready(function() {
         includeSelectAllOption: true,
         numberDisplayed: 0,
         onChange: function(option, checked, select) {
+            //selecting the cild option of parent class multiselect, 
+            //and only chosing the selected.
             var selectedOptions = $('.multiselect option:selected');
             var selected_food_groups = "";
             selectedOptions.each(function(index, selectedOption){
                 //.val() is used to get values from form )inputs, dropdowns) elements
-                selected_food_groups += $(selectedOption).val();
-                selected_food_groups += ',';
+                var value = $(selectedOption).val();
+                if (value != "multiselect-all"){
+                    selected_food_groups += value;
+                    selected_food_groups += ',';
+                }
             });
             console.log(selected_food_groups);
             // need to add the selected food

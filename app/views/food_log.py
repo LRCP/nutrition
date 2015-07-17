@@ -130,6 +130,17 @@ def saved_meal_post():
     #returning an empty string is saying that the code works.
     return ""
     
+@app.route('/food_log/add_saved_meal', methods=['POST'])
+@login_required
+def add_saved_meal_post():
+    #don't use the reequest.args.get('user') to avoid malicious user.
+    user = current_user
+    meal_name = request.args.get('meal_name')
+    print meal_name
+    selected_foods = request.args.get('selected_foods')
+    #meal_name = session.query(meal_name).get(selected_foods)
+    food_log = get_food_log(user)
+    return selected_foods
 
 
 
@@ -390,6 +401,8 @@ def selected_food_groups():
 
     session.commit()
     return ""
+
+
 
 
 

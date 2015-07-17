@@ -14,14 +14,20 @@ def query_foods(query_string):
     
     # construct a list of all the groups that we want to use as filters.
     # groups is a list of numbers
+    # request.args.get list : we are looking for ?group
     groups = request.args.getlist("group")
 
     group_filters = [FoodDescription.FdGrp_Cd == group for group in groups]
     foods = session.query(FoodDescription)
     foods = foods.filter(FoodDescription.Long_Desc.ilike('%{}%'.format(query_string)))
+    #finds the foods in all the foods and group_filters.
     foods = foods.filter(or_(*group_filters))
-    # .all(0)sends the query to the database and try to get back a list of items.)
-    foods = foods.all()
+
+    #this limit needs to be raised or eliminated 
+    #once I incorporate PostgreSQL, elastic, or Lucene 
+    #as a more precise search tool.
+    foods = foods.limit(20)
+    
     food_list = []
     for food in foods:
         #find all the weights that match the foods.
