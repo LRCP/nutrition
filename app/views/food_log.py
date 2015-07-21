@@ -78,7 +78,9 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
 def saved_meal_post():
     #don't use the reequest.args.get('user') to avoid malicious user.
     user = current_user
-
+    #request.args.get('meal_name') gets the value associated 
+    #with the query string 'meal_name' 
+    #ex: /add_saved_meal_post?meal_name=breakfast
     selected_foods = request.args.get('selected_foods')
     meal_name = request.args.get('meal_name')
 
@@ -134,11 +136,15 @@ def saved_meal_post():
 @login_required
 def add_saved_meal_post():
     #don't use the reequest.args.get('user') to avoid malicious user.
+    #user_id incorporates the user_id via flask.
     user = current_user
     meal_name = request.args.get('meal_name')
     print meal_name
+
     selected_foods = request.args.get('selected_foods')
-    #meal_name = session.query(meal_name).get(selected_foods)
+    #query the data base Meal.
+    meal_name = session.query(Meal).filter_by(Meal.name='meal_name', user=current_user)
+    
     food_log = get_food_log(user)
     return selected_foods
 
