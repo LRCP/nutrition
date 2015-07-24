@@ -139,14 +139,26 @@ def add_saved_meal_post():
     #user_id incorporates the user_id via flask.
     user = current_user
     meal_name = request.args.get('meal_name')
-    print meal_name
-
-    selected_foods = request.args.get('selected_foods')
     #query the data base Meal.
-    meal_name = session.query(Meal).filter_by(Meal.name='meal_name', user=current_user)
-    
+    meal = session.query(Meal).filter_by(name=meal_name, user_id=user.id).first()   
     food_log = get_food_log(user)
-    return selected_foods
+    for food in meal.foods:
+        #food is the name of the food in the MealFoodAssociation
+        #create a new FoodLogFoodAssociation() for each MealFoodAssociation
+        flfa = FoodLogFoodAssociation()
+        #copy over the attributes of the MealFoodAssociation to FoodLogFoodAssociation
+        flfa.food_NDB_No = food.food_NDB_No
+        flfa.unit_Seq = food.unit_Seq
+        flfa.quantity = food.quantity
+        #append FoodLogFoodAssociation to food_log.foods
+        food_log.foods.append(flfa)
+        #send back this info to the client side via html which will then 
+        #be sent to the javascript which will insert the info on the page.
+    session.commit()
+    print food
+    return ""
+    
+
 
 
 
