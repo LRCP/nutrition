@@ -18,6 +18,73 @@ from app.models.favorite_association import FavoriteAssociation
 from app.models.meal import Meal
 from app.models.meal_food_association import MealFoodAssociation
 
+def build_food_list(input_foods, nutrient_definitions):
+    # Build a list of foods with their nutrients etc.
+    foods = []
+
+    for association in input_foods:
+        ndb = association.food_NDB_No
+        seq = association.unit_Seq
+        food = session.query(FoodDescription).get(ndb)
+        unit = session.query(Weight).filter_by(NDB_No=ndb, Seq=seq).first()
+        #get all the nutrient's data by serching by its ndb.no
+        nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
+        nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
+        #nutrient_dict contains a category_name mapped to a dictionary
+        #containing the nutrient_numbers.
+        for category_name, category in food_nutrient_dictionary_new.iteritems():
+                #the category, which is a dictionary maps the name of a nutrient to 
+                #a tuple that contains the nutrient_number plus a dictionary of 
+                #subnutrients.
+            category = food_nutrient_dictionary_new[category_name]
+            for nutrient_name, nutrient_tuple in category.iteritems():
+                nutrient_number = nutrient_tuple[0]
+                if nutrient_number != None:
+                    value = nutrient_number_to_quantity(
+                        nutrients, str(nutrient_number), association, unit
+                        )
+                    
+                    # lambda function finds the matching nutrient_definition in the nutr_def table
+                    # filtering by nutrient number. It will return the information in the form of a list.
+
+                    # unpack the tuple that returns nutrient_unit when 
+                    # the arguments nutrient_definitions and nutrient are passed into the get_nutrient_unit function.
+                    nutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, nutrient_number)
+                    # unpack the tuple that returns the value and nutrient_unit when
+                    # the arguments value, nutrient_unit and unit_precision are passed into the format_unit_for_display function.
+                    value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)                    
+                else:
+                    value = ""
+                    nutrient_unit = ""
+                #puts the value into the nutrient_dict
+                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
+                
+                #loop throught the subnutrients to get the name and number.
+                for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
+                    if subnutrient_number != None:
+                        value = nutrient_number_to_quantity(
+                            nutrients, str(subnutrient_number), association, unit
+                            )
+                        subnutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, subnutrient_number)
+                        value, subnutrient_unit = format_unit_for_display(value, subnutrient_unit, unit_precision)
+                    else:
+                        value = ""
+                        subnutrient_unit = ""
+                    
+                    # to access the value of OrderedDict
+                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = (value, subnutrient_unit)
+
+
+        foods.append({
+            "name": food.Long_Desc,
+            "id": association.id,
+            "quantity": association.quantity,
+            "nutrients": nutrient_dict,
+            "unit": unit.Msre_Desc,
+        })
+
+    return foods  
+
 def get_food_log(user):
     food_log = session.query(FoodLog).filter_by(user=user).first()
     if food_log is None:
@@ -155,8 +222,9 @@ def add_saved_meal_post():
         #send back this info to the client side via html which will then 
         #be sent to the javascript which will insert the info on the page.
     session.commit()
-    print food
-    return ""
+    nutrient_definitions = session.query(NutrientDefinition).all()
+    foods = build_food_list(meal.foods, nutrient_definitions)
+    return render_template('partial_food_log.html', foods=foods)
     
 
 
@@ -194,116 +262,8 @@ def food_log_get():
 
     # Get the current food log
     food_log = get_food_log(user)
+    foods = build_food_list(food_log.foods, nutrient_definitions)
 
-    # Build a list of foods with their nutrients etc.
-    foods = []
-    for association in food_log.foods:
-        ndb = association.food_NDB_No
-        seq = association.unit_Seq
-
-        food = session.query(FoodDescription).get(ndb)
-        unit = session.query(Weight).filter_by(NDB_No=ndb, Seq=seq).first()
-
-        #get all the nutrient's data by serching by its ndb.no
-        nutrients = session.query(NutrientData).filter_by(NDB_No=ndb).all()
-       
-
-       
-        nutrient_dict = copy.deepcopy(food_nutrient_dictionary_new)
-        #nutrient_dict contains a category_name mapped to a dictionary
-        #containing the nutrient_numbers.
-        for category_name, category in food_nutrient_dictionary_new.iteritems():
-            
-            
-                #the category, which is a dictionary maps the name of a nutrient to 
-                #a tuple that contains the nutrient_number plus a dictionary of 
-                #subnutrients.
-            category = food_nutrient_dictionary_new[category_name]
-            
-          
-            for nutrient_name, nutrient_tuple in category.iteritems():
-                nutrient_number = nutrient_tuple[0]
-                if nutrient_number != None:
-                    value = nutrient_number_to_quantity(
-                        nutrients, str(nutrient_number), association, unit
-                        )
-                    
-                    # lambda function finds the matching nutrient_definition in the nutr_def table
-                    # filtering by nutrient number. It will return the information in the form of a list.
-
-                    # unpack the tuple that returns nutrient_unit when 
-                    # the arguments nutrient_definitions and nutrient are passed into the get_nutrient_unit function.
-                    nutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, nutrient_number)
-                    # unpack the tuple that returns the value and nutrient_unit when
-                    # the arguments value, nutrient_unit and unit_precision are passed into the format_unit_for_display function.
-                    value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)
-                    
-
-                else:
-                    value = ""
-                    nutrient_unit = ""
-                    
-
-                
-                
-                
-                #puts the value into the nutrient_dict
-                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
-                
-                #loop throught the subnutrients to get the name and number.
-                for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
-                    if subnutrient_number != None:
-                        value = nutrient_number_to_quantity(
-                            nutrients, str(subnutrient_number), association, unit
-                            )
-                        subnutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, subnutrient_number)
-                        value, subnutrient_unit = format_unit_for_display(value, subnutrient_unit, unit_precision)
-                    else:
-                        value = ""
-                        subnutrient_unit = ""
-                    
-                    # to access the value of OrderedDict
-                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = (value, subnutrient_unit)
-
-                   
-
-            
-
-        # Post-process the list to add some extra nutrients
-        # ffa = nutrient_dict["Fats & Fatty Acids"]
-        # omega_3_keys_ALA = [
-        #     "18:3 n-3 cis,cis,cis (ALA)  linolenic alpha-linolenic"
-        #     ]
-        #     #"20:3 n-3 eicosatrienoic acid (ETE)",
-        #     #"20:4 undifferentiated arachidonic",
-        # omega_3_keys_EPA_DHA = [
-        #     "20:5 n-3 eicosapentaenoic (EPA)  timnodonic",
-        #     #"22:5 n-3 docosapentaenoic (DPA)  clupanodonic",
-        #     "22:6 n-3 docosahexaenoic (DHA)  cervonic"
-        #     ]
-
-        # ffa["omega_3_ALA"] = sum_nutrients(omega_3_keys_ALA, ffa)
-        # ffa["omega_3_keys_EPA_DHA"] = sum_nutrients(omega_3_keys_EPA_DHA, ffa)
-
-        # omega_6_keys = [
-        #     "18:2 n-6 cis,cis (LA)  linoleic",
-        #     "18:3 n-6 cis,cis,cis (GLA)  gamma-linolenic",
-        #     #"20:2 n-6 cis,cis eicosadienoic",
-        #     #"20:3 n-6 (DGLA) dihomo-gamma-linolenic acid",
-        #     "20:4 n-6 eicosatetraenoic (AA)  arachidonic"
-        # ]
-
-        
-
-        # ffa["omega_6"] = sum_nutrients(omega_6_keys, ffa)
-
-        foods.append({
-            "name": food.Long_Desc,
-            "id": association.id,
-            "quantity": association.quantity,
-            "nutrients": nutrient_dict,
-            "unit": unit.Msre_Desc,
-        })
 
     
     # Total the number of nutrients consumed
