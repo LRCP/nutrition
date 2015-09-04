@@ -280,7 +280,7 @@ def food_log_get():
                     totals[category_name][nutrient_name].append(0)
                     totals[category_name][nutrient_name].append(ordered_defaultdict.OrderedDefaultdict(list))
                     totals[category_name][nutrient_name].append("")
-                if nutrient_value == "N/A":
+                if not nutrient_value or nutrient_value == "N/A":
                     continue
 
                 totals[category_name][nutrient_name][0] += float(nutrient_value)
@@ -290,7 +290,7 @@ def food_log_get():
                     if totals[category_name][nutrient_name][1][subnutrient_name] == []:
                         totals[category_name][nutrient_name][1][subnutrient_name].append(0)
                         totals[category_name][nutrient_name][1][subnutrient_name].append("")
-                    if subnutrient_value == "N/A":
+                    if not subnutrient_value or subnutrient_value == "N/A":
                         continue
                     totals[category_name][nutrient_name][1][subnutrient_name][0] += subnutrient_value
 
@@ -301,21 +301,22 @@ def food_log_get():
         "nutrients": totals,
     })
     calorie_percentage = (
-        totals["Calorie Information"]["Energy_KCAL"] *100
+        totals["Calorie Information"]["Energy_KCAL"][0] *100
         )
+
     calorie_percentage /= user.get_adjusted_daily_caloric_needs()
 
     protein_percentage = (
-        totals["Protein & Amino Acids"]["Protein"] * 100
+        totals["Protein & Amino Acids"]["Protein"][0] * 100
         )
     protein_percentage /= user.get_adjusted_daily_caloric_needs()
 
     carbohydrate_percentage = (
-        totals["Carbohydrates"]["Carbohydrate, by difference"] * 100
+        totals["Carbohydrates"]["Carbohydrate, by difference"][0] * 100
         )
     carbohydrate_percentage /= user.get_adjusted_daily_caloric_needs()
     fat_percentage = (
-        totals["Fats & Fatty Acids"]["Total lipid (fat)"] * 100
+        totals["Fats & Fatty Acids"]["Total lipid (fat)"][0] * 100
         )
     fat_percentage /= user.get_adjusted_daily_caloric_needs()
 
