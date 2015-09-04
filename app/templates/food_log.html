@@ -178,7 +178,7 @@
 
         {# we get a tuple with emumerate and then we unpack it as
         food_index, food_nutrient_list. We want all but the very last one. food_index will be an integer. #}
-        {% for food_index, food in enumerate(food_nutrient_list[:-1]) %}
+        {% for food_index, food in enumerate(food_nutrient_list) %}
         {# Can create any data type attributes by starting its name as data-#}
         {# Render the food using the macro.show_food(food_index, food) macro #}
         {{ macro.show_food(food_index, food)}}

@@ -264,17 +264,37 @@ def food_log_get():
     food_log = get_food_log(user)
     foods = build_food_list(food_log.foods, nutrient_definitions)
 
-
+    with open("dump.json", "w") as f:
+        json.dump(foods, f)
     
     # Total the number of nutrients consumed
-    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(float))
+    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(list))
     for food in foods:
         nutrients = food["nutrients"]
         for category_name, category in nutrients.iteritems():
-            for nutrient_name, nutrient_value in category.iteritems():
+            for nutrient_name, nutrient_tuple in category.iteritems():
+                nutrient_value = nutrient_tuple[0]
+                subnutrients = nutrient_tuple[1]
+                nutrient_unit = nutrient_tuple[2]
+                if totals[category_name][nutrient_name] == []:
+                    totals[category_name][nutrient_name].append(0)
+                    totals[category_name][nutrient_name].append(ordered_defaultdict.OrderedDefaultdict(list))
+                    totals[category_name][nutrient_name].append("")
                 if nutrient_value == "N/A":
                     continue
-                #totals[category_name][nutrient_name] += nutrient_value
+
+                totals[category_name][nutrient_name][0] += float(nutrient_value)
+                for subnutrient_name, subnutrient_tuple in subnutrients.iteritems():
+                    subnutrient_value = subnutrient_tuple[0]
+                    subnutrient_unit = subnutrient_tuple[1]
+                    if totals[category_name][nutrient_name][1][subnutrient_name] == []:
+                        totals[category_name][nutrient_name][1][subnutrient_name].append(0)
+                        totals[category_name][nutrient_name][1][subnutrient_name].append("")
+                    if subnutrient_value == "N/A":
+                        continue
+                    totals[category_name][nutrient_name][1][subnutrient_name][0] += subnutrient_value
+
+
 
     foods.append({
         "name": "Totals",
