@@ -12,7 +12,8 @@ $(document).ready(function() {
             url: "saved_meals.json?q=SPAM",
             //change app.route to @app.route("saved_meals.json")
             //then type into browser url:"/saved_meals.json?=SPAM",
-    
+            'cache': false,
+
             /*filter code is saving the data as datums variable so that we can use it later.*/
             filter: function(data) {
                 datums = data;
