@@ -1,0 +1,250 @@
+{% macro show_food(food_index, food) %}
+<tr class="food_row" data-association-id="{{food["id"]}}">
+   <td class="food_name">{{food["name"]}}<br>
+        <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
+    </td>
+    
+    <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"][0]}}
+    </td>
+    <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"][0]}}</td>
+    <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"][0]}}</td>
+    <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]}}</td>
+    <td>{{food["nutrients"]["Other"]["Water"][0]}}</td>
+    <td class="more_button">
+        <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </td>
+    <td class="delete_button">
+        {% if food["name"] != "Totals" %}
+        <a href="food_log/delete/{{food["id"]}}">
+            <button type="button" class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </a>
+        {% endif %} 
+    </td>      
+</tr>
+
+
+<tr>
+    {#THIS IS ONE VARIATION: LINES 141-154#}
+    <td  colspan="7">
+        <div id="Food-Details-{{food_index}}" class="collapse food_details">
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>PROTEIN</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_protein-{{ food_index }}">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Protein & Amino Acids"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_protein-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>CARBOHYDRATES</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_carbohydrates-{{ food_index }} ">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                 </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Carbohydrates"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {# there are 3 levels of tuples: value is a tuple which consists of (value, unit) #}
+                {# the items are a tuple which consists of (key, value) #}
+                {# enumerate gives a tuple which consists of (indes, item) #}
+
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_carbohydrates-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>FATS</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_fats-{{ food_index }}">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Fats & Fatty Acids"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_fats-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>VITAMINS</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_vitamins-{{ food_index }}">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Vitamins"].items()) %}
+                <tr>
+                    <div class="nutrient_header">
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                    </div>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_vitamins-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                     </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>MINERALS</strong>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Minerals"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_minerals more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>STEROLS</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_sterols-{{ food_index }}">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Sterols"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_sterols-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+            <table class="table">
+               <tr>
+                    <td>
+                        <div class="nutrient_header">
+                            <strong>OTHER</strong>
+                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_other-{{ food_index }}">
+                                    <span class="glyphicon glyphicon-plus">
+                                    </span>
+                                </button>
+                        </div>
+                    </td>
+                </tr>
+                {# .items() returns a list of tuples of (key, value) #}
+                {% for index, (nutrient_name, nutrient_tuple) in enumerate
+                    (food["nutrients"]["Other"].items()) %}
+                <tr>
+                    <td class="nutrient">
+                        {{nutrient_name}} {{nutrient_tuple[0]}} {{ nutrient_tuple[2] }}
+                    </td>
+                </tr>
+                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                    (nutrient_tuple[1].items()) %}
+                <tr class="more_other-{{ food_index }} more collapse">
+                    <td>
+                        {{subnutrient_name}} {{ value }} {{ unit }}
+                    </td>
+                </tr>
+                {% endfor %}
+                {% endfor %}
+            </table>
+        </div>
+    </td>
+    
+</tr>
+{% endmacro %}

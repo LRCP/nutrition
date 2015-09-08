@@ -1,0 +1,8 @@
+{% import "macro.html" as macro %}
+{% for food_index, food in enumerate(foods) %}
+        {# Can create any data type attributes by starting its name as data-#}
+        {# Render the food using the macro.show_food(food_index, food) macro #}
+{{ macro.show_food(food_index, food)}}
+        
+
+{% endfor %}
