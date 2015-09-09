@@ -344,11 +344,18 @@ def food_log_post():
 
     food_log = get_food_log(user)
 
-    association = FoodLogFoodAssociation(
-        food_NDB_No=unit["NDB_No"],
-        unit_Seq=unit["Seq"],
-        quantity=float(quantity)
-    )
+    try:
+        association = FoodLogFoodAssociation(
+            food_NDB_No=unit["NDB_No"],
+            unit_Seq=unit["Seq"],
+            quantity=float(quantity)
+        )
+    except ValueError as e:
+        flash('Please use proper syntax when entering the number or use a decimal point')
+        return redirect(url_for('food_log_get'))
+
+
+
 
 
     food_log.foods.append(association)
