@@ -54,7 +54,7 @@ def build_food_list(input_foods, nutrient_definitions):
                     # the arguments value, nutrient_unit and unit_precision are passed into the format_unit_for_display function.
                     value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)                    
                 else:
-                    value = ""
+                    value = u"\u25BE"
                     nutrient_unit = ""
                 #puts the value into the nutrient_dict
                 nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
@@ -262,6 +262,7 @@ def food_log_get():
 
     # Get the current food log
     food_log = get_food_log(user)
+    print food_log.date
     foods = build_food_list(food_log.foods, nutrient_definitions)
 
     with open("dump.json", "w") as f:
@@ -280,7 +281,7 @@ def food_log_get():
                     totals[category_name][nutrient_name].append(0)
                     totals[category_name][nutrient_name].append(ordered_defaultdict.OrderedDefaultdict(list))
                     totals[category_name][nutrient_name].append("")
-                if not nutrient_value or nutrient_value == "N/A":
+                if not nutrient_value or nutrient_value == "N/A" or nutrient_value == u"\u25BE":
                     continue
 
                 totals[category_name][nutrient_name][0] += float(nutrient_value)

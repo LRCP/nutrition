@@ -227,7 +227,7 @@ food_nutrient_dictionary_new["Vitamins"]["C, (ascorbic acid)"] = (401, OrderedDi
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"] = (None, OrderedDict())
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D (D2 + D3)"] = 328
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D"] = 324
-food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["Vitamin D3(cholecalciferol)"] = 326
+food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D3 (cholecalciferol)"] = 326
 
 
 food_nutrient_dictionary_new["Vitamins"]["D (D2 + D3)"][1]["D2 (Ergocalciforol)"] = 325
@@ -354,10 +354,11 @@ food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Campesterol"] = 639
 food_nutrient_dictionary_new["Sterols"]["Phytosterols"][1]["Beta-sitosterol"] = 641
 #Level 1
 food_nutrient_dictionary_new["Other"]["Water"] = (255, OrderedDict())
-food_nutrient_dictionary_new["Other"]["Water"][1]["Alcohol, ethyl"] = 221
-food_nutrient_dictionary_new["Other"]["Water"][1]["Caffeine"] = 262
-food_nutrient_dictionary_new["Other"]["Water"][1]["Theobromine"] = 263
-food_nutrient_dictionary_new["Other"]["Water"][1]["Ash"] = 207
+food_nutrient_dictionary_new["Other"]["Additional +"]  = (None, OrderedDict())
+food_nutrient_dictionary_new["Other"]["Additional +"][1]["Alcohol, ethyl"] = 221
+food_nutrient_dictionary_new["Other"]["Additional +"][1]["Caffeine"] = 262
+food_nutrient_dictionary_new["Other"]["Additional +"][1]["Theobromine"] = 263
+food_nutrient_dictionary_new["Other"]["Additional +"][1]["Ash"] = 207
 
 
 # food_nutrient_dictionary_new = {
