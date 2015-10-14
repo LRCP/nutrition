@@ -9,7 +9,7 @@ Flask-SQLAlchemy
 Flask-Script
 Flask-WTF
 Flask-WhooshAlchemy
-Jinja
+
 Jinja2
 Mako
 MarkupSafe
@@ -21,10 +21,10 @@ Whoosh
 alembic
 blinker
 decorator
-flup
+#flup
 gunicorn
 itsdangerous
 python-openid
 pytz
 speaklater
-wsgiref
+#wsgiref
