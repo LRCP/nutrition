@@ -38,6 +38,7 @@ from app.models.user_food_group_association import UserFoodGroupAssociation
 from app.models.favorite_association import FavoriteAssociation
 from app.models.meal import Meal
 from app.models.meal_food_association import MealFoodAssociation
+from app.models.target import Target
 
 
 from app.models.usda import *
@@ -58,6 +59,7 @@ session = Session(binds={
     FoodDescription:engineUSDA,
     FoodGroupDescription:engineUSDA,
 
+
     Footnote:engineUSDA,
     LangualFactorsDescription:engineUSDA,
     LangualFactor:engineUSDA,
@@ -66,6 +68,7 @@ session = Session(binds={
     SourcesofData:engineUSDA,
     SourcesOfDataLink:engineUSDA,
     SourceCode:engineUSDA,
+    Target:engineNutrition,
     Weight:engineUSDA,
 
 })
