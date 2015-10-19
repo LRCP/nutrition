@@ -12,7 +12,10 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 from app import app
-from app import BaseNutrition, BaseUSDA
+from app import BaseNutrition, BaseUSDA, session
+import csv
+
+
 
 class DB(object):
     def __init__(self, metadata):
@@ -24,6 +27,27 @@ manager = Manager(app)
 #add migrate to the manager
 #default run file is built into the manager
 manager.add_command('db', MigrateCommand)
+@manager.command
+def import_targets():
+    from app.models.target import Target
+    with open('nutritionTablesReformatted.csv', 'rU') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        for row in reader:
+            #create a new line in the database using sqlalchemy
+            #instantiate in instance of the model, add it and commit
+            target = Target()
+            target.group = row[0]
+            target.lower_age = row[1]
+            target.upper_age = row[2]
+            target.nutrient_no = row[3]
+            target.value = row[4]
+            session.add(target)
+        session.commit()
+    
+
+
+
+
 
 if __name__ == '__main__':
     manager.run()
