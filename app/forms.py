@@ -153,10 +153,10 @@ class ProfileForm(Form):
         )
     
     gender = SelectField('Gender', choices=[
-        ('male','Male'), 
-        ('female', 'Female'), 
-        ('female pregnant', 'Female Pregnant'), 
-        ('female lactating', 'Female Lactating')], 
+        ('Males','Male'), 
+        ('Females', 'Female'), 
+        ('Preganancy', 'Female Pregnant'), 
+        ('Lactation', 'Female Lactating')], 
         validators=[validators.Required(
             message='Make a Selection')]
         )

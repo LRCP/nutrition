@@ -125,9 +125,9 @@ class User(BaseNutrition):
     #need setter functions for height,activity
     #for simple values, don't need addtional arguments.
     def get_basal_metabolic_rate(self):
-        if self.gender == 'male':
+        if self.gender == 'Males':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 11
-        elif self.gender == 'female':
+        elif self.gender == 'Females':
             basal_metabolic_rate = self.weight_in_kilograms * 2.2 * 10.1
         return basal_metabolic_rate
 

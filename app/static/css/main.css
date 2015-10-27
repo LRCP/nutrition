@@ -35,18 +35,28 @@ header a{
   line-height: normal;
 }
 
-#nutrient_goals {
-  padding-left: 15px;
-}
-/*We are selecting the div child of the nutrient_goals parent.*/
-#nutrient_goals div {
+/*.progress-bar {
   display: inline-block;
   width: 30px;
-  /*height: 12px;*/
+  height: 12px;
   height: 1em;
   border: 1px solid black;
   vertical-align: text-bottom;
 
+}
+*/
+
+
+#nutrient_goals {
+  padding-left: 15px;
+}
+/*We are selecting the div child of the nutrient_goals parent.*/
+.target-progress-bar{
+  display: inline-block;
+  width: 30px;
+  height: 1em;
+  border: 1px solid black;
+  vertical-align: text-bottom;
 }
 
 

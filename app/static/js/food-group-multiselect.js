@@ -8,8 +8,9 @@ $(document).ready(function() {
     $('.multiselect').multiselect({    
         includeSelectAllOption: true,
         numberDisplayed: 0,
+        nonSelectedText: 'Food Group',
         onChange: function(option, checked, select) {
-            //selecting the cild option of parent class multiselect, 
+            //selecting the child option of parent class multiselect, 
             //and only chosing the selected.
             var selectedOptions = $('.multiselect option:selected');
             var selected_food_groups = "";

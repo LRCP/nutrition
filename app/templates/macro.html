@@ -88,7 +88,10 @@
                     (nutrient_tuple[1].items()) %}
                 <tr class="more_carbohydrates-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ value }} {{ unit }} <div class="target-progress-bar" style="background-image: linear-gradient(
+        to right, #7280DE, #7280DE {{ carbohydrate_percentage }}%, 
+        white {{ fat_percentage }}%);"></div>
+    
                     </td>
                 </tr>
                 {% endfor %}

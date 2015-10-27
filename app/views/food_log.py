@@ -17,7 +17,7 @@ from app.constants import food_nutrient_dictionary_new
 from app.models.favorite_association import FavoriteAssociation
 from app.models.meal import Meal
 from app.models.meal_food_association import MealFoodAssociation
-
+from app.models.target import Target
 def build_food_list(input_foods, nutrient_definitions):
     # Build a list of foods with their nutrients etc.
     foods = []
@@ -226,6 +226,20 @@ def add_saved_meal_post():
     foods = build_food_list(meal.foods, nutrient_definitions)
     return render_template('partial_food_log.html', foods=foods)
     
+#work on this 
+def get_targets_for_user(user):
+    targets = session.query(Target)
+    targets = targets.filter_by(group = user.gender)
+    targets = targets.filter(Target.lower_age <= user.get_age())
+    targets = targets.filter(Target.upper_age > user.get_age())
+
+  
+    return targets
+
+
+
+
+
 
 
 
@@ -238,7 +252,7 @@ def food_log_get():
     # Hack: If the user has no protein goal they have no profile!
     if user.protein_goal == None:
         return redirect(url_for('profile_get'))
-
+    targets = get_targets_for_user(user)
     # Get a list of all of the food groups
     all_food_groups = session.query(FoodGroupDescription)
     #order_by orders the food groups alphabetically according to the description
@@ -262,7 +276,7 @@ def food_log_get():
 
     # Get the current food log
     food_log = get_food_log(user)
-    print food_log.date
+    
     foods = build_food_list(food_log.foods, nutrient_definitions)
 
     with open("dump.json", "w") as f:
@@ -301,24 +315,41 @@ def food_log_get():
         "name": "Totals",
         "nutrients": totals,
     })
-    calorie_percentage = (
-        totals["Calorie Information"]["Energy_KCAL"][0] *100
-        )
+    if len(totals["Calorie Information"]["Energy_KCAL"])>0:
+        calorie_percentage = (
+            totals["Calorie Information"]["Energy_KCAL"][0] *100
+            )
+    else:
+        calorie_percentage = 0
 
     calorie_percentage /= user.get_adjusted_daily_caloric_needs()
 
-    protein_percentage = (
-        totals["Protein & Amino Acids"]["Protein"][0] * 100
-        )
+
+    if len(totals["Protein & Amino Acids"]["Protein"])>0:
+        protein_percentage = (
+            totals["Protein & Amino Acids"]["Protein"][0] * 100
+            )
+    else:
+        protein_percentage = 0
+
     protein_percentage /= user.get_adjusted_daily_caloric_needs()
 
-    carbohydrate_percentage = (
-        totals["Carbohydrates"]["Carbohydrate, by difference"][0] * 100
-        )
+    if len(totals["Carbohydrates"]["Carbohydrate, by difference"])>0:
+
+        carbohydrate_percentage = (
+            totals["Carbohydrates"]["Carbohydrate, by difference"][0] * 100
+            )
+    else:
+        carbohydrate_percentage = 0
+
     carbohydrate_percentage /= user.get_adjusted_daily_caloric_needs()
-    fat_percentage = (
-        totals["Fats & Fatty Acids"]["Total lipid (fat)"][0] * 100
-        )
+    if len(totals["Fats & Fatty Acids"]["Total lipid (fat)"])>0:
+        fat_percentage = (
+            totals["Fats & Fatty Acids"]["Total lipid (fat)"][0] * 100
+            )
+    else:
+        fat_percentage = 0
+
     fat_percentage /= user.get_adjusted_daily_caloric_needs()
 
     
@@ -331,6 +362,11 @@ def food_log_get():
         protein_percentage=protein_percentage,
         carbohydrate_percentage=carbohydrate_percentage,
         fat_percentage=fat_percentage,
+        targets=targets,
+
+        
+
+
         )
 
 
