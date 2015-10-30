@@ -57,7 +57,11 @@ def build_food_list(input_foods, nutrient_definitions):
                     value = u"\u25BE"
                     nutrient_unit = ""
                 #puts the value into the nutrient_dict
-                nutrient_dict[category_name][nutrient_name] = (value, OrderedDict(), nutrient_unit)
+                nutrient_dict[category_name][nutrient_name] = {
+                    "value": value, 
+                    "subnutrients": OrderedDict(), 
+                    "unit": nutrient_unit, 
+                    "number": nutrient_number}
                 
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
@@ -72,7 +76,11 @@ def build_food_list(input_foods, nutrient_definitions):
                         subnutrient_unit = ""
                     
                     # to access the value of OrderedDict
-                    nutrient_dict[category_name][nutrient_name][1][subnutrient_name] = (value, subnutrient_unit)
+                    nutrient_dict[category_name][nutrient_name]["subnutrients"][subnutrient_name] = {
+                        "value": value, 
+                        "unit": subnutrient_unit,
+                        "number": subnutrient_number,
+                        }
 
 
         foods.append({
@@ -253,6 +261,9 @@ def food_log_get():
     if user.protein_goal == None:
         return redirect(url_for('profile_get'))
     targets = get_targets_for_user(user)
+    #maps the nutrient number to the amount that the user needs.
+    targets = {target.nutrient_no: target.value for target in targets}
+
     # Get a list of all of the food groups
     all_food_groups = session.query(FoodGroupDescription)
     #order_by orders the food groups alphabetically according to the description
@@ -421,6 +432,7 @@ def food_log_post():
 def delete_food(id):
     association = session.query(FoodLogFoodAssociation).get(id)
     session.delete(association)
+    session.commit()
     return redirect(url_for('food_log_get'))
 
 @app.route('/food_log/selected_food_groups', methods=['GET', 'POST'])
