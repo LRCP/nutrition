@@ -298,10 +298,10 @@ def food_log_get():
     for food in foods:
         nutrients = food["nutrients"]
         for category_name, category in nutrients.iteritems():
-            for nutrient_name, nutrient_tuple in category.iteritems():
-                nutrient_value = nutrient_tuple[0]
-                subnutrients = nutrient_tuple[1]
-                nutrient_unit = nutrient_tuple[2]
+            for nutrient_name, nutrient_dict in category.iteritems():
+                nutrient_value = nutrient_dict["value"]
+                subnutrients = nutrient_dict["subnutrients"]
+                nutrient_unit = nutrient_dict["unit"]
                 if totals[category_name][nutrient_name] == []:
                     totals[category_name][nutrient_name].append(0)
                     totals[category_name][nutrient_name].append(ordered_defaultdict.OrderedDefaultdict(list))
@@ -310,9 +310,9 @@ def food_log_get():
                     continue
 
                 totals[category_name][nutrient_name][0] += float(nutrient_value)
-                for subnutrient_name, subnutrient_tuple in subnutrients.iteritems():
-                    subnutrient_value = subnutrient_tuple[0]
-                    subnutrient_unit = subnutrient_tuple[1]
+                for subnutrient_name, subnutrient_dict in subnutrients.iteritems():
+                    subnutrient_value = subnutrient_dict["value"]
+                    subnutrient_unit = subnutrient_dict["unit"]
                     if totals[category_name][nutrient_name][1][subnutrient_name] == []:
                         totals[category_name][nutrient_name][1][subnutrient_name].append(0)
                         totals[category_name][nutrient_name][1][subnutrient_name].append("")

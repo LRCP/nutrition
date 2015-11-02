@@ -50,11 +50,11 @@
                         {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
                     </td>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_protein-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -84,11 +84,11 @@
                 {# the items are a tuple which consists of (key, value) #}
                 {# enumerate gives a tuple which consists of (indes, item) #}
 
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_carbohydrates-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }} <div class="target-progress-bar" style="background-image: linear-gradient(
+                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }} <div class="target-progress-bar" style="background-image: linear-gradient(
         to right, #7280DE, #7280DE {{ carbohydrate_percentage }}%, 
         white {{ fat_percentage }}%);"></div>
     
@@ -117,11 +117,11 @@
                         {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
                     </td>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["Subnutrient"].items()) %}
                 <tr class="more_fats-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -149,11 +149,11 @@
                     </td>
                     </div>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_vitamins-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
                      </td>
                 </tr>
                 {% endfor %}
@@ -175,11 +175,11 @@
                         {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
                     </td>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_minerals more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
                     </td>
                 </tr>
                 {% endfor %}
@@ -205,11 +205,11 @@
                         {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
                     </td>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_sterols-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"]}}
                     </td>
                 </tr>
                 {% endfor %}
@@ -235,11 +235,11 @@
                         {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
                     </td>
                 </tr>
-                {% for index, (subnutrient_name, (value, unit)) in enumerate
+                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
                     (nutrient_dict["subnutrient"].items()) %}
                 <tr class="more_other-{{ food_index }} more collapse">
                     <td>
-                        {{subnutrient_name}} {{ value }} {{ unit }}
+                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
                     </td>
                 </tr>
                 {% endfor %}
