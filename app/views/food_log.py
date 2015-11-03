@@ -18,7 +18,10 @@ from app.models.favorite_association import FavoriteAssociation
 from app.models.meal import Meal
 from app.models.meal_food_association import MealFoodAssociation
 from app.models.target import Target
-def build_food_list(input_foods, nutrient_definitions):
+
+
+def build_food_list(input_foods, nutrient_definitions, targets):
+    print targets
     # Build a list of foods with their nutrients etc.
     foods = []
 
@@ -56,13 +59,28 @@ def build_food_list(input_foods, nutrient_definitions):
                 else:
                     value = u"\u25BE"
                     nutrient_unit = ""
+                #dictionary.get() returns a value or None
+                target = targets.get(nutrient_number)
                 #puts the value into the nutrient_dict
-                nutrient_dict[category_name][nutrient_name] = {
+                tmp = {
                     "value": value, 
                     "subnutrients": OrderedDict(), 
                     "unit": nutrient_unit, 
-                    "number": nutrient_number}
-                
+                    "number": nutrient_number,
+                    "target": target,   
+                }
+                if target != None:
+                    #difinintion of a new key "target_percentage"
+                    tmp["target_percentage"] = value/target * 100
+                else:
+                    tmp["target_percentage"] = None
+                print target
+
+                nutrient_dict[category_name][nutrient_name] = tmp
+
+
+
+
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
                     if subnutrient_number != None:
@@ -74,13 +92,21 @@ def build_food_list(input_foods, nutrient_definitions):
                     else:
                         value = ""
                         subnutrient_unit = ""
-                    
+
+                    target = targets.get(subnutrient_number)
                     # to access the value of OrderedDict
-                    nutrient_dict[category_name][nutrient_name]["subnutrients"][subnutrient_name] = {
+                    tmp = {
                         "value": value, 
                         "unit": subnutrient_unit,
                         "number": subnutrient_number,
+                        "target": target,
                         }
+                    if target != None:
+                    #difinintion of a new key "target_percentage"
+                        tmp["target_percentage"] = value/target * 100
+                    else:
+                        tmp["target_percentage"] = None
+                    nutrient_dict[category_name][nutrient_name]["subnutrients"][subnutrient_name] = tmp
 
 
         foods.append({
@@ -288,13 +314,13 @@ def food_log_get():
     # Get the current food log
     food_log = get_food_log(user)
     
-    foods = build_food_list(food_log.foods, nutrient_definitions)
+    foods = build_food_list(food_log.foods, nutrient_definitions, targets)
 
     with open("dump.json", "w") as f:
         json.dump(foods, f)
     
     # Total the number of nutrients consumed
-    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(list))
+    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(dict))
     for food in foods:
         nutrients = food["nutrients"]
         for category_name, category in nutrients.iteritems():
@@ -302,23 +328,24 @@ def food_log_get():
                 nutrient_value = nutrient_dict["value"]
                 subnutrients = nutrient_dict["subnutrients"]
                 nutrient_unit = nutrient_dict["unit"]
-                if totals[category_name][nutrient_name] == []:
-                    totals[category_name][nutrient_name].append(0)
-                    totals[category_name][nutrient_name].append(ordered_defaultdict.OrderedDefaultdict(list))
-                    totals[category_name][nutrient_name].append("")
+                if totals[category_name][nutrient_name] == {}:
+                    totals[category_name][nutrient_name]["value"]= 0
+                    totals[category_name][nutrient_name]["subnutrients"] = ordered_defaultdict.OrderedDefaultdict(dict)
+                    totals[category_name][nutrient_name]["unit"] = ""
                 if not nutrient_value or nutrient_value == "N/A" or nutrient_value == u"\u25BE":
                     continue
 
-                totals[category_name][nutrient_name][0] += float(nutrient_value)
+                totals[category_name][nutrient_name]["value"] += float(nutrient_value)
                 for subnutrient_name, subnutrient_dict in subnutrients.iteritems():
                     subnutrient_value = subnutrient_dict["value"]
                     subnutrient_unit = subnutrient_dict["unit"]
-                    if totals[category_name][nutrient_name][1][subnutrient_name] == []:
-                        totals[category_name][nutrient_name][1][subnutrient_name].append(0)
-                        totals[category_name][nutrient_name][1][subnutrient_name].append("")
+                    if totals[category_name][nutrient_name]["subnutrients"][subnutrient_name] == {}:
+                        totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] = 0
+                        totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["unit"] = ""
                     if not subnutrient_value or subnutrient_value == "N/A":
                         continue
-                    totals[category_name][nutrient_name][1][subnutrient_name][0] += subnutrient_value
+                    #This demonstrates the data structure.   
+                    totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] += subnutrient_value
 
 
 
@@ -328,7 +355,7 @@ def food_log_get():
     })
     if len(totals["Calorie Information"]["Energy_KCAL"])>0:
         calorie_percentage = (
-            totals["Calorie Information"]["Energy_KCAL"][0] *100
+            totals["Calorie Information"]["Energy_KCAL"]["value"] *100
             )
     else:
         calorie_percentage = 0
@@ -338,7 +365,7 @@ def food_log_get():
 
     if len(totals["Protein & Amino Acids"]["Protein"])>0:
         protein_percentage = (
-            totals["Protein & Amino Acids"]["Protein"][0] * 100
+            totals["Protein & Amino Acids"]["Protein"]["value"] * 100
             )
     else:
         protein_percentage = 0
@@ -348,7 +375,7 @@ def food_log_get():
     if len(totals["Carbohydrates"]["Carbohydrate, by difference"])>0:
 
         carbohydrate_percentage = (
-            totals["Carbohydrates"]["Carbohydrate, by difference"][0] * 100
+            totals["Carbohydrates"]["Carbohydrate, by difference"]["value"] * 100
             )
     else:
         carbohydrate_percentage = 0
@@ -356,7 +383,7 @@ def food_log_get():
     carbohydrate_percentage /= user.get_adjusted_daily_caloric_needs()
     if len(totals["Fats & Fatty Acids"]["Total lipid (fat)"])>0:
         fat_percentage = (
-            totals["Fats & Fatty Acids"]["Total lipid (fat)"][0] * 100
+            totals["Fats & Fatty Acids"]["Total lipid (fat)"]["value"] * 100
             )
     else:
         fat_percentage = 0
