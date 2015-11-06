@@ -61,6 +61,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     nutrient_unit = ""
                 #dictionary.get() returns a value or None
                 target = targets.get(nutrient_number)
+                print nutrient_number, target
                 #puts the value into the nutrient_dict
                 tmp = {
                     "value": value, 
@@ -69,13 +70,16 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     "number": nutrient_number,
                     "target": target,   
                 }
-                if target != None:
-                    #difinintion of a new key "target_percentage"
+                if target != None and value != "":
+                    #definintion of a new key "target_percentage"
                     tmp["target_percentage"] = value/target * 100
                 else:
                     tmp["target_percentage"] = None
-                print target
-
+                #print target
+                tmp["target_percentage"] = round_value(
+                    tmp["target_percentage"], 2
+                    )
+                    
                 nutrient_dict[category_name][nutrient_name] = tmp
 
 
@@ -94,6 +98,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         subnutrient_unit = ""
 
                     target = targets.get(subnutrient_number)
+                    
                     # to access the value of OrderedDict
                     tmp = {
                         "value": value, 
@@ -101,7 +106,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         "number": subnutrient_number,
                         "target": target,
                         }
-                    if target != None:
+                    if target != None and value != "":
                     #difinintion of a new key "target_percentage"
                         tmp["target_percentage"] = value/target * 100
                     else:
@@ -151,9 +156,13 @@ def get_nutrient_unit(nutrient_definitions, nutrient_number):
                 
     return nutrient_unit, unit_precision
 
+def round_value(value, unit_precision):
+    return round(value, int(unit_precision))
+    
+
 def format_unit_for_display(value, nutrient_unit, unit_precision):
     if isinstance(value, float):
-       value = round(value, int(unit_precision))
+       value = round_value(value, unit_precision)
     else:
        value = ""
        nutrient_unit = ""
@@ -288,7 +297,7 @@ def food_log_get():
         return redirect(url_for('profile_get'))
     targets = get_targets_for_user(user)
     #maps the nutrient number to the amount that the user needs.
-    targets = {target.nutrient_no: target.value for target in targets}
+    targets = {int(target.nutrient_no): target.value for target in targets}
 
     # Get a list of all of the food groups
     all_food_groups = session.query(FoodGroupDescription)
