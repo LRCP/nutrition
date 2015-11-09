@@ -42,7 +42,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
             category = food_nutrient_dictionary_new[category_name]
             for nutrient_name, nutrient_tuple in category.iteritems():
                 nutrient_number = nutrient_tuple[0]
-                if nutrient_number != None:
+                if nutrient_number is not None:
                     value = nutrient_number_to_quantity(
                         nutrients, str(nutrient_number), association, unit
                         )
@@ -55,10 +55,12 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     nutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, nutrient_number)
                     # unpack the tuple that returns the value and nutrient_unit when
                     # the arguments value, nutrient_unit and unit_precision are passed into the format_unit_for_display function.
-                    value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)                    
+                    #value, nutrient_unit = format_unit_for_display(value, nutrient_unit, unit_precision)                    
                 else:
-                    value = u"\u25BE"
-                    nutrient_unit = ""
+                    #fix me!: add down carets when there are only subnutrients
+                    #value = u"\u25BE"
+                    value = None
+                    nutrient_unit = None
                 #dictionary.get() returns a value or None
                 target = targets.get(nutrient_number)
                 print nutrient_number, target
@@ -70,15 +72,13 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     "number": nutrient_number,
                     "target": target,   
                 }
-                if target != None and value != "":
+                if target is not None and value is not None:
                     #definintion of a new key "target_percentage"
                     tmp["target_percentage"] = value/target * 100
                 else:
                     tmp["target_percentage"] = None
-                #print target
-                tmp["target_percentage"] = round_value(
-                    tmp["target_percentage"], 2
-                    )
+                
+                
                     
                 nutrient_dict[category_name][nutrient_name] = tmp
 
@@ -87,15 +87,15 @@ def build_food_list(input_foods, nutrient_definitions, targets):
 
                 #loop throught the subnutrients to get the name and number.
                 for subnutrient_name, subnutrient_number in nutrient_tuple[1].iteritems():
-                    if subnutrient_number != None:
+                    if subnutrient_number is not None:
                         value = nutrient_number_to_quantity(
                             nutrients, str(subnutrient_number), association, unit
                             )
                         subnutrient_unit, unit_precision = get_nutrient_unit(nutrient_definitions, subnutrient_number)
-                        value, subnutrient_unit = format_unit_for_display(value, subnutrient_unit, unit_precision)
+                        
                     else:
-                        value = ""
-                        subnutrient_unit = ""
+                        value = None
+                        subnutrient_unit = None
 
                     target = targets.get(subnutrient_number)
                     
@@ -106,7 +106,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         "number": subnutrient_number,
                         "target": target,
                         }
-                    if target != None and value != "":
+                    if target is not None and value is not None:
                     #difinintion of a new key "target_percentage"
                         tmp["target_percentage"] = value/target * 100
                     else:
@@ -156,17 +156,10 @@ def get_nutrient_unit(nutrient_definitions, nutrient_number):
                 
     return nutrient_unit, unit_precision
 
-def round_value(value, unit_precision):
-    return round(value, int(unit_precision))
+
     
 
-def format_unit_for_display(value, nutrient_unit, unit_precision):
-    if isinstance(value, float):
-       value = round_value(value, unit_precision)
-    else:
-       value = ""
-       nutrient_unit = ""
-    return value, nutrient_unit
+
    
 
 
@@ -179,7 +172,7 @@ def nutrient_number_to_quantity(nutrients, nutrient_number, association, unit):
         value = (float(value) * association.quantity *
             float(unit.Gm_Wgt) / 100)
     except StopIteration:
-        value = "N/A"     
+        value = None    
             #puts the value into the nutrient_dict
     #nutrient_dict[category_name][nutrient_name] = value. replace by return value.
     return value
@@ -340,8 +333,8 @@ def food_log_get():
                 if totals[category_name][nutrient_name] == {}:
                     totals[category_name][nutrient_name]["value"]= 0
                     totals[category_name][nutrient_name]["subnutrients"] = ordered_defaultdict.OrderedDefaultdict(dict)
-                    totals[category_name][nutrient_name]["unit"] = ""
-                if not nutrient_value or nutrient_value == "N/A" or nutrient_value == u"\u25BE":
+                    totals[category_name][nutrient_name]["unit"] = None
+                if nutrient_value is None:
                     continue
 
                 totals[category_name][nutrient_name]["value"] += float(nutrient_value)
@@ -350,8 +343,8 @@ def food_log_get():
                     subnutrient_unit = subnutrient_dict["unit"]
                     if totals[category_name][nutrient_name]["subnutrients"][subnutrient_name] == {}:
                         totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] = 0
-                        totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["unit"] = ""
-                    if not subnutrient_value or subnutrient_value == "N/A":
+                        totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["unit"] = None
+                    if subnutrient_value is None:
                         continue
                     #This demonstrates the data structure.   
                     totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] += subnutrient_value
