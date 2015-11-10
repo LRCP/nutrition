@@ -61,6 +61,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     #value = u"\u25BE"
                     value = None
                     nutrient_unit = None
+                    unit_precision = None
                 #dictionary.get() returns a value or None
                 target = targets.get(nutrient_number)
                 print nutrient_number, target
@@ -70,7 +71,9 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     "subnutrients": OrderedDict(), 
                     "unit": nutrient_unit, 
                     "number": nutrient_number,
-                    "target": target,   
+                    "target": target, 
+                    "precision": int(unit_precision),
+
                 }
                 if target is not None and value is not None:
                     #definintion of a new key "target_percentage"
@@ -96,6 +99,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     else:
                         value = None
                         subnutrient_unit = None
+                        unit_precision = None
 
                     target = targets.get(subnutrient_number)
                     
@@ -105,6 +109,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         "unit": subnutrient_unit,
                         "number": subnutrient_number,
                         "target": target,
+                        "precision": unit_precision,
                         }
                     if target is not None and value is not None:
                     #difinintion of a new key "target_percentage"

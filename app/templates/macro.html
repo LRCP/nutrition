@@ -30,223 +30,53 @@
 <tr>
     <td  colspan="7">
         <div id="Food-Details-{{food_index}}" class="collapse food_details">
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>PROTEIN</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_protein-{{ food_index }}">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Protein & Amino Acids"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]}}
-                    </td>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_protein-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>CARBOHYDRATES</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_carbohydrates-{{ food_index }} ">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                 </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Carbohydrates"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {# there are 3 levels of tuples: value is a tuple which consists of (value, unit) #}
-                {# the items are a tuple which consists of (key, value) #}
-                {# enumerate gives a tuple which consists of (indes, item) #}
+            {{show_nutrients(food, "PROTEIN", "protein", "Protein & Amino Acids")}}
+            {{show_nutrients(food, "CARBOHYDRATES", "carbohydrates", "Carbohydrates")}}
+            {{show_nutrients(food, "FATS", "fats", "Fats & Fatty Acids")}}
+            {{show_nutrients(food, "VITAMINS", "vitamins", "Vitamins")}}
+            {{show_nutrients(food, "MINERALS", "minerals", "Minerals")}}
+            {{show_nutrients(food, "STEROLS", "sterols", "Sterols")}}
+            {{show_nutrients(food, "OTHER", "other", "Other")}}
 
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_carbohydrates-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }} <div class="target-progress-bar" style="background-image: linear-gradient(
-        to right, #7280DE, #7280DE {{ carbohydrate_percentage }}%, 
-        white {{ fat_percentage }}%);"></div>
-    
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>FATS</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_fats-{{ food_index }}">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Fats & Fatty Acids"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_fats-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>VITAMINS</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_vitamins-{{ food_index }}">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Vitamins"].items()) %}
-                <tr>
-                    <div class="nutrient_header">
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
-                    </td>
-                    </div>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_vitamins-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
-                     </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>MINERALS</strong>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Minerals"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]}}
-                    </td>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_minerals more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>STEROLS</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_sterols-{{ food_index }}">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Sterols"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_sterols-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"]}}
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
-            <table class="table">
-               <tr>
-                    <td>
-                        <div class="nutrient_header">
-                            <strong>OTHER</strong>
-                                <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_other-{{ food_index }}">
-                                    <span class="glyphicon glyphicon-plus">
-                                    </span>
-                                </button>
-                        </div>
-                    </td>
-                </tr>
-                {# .items() returns a list of tuples of (key, value) #}
-                {% for index, (nutrient_name, nutrient_dict) in enumerate
-                    (food["nutrients"]["Other"].items()) %}
-                <tr>
-                    <td class="nutrient">
-                        {{nutrient_name}} {{nutrient_dict["value"]}} {{ nutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% for index, (subnutrient_name, subnutrient_dict) in enumerate
-                    (nutrient_dict["subnutrients"].items()) %}
-                <tr class="more_other-{{ food_index }} more collapse">
-                    <td>
-                        {{subnutrient_name}} {{ subnutrient_dict["value"]}} {{ subnutrient_dict["unit"] }}
-                    </td>
-                </tr>
-                {% endfor %}
-                {% endfor %}
-            </table>
+            
+            
+            
+            
         </div>
     </td>
     
 </tr>
 {% endmacro %}
+
+{%macro show_nutrients(food, title, data_target, category_name)%}
+<table class="table">
+   <tr>
+        <td>
+            <div class="nutrient_header">
+                <strong>{{title}}</strong>
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_{{data_target}}-{{ food_index }}">
+                        <span class="glyphicon glyphicon-plus">
+                        </span>
+                    </button>
+            </div>
+        </td>
+    </tr>
+    {# .items() returns a list of tuples of (key, value) #}
+    {% for index, (nutrient_name, nutrient_dict) in enumerate
+        (food["nutrients"][category_name].items()) %}
+    <tr>
+        <td class="nutrient">
+            {{nutrient_name}} {{nutrient_dict["value"]|num_round(nutrient_dict["precision"])}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]}}
+        </td>
+    </tr>
+    {% for index, (subnutrient_name, subnutrient_dict) in enumerate
+        (nutrient_dict["subnutrients"].items()) %}
+    <tr class="more_{{data_target}}-{{ food_index }} more collapse">
+        <td>
+            {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
+        </td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+</table>
+{%endmacro%}
