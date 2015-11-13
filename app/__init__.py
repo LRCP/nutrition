@@ -11,6 +11,12 @@ from flask import Flask
 
 # Then initialize the variables
 app = Flask(__name__)
+
+#http://stackoverflow.com/questions/11146619/suppress-none-output-as-string-in-jinja2/17661969#17661969
+def my_finalize(thing):
+    return thing if thing is not None else ''
+
+app.jinja_env.finalize = my_finalize
 # to iterate ove an ordered dictionary in jinja2, import the module enumerate.
 # see stackoverflow: http://stackoverflow.com/questions/6036082/call-a-python-function-from-jinja2
 app.jinja_env.globals.update(enumerate=enumerate)

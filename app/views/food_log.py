@@ -72,7 +72,7 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     "unit": nutrient_unit, 
                     "number": nutrient_number,
                     "target": target, 
-                    "precision": int(unit_precision),
+                    "precision": unit_precision,
 
                 }
                 if target is not None and value is not None:
@@ -156,7 +156,7 @@ def get_nutrient_unit(nutrient_definitions, nutrient_number):
     nutrient_unit = nutrient_definition.Units
     if nutrient_unit == u"µg":
         nutrient_unit = u"mcg"
-    unit_precision = nutrient_definition.Num_Dec
+    unit_precision = int(nutrient_definition.Num_Dec)
    
                 
     return nutrient_unit, unit_precision
@@ -323,8 +323,8 @@ def food_log_get():
     
     foods = build_food_list(food_log.foods, nutrient_definitions, targets)
 
-    with open("dump.json", "w") as f:
-        json.dump(foods, f)
+    # with open("dump.json", "w") as f:
+    #     json.dump(foods, f)
     
     # Total the number of nutrients consumed
     totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(dict))
@@ -334,26 +334,49 @@ def food_log_get():
             for nutrient_name, nutrient_dict in category.iteritems():
                 nutrient_value = nutrient_dict["value"]
                 subnutrients = nutrient_dict["subnutrients"]
+                #nutrient_unit is currently not being use but should be used.
                 nutrient_unit = nutrient_dict["unit"]
+                
                 if totals[category_name][nutrient_name] == {}:
                     totals[category_name][nutrient_name]["value"]= 0
                     totals[category_name][nutrient_name]["subnutrients"] = ordered_defaultdict.OrderedDefaultdict(dict)
-                    totals[category_name][nutrient_name]["unit"] = None
+                    #confirm that totals[category_name][nutrient_name]["unit"] is the same every other subnutrient iteration in my code.
+                    
                 if nutrient_value is None:
                     continue
-
+                #do the same thing in subnutrients as I did in nutrients re: unit and precision.
+                #Chris Angelico7:52 am
+        #Ask Joe: assert that the precision and unit are the same for all subnutrients.
                 totals[category_name][nutrient_name]["value"] += float(nutrient_value)
                 for subnutrient_name, subnutrient_dict in subnutrients.iteritems():
                     subnutrient_value = subnutrient_dict["value"]
                     subnutrient_unit = subnutrient_dict["unit"]
                     if totals[category_name][nutrient_name]["subnutrients"][subnutrient_name] == {}:
                         totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] = 0
-                        totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["unit"] = None
+                        
                     if subnutrient_value is None:
                         continue
                     #This demonstrates the data structure.   
                     totals[category_name][nutrient_name]["subnutrients"][subnutrient_name]["value"] += subnutrient_value
 
+    for category_name, category in totals.iteritems():
+        for nutrient_name, nutrient_dict in category.iteritems():
+            nutrient_value = nutrient_dict["value"]
+            subnutrients = nutrient_dict["subnutrients"]
+            nutrient_dict["unit"] = None
+            nutrient_dict["precision"] = 2
+            nutrient_dict["target"] = None
+            nutrient_dict["target_percentage"] = None
+
+            
+            for subnutrient_name, subnutrient_dict in subnutrients.iteritems():
+                subnutrient_value = subnutrient_dict["value"]
+                subnutrient_dict["unit"] = None
+                subnutrient_dict["precision"] = 2
+                subnutrient_dict["target"] = None
+                subnutrient_dict["target_percentage"] = None
+               
+                
 
 
     foods.append({

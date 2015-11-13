@@ -66,14 +66,14 @@
         (food["nutrients"][category_name].items()) %}
     <tr>
         <td class="nutrient">
-            {{nutrient_name}} {{nutrient_dict["value"]|num_round(nutrient_dict["precision"])}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]}}
+            {{nutrient_name}} {{nutrient_dict["value"]|num_round(nutrient_dict["precision"])}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]|num_round(2)}}%
         </td>
     </tr>
     {% for index, (subnutrient_name, subnutrient_dict) in enumerate
         (nutrient_dict["subnutrients"].items()) %}
     <tr class="more_{{data_target}}-{{ food_index }} more collapse">
         <td>
-            {{subnutrient_name}} {{ subnutrient_dict["value"] }} {{ subnutrient_dict["unit"] }}
+            {{subnutrient_name}} {{ subnutrient_dict["value"]|num_round(subnutrient_dict["precision"]) }} {{ subnutrient_dict["unit"] }} {{ subnutrient_dict["target_percentage"]|num_round(2)}}%
         </td>
     </tr>
     {% endfor %}
