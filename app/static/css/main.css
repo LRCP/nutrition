@@ -53,10 +53,13 @@ header a{
 /*We are selecting the div child of the nutrient_goals parent.*/
 .target-progress-bar{
   display: inline-block;
-  width: 30px;
-  height: 1em;
+  min-width: 30px;
+  padding: 0 5px;
+  height: 1.5em;
   border: 1px solid black;
-  vertical-align: text-bottom;
+  
+  text-align: center;
+
 }
 
 

@@ -66,14 +66,54 @@
         (food["nutrients"][category_name].items()) %}
     <tr>
         <td class="nutrient">
-            {{nutrient_name}} {{nutrient_dict["value"]|num_round(nutrient_dict["precision"])}} {{ nutrient_dict["unit"] }} {{ nutrient_dict["target_percentage"]|num_round(2)}}%
+            {{nutrient_name}}
+            {{nutrient_dict["value"]|num_round(nutrient_dict["precision"])}}
+            {% if nutrient_dict["value"] is not none %}
+
+            {{ nutrient_dict["unit"] }}
+            {% endif %}
+
+            
+            {# in jinja, can't use None. must use none. #}
+            {% if nutrient_dict["target_percentage"] is not none %}
+            <div class="target-progress-bar"
+                style="background-image: linear-gradient(
+                    to right, #7280DE, #7280DE {{ nutrient_dict["target_percentage"] }}%, 
+                    white {{ nutrient_dict["target_percentage"] }}%
+                );">
+                {{ nutrient_dict["target_percentage"]|num_round(2)}}
+                %
+            </div>
+           
+            {% endif %}
+            {% if nutrient_dict["subnutrients"] %}
+            ▾
+            {% endif %}
+
+
         </td>
     </tr>
     {% for index, (subnutrient_name, subnutrient_dict) in enumerate
         (nutrient_dict["subnutrients"].items()) %}
     <tr class="more_{{data_target}}-{{ food_index }} more collapse">
         <td>
-            {{subnutrient_name}} {{ subnutrient_dict["value"]|num_round(subnutrient_dict["precision"]) }} {{ subnutrient_dict["unit"] }} {{ subnutrient_dict["target_percentage"]|num_round(2)}}%
+            {{subnutrient_name}}
+
+            {{ subnutrient_dict["value"]|num_round(subnutrient_dict["precision"]) }}
+            {% if subnutrient_dict["value"] is not none %}
+            {{ subnutrient_dict["unit"] }}
+            {% endif %}
+            
+            {% if subnutrient_dict["target_percentage"] is not none %}
+           <div class="target-progress-bar"
+                style="background-image: linear-gradient(
+                    to right, #7280DE, #7280DE {{ subnutrient_dict["target_percentage"] }}%, 
+                    white {{ subnutrient_dict["target_percentage"] }}%
+                );">
+                {{ subnutrient_dict["target_percentage"]|num_round(2)}}
+                %
+            </div>
+            {% endif %}
         </td>
     </tr>
     {% endfor %}
