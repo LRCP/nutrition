@@ -30,13 +30,13 @@
 <tr>
     <td  colspan="7">
         <div id="Food-Details-{{food_index}}" class="collapse food_details">
-            {{show_nutrients(food, "PROTEIN", "protein", "Protein & Amino Acids")}}
-            {{show_nutrients(food, "CARBOHYDRATES", "carbohydrates", "Carbohydrates")}}
-            {{show_nutrients(food, "FATS", "fats", "Fats & Fatty Acids")}}
-            {{show_nutrients(food, "VITAMINS", "vitamins", "Vitamins")}}
-            {{show_nutrients(food, "MINERALS", "minerals", "Minerals")}}
-            {{show_nutrients(food, "STEROLS", "sterols", "Sterols")}}
-            {{show_nutrients(food, "OTHER", "other", "Other")}}
+            {{show_nutrients(food, food_index, "PROTEIN", "protein", "Protein & Amino Acids")}}
+            {{show_nutrients(food, food_index, "CARBOHYDRATES", "carbohydrates", "Carbohydrates")}}
+            {{show_nutrients(food, food_index, "FATS", "fats", "Fats & Fatty Acids")}}
+            {{show_nutrients(food, food_index, "VITAMINS", "vitamins", "Vitamins")}}
+            {{show_nutrients(food, food_index, "MINERALS", "minerals", "Minerals")}}
+            {{show_nutrients(food, food_index, "STEROLS", "sterols", "Sterols")}}
+            {{show_nutrients(food, food_index, "OTHER", "other", "Other")}}
 
             
             
@@ -48,21 +48,21 @@
 </tr>
 {% endmacro %}
 
-{%macro show_nutrients(food, title, data_target, category_name)%}
+{%macro show_nutrients(food, food_index, title, data_target, category_name)%}
 <table class="table">
    <tr>
         <td>
             <div class="nutrient_header">
                 <strong>{{title}}</strong>
-                    <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_{{data_target}}-{{ food_index }}">
+                    {# <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target=".more_{{data_target}}_{{ food_index }}">
                         <span class="glyphicon glyphicon-plus">
                         </span>
-                    </button>
+                    </button> #}
             </div>
         </td>
     </tr>
     {# .items() returns a list of tuples of (key, value) #}
-    {% for index, (nutrient_name, nutrient_dict) in enumerate
+    {% for nutrient_index, (nutrient_name, nutrient_dict) in enumerate
         (food["nutrients"][category_name].items()) %}
     <tr>
         <td class="nutrient">
@@ -87,15 +87,15 @@
            
             {% endif %}
             {% if nutrient_dict["subnutrients"] %}
-            ▾
+            <a data-toggle="collapse" data-target=".more_{{data_target}}_{{ food_index }}_{{nutrient_index}}">▼</a>
             {% endif %}
 
 
         </td>
     </tr>
-    {% for index, (subnutrient_name, subnutrient_dict) in enumerate
+    {% for subnutrient_index, (subnutrient_name, subnutrient_dict) in enumerate
         (nutrient_dict["subnutrients"].items()) %}
-    <tr class="more_{{data_target}}-{{ food_index }} more collapse">
+    <tr class="more_{{data_target}}_{{ food_index}}_{{ nutrient_index }} more collapse">
         <td>
             {{subnutrient_name}}
 

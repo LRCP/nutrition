@@ -107,8 +107,9 @@ td {
 .more.collapse.in{
     display: table-row!important;
 }
-td.nutrient{
+td.nutrient a{
   /*font-weight: bold;*/
+  color: black;
 }
 
 .add_foods{
