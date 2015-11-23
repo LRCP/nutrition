@@ -2,6 +2,7 @@
 import json
 import copy
 from collections import defaultdict, OrderedDict
+import datetime
 
 from flask import flash, redirect, url_for, render_template, request
 from flask.ext.login import login_required, current_user
@@ -129,13 +130,14 @@ def build_food_list(input_foods, nutrient_definitions, targets):
 
     return foods  
 
-def get_food_log(user):
-    food_log = session.query(FoodLog).filter_by(user=user).first()
+def get_food_log(user, date=None):
+    if date is None:
+        date = datetime.date.today()
+    food_log = session.query(FoodLog).filter_by(user=user, date=date).first()
     if food_log is None:
         food_log = FoodLog()
         food_log.user = user
         session.add(food_log)
-
         session.commit()    
     return food_log
 
