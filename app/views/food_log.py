@@ -288,10 +288,18 @@ def get_targets_for_user(user):
 
 
 @app.route('/food_log', methods=['GET'])
+@app.route('/food_log/<int:year>/<int:month>/<int:day>', methods=['GET'])
 @login_required
-def food_log_get():
+#year, month and day is supplied in the url bar.
+def food_log_get(year=None, month=None, day=None):
     user = current_user
-
+    if year is None:
+        year = datetime.date.today().year
+    if month is None:
+        month = datetime.date.today().month
+    if day is None:
+        day = datetime.date.today().day
+    date = str(year) + "-" + str(month) + "-" + str(day)
     # Hack: If the user has no protein goal they have no profile!
     if user.protein_goal == None:
         return redirect(url_for('profile_get'))
@@ -321,7 +329,7 @@ def food_log_get():
 
 
     # Get the current food log
-    food_log = get_food_log(user)
+    food_log = get_food_log(user, date)
     
     foods = build_food_list(food_log.foods, nutrient_definitions, targets)
 
@@ -329,7 +337,12 @@ def food_log_get():
     #     json.dump(foods, f)
     
     # Total the number of nutrients consumed
-    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(dict))
+    totals = defaultdict(lambda: ordered_defaultdict.OrderedDefaultdict(lambda: {
+        "value": 0,
+        "precision": 0,
+        "target_percentage": 0,
+        "subnutrients": ordered_defaultdict.OrderedDefaultdict(dict)
+        }))
     for food in foods:
         nutrients = food["nutrients"]
         for category_name, category in nutrients.iteritems():
@@ -338,12 +351,7 @@ def food_log_get():
                 subnutrients = nutrient_dict["subnutrients"]
                 #nutrient_unit is currently not being use but should be used.
                 nutrient_unit = nutrient_dict["unit"]
-                
-                if totals[category_name][nutrient_name] == {}:
-                    totals[category_name][nutrient_name]["value"]= 0
-                    totals[category_name][nutrient_name]["subnutrients"] = ordered_defaultdict.OrderedDefaultdict(dict)
-                    #confirm that totals[category_name][nutrient_name]["unit"] is the same every other subnutrient iteration in my code.
-                    
+               
                 if nutrient_value is None:
                     continue
                 #do the same thing in subnutrients as I did in nutrients re: unit and precision.
