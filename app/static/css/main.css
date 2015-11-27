@@ -140,11 +140,11 @@ td.nutrient a{
 
 }
 /*Bootstrap 3 style fixes for using Typeahead.js*/
-.tt-dropdown-menu{
+.tt-menu{
 
   min-width: 160px;
   margin-top: 2px;
-  padding: 5px 0;
+  padding: 10px;
   background-color: #ffffff;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
