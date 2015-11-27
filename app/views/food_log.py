@@ -441,6 +441,7 @@ def food_log_get(year=None, month=None, day=None):
         carbohydrate_percentage=carbohydrate_percentage,
         fat_percentage=fat_percentage,
         targets=targets,
+        date=date,
 
         
 
