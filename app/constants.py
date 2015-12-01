@@ -22,7 +22,7 @@ food_nutrient_dictionary_new = {
     "Other": OrderedDict(),
 }
 
-food_nutrient_dictionary_new["Calorie Information"]["Energy_KCAL"] = (208, OrderedDict())
+food_nutrient_dictionary_new["Calorie Information"]["Calories"] = (208, OrderedDict())
 #First Level
 food_nutrient_dictionary_new["Carbohydrates"]["Carbohydrate, by difference"] = (205, OrderedDict())
 #Second Level

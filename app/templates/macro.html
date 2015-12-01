@@ -4,12 +4,16 @@
         <div class="quantity_unit">{{food["quantity"]}} {{food["unit"]}}</div>
     </td>
     
-    <td>{{food["nutrients"]["Calorie Information"]["Energy_KCAL"][0]}}
+    <td>{{food["nutrients"]["Calorie Information"]["Calories"]["value"]|num_round(food["nutrients"]["Calorie Information"]["Calories"]["precision"])}}
     </td>
-    <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"][0]}}</td>
-    <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"][0]}}</td>
-    <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"][0]}}</td>
-    <td>{{food["nutrients"]["Other"]["Water"][0]}}</td>
+
+    <td>{{food["nutrients"]["Protein & Amino Acids"]["Protein"]["value"]|num_round(food["nutrients"]["Protein & Amino Acids"]["Protein"]["precision"])}}</td>
+
+    <td>{{food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]["value"]|num_round(food["nutrients"]["Carbohydrates"]["Carbohydrate, by difference"]["precision"])}}</td>
+
+    <td>{{food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]["value"]|num_round(food["nutrients"]["Fats & Fatty Acids"]["Total lipid (fat)"]["precision"])}}</td>
+    
+    <td>{{food["nutrients"]["Other"]["Water"]["value"]|num_round(food["nutrients"]["Other"]["Water"]["precision"])}}</td>
     <td class="more_button">
         <button type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-target="#Food-Details-{{food_index}}" aria-expanded="false" aria-controls="Food-Details-{{food_index}}">
             <span class="glyphicon glyphicon-plus"></span>
@@ -30,6 +34,7 @@
 <tr>
     <td  colspan="7">
         <div id="Food-Details-{{food_index}}" class="collapse food_details">
+            {{show_nutrients(food, food_index, "CALORIES", "calories", "Calorie Information")}}
             {{show_nutrients(food, food_index, "PROTEIN", "protein", "Protein & Amino Acids")}}
             {{show_nutrients(food, food_index, "CARBOHYDRATES", "carbohydrates", "Carbohydrates")}}
             {{show_nutrients(food, food_index, "FATS", "fats", "Fats & Fatty Acids")}}

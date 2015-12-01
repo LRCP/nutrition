@@ -285,7 +285,33 @@ def get_targets_for_user(user):
 #want to add the derived targets to this targets dictionary
 #targets["Energy kcal"]
 def get_derived_targets(user, targets):
-    pass
+    #targets[208] gets the nutrient number for ["Energy kcal"]
+    targets[208]=user.get_adjusted_daily_caloric_needs()
+    #targets[protein nutrient number] = some calculation caloric need * %protein goal * number to display in grams.
+    #for all the amino acids, all the derived targets.
+
+    #203 is for total protein
+    targets[203] = user.get_adjusted_daily_caloric_needs() * user.protein_goal / 400
+    #18 mg of total protein will be histidine
+    targets[512] = targets[203] * 0.018
+    #Isoleucine 503  0.025
+    #Leucine 504  0.055
+    #Lysine 505  0.051
+    #Methionine[506] & Cystine[507]  0.025
+    #phenylalanine[508] and tyrosine[509]  0.047
+    #threonine 502  0.027
+    #tryptophan 501  0.07
+    #valine 510  0.032
+    #do the same for all the amino acids. Use chart.
+
+    #204 is for total fats
+    targets[204] = user.get_adjusted_daily_caloric_needs() * user.fat_goal / 900
+
+    targets[205] = user.get_adjusted_daily_caloric_needs() * user.carbohydrate_goal / 400
+
+    #targets[]
+    #what are the guidelines for sugar, and any other targets for? check it out.
+    
 
 
 
@@ -304,7 +330,7 @@ def food_log_get(year=None, month=None, day=None):
         month = datetime.date.today().month
     if day is None:
         day = datetime.date.today().day
-    date = str(year) + "-" + str(month) + "-" + str(day)
+    date = "{:04d}-{:02d}-{:02d}".format(year, month, day)
     # Hack: If the user has no protein goal they have no profile!
     if user.protein_goal == None:
         return redirect(url_for('profile_get'))
