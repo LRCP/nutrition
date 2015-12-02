@@ -292,17 +292,36 @@ def get_derived_targets(user, targets):
 
     #203 is for total protein
     targets[203] = user.get_adjusted_daily_caloric_needs() * user.protein_goal / 400
+
     #18 mg of total protein will be histidine
     targets[512] = targets[203] * 0.018
+
     #Isoleucine 503  0.025
+    targets[503] = targets[203] * 0.025
+
     #Leucine 504  0.055
+    targets[504] = targets[203] * 0.055
+
     #Lysine 505  0.051
+    targets[505] = targets[203]  * 0.051
+
     #Methionine[506] & Cystine[507]  0.025
+    targets[506] = targets[203] * 0.025
+    targets[507] = targets[203] * 0.025
+
     #phenylalanine[508] and tyrosine[509]  0.047
+    targets[508] = targets[203] * 0.047
+    targets[509] = targets[203] * 0.047
+
     #threonine 502  0.027
+    targets[502] = targets[203] * 0.027
+
     #tryptophan 501  0.07
+    targets[501] = targets[203] * 0.07
+
     #valine 510  0.032
-    #do the same for all the amino acids. Use chart.
+    targets[510] = targets[203] * 0.032
+    
 
     #204 is for total fats
     targets[204] = user.get_adjusted_daily_caloric_needs() * user.fat_goal / 900

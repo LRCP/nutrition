@@ -76,6 +76,9 @@
             {% if nutrient_dict["value"] is not none %}
 
             {{ nutrient_dict["unit"] }}
+            {% else %}
+            <div class="target-progress-bar">N/A</div>
+
             {% endif %}
 
             
@@ -94,6 +97,7 @@
             {% if nutrient_dict["subnutrients"] %}
             <a data-toggle="collapse" data-target=".more_{{data_target}}_{{ food_index }}_{{nutrient_index}}">▼</a>
             {% endif %}
+            
 
 
         </td>
@@ -107,6 +111,8 @@
             {{ subnutrient_dict["value"]|num_round(subnutrient_dict["precision"]) }}
             {% if subnutrient_dict["value"] is not none %}
             {{ subnutrient_dict["unit"] }}
+            {% else %}
+            <div class="target-progress-bar">N/A</div>
             {% endif %}
             
             {% if subnutrient_dict["target_percentage"] is not none %}
