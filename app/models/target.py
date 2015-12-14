@@ -13,6 +13,7 @@ class Target(BaseNutrition):
     #nutrient_no is being referenced as a text because that is how it is referenced in the USDA database
     nutrient_no = Column(Text, nullable=False)
     value = Column(Float)
+    upper_limit = Column(Float)
 
 
 

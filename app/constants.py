@@ -343,7 +343,7 @@ food_nutrient_dictionary_new["Minerals"]["Zinc"] = (309, OrderedDict())
 food_nutrient_dictionary_new["Minerals"]["Copper"] = (312, OrderedDict())
 food_nutrient_dictionary_new["Minerals"]["Manganese"] = (315, OrderedDict())
 food_nutrient_dictionary_new["Minerals"]["Selenium"] = (317, OrderedDict())
-food_nutrient_dictionary_new["Minerals"]["Flouride"] = (313, OrderedDict())
+food_nutrient_dictionary_new["Minerals"]["Fluoride"] = (313, OrderedDict())
 
 #Level 1
 food_nutrient_dictionary_new["Sterols"]["Cholesterol"] = (601, OrderedDict())

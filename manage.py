@@ -47,6 +47,10 @@ def import_targets():
                 target.value = None
             else:
                 target.value = row[4]
+            if row[5] == "":
+                target.upper_limit = None
+            else:
+                target.upper_limit = row[5]
             session.add(target)
         session.commit()
     
