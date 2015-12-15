@@ -43,10 +43,12 @@ def import_targets():
             target.lower_age = float(row[1])
             target.upper_age = float(row[2])
             target.nutrient_no = row[3]
+            
             if row[4] == "":
                 target.value = None
             else:
                 target.value = row[4]
+            
             if row[5] == "":
                 target.upper_limit = None
             else:

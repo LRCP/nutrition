@@ -65,6 +65,15 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     unit_precision = None
                 #dictionary.get() returns a value or None
                 target = targets.get(nutrient_number)
+                #use the terniary operator to create the following code. Use this value 
+                #if this is true, or else use this value if not true. 
+                #there are three parts. There is the conditions and the two values.
+                #key is "target". 
+                #value is value of the dictionary target.get with the key of "value"
+                #if target exists and is a dictionary.
+                #Otherwise the value is None.
+                upper_limit = target.get("upper_limit") if target else None
+                target = target.get("value") if target else None
                 print nutrient_number, target
                 #puts the value into the nutrient_dict
                 tmp = {
@@ -72,15 +81,24 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                     "subnutrients": OrderedDict(), 
                     "unit": nutrient_unit, 
                     "number": nutrient_number,
-                    "target": target, 
+                    "target": target,
                     "precision": unit_precision,
+                    "upper_limit": upper_limit,
 
                 }
+                
+
                 if target is not None and value is not None:
                     #definintion of a new key "target_percentage"
                     tmp["target_percentage"] = value/target * 100
                 else:
                     tmp["target_percentage"] = None
+
+                if upper_limit is not None and value is not None:
+                    #definintion of a new key "upper_limit_percentage"
+                    tmp["upper_limit_percentage"] = value/upper_limit * 100
+                else:
+                    tmp["upper_limit_percentage"] = None
                 
                 
                     
@@ -103,6 +121,10 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         unit_precision = None
 
                     target = targets.get(subnutrient_number)
+                    upper_limit = target.get("upper_limit") if target else None
+
+                    target = target.get("value") if target else None
+
                     
                     # to access the value of OrderedDict
                     tmp = {
@@ -111,12 +133,19 @@ def build_food_list(input_foods, nutrient_definitions, targets):
                         "number": subnutrient_number,
                         "target": target,
                         "precision": unit_precision,
+                        "upper_limit": upper_limit,
                         }
                     if target is not None and value is not None:
-                    #difinintion of a new key "target_percentage"
+                    #definintion of a new key "target_percentage"
                         tmp["target_percentage"] = value/target * 100
                     else:
                         tmp["target_percentage"] = None
+
+                    if upper_limit is not None and value is not None:
+                        #definintion of a new key "target_percentage"
+                        tmp["upper_limit_percentage"] = value/upper_limit * 100
+                    else:
+                        tmp["upper_limit_percentage"] = None
                     nutrient_dict[category_name][nutrient_name]["subnutrients"][subnutrient_name] = tmp
 
 
@@ -266,6 +295,7 @@ def add_saved_meal_post():
         #be sent to the javascript which will insert the info on the page.
     session.commit()
     nutrient_definitions = session.query(NutrientDefinition).all()
+    #fix me-should pass targets in.
     foods = build_food_list(meal.foods, nutrient_definitions)
     return render_template('partial_food_log.html', foods=foods)
     
@@ -276,8 +306,13 @@ def get_targets_for_user(user):
     targets = targets.filter(Target.lower_age <= user.get_age())
     targets = targets.filter(Target.upper_age > user.get_age())
 
-    #maps the nutrient number to the amount that the user needs.
-    targets = {int(target.nutrient_no): target.value for target in targets}
+    #maps the nutrient number to the target, the amount that the user needs.
+    targets = {int(target.nutrient_no): {
+            "value": target.value, 
+            "upper_limit": target.upper_limit
+        } 
+    for target in targets}
+
     get_derived_targets(user, targets)
 
     return targets
@@ -286,47 +321,47 @@ def get_targets_for_user(user):
 #targets["Energy kcal"]
 def get_derived_targets(user, targets):
     #targets[208] gets the nutrient number for ["Energy kcal"]
-    targets[208]=user.get_adjusted_daily_caloric_needs()
+    targets[208]={"value": user.get_adjusted_daily_caloric_needs()}
     #targets[protein nutrient number] = some calculation caloric need * %protein goal * number to display in grams.
     #for all the amino acids, all the derived targets.
 
     #203 is for total protein
-    targets[203] = user.get_adjusted_daily_caloric_needs() * user.protein_goal / 400
+    targets[203] = {"value": user.get_adjusted_daily_caloric_needs() * user.protein_goal / 400}
 
     #18 mg of total protein will be histidine
-    targets[512] = targets[203] * 0.018
+    targets[512] = {"value": targets[203]["value"] * 0.018}
 
     #Isoleucine 503  0.025
-    targets[503] = targets[203] * 0.025
+    targets[503] = {"value": targets[203]["value"] * 0.025}
 
     #Leucine 504  0.055
-    targets[504] = targets[203] * 0.055
+    targets[504] = {"value": targets[203]["value"] * 0.055}
 
     #Lysine 505  0.051
-    targets[505] = targets[203]  * 0.051
+    targets[505] = {"value": targets[203]["value"]  * 0.051}
 
     #Methionine[506] & Cystine[507]  0.025
-    targets[506] = targets[203] * 0.025
-    targets[507] = targets[203] * 0.025
+    targets[506] = {"value": targets[203]["value"] * 0.025}
+    targets[507] = {"value": targets[203]["value"] * 0.025}
 
     #phenylalanine[508] and tyrosine[509]  0.047
-    targets[508] = targets[203] * 0.047
-    targets[509] = targets[203] * 0.047
+    targets[508] = {"value": targets[203]["value"] * 0.047}
+    targets[509] = {"value": targets[203]["value"] * 0.047}
 
     #threonine 502  0.027
-    targets[502] = targets[203] * 0.027
+    targets[502] = {"value": targets[203]["value"] * 0.027}
 
     #tryptophan 501  0.07
-    targets[501] = targets[203] * 0.07
+    targets[501] = {"value": targets[203]["value"] * 0.07}
 
     #valine 510  0.032
-    targets[510] = targets[203] * 0.032
+    targets[510] = {"value": targets[203]["value"] * 0.032}
     
 
     #204 is for total fats
-    targets[204] = user.get_adjusted_daily_caloric_needs() * user.fat_goal / 900
+    targets[204] = {"value": user.get_adjusted_daily_caloric_needs() * user.fat_goal / 900}
 
-    targets[205] = user.get_adjusted_daily_caloric_needs() * user.carbohydrate_goal / 400
+    targets[205] = {"value": user.get_adjusted_daily_caloric_needs() * user.carbohydrate_goal / 400}
 
     #targets[]
     #what are the guidelines for sugar, and any other targets for? check it out.
@@ -425,6 +460,8 @@ def food_log_get(year=None, month=None, day=None):
             nutrient_dict["precision"] = 2
             nutrient_dict["target"] = None
             nutrient_dict["target_percentage"] = None
+            nutrient_dict["upper_limit"] = None
+
 
             
             for subnutrient_name, subnutrient_dict in subnutrients.iteritems():
@@ -433,6 +470,7 @@ def food_log_get(year=None, month=None, day=None):
                 subnutrient_dict["precision"] = 2
                 subnutrient_dict["target"] = None
                 subnutrient_dict["target_percentage"] = None
+                subnutrient_dict["upper_limit"] = None
 
     
 
