@@ -55,6 +55,11 @@ def import_targets():
                 target.upper_limit = row[5]
             session.add(target)
         session.commit()
+
+@manager.command
+def run():
+    app.run(
+        host='127.0.0.1', port=5000, debug=True)
     
 
 

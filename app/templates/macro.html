@@ -117,10 +117,11 @@
             
             {% if subnutrient_dict["target_percentage"] is not none 
                 <div class="target-progress-bar"
-                style="background-image: linear-gradient(
+                    style="background-image: linear-gradient(
                     to right, #7280DE, #7280DE {{ subnutrient_dict["target_percentage"] }}%, 
                     white {{ subnutrient_dict["target_percentage"] }}%
-                );">
+                );"
+                </div>
                 {{ subnutrient_dict["target_percentage"]|num_round(2)}}
                 %
                 {% if subnutrient_dict["upper_limit_percentage"] is not none
