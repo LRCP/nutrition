@@ -15,7 +15,7 @@ def load_user(userid):
 #to see if the user is authenticated.
 @app.before_request
 def load_globals():
-    g.logged_in = current_user.is_authenticated()
+    g.logged_in = current_user.is_authenticated
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
