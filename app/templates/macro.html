@@ -21,7 +21,7 @@
     </td>
     <td class="delete_button">
         {% if food["name"] != "Totals" %}
-        <a href="food_log/delete/{{food["id"]}}">
+        <a href="/food_log/delete/{{food["id"]}}">
             <button type="button" class="btn btn-default btn-xs">
                 <span class="glyphicon glyphicon-remove"></span>
             </button>
@@ -92,6 +92,11 @@
                 {{ nutrient_dict["target_percentage"]|num_round(2)}}
                 %
             </div>
+            {% if nutrient_dict["upper_limit_percentage"] is not none and nutrient_dict["upper_limit_percentage"] > 100 %}
+                <span class="max">
+                    Max is {{ nutrient_dict["upper_limit"]}} {{ nutrient_dict["unit"] }}!
+                </span>
+            {% endif %}
            
             {% endif %}
             {% if nutrient_dict["subnutrients"] %}
@@ -126,7 +131,9 @@
                 %
                 </div>
                 {% if subnutrient_dict["upper_limit_percentage"] is not none%}
-                {{ subnutrient_dict["upper_limit_percentage"] }} 
+                <span class="max">
+                    Max is {{ subnutrient_dict["upper_limit"] }} {{ subnutrient_dict["unit"] }}!
+                </span>
                 {% endif %}
                
             {% endif %}

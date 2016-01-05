@@ -61,6 +61,18 @@ header a{
   text-align: center;
 
 }
+
+.max {
+  display: inline-block;
+  min-width: 30px;
+  padding: 0 5px;
+  height: 1.5em;
+  border: 1px solid black;
+  
+  text-align: center;
+  background: red;
+
+}
 #nutrient_goals .target-progress-bar{
   display: inline-block;
   min-width: 30px;

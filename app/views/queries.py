@@ -40,6 +40,7 @@ def query_foods(query_string):
                 "Gm_Wgt": unit.Gm_Wgt,
                 "NDB_No": unit.NDB_No,
                 "Seq": unit.Seq,
+                "amount": unit.Amount,
                 })
         food_list.append({
             "name": food.Long_Desc,

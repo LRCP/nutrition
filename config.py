@@ -19,5 +19,5 @@ OPENID_PROVIDERS = [
     { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
     { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
     { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
-
+DEBUG = True
 

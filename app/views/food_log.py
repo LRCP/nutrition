@@ -424,6 +424,7 @@ def food_log_get(year=None, month=None, day=None):
         "value": 0,
         "precision": 0,
         "target_percentage": 0,
+        "upper_limit_percentage": 0,
         "subnutrients": ordered_defaultdict.OrderedDefaultdict(dict)
         }))
     for food in foods:

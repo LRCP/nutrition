@@ -65,7 +65,6 @@ $(document).ready(function() {
         */
         displayKey: function(suggestion){
             console.log(suggestion.name);
-            
             return suggestion.name;
         },
         /* need something in addition to displayKey: 'units'*/
@@ -77,7 +76,7 @@ $(document).ready(function() {
         for (var i = 0; i < suggestion.units.length; i++) {
             var unit = suggestion.units[i];
             var option = $("<option>");
-            option.text(unit.name);
+            option.text(unit.amount + unit.name + unit.Gm_Wgt);
             option.attr("value", JSON.stringify(unit));
             $("#units").append(option);
         } 
