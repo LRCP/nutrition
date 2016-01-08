@@ -13,7 +13,7 @@
         <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
         <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
         <script>
-        $(function() {
+        /*$(function() {
             $( "#birthday" ).datepicker({
              changeMonth: true,
              changeYear: true,
@@ -21,12 +21,12 @@
              yearRange: "1900:+0",
              
             });
-        });
+        });*/
         </script>
-        <p>Birthdate: <input type="text" id="birthday"></p>
+        {# <p>Birthdate: <input type="text" id="birthday" value="{{user.birthday}}"></p> #}
     </div>
     <div>
-        <!-- {{ render_field(form.birthday) }} -->
+        {{ render_field(form.birthday) }}
 
         {{ render_field(form.gender) }}      
     </div>
@@ -60,6 +60,11 @@
         {{ render_field(form.carbohydrate_goal) }}
         {{ render_field(form.fat_goal) }}
     </div> 
+    <div id="supertracker">
+
+        <h5>Alternatively, you can connect to <a href="https://www.supertracker.usda.gov">The USDA Supertracker</a> to help you define your nutrition goals
+        </h5>
+    </div>
 
     
 

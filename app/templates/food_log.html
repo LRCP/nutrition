@@ -1,5 +1,10 @@
 
 {% extends "base.html" %}
+{% block head %}
+<script type="text/javascript" src="/static/js/meal-typeahead.js"></script>
+<script type="text/javascript" src="/static/js/food-typeahead.js"></script>
+<script type="text/javascript" src="/static/js/food-group-multiselect.js"></script>
+{% endblock %} 
 {% block content %}
 {% from "_formhelpers.html" import render_field %}
 {% import "macro.html" as macro %}

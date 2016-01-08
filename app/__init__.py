@@ -22,7 +22,7 @@ app.jinja_env.finalize = my_finalize
 app.jinja_env.globals.update(enumerate=enumerate)
 app.config.from_object('config')
 #sqlite lives in the computer
-engineUSDA = create_engine('sqlite:///sr27.db')
+engineUSDA = create_engine('sqlite:///sr28.db')
 engineNutrition = create_engine('sqlite:///app.db')
 BaseUSDA = declarative_base()
 BaseNutrition = declarative_base()

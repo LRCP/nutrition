@@ -1,6 +1,6 @@
 from flask.ext.wtf import Form
 from wtforms import BooleanField, PasswordField, DateTimeField, validators
-from wtforms import DecimalField, TextField, IntegerField, DateField, SelectField, FloatField
+from wtforms import DecimalField, TextField, FloatField, DateField, SelectField, FloatField
 from wtforms.validators import Required, Length, NumberRange
 from wtforms.fields.html5 import DateField
 import datetime
@@ -27,33 +27,33 @@ class RegistrationForm(Form):
 
 class ProfileForm(Form):
 
-    calorie_goal = IntegerField(
+    calorie_goal = FloatField(
         'Calories', 
         [validators.NumberRange(
             min=500, 
             max=10000,
             message="Enter the number of calories between 500 and 10,000.")]
         )
-    protein_goal = IntegerField(
+    protein_goal = FloatField(
         'Protein', 
         [validators.NumberRange(
             min=1, 
             max=100,
             message="Enter the percentage of your calories to consume as protein.")]
         )
-    carbohydrate_goal = IntegerField(
+    carbohydrate_goal = FloatField(
         'Carbohydrate',
         # [validators.NumberRange(
         #     min=1, 
         #     max=300,
         #     message="Enter the number of Carbohydrate grams between 1 and 300.")]
         )
-    fat_goal = IntegerField(
+    fat_goal = FloatField(
         'Fat',
         [validators.NumberRange(
             min=1, 
             max=100,
-            message="Enter an integer between 1 and 100 as a percentage of your Calorie Goal")]
+            message="Enter an Float between 1 and 100 as a percentage of your Calorie Goal")]
         )
     
 
@@ -73,7 +73,7 @@ class ProfileForm(Form):
             # [validators.NumberRange(
             # min=2, 
             # max=1000,
-            # message="Enter an integer between 2 and 1000")]),
+            # message="Enter an Float between 2 and 1000")]),
         ('weight_in_kilograms', 'Kilograms'),
             # [validators.NumberRange(
             #     min=1, 
@@ -87,7 +87,7 @@ class ProfileForm(Form):
                 message='Make a Selection')]     
         )
 
-    weight = IntegerField(
+    weight = FloatField(
         'Weight:', 
         [validators.NumberRange(
             min=1, 
@@ -95,7 +95,7 @@ class ProfileForm(Form):
             message="Enter a number between and including 1 and 1000")]
         )
 
-    # weight_goal = IntegerField(
+    # weight_goal = FloatField(
     #     'Weight Goal',
     #     [validators.NumberRange(
     #         min=1,

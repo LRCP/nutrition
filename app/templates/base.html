@@ -1,6 +1,7 @@
 {# <--base.html> #}
 
 <!DOCTYPE html>
+{# order of script tags are important #}
 
 
 <html lang="en">
@@ -18,19 +19,19 @@
         <meta charset="UTF-8">
 
         <script type="text/javascript" src="/static/js/bootstrap-multiselect.js"></script>
-        <script type="text/javascript" src="/static/js/meal-typeahead.js"></script>
-        <script type="text/javascript" src="/static/js/food-typeahead.js"></script>
+        <script type="text/javascript" src="/static/js/typeahead.js/typeahead.bundle.js"></script>
         
-        <script type="text/javascript" src="/static/js/food-group-multiselect.js"></script>
+        
+        
+        
         <script type="text/javascript" src="/static/js/profile.js"></script>
         <script type="text/javascript" src="/static/js/save-meal.js"></script>
-        <script type="text/javascript" src="/static/js/typeahead.js/typeahead.bundle.js"></script>
+        
         <script type="text/javascript" src="/static/js/add-saved-meals.js"></script>
         <script type="text/javascript" src="/static/js/date-select.js"></script>
         <link rel="stylesheet" href="/static/css/bootstrap-multiselect.css" type="text/css"/>
         <link rel="stylesheet" href="/static/css/main.css" type="text/css"/>
-       
-        
+        {% block head %}{% endblock %} 
 
     </head>
     <body>

@@ -36,7 +36,8 @@ def profile_get():
         #make a variable in the template called form. 
         #The value of the form should be
         #equal to the variable form in the local function.
-        form=form
+        form=form,
+        user=user,
         )
 
 

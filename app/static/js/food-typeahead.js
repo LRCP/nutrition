@@ -76,7 +76,7 @@ $(document).ready(function() {
         for (var i = 0; i < suggestion.units.length; i++) {
             var unit = suggestion.units[i];
             var option = $("<option>");
-            option.text(unit.amount + unit.name + unit.Gm_Wgt);
+            option.text(unit.amount + " " + unit.name + " (" + unit.Gm_Wgt + "g)");
             option.attr("value", JSON.stringify(unit));
             $("#units").append(option);
         } 
